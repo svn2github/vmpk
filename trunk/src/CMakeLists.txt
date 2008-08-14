@@ -81,12 +81,11 @@ SET(vmpk_qtobject_SRCS
 
 QT4_WRAP_CPP(vmpk_moc_SRCS ${vmpk_qtobject_SRCS})
 
-ADD_EXECUTABLE(vmpk
+ADD_EXECUTABLE ( vmpk
     ${vmpk_ui_SRCS}
     ${vmpk_moc_SRCS}
     ${vmpk_SRCS}
 )
 
-# we should install some files...
-INSTALL(TARGETS vmpk
-    RUNTIME DESTINATION bin)
+INSTALL ( TARGETS vmpk
+          RUNTIME DESTINATION bin )

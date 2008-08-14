@@ -1,0 +1,17 @@
+To reach the beta state, these are some pending features:
+
+MIDI CONTROLLERS
+
+* display the numeric controller value as a label
+* controller value state remembered when changing from one controller to 
+  another one.
+
+MIDI CONNECTIONS
+
+* MIDI thru: optionally send the received events to the output port.
+* store connection names instead of number in the settings
+
+PRESENTATION
+
+* Let the user to choose a custom highligh color for the pressed keys
+* better looking keys (realistic 3D, maybe SVG graphics)

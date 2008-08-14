@@ -1,0 +1,74 @@
+Virtual MIDI Piano Keyboard
+===========================
+
+This program is a MIDI event generator/receiver. It doesn't produce any sound
+by itself, but can be used to drive a MIDI synthesizer (either hardware or
+software, internal or external). You can use the computer's keyboard to play
+MIDI notes, and also the mouse. You can use the Virtual MIDI Piano Keyboard
+to display the played MIDI notes from another instrument or MIDI file player.
+To do so, connect the other MIDI port to the input port of VMPK.
+
+VMPK has been tested in Linux and Windows, but maybe is possible to 
+build it also in Mac OSX and Irix. If you can compile and test the program in
+those systems, please drop a mail to the author.
+
+The Virtual Keyboard by Takashi Iway (vkeybd) has been the inspiration for this 
+one. It is a wonderful piece of software and has served us well for many years.
+Thanks!
+
+VMPK uses a modern GUI framework: Qt4 by Trolltech. It gives excellent features
+and performance. RtMIDI provides MIDI input/output features. Both frameworks are
+platform independent, available for Linux, Windows and Mac OSX.
+
+The alphanumeric keyboard mapping can be configured from inside the program
+using the GUI interface, and the settings are stored in XML format. Some maps
+for Spanish, German and French keyboard layouts are provided, translated from
+the ones provided by VKeybd.
+
+VMPK can send program changes and controllers to a MIDI synth. The definitions 
+for different standards and devices can be provided as .INS files, the same 
+format used by QTractor and TSE3. It was developed by Cakewalk and used also 
+in Sonar.
+
+This software is in a very early alpha stage. See the TODO file for a list of 
+pending features. Please feel free to contact the author to ask questions, 
+report bugs, and propose new features.
+
+REQUIREMENTS
+
+You need Qt 4.3 or newer. (install the -devel package for your system, or 
+download the open source edition from Trolltech.)
+
+RtMIDI is included in the source package. It uses ALSA in Linux, WinMM in 
+Windows and CoreMIDI in Mac OSX, which are the native MIDI systems in all the
+supported platforms.
+
+INSTALLATION
+
+Download the sources from http://sourceforge.net/projects/vmpk
+
+Unpack the sources in your home directory, and change to the uynpacked dir.
+
+$ cd vmpk-0.1.0
+
+You can choose between CMake and Qmake to prepare the build system.
+
+$ cmake .
+or
+$ ccmake .
+or
+$ qmake
+
+After that, to compile the program:
+
+$ make
+
+if the program has been compiled sucessfully, you can install it:
+
+$ make install
+
+more options available:
+
+$ make uninstall
+
+$ make clean

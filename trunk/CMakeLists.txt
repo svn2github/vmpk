@@ -124,7 +124,6 @@ IF(${CMAKE_SYSTEM} MATCHES "Windows")
     LINK_LIBRARIES(winmm)
 ENDIF(${CMAKE_SYSTEM} MATCHES "Windows")
 
-ADD_SUBDIRECTORY(data build)
 ADD_SUBDIRECTORY(src build)
 
 # uninstall custom target
@@ -175,5 +174,15 @@ INSTALL ( FILES
     README
     TODO
 DESTINATION 
-    share/docs/vmpk
+    share/doc/packages/vmpk
+)
+
+INSTALL ( FILES
+    data/azerty.xml
+    data/default.xml
+    data/german.xml
+    data/gmgsxg.ins
+    data/spanish.xml
+DESTINATION 
+    share/vmpk 
 )
