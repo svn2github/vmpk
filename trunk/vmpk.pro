@@ -9,7 +9,7 @@ CONFIG += debug
 win32 { 
     DEFINES += __WINDOWS_MM__
     LIBS += -lwinmm
-    RC_FILE = data/vpiano.rc
+    RC_FILE = src/vpianoico.rc
     CONFIG += console
 }
 linux-g++ { 
