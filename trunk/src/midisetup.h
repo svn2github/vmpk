@@ -28,8 +28,9 @@ class MidiSetup : public QDialog
     
 public:
 	MidiSetup();
+	void inputNotAvailable();
 	bool inputIsEnabled();
-	void disableInput(const bool state);
+	void setInputEnabled(const bool state);
 	void clearCombos();
 	void addInputPortName(const QString& name, int index);
     void addOutputPortName(const QString& output, int index);
@@ -37,6 +38,9 @@ public:
     void setCurrentOutput(int index);
 	int  selectedInput();
 	int  selectedOutput();
+
+public slots:
+    void toggledInput(bool state);
 
 private:
     Ui::MidiSetupClass ui;

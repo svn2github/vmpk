@@ -116,11 +116,13 @@ private:
     void bankChange(int bank);
     void programChange(int program);
     void bender(int value);
+    void messageWrapper(std::vector<unsigned char> *message);
 
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;
     int m_currentOut;
     int m_currentIn;
+    bool m_inputActive;
     
     Ui::VPiano ui;
     About dlgAbout;

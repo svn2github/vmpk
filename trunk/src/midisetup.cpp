@@ -21,7 +21,20 @@
 
 MidiSetup::MidiSetup()
 {
-    ui.setupUi(this);    
+    ui.setupUi(this);
+    connect(ui.chkEnableInput, SIGNAL(toggled(bool)), SLOT(toggledInput(bool)));
+}
+
+void MidiSetup::toggledInput(bool state)
+{
+    if (!state) ui.comboInput->setCurrentIndex(-1);
+}
+
+void MidiSetup::inputNotAvailable()
+{
+    setInputEnabled(false);
+    ui.chkEnableInput->setEnabled(false);
+    ui.comboInput->setCurrentIndex(-1);
 }
 
 bool MidiSetup::inputIsEnabled()
@@ -29,10 +42,9 @@ bool MidiSetup::inputIsEnabled()
     return ui.chkEnableInput->isChecked();
 }
 
-void MidiSetup::disableInput(const bool state)
+void MidiSetup::setInputEnabled(const bool state)
 {
-    ui.chkEnableInput->setChecked(!state);
-    ui.chkEnableInput->setEnabled(!state);
+    ui.chkEnableInput->setChecked(state);
 }
 
 void MidiSetup::clearCombos()

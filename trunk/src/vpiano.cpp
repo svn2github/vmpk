@@ -40,7 +40,8 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     m_midiout(0),
     m_midiin(0),
     m_currentOut(-1),
-    m_currentIn(-1)
+    m_currentIn(-1),
+    m_inputActive(false)
 {
     ui.setupUi(this);
     ui.actionStatusBar->setChecked(false);
@@ -58,14 +59,22 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
 
 VPiano::~VPiano()
 {
-    if (m_midiout != NULL) {
-        m_midiout->closePort();
-        delete m_midiout;
-    }
-    if (m_midiin != NULL) {
-        m_midiin->cancelCallback();
-        m_midiin->closePort();
-        delete m_midiin;
+    try {
+        if (m_midiout != NULL) {
+            m_midiout->closePort();
+            delete m_midiout;
+        }
+        if (m_midiin != NULL) {
+            if (m_inputActive) {
+                m_midiin->cancelCallback();
+                m_inputActive = false;
+            }
+            if (m_currentIn > -1)
+                m_midiin->closePort();
+            delete m_midiin;
+        }
+    } catch (RtError& err) {
+        qWarning() << QString::fromStdString(err.getMessage());
     }
 }
 
@@ -108,32 +117,38 @@ void midiCallback( double /*deltatime*/,
 
 void VPiano::initMidi()
 {
-    m_midiout = new RtMidiOut("VMPK Output Client");
-    int nOutPorts = m_midiout->getPortCount();
-    if (nOutPorts == 0) {
-        delete m_midiout;
-        m_midiout = 0;
-        QMessageBox::critical( 0, "Error", 
-                               "No MIDI output ports available. Aborting");
+    try {
+        m_midiout = new RtMidiOut("VMPK Output Client");
+        int nOutPorts = m_midiout->getPortCount();
+        if (nOutPorts == 0) {
+            delete m_midiout;
+            m_midiout = 0;
+            QMessageBox::critical( 0, "Error", 
+                                   "No MIDI output ports available. Aborting");
+            qApp->quit();
+        }
+        m_midiin = new RtMidiIn("VMPK Input Client");
+        int nInPorts = m_midiin->getPortCount();
+        if (nInPorts == 0) {
+            delete m_midiin;
+            m_midiin = NULL;
+        }
+#if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)     
+        m_midiout->openVirtualPort("VMPK output");
+        if (m_midiin != NULL)
+            m_midiin->openVirtualPort("VMPK input");
+#else //if defined(__WINDOWS_MM__) || defined(__IRIX_MD__) 
+        m_midiout->openPort( m_currentOut = 0 );
+#endif
+        if (m_midiin != NULL) {
+            m_midiin->setCallback( &midiCallback, this );
+            m_inputActive = true;
+        }
+    } catch (RtError& err) {
+        QMessageBox::critical( 0, "Error. Aborting",
+                               QString::fromStdString(err.getMessage()));
         qApp->quit();
     }
-    m_midiin = new RtMidiIn("VMPK Input Client");
-    int nInPorts = m_midiin->getPortCount();
-    if (nInPorts == 0) {
-        delete m_midiin;
-        m_midiin = NULL;
-    }
-#if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)     
-    m_midiout->openVirtualPort("VMPK output");
-    if (m_midiin != NULL)
-        m_midiin->openVirtualPort("VMPK input");
-#else //if defined(__WINDOWS_MM__) || defined(__IRIX_MD__) 
-    m_midiout->openPort( m_currentOut = 0 );
-    //if (m_midiin != NULL)
-    //    m_midiin->openPort( m_currentIn = 0 );
-#endif
-    if (m_midiin != NULL)
-        m_midiin->setCallback( &midiCallback, this );
 }
 
 void VPiano::initToolBars()
@@ -257,8 +272,12 @@ void VPiano::readSettings()
     int out_port = settings.value("OutPort", -1).toInt();
     settings.endGroup();
 
-    dlgMidiSetup.disableInput((m_midiin == NULL) || !inEnabled);
-    dlgMidiSetup.setCurrentInput(in_port);
+    if (m_midiin == NULL) {
+        dlgMidiSetup.inputNotAvailable();
+    } else {
+        dlgMidiSetup.setInputEnabled(inEnabled);
+        dlgMidiSetup.setCurrentInput(in_port);
+    }
     dlgMidiSetup.setCurrentOutput(out_port);
     
     settings.beginGroup("Keyboard");
@@ -333,6 +352,15 @@ void VPiano::hideEvent( QHideEvent *event )
     QMainWindow::hideEvent(event);
 }
 
+void VPiano::messageWrapper(std::vector<unsigned char> *message)
+{
+    try {
+        m_midiout->sendMessage( message );
+    } catch (RtError& err) {
+        ui.statusBar->showMessage(QString::fromStdString(err.getMessage()));
+    }
+}
+
 void VPiano::slotNoteOn(int midiNote)
 {
     std::vector<unsigned char> message;
@@ -342,7 +370,7 @@ void VPiano::slotNoteOn(int midiNote)
     message.push_back(STATUS_NOTEON + (chan & MASK_CHANNEL));
     message.push_back(midiNote & MASK_SAFETY);
     message.push_back(vel & MASK_SAFETY);
-    m_midiout->sendMessage( &message );
+    messageWrapper( &message );
 }
 
 void VPiano::slotNoteOff(int midiNote)
@@ -354,7 +382,7 @@ void VPiano::slotNoteOff(int midiNote)
     message.push_back(STATUS_NOTEOFF + (chan & MASK_CHANNEL));
     message.push_back(midiNote & MASK_SAFETY);
     message.push_back(vel & MASK_SAFETY);
-    m_midiout->sendMessage( &message );
+    messageWrapper( &message );
 }
 
 void VPiano::sendController(int controller, int value)
@@ -367,7 +395,7 @@ void VPiano::sendController(int controller, int value)
     message.push_back(STATUS_CONTROLLER + (chan & MASK_CHANNEL));
     message.push_back(ctl & MASK_SAFETY);
     message.push_back(val & MASK_SAFETY);
-    m_midiout->sendMessage( &message );
+    messageWrapper( &message );
 }
 
 void VPiano::resetAllControllers()
@@ -389,7 +417,7 @@ void VPiano::programChange(int program)
     // Program: 0xC0 + channel, pgm
     message.push_back(STATUS_PROGRAM + (chan & MASK_CHANNEL));
     message.push_back(pgm & MASK_SAFETY);
-    m_midiout->sendMessage( &message );
+    messageWrapper( &message );
 }
 
 void VPiano::bankChange(int bank)
@@ -425,7 +453,7 @@ void VPiano::bender(int value)
     message.push_back(STATUS_BENDER + (chan & MASK_CHANNEL));
     message.push_back(lsb);
     message.push_back(msb);
-    m_midiout->sendMessage( &message );
+    messageWrapper( &message );
 }
 
 void VPiano::slotPanic()
@@ -469,33 +497,36 @@ void VPiano::slotAboutQt()
 void VPiano::refreshConnections()
 {
     int i = 0, nInPorts = 0, nOutPorts = 0;
-    dlgMidiSetup.clearCombos();
-    // inputs
-    if (m_midiin == NULL) {
-        dlgMidiSetup.disableInput(true);
-    } else {
-        dlgMidiSetup.disableInput(false);
-        nInPorts = m_midiin->getPortCount();
-        for ( i = 0; i < nInPorts; i++ ) {
-            QString name = QString::fromStdString(m_midiin->getPortName(i));
-            if (!name.startsWith("VMPK"))
-                dlgMidiSetup.addInputPortName(name, i);
+    try {
+        dlgMidiSetup.clearCombos();
+        // inputs
+        if (m_midiin == NULL) {
+            dlgMidiSetup.inputNotAvailable();
+            dlgMidiSetup.setInputEnabled(false);
+        } else {
+            dlgMidiSetup.setInputEnabled(m_currentIn != -1);
+            nInPorts = m_midiin->getPortCount();
+            for ( i = 0; i < nInPorts; i++ ) {
+                QString name = QString::fromStdString(m_midiin->getPortName(i));
+                if (!name.startsWith("VMPK"))
+                    dlgMidiSetup.addInputPortName(name, i);
+            }
         }
-        
-    }
-    // outputs
-    nOutPorts = m_midiout->getPortCount();
-    for ( i = 0; i < nOutPorts; i++ ) {
-        QString name = QString::fromStdString(m_midiout->getPortName(i));
-        if (!name.startsWith("VMPK"))
-            dlgMidiSetup.addOutputPortName(name, i); 
+        // outputs
+        nOutPorts = m_midiout->getPortCount();
+        for ( i = 0; i < nOutPorts; i++ ) {
+            QString name = QString::fromStdString(m_midiout->getPortName(i));
+            if (!name.startsWith("VMPK"))
+                dlgMidiSetup.addOutputPortName(name, i); 
+        }
+    } catch (RtError& err) {
+        ui.statusBar->showMessage(QString::fromStdString(err.getMessage()));
     }
 }
 
 void VPiano::slotConnections()
 {
     refreshConnections();
-    // open the dialog box
     dlgMidiSetup.setCurrentInput(m_currentIn);
     dlgMidiSetup.setCurrentOutput(m_currentOut);
     ui.pianokeybd->releaseKeyboard();
@@ -508,23 +539,33 @@ void VPiano::slotConnections()
 void VPiano::applyConnections()
 {
     int i, nInPorts = 0, nOutPorts = 0;
-    nInPorts = m_midiin->getPortCount();
-    nOutPorts = m_midiout->getPortCount();
-    i = dlgMidiSetup.selectedOutput();
-    if ((i >= 0) && (i < nOutPorts) && (i != m_currentOut)) {
-        m_midiout->closePort();
-        m_midiout->openPort(m_currentOut = i);
-    }
-    if (m_midiin != NULL) {
-        i = dlgMidiSetup.selectedInput();
-        if ((i >= 0) && (i < nInPorts) && (i != m_currentIn)) {
-            m_midiin->cancelCallback();
-            m_midiin->closePort();
-            if (dlgMidiSetup.inputIsEnabled()) {
-                m_midiin->openPort(m_currentIn = i);
-                m_midiin->setCallback( &midiCallback, this );
-            }
+    try {
+        nInPorts = m_midiin->getPortCount();
+        nOutPorts = m_midiout->getPortCount();
+        i = dlgMidiSetup.selectedOutput();
+        if ((i >= 0) && (i < nOutPorts) && (i != m_currentOut)) {
+            m_midiout->closePort();
+            m_midiout->openPort(i);
         }
+        m_currentOut = i;
+        if (m_midiin != NULL) {
+            i = dlgMidiSetup.selectedInput();
+            if (m_inputActive && (i != m_currentIn)) {
+                m_midiin->cancelCallback();
+                m_inputActive = false;
+                if (m_currentIn > -1)
+                    m_midiin->closePort();
+            }
+            if ((i >= 0) && (i < nInPorts) && (i != m_currentIn) &&  
+                dlgMidiSetup.inputIsEnabled()) {
+                m_midiin->openPort(i);
+                m_midiin->setCallback( &midiCallback, this );
+                m_inputActive = true;
+            }
+            m_currentIn = i;
+        }
+    } catch (RtError& err) {
+        ui.statusBar->showMessage(QString::fromStdString(err.getMessage()));
     }
 }
 
