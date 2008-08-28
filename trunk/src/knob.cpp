@@ -164,5 +164,13 @@ void Knob::wheelEvent ( QWheelEvent *pWheelEvent )
 	}
 }
 
+void Knob::setValue(int val)
+{
+    QDial::setValue(val);
+    QString tip = QString::number(value()); 
+    setToolTip(tip);
+    QToolTip::showText(QCursor::pos(), tip, this);
+}
 
 // end of knob.cpp
+

@@ -63,6 +63,8 @@ public slots:
 	// Set knob dial mode behavior.
 	void setDialMode(DialMode dialMode);
 
+	void setValue(int val);	
+	
 protected:
 
 	// Mouse angle determination.
