@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=vmpk
+Comment=Virtual MIDI Piano Keyboard
+Exec=@CMAKE_INSTALL_PREFIX@/bin/vmpk
+Icon=@CMAKE_INSTALL_PREFIX@/share/pixmaps/vmpk.png
+Categories=Multimedia;AudioVideo;Music
+Terminal=false
+Type=Application

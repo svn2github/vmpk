@@ -1,0 +1,60 @@
+#
+# spec file for package vmpk (Version @VERSION@)
+#
+# norootforbuild
+
+Name:           vmpk
+Version:        @VERSION@
+Release:        0
+License:        GPL v3 or later
+Summary:        Virtual MIDI Piano Keyboard
+Group:          Productivity/Multimedia/Sound/Midi
+Source:         %name-%version.tar.bz2
+URL:            http://vmpk.sourceforge.net
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildRequires:  cmake
+BuildRequires:  alsa-devel
+BuildRequires:	libqt4-devel
+
+%description
+VMPK is a MIDI event generator/receiver. It doesn't produce any sound by itself, 
+but can be used to drive a MIDI synthesizer (either hardware or software, 
+internal or external). You can use the computer's keyboard to play MIDI notes, 
+and also the mouse. You can use the Virtual MIDI Piano Keyboard to display the 
+played MIDI notes from another instrument or MIDI file player.
+
+Authors:
+--------
+    Pedro Lopez-Cabanillas <plcl@users.sourceforge.net>
+
+%debug_package
+%prep
+%setup -q
+
+%build
+cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+make %{?jobs:-j %jobs}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+%if %suse_version < 1010
+%suse_update_desktop_file %name AudioVideo Music
+%else
+%suse_update_desktop_file -G "Virtual MIDI Piano Keyboard" %name AudioVideo Music
+%endif
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%doc NEWS README ChangeLog AUTHORS TODO COPYING
+/usr/bin/%name
+/usr/share/%name/*
+/usr/share/pixmaps/%name.png
+/usr/share/applications/%name.desktop
+
+%changelog
+* Sun Aug 31 2008 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.1.0
+- First public release

@@ -15,7 +15,6 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 
 PROJECT(VMPK)
-
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4.4)
 
 # Show full commands and messages. 
@@ -36,8 +35,9 @@ SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
 SET (VERSION_MAJOR "0")
 SET (VERSION_MINOR "1")
 SET (VERSION_PATCH "0")
-SET (VERSION_SUFFIX "test")
-SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_SUFFIX})
+SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
+# SET (VERSION_SUFFIX "test")
+# SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_SUFFIX})
 ADD_DEFINITIONS(-D'VERSION="${VERSION}"')
 
 MESSAGE(STATUS "vmpk ${VERSION} prefix: ${CMAKE_INSTALL_PREFIX}")
@@ -126,6 +126,9 @@ ENDIF(${CMAKE_SYSTEM} MATCHES "Windows")
 
 ADD_SUBDIRECTORY(src build)
 
+CONFIGURE_FILE(vmpk.desktop.in vmpk.desktop IMMEDIATE @ONLY)
+CONFIGURE_FILE(vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
+
 # uninstall custom target
 CONFIGURE_FILE(
     "${CMAKE_SOURCE_DIR}/cmake_admin/cmake_uninstall.cmake.in"
@@ -144,6 +147,8 @@ IF (UNIX)
         COMMAND rm -f  CPackConfig.cmake
         COMMAND rm -f  CPackSourceConfig.cmake
         COMMAND rm -f  install_manifest.txt
+        COMMAND rm -f  vmpk.desktop
+        COMMAND rm -f  vmpk.spec
         COMMAND rm -f  progress.make
         COMMAND rm -f  Makefile
         COMMAND rm -rf CMakeFiles
@@ -156,9 +161,9 @@ IF (UNIX)
     ADD_CUSTOM_TARGET ( tarball
         COMMAND mkdir -p vmpk-${VERSION}
         COMMAND cp -r cmake_admin vmpk-${VERSION}
-        COMMAND cp -r doc vmpk-${VERSION}
+        COMMAND cp -r data vmpk-${VERSION}
         COMMAND cp -r src vmpk-${VERSION}
-        COMMAND cp CMakeLists.txt AUTHORS COPYING ChangeLog INSTALL NEWS README TODO *.spec* vmpk-${VERSION}
+        COMMAND cp CMakeLists.txt AUTHORS COPYING ChangeLog NEWS README TODO vmpk.* vmpk-${VERSION}
         COMMAND tar -cj --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
         COMMAND tar -cz --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.gz vmpk-${VERSION}
         COMMAND rm -rf vmpk-${VERSION}
@@ -185,4 +190,16 @@ INSTALL ( FILES
     data/spanish.xml
 DESTINATION 
     share/vmpk 
+)
+
+INSTALL ( FILES 
+    data/vmpk.png
+DESTINATION 
+    share/pixmaps 
+)
+
+INSTALL ( FILES 
+    vmpk.desktop
+DESTINATION 
+    share/applications
 )
