@@ -540,7 +540,6 @@ void VPiano::applyConnections()
 {
     int i, nInPorts = 0, nOutPorts = 0;
     try {
-        nInPorts = m_midiin->getPortCount();
         nOutPorts = m_midiout->getPortCount();
         i = dlgMidiSetup.selectedOutput();
         if ((i >= 0) && (i < nOutPorts) && (i != m_currentOut)) {
@@ -549,6 +548,7 @@ void VPiano::applyConnections()
         }
         m_currentOut = i;
         if (m_midiin != NULL) {
+            nInPorts = m_midiin->getPortCount();
             i = dlgMidiSetup.selectedInput();
             if (m_inputActive && (i != m_currentIn)) {
                 m_midiin->cancelCallback();

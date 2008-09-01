@@ -15,6 +15,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  cmake
 BuildRequires:  alsa-devel
 BuildRequires:	libqt4-devel
+BuildRequires:	update-desktop-files
 
 %description
 VMPK is a MIDI event generator/receiver. It doesn't produce any sound by itself, 
@@ -32,7 +33,7 @@ Authors:
 %setup -q
 
 %build
-cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+CXXFLAGS="$RPM_OPT_FLAGS -fexceptions" cmake . -DCMAKE_INSTALL_PREFIX=/usr
 make %{?jobs:-j %jobs}
 
 %install
