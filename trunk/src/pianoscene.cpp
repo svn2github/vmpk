@@ -156,9 +156,8 @@ void PianoScene::setKeyboardMap(const KeyboardMap* map)
 
 PianoKey* PianoScene::getPianoKey( const int key )
 {
-    QKeySequence keyseq(key);
-    KeyboardMap::ConstIterator it = m_keybdMap.find(keyseq);
-    if ((it != m_keybdMap.end()) && (it.key() == keyseq)) {
+    KeyboardMap::ConstIterator it = m_keybdMap.find(key);
+    if ((it != m_keybdMap.end()) && (it.key() == key)) {
         int note = it.value();
         if (note < m_keys.size())
             return m_keys[note];

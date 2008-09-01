@@ -19,14 +19,13 @@
 #ifndef KEYBOARDMAP_H
 #define KEYBOARDMAP_H
 
-#include <QMap>
-#include <QKeySequence>
+#include <QHash>
 #include <QIODevice>
 
-class KeyboardMap : public QMap<QKeySequence, int>  
+class KeyboardMap : public QHash<int, int>  
 {
 public:
-    KeyboardMap() : QMap<QKeySequence, int>(), m_fileName("default") {}
+    KeyboardMap() : QHash<int, int>(), m_fileName("default") {}
     QString loadFromXMLFile(const QString fileName);
     void saveToXMLFile(const QString fileName);
     QString initializeFromXML(QIODevice *dev);

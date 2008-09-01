@@ -72,25 +72,36 @@ void PianoKeybd::showNoteOff(int midiNote)
 
 void PianoKeybd::initDefaultMap()
 {
-    m_defaultMap.insert(QKeySequence(Qt::Key_A), 8);
-    m_defaultMap.insert(QKeySequence(Qt::Key_Z), 9);
-    m_defaultMap.insert(QKeySequence(Qt::Key_S), 10);
-    m_defaultMap.insert(QKeySequence(Qt::Key_X), 11);
-    m_defaultMap.insert(QKeySequence(Qt::Key_C), 12);
-    m_defaultMap.insert(QKeySequence(Qt::Key_F), 13);
-    m_defaultMap.insert(QKeySequence(Qt::Key_V), 14);
-    m_defaultMap.insert(QKeySequence(Qt::Key_G), 15);
-    m_defaultMap.insert(QKeySequence(Qt::Key_B), 16);
-    m_defaultMap.insert(QKeySequence(Qt::Key_N), 17);
-    m_defaultMap.insert(QKeySequence(Qt::Key_J), 18);
-    m_defaultMap.insert(QKeySequence(Qt::Key_M), 19);
-    m_defaultMap.insert(QKeySequence(Qt::Key_K), 20);
-    m_defaultMap.insert(QKeySequence(Qt::Key_Comma), 21);
-    m_defaultMap.insert(QKeySequence(Qt::Key_L), 22);
-    m_defaultMap.insert(QKeySequence(Qt::Key_Period), 23);
-    m_defaultMap.insert(QKeySequence(Qt::Key_Slash), 24);
-    m_defaultMap.insert(QKeySequence(Qt::Key_Apostrophe), 25);
-    m_defaultMap.insert(QKeySequence(Qt::Key_Backslash), 26);
+    m_defaultMap.insert(Qt::Key_Z, 12);
+    m_defaultMap.insert(Qt::Key_S, 13);
+    m_defaultMap.insert(Qt::Key_X, 14);
+    m_defaultMap.insert(Qt::Key_D, 15);
+    m_defaultMap.insert(Qt::Key_C, 16);
+    m_defaultMap.insert(Qt::Key_V, 17);
+    m_defaultMap.insert(Qt::Key_G, 18);
+    m_defaultMap.insert(Qt::Key_B, 19);
+    m_defaultMap.insert(Qt::Key_H, 20);
+    m_defaultMap.insert(Qt::Key_N, 21);
+    m_defaultMap.insert(Qt::Key_J, 22);
+    m_defaultMap.insert(Qt::Key_M, 23);
+    
+    m_defaultMap.insert(Qt::Key_Q, 24);
+    m_defaultMap.insert(Qt::Key_2, 25);
+    m_defaultMap.insert(Qt::Key_W, 26);
+    m_defaultMap.insert(Qt::Key_3, 27);
+    m_defaultMap.insert(Qt::Key_E, 28);
+    m_defaultMap.insert(Qt::Key_R, 29);
+    m_defaultMap.insert(Qt::Key_5, 30);
+    m_defaultMap.insert(Qt::Key_T, 31);
+    m_defaultMap.insert(Qt::Key_6, 32);
+    m_defaultMap.insert(Qt::Key_Y, 33);
+    m_defaultMap.insert(Qt::Key_7, 34);
+    m_defaultMap.insert(Qt::Key_U, 35);
+    m_defaultMap.insert(Qt::Key_I, 36);
+    m_defaultMap.insert(Qt::Key_9, 37);
+    m_defaultMap.insert(Qt::Key_O, 38);
+    m_defaultMap.insert(Qt::Key_0, 39);
+    m_defaultMap.insert(Qt::Key_P, 40);
 }
 
 void PianoKeybd::setNumOctaves(const int numOctaves)

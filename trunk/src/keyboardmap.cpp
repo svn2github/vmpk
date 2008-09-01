@@ -21,6 +21,7 @@
 #include <QFile>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include <QKeySequence>
 
 QString KeyboardMap::loadFromXMLFile(const QString fileName)
 {
@@ -57,7 +58,8 @@ QString KeyboardMap::initializeFromXML(QIODevice *dev)
                         bool ok = false;
                         int note = sn.toInt(&ok);
                         if (ok) {
-                            insert(key, note);
+                            QKeySequence ks(key);
+                            insert(ks[0], note);
                         }
                     }
                     reader.readNext();
@@ -84,9 +86,10 @@ void KeyboardMap::serializeToXML(QIODevice *dev)
     writer.writeDTD("<!DOCTYPE keyboardmap>");
     writer.writeStartElement("keyboardmap");
     writer.writeAttribute("version", "1.0");
-    foreach(QKeySequence key, keys()) {
+    foreach(int key, keys()) {
+        QKeySequence ks(key);
         writer.writeEmptyElement("mapping");
-        writer.writeAttribute("key", key.toString(QKeySequence::PortableText));
+        writer.writeAttribute("key", ks.toString(QKeySequence::PortableText));
         writer.writeAttribute("note", QString::number(value(key))); 
     }
     writer.writeEndElement();

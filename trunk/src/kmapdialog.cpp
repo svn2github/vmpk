@@ -20,6 +20,7 @@
 #include <QFileInfo>
 #include <QHeaderView>
 #include <QPushButton>
+#include <QKeySequence>
 
 KMapDialog::KMapDialog(QWidget *parent)
     : QDialog(parent)
@@ -35,7 +36,8 @@ void KMapDialog::displayMap(const KeyboardMap* map)
     KeyboardMap::ConstIterator it;
     for(it = map->begin(); it != map->end(); ++it) {
         row = it.value();
-        ui.tableWidget->setItem(row, 0, new QTableWidgetItem(it.key().toString()));
+        QKeySequence ks(it.key());
+        ui.tableWidget->setItem(row, 0, new QTableWidgetItem(ks.toString()));
     }
 }
 
@@ -47,7 +49,7 @@ KeyboardMap* KMapDialog::getMap()
         item = ui.tableWidget->item(i, 0);
         if ((item != NULL) && !item->text().isEmpty()) {
             QKeySequence ks(item->text());
-            m_map.insert(ks, i);
+            m_map.insert(ks[0], i);
         }
     }
     return &m_map;

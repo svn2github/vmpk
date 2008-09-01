@@ -22,10 +22,8 @@
 #include "keyboardmap.h"
 #include "pianokey.h"
 #include <QGraphicsScene>
-#include <QKeySequence>
-#include <QMap>
 
-//#define KeyboardMap QMap<QKeySequence, int>  
+//#define KeyboardMap QHash<int, int>  
 
 class PianoScene : public QGraphicsScene
 {

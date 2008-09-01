@@ -77,3 +77,22 @@ There are more commands available:
 
 $ make uninstall
 $ make clean
+
+You can get some compiler optimisation when building the program, but don't 
+expect too much improvement. There are two ways. First, using a predefined 
+configuration type:
+
+$ cmake . -DCMAKE_BUILD_TYPE=Release 
+
+The CMake "Release" type uses the compiler flags: "-O3 -DNDEBUG". Other 
+predefined build types are "Debug", "RelWithDebInfo", and "MinSizeRel".
+The second way is to choose the compiler flags yourself:
+
+$ export CXXFLAGS="-O2 -march=native -mtune=native -DNDEBUG" 
+$ cmake .
+
+You need to find the better CXXFLAGS for your own system.
+
+If you want to install the program at some place other than the default 
+(/usr/local) use the following CMake option:
+$ cmake . -DCMAKE_INSTALL_PREFIX=/usr
