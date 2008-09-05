@@ -25,14 +25,20 @@
 #define KEYWIDTH  18
 #define KEYHEIGHT 72
 
-PianoScene::PianoScene ( const int baseOctave, const int numOctaves, QObject * parent )
+PianoScene::PianoScene ( const int baseOctave, 
+                         const int numOctaves, 
+                         const QColor& selectedColor,
+                         QObject * parent )
     : QGraphicsScene( QRectF(0, 0, KEYWIDTH * numOctaves * 7, KEYHEIGHT), parent ),
     m_baseOctave( baseOctave ),
     m_numOctaves( numOctaves ),
-    m_mousePressed( false )
+    m_selectedColor( selectedColor ),
+    m_mousePressed( false ),
+    m_handler( NULL )
 {
     QBrush blackBrush(Qt::black);
     QBrush whiteBrush(Qt::white);
+    QBrush selBrush(m_selectedColor);
     int i, numkeys = m_numOctaves * 12;
     for(i = 0; i < numkeys; ++i)
     {
@@ -48,6 +54,8 @@ PianoScene::PianoScene ( const int baseOctave, const int numOctaves, QObject * p
             key = new PianoKey( QRectF( x, 0, KEYWIDTH * 8/10 - 1, KEYHEIGHT * 6/10 ), blackBrush, i );
             key->setZValue( 1 );
         }
+        if (m_selectedColor.isValid())
+            key->setPressedBrush(selBrush);
         m_keys.insert(i, key);
         addItem( key );
     }
@@ -60,12 +68,12 @@ QSize PianoScene::sizeHint() const
 
 void PianoScene::showKeyOn( PianoKey* key )
 {
-    key->setSelected(true);
+    key->setPressed(true);
 }
 
 void PianoScene::showKeyOff( PianoKey* key )
 {
-    key->setSelected(false);
+    key->setPressed(false);
 }
 
 void PianoScene::showNoteOn( const int note )
@@ -85,18 +93,26 @@ void PianoScene::showNoteOff( const int note )
 void PianoScene::keyOn( PianoKey* key )
 {
     int n = m_baseOctave*12 + key->getNote();
+    if (m_handler != NULL) {
+        m_handler->noteOn(n);
+    } else {
+        emit noteOn(n);
+    }
     showKeyOn(key);
-    emit noteOn(n);
 }
 
 void PianoScene::keyOff( PianoKey* key )
 {
     int n = m_baseOctave*12 + key->getNote();
+    if (m_handler != NULL) {
+        m_handler->noteOff(n);
+    } else {
+        emit noteOff(n);
+    }
     showKeyOff(key);
-    emit noteOff(n);
 }
 
-PianoKey* PianoScene::getKeyForPos( const QPointF& p )
+PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
 {
     QGraphicsItem *itm = itemAt(p);
     if (itm != NULL) {
@@ -111,13 +127,13 @@ void PianoScene::mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent )
     if (m_mousePressed) {
         PianoKey* key = getKeyForPos(mouseEvent->scenePos());
         PianoKey* lastkey = getKeyForPos(mouseEvent->lastScenePos());
-        if ((lastkey != NULL) && (lastkey != key) && lastkey->isSelected()) {
+        if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed()) {
             keyOff(lastkey);
         }
         if (key == NULL) {
             m_mousePressed = false;
         } else {
-            if (!key->isSelected()) keyOn(key);
+            if (!key->isPressed()) keyOn(key);
         }
         mouseEvent->accept();
         return;
@@ -142,7 +158,7 @@ void PianoScene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
     PianoKey* key = getKeyForPos(mouseEvent->scenePos());
     if (key != NULL) {
         keyOff(key);
-        m_mousePressed = false;	
+        m_mousePressed = false; 
         mouseEvent->accept();
         return;
     }
@@ -154,7 +170,7 @@ void PianoScene::setKeyboardMap(const KeyboardMap* map)
     m_keybdMap = *map;
 }
 
-PianoKey* PianoScene::getPianoKey( const int key )
+PianoKey* PianoScene::getPianoKey( const int key ) const
 {
     KeyboardMap::ConstIterator it = m_keybdMap.find(key);
     if ((it != m_keybdMap.end()) && (it.key() == key)) {
@@ -167,34 +183,30 @@ PianoKey* PianoScene::getPianoKey( const int key )
 
 void PianoScene::keyPressEvent ( QKeyEvent * keyEvent )
 {
-    if (!keyEvent->isAutoRepeat()) { /* ignore auto-repeats */
+    if (!keyEvent->isAutoRepeat()) { // ignore auto-repeats 
         PianoKey* key = getPianoKey(keyEvent->key());
         if (key != NULL) {
             keyOn(key);
-            keyEvent->accept();
-            return;
         }
     }
-    keyEvent->ignore();
+    keyEvent->accept();
 }
 
 void PianoScene::keyReleaseEvent ( QKeyEvent * keyEvent )
 {
-    if (!keyEvent->isAutoRepeat()) { /* ignore auto-repeats */
+    if (!keyEvent->isAutoRepeat()) { // ignore auto-repeats
         PianoKey* key = getPianoKey(keyEvent->key());
         if (key != NULL) {
             keyOff(key);
-            keyEvent->accept();
-            return;
         }
-    }	
-    keyEvent->ignore();
+    }   
+    keyEvent->accept();
 }
 
 void PianoScene::allKeysOff()
 {
     QList<PianoKey*>::ConstIterator it; 
     for(it = m_keys.begin(); it != m_keys.end(); ++it) {
-        (*it)->setSelected(false);
+        (*it)->setPressed(false);
     }
 }

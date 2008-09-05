@@ -30,6 +30,7 @@ class PianoKeybd : public QGraphicsView
 //    Q_PROPERTY( int baseOctave READ baseOctave WRITE setBaseOctave )
 //    Q_PROPERTY( int numOctaves READ numOctaves WRITE setNumOctaves )
 //    Q_PROPERTY( int rotation READ getRotation WRITE setRotation )
+//    Q_PROPERTY( QColor selectedColor READ getSelectedColor WRITE setSelectedColor )
 
 public:
     PianoKeybd(QWidget *parent = 0);
@@ -43,8 +44,11 @@ public:
     QSize sizeHint() const;
     int getRotation() const { return m_rotation; }
     void setRotation(int r);
-    void allKeysOff();
-
+    QColor getSelectedColor() const { return m_scene->getSelectedColor(); }
+    void setSelectedColor(const QColor& c);
+    void allKeysOff() { m_scene->allKeysOff(); }
+    void setPianoHandler(PianoHandler* handler) { m_scene->setPianoHandler(handler); }
+    
 public slots:
     void showNoteOn( int midiNote );
     void showNoteOff( int midiNote );
@@ -56,7 +60,7 @@ signals:
 protected:
     void initialize();
     void initDefaultMap();
-    void initScene(int base, int num);
+    void initScene(int base, int num, const QColor& c = QColor());
     void resizeEvent(QResizeEvent *event);
 
 private:

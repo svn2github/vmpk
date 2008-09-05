@@ -68,13 +68,17 @@ public:
     { }
 };
 
-class VPiano : public QMainWindow
+class VPiano : public QMainWindow, public PianoHandler
 {
     Q_OBJECT
 public:
     VPiano( QWidget * parent = 0, Qt::WindowFlags flags = 0 );
     virtual ~VPiano();
     int getInputChannel();
+    
+    // PianoHandler methods
+    void noteOn(const int midiNote);
+    void noteOff(const int midiNote);
     
 protected:
     void closeEvent ( QCloseEvent *event );
@@ -90,8 +94,6 @@ public slots:
     void slotLoadKeyboardMap();
     void slotSaveKeyboardMap();
     void slotEditKeyboardMap();
-    void slotNoteOn(int midiNote);
-    void slotNoteOff(int midiNote);
     void slotPanic();
     void slotResetAllControllers();
     void slotResetBender();
@@ -100,6 +102,10 @@ public slots:
     void slotBankChanged(int index);
     void slotProgChanged(int index);
     void slotBaseOctave(int octave);
+    
+    // slots for note signals 
+    // void slotNoteOn(int midiNote);
+    // void slotNoteOff(int midiNote);
     
 private:
     void initialization();

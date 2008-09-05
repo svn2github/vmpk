@@ -25,12 +25,22 @@
 
 //#define KeyboardMap QHash<int, int>  
 
+class PianoHandler
+{
+public:
+    virtual void noteOn( const int note ) = 0;
+    virtual void noteOff( const int note ) = 0;
+};
+
 class PianoScene : public QGraphicsScene
 {
     Q_OBJECT
-
+    
 public:
-    PianoScene ( const int baseOctave, const int numOctaves, QObject * parent = 0 );
+    PianoScene ( const int baseOctave, 
+                 const int numOctaves,
+                 const QColor& selectedColor = QColor(),
+                 QObject * parent = 0 );
     void setKeyboardMap( const KeyboardMap* map );
     KeyboardMap* getKeyboardMap() { return &m_keybdMap; }
     void showNoteOn( const int note );
@@ -38,9 +48,11 @@ public:
     int baseOctave() const { return m_baseOctave; }
     void setBaseOctave( const int base ) { m_baseOctave = base; }
     int numOctaves() const { return m_numOctaves; }
+    QColor getSelectedColor() const { return m_selectedColor; }
     QSize sizeHint() const;
     void allKeysOff();
-
+    void setPianoHandler(PianoHandler* handler) { m_handler = handler; }
+    
 signals:
     void noteOn(int n);
     void noteOff(int n);
@@ -50,8 +62,8 @@ protected:
     void showKeyOff( PianoKey* key );
     void keyOn( PianoKey* key );
     void keyOff( PianoKey* key );
-    PianoKey* getKeyForPos( const QPointF& p );
-    PianoKey* getPianoKey( const int key );
+    PianoKey* getKeyForPos( const QPointF& p ) const;
+    PianoKey* getPianoKey( const int key ) const;
 
     void mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent );
@@ -62,7 +74,9 @@ protected:
 private:
     int m_baseOctave;
     int m_numOctaves;
+    QColor m_selectedColor;
     bool m_mousePressed;
+    PianoHandler* m_handler;
     KeyboardMap m_keybdMap;
     QList<PianoKey*> m_keys;
 };

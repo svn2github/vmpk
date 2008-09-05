@@ -25,12 +25,18 @@
 class PianoKey : public QGraphicsRectItem
 {
 public:
-    PianoKey(QGraphicsItem * parent = 0 ) : QGraphicsRectItem(parent) { }
+    PianoKey(QGraphicsItem * parent = 0 ) 
+        : QGraphicsRectItem(parent), m_pressed(false) { }
     PianoKey(const QRectF &rect, const QBrush &brush, const int note); 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
     int getNote() const { return m_note; }
+    void setPressedBrush(const QBrush& b) { m_selectedBrush = b; }
+    bool isPressed() const { return m_pressed; }
+    void setPressed(bool p);
 
 private:
+    bool m_pressed;
+    QBrush m_selectedBrush;
     QBrush m_brush;
     int m_note;
 };

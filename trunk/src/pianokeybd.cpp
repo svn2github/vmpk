@@ -34,9 +34,9 @@ PianoKeybd::PianoKeybd(const int baseOctave, const int numOctaves, QWidget *pare
     initScene(baseOctave, numOctaves);
 }
 
-void PianoKeybd::initScene(int base, int num)
+void PianoKeybd::initScene(int base, int num, const QColor& c)
 {
-    m_scene = new PianoScene(base, num, this);
+    m_scene = new PianoScene(base, num, c, this);
     m_scene->setKeyboardMap(&m_defaultMap);
     connect(m_scene, SIGNAL(noteOn(int)), SIGNAL(noteOn(int)));
     connect(m_scene, SIGNAL(noteOff(int)), SIGNAL(noteOff(int)));
@@ -48,9 +48,12 @@ void PianoKeybd::initialize()
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setCacheMode(CacheBackground);
-    setViewportUpdateMode(FullViewportUpdate);
+    setViewportUpdateMode(MinimalViewportUpdate);
     setRenderHints(QPainter::Antialiasing);
-    setBackgroundBrush(QApplication::palette().brush(QPalette::Background));
+    setOptimizationFlag(DontClipPainter, true);
+    setOptimizationFlag(DontSavePainterState, true);
+    setOptimizationFlag(DontAdjustForAntialiasing, true);
+    setBackgroundBrush(QApplication::palette().background());
     initDefaultMap();
 }
 
@@ -108,8 +111,20 @@ void PianoKeybd::setNumOctaves(const int numOctaves)
 {
     if (numOctaves != m_scene->numOctaves()) {
         int baseOctave = m_scene->baseOctave();
+        QColor color = m_scene->getSelectedColor();
         delete m_scene;
-        initScene(baseOctave, numOctaves);
+        initScene(baseOctave, numOctaves, color);
+        fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);
+    }
+}
+
+void PianoKeybd::setSelectedColor(const QColor& color)
+{
+    if (color != m_scene->getSelectedColor()) {
+        int baseOctave = m_scene->baseOctave();
+        int numOctaves = m_scene->numOctaves();
+        delete m_scene;
+        initScene(baseOctave, numOctaves, color);
         fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);
     }
 }
@@ -127,9 +142,4 @@ void PianoKeybd::setRotation(int r)
 QSize PianoKeybd::sizeHint() const 
 { 
     return mapFromScene(sceneRect()).boundingRect().size();
-}
-
-void PianoKeybd::allKeysOff()
-{
-    m_scene->allKeysOff();
 }

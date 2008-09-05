@@ -22,21 +22,34 @@
 #include <QPalette>
 
 PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note) 
-    : QGraphicsRectItem(rect), 
+    : QGraphicsRectItem(rect),
+    m_pressed(false),
     m_brush(brush), 
     m_note(note) 
 {
-    setFlag(QGraphicsItem::ItemIsSelectable);
     setAcceptedMouseButtons(Qt::NoButton);
 }
 
 void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    if (isSelected()) {
-        painter->setBrush(QApplication::palette().brush(QPalette::Highlight));
+    static const QPen blackPen(QPen(Qt::black, 1));
+    if (m_pressed) {
+        if (m_selectedBrush.style() != Qt::NoBrush) {
+            painter->setBrush(m_selectedBrush);
+        } else {
+            painter->setBrush(QApplication::palette().highlight());
+        }
     } else {
         painter->setBrush(m_brush);
     }
-    painter->setPen(QPen(Qt::black, 1));
+    painter->setPen(blackPen);
     painter->drawRoundRect(rect(), 15, 15);
+}
+
+void PianoKey::setPressed(bool p)
+{
+    if (p != m_pressed) {
+        m_pressed = p;
+        update();
+    }
 }

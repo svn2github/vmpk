@@ -52,8 +52,9 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionLoadKM, SIGNAL(triggered()), SLOT(slotLoadKeyboardMap()));
     connect(ui.actionSaveKM, SIGNAL(triggered()), SLOT(slotSaveKeyboardMap()));
     connect(ui.actionEditKM, SIGNAL(triggered()), SLOT(slotEditKeyboardMap()));
-    connect(ui.pianokeybd, SIGNAL(noteOn(int)), SLOT(slotNoteOn(int)));
-    connect(ui.pianokeybd, SIGNAL(noteOff(int)), SLOT(slotNoteOff(int)));
+    //connect(ui.pianokeybd, SIGNAL(noteOn(int)), SLOT(slotNoteOn(int)));
+    //connect(ui.pianokeybd, SIGNAL(noteOff(int)), SLOT(slotNoteOff(int)));
+    ui.pianokeybd->setPianoHandler(this);
     initialization();
 }
 
@@ -352,7 +353,7 @@ void VPiano::hideEvent( QHideEvent *event )
     QMainWindow::hideEvent(event);
 }
 
-void VPiano::messageWrapper(std::vector<unsigned char> *message)
+inline void VPiano::messageWrapper(std::vector<unsigned char> *message)
 {
     try {
         m_midiout->sendMessage( message );
@@ -361,7 +362,8 @@ void VPiano::messageWrapper(std::vector<unsigned char> *message)
     }
 }
 
-void VPiano::slotNoteOn(int midiNote)
+//void VPiano::slotNoteOn(int midiNote)
+void VPiano::noteOn(const int midiNote)
 {
     std::vector<unsigned char> message;
     unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
@@ -373,7 +375,8 @@ void VPiano::slotNoteOn(int midiNote)
     messageWrapper( &message );
 }
 
-void VPiano::slotNoteOff(int midiNote)
+//void VPiano::slotNoteOff(int midiNote)
+void VPiano::noteOff(const int midiNote)
 {
     std::vector<unsigned char> message;
     unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
