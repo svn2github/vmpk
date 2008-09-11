@@ -1,6 +1,10 @@
 2008-09-11
     * New icon, by Theresa Knott
-
+    * fix for bug: #2105246 Channel numbers starting from 1 instead of 0
+    * better About dialog
+    * toolbars: workaround for strange Qt4.4 behavior when restoring the main 
+      window state.
+ 
 2008-09-05 0.1.1 
     * Bugfixes and optimizations
 

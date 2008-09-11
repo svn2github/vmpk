@@ -2,17 +2,17 @@ To reach the beta state, these are some pending features:
 
 MIDI CONTROLLERS, PROGRAMS
 
-* controller value state remembered when changing from one controller to 
+* 2106035 controller value state remembered when changing from one controller to 
   another one.
-* persistence of controller values and bank/programs.    
+* 2106031 settings persistence of controller values and bank/programs.    
 
 MIDI CONNECTIONS
 
-* MIDI thru: optionally send the received events to the output port.
-* store connection names instead of numbers in the settings
+* 2106023 MIDI thru: optionally send the received events to the output port.
+* 2106026 store connection names instead of numbers in the settings
 
 PRESENTATION
 
-* translation (Qt Linguist) support, and also Spanish translation
-* let the user to choose a custom highligh color for the pressed keys
-* better looking keys (realistic 3D, maybe SVG graphics)
+* 2106015 translation (Qt Linguist) support, and also Spanish translation
+* 2106021 let the user to choose a custom highligh color for the pressed keys
+* 2106022 better looking keys (realistic 3D, maybe SVG graphics)
