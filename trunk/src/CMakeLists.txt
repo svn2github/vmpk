@@ -64,6 +64,8 @@ SET(vmpk_SRCS
     vpiano.h
 )
 
+QT4_ADD_RESOURCES(vmpk_SRCS ../data/vmpk.qrc)
+
 IF(WIN32)
     ADD_WINDRES_OBJS(vmpk_SRCS vpianoico.rc)
 ENDIF(WIN32)

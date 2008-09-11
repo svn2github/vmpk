@@ -34,10 +34,10 @@ SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
 # VMPK version string
 SET (VERSION_MAJOR "0")
 SET (VERSION_MINOR "1")
-SET (VERSION_PATCH "1")
-SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
-#SET (VERSION_SUFFIX "test")
-#SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_SUFFIX})
+SET (VERSION_PATCH "2")
+#SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
+SET (VERSION_SUFFIX "CVS")
+SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_SUFFIX})
 ADD_DEFINITIONS(-D'VERSION="${VERSION}"')
 
 MESSAGE(STATUS "vmpk ${VERSION} prefix: ${CMAKE_INSTALL_PREFIX}")
@@ -58,7 +58,7 @@ IF(QT4_FOUND)
                          ${QT_GUI_LIB_DEPENDENCIES}
                          ${QT_XML_LIB_DEPENDENCIES})
     ENDIF (NOT QT_LIBRARIES)
-    MESSAGE(STATUS "Found Qt4. ${QT_EDITION} version = ${QTVERSION}")
+    MESSAGE(STATUS "Found Qt4.${QT_EDITION} version = ${QTVERSION}")
     #MESSAGE("QT_DEFINITIONS: ${QT_DEFINITIONS}")
     #MESSAGE("QT_LIBRARIES: ${QT_LIBRARIES}")
     #MESSAGE("QT_QTCORE_LIBRARY: ${QT_QTCORE_LIBRARY}")
@@ -127,7 +127,6 @@ ENDIF(${CMAKE_SYSTEM} MATCHES "Windows")
 
 ADD_SUBDIRECTORY(src build)
 
-CONFIGURE_FILE(vmpk.desktop.in vmpk.desktop IMMEDIATE @ONLY)
 CONFIGURE_FILE(vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
 
 # uninstall custom target
@@ -148,7 +147,6 @@ IF (UNIX)
         COMMAND rm -f  CPackConfig.cmake
         COMMAND rm -f  CPackSourceConfig.cmake
         COMMAND rm -f  install_manifest.txt
-        COMMAND rm -f  vmpk.desktop
         COMMAND rm -f  vmpk.spec
         COMMAND rm -f  progress.make
         COMMAND rm -f  Makefile
@@ -164,7 +162,7 @@ IF (UNIX)
         COMMAND cp -r cmake_admin vmpk-${VERSION}
         COMMAND cp -r data vmpk-${VERSION}
         COMMAND cp -r src vmpk-${VERSION}
-        COMMAND cp CMakeLists.txt AUTHORS COPYING ChangeLog NEWS README TODO vmpk.* vmpk-${VERSION}
+        COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.* vmpk-${VERSION}
         COMMAND tar -cj --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
         COMMAND tar -cz --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.gz vmpk-${VERSION}
         COMMAND rm -rf vmpk-${VERSION}
@@ -174,8 +172,8 @@ ENDIF (UNIX)
 
 INSTALL ( FILES
     AUTHORS
-    COPYING
     ChangeLog
+    COPYING
     NEWS
     README
     TODO
@@ -195,7 +193,10 @@ DESTINATION
 )
 
 INSTALL ( FILES 
-    data/vmpk.png
+    data/vmpk_16x16.png 
+    data/vmpk_32x32.png 
+    data/vmpk_48x48.png 
+    data/vmpk_64x64.png 
 DESTINATION 
     share/pixmaps 
 )

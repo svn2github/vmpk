@@ -9,6 +9,7 @@ Release:        0
 License:        GPL v3 or later
 Summary:        Virtual MIDI Piano Keyboard
 Group:          Productivity/Multimedia/Sound/Midi
+Packager:       Pedro Lopez-Cabanillas <plcl@users.sourceforge.net>
 Source:         %name-%version.tar.bz2
 URL:            http://vmpk.sourceforge.net
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -33,17 +34,12 @@ Authors:
 %setup -q
 
 %build
-CXXFLAGS="$RPM_OPT_FLAGS -fexceptions" cmake . -DCMAKE_INSTALL_PREFIX=/usr
-make %{?jobs:-j %jobs}
+CXXFLAGS="$RPM_OPT_FLAGS -g -fexceptions" cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix}
+make %{?jobs:-j %jobs} VERBOSE=1
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
-%if %suse_version < 1010
-%suse_update_desktop_file %name AudioVideo Music
-%else
 %suse_update_desktop_file -G "Virtual MIDI Piano Keyboard" %name AudioVideo Music
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -51,11 +47,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc NEWS README ChangeLog AUTHORS TODO COPYING
-/usr/bin/%name
-/usr/share/%name/*
-/usr/share/pixmaps/%name.png
-/usr/share/applications/%name.desktop
+%{_bindir}/%name
+%{_datadir}/%name/*
+%{_datadir}/pixmaps/*.png
+%{_datadir}/applications/%name.desktop
 
 %changelog
+* Fri Sep 5 2008 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.1.1  
+- New release  
+
 * Sun Aug 31 2008 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.1.0
 - First public release

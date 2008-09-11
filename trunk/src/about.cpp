@@ -22,5 +22,17 @@ About::About(QWidget *parent)
     : QDialog(parent)
 {
     ui.setupUi(this);
+    ui.labelVersion->setText(
+            "<html>"
+            "<head>"
+              "<meta name=\"qrichtext\" content=\"1\" />"
+              "<style type=\"text/css\">\np, li { white-space: pre-wrap; }</style>"
+            "</head>"
+            "<body style=\"font-family:'Sans Serif'; font-size:12pt; font-weight:400; font-style:normal;\">"
+              "<p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                "Version: " VERSION "<br />"
+                "Build date: " __DATE__
+              "</p>"
+            "</body>"
+            "</html>");
 }
-

@@ -13,5 +13,6 @@ MIDI CONNECTIONS
 
 PRESENTATION
 
-* Let the user to choose a custom highligh color for the pressed keys
+* translation (Qt Linguist) support, and also Spanish translation
+* let the user to choose a custom highligh color for the pressed keys
 * better looking keys (realistic 3D, maybe SVG graphics)

@@ -70,3 +70,4 @@ SOURCES += src/kmapdialog.cpp \
     src/preferences.cpp \
     src/instrument.cpp \
     src/main.cpp
+RESOURCES += data/vmpk.qrc
