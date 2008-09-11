@@ -39,6 +39,7 @@ make %{?jobs:-j %jobs} VERBOSE=1
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
+ln -sf vmpk_32x32.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/vmpk.png
 %suse_update_desktop_file -G "Virtual MIDI Piano Keyboard" %name AudioVideo Music
 
 %clean
