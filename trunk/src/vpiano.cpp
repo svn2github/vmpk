@@ -158,9 +158,9 @@ void VPiano::initToolBars()
     // Notes tool bar
     ui.toolBarNotes->addWidget(new QLabel(" Channel: ", this));
     m_sboxChannel = new QSpinBox(this);
-    m_sboxChannel->setMinimum(0);
-    m_sboxChannel->setMaximum(15);
-    m_sboxChannel->setValue(dlgPreferences.getOutChannel());
+    m_sboxChannel->setMinimum(1);
+    m_sboxChannel->setMaximum(16);
+    m_sboxChannel->setValue(dlgPreferences.getOutChannel() + 1);
     ui.toolBarNotes->addWidget(m_sboxChannel);
     ui.toolBarNotes->addWidget(new QLabel(" Base Octave: ", this));
     m_sboxOctave = new QSpinBox(this);
@@ -179,7 +179,7 @@ void VPiano::initToolBars()
     m_Velocity->setValue(dlgPreferences.getVelocity());
     ui.toolBarNotes->addWidget(m_Velocity);
     connect( m_sboxChannel, SIGNAL(valueChanged(int)), 
-             &dlgPreferences, SLOT(setOutChannel(int)) );
+             this, SLOT(slotOutChannel(int)) );
     connect( m_sboxOctave, SIGNAL(valueChanged(int)), 
              this, SLOT(slotBaseOctave(int)) );
     connect( m_Velocity, SIGNAL(valueChanged(int)), 
@@ -353,7 +353,7 @@ void VPiano::hideEvent( QHideEvent *event )
     QMainWindow::hideEvent(event);
 }
 
-inline void VPiano::messageWrapper(std::vector<unsigned char> *message)
+void VPiano::messageWrapper(std::vector<unsigned char> *message) const
 {
     try {
         m_midiout->sendMessage( message );
@@ -388,7 +388,7 @@ void VPiano::noteOff(const int midiNote)
     messageWrapper( &message );
 }
 
-void VPiano::sendController(int controller, int value)
+void VPiano::sendController(const int controller, const int value)
 {
     std::vector<unsigned char> message;
     unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
@@ -412,7 +412,7 @@ void VPiano::allNotesOff()
     ui.pianokeybd->allKeysOff();    
 }
 
-void VPiano::programChange(int program)
+void VPiano::programChange(const int program)
 {
     std::vector<unsigned char> message;
     unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
@@ -423,7 +423,7 @@ void VPiano::programChange(int program)
     messageWrapper( &message );
 }
 
-void VPiano::bankChange(int bank)
+void VPiano::bankChange(const int bank)
 {
     int method = (m_ins != NULL) ? m_ins->bankSelMethod() : 0;
     int lsb, msb;
@@ -445,7 +445,7 @@ void VPiano::bankChange(int bank)
     }
 }
 
-void VPiano::bender(int value)
+void VPiano::bender(const int value)
 {
     std::vector<unsigned char> message;
     int v = value + BENDER_MID; // v >= 0, v <= 16384
@@ -581,7 +581,7 @@ void VPiano::applyPreferences()
     if (ui.pianokeybd->numOctaves() != dlgPreferences.getNumOctaves()) {
         ui.pianokeybd->setNumOctaves(dlgPreferences.getNumOctaves());
     }
-    m_sboxChannel->setValue(dlgPreferences.getOutChannel());
+    m_sboxChannel->setValue(dlgPreferences.getOutChannel() + 1);
     m_sboxOctave->setValue(dlgPreferences.getBaseOctave());
     m_Velocity->setValue(dlgPreferences.getVelocity());
     
@@ -654,7 +654,7 @@ void VPiano::slotEditKeyboardMap()
     ui.pianokeybd->grabKeyboard();
 }
 
-void VPiano::slotBankChanged(int index)
+void VPiano::slotBankChanged(const int index)
 {
     m_comboProg->clear();
     if (index < 0) return;
@@ -667,7 +667,7 @@ void VPiano::slotBankChanged(int index)
     }
 }
 
-void VPiano::slotProgChanged(int index)
+void VPiano::slotProgChanged(const int index)
 {
     if (index < 0) return;
     int bankIdx = m_comboBank->currentIndex();
@@ -679,11 +679,19 @@ void VPiano::slotProgChanged(int index)
         programChange(pgm);
 }
 
-void VPiano::slotBaseOctave(int octave)
+void VPiano::slotBaseOctave(const int octave)
 {
     if (octave != dlgPreferences.getBaseOctave()) {
         ui.pianokeybd->allKeysOff();
         dlgPreferences.setBaseOctave(octave);
         ui.pianokeybd->setBaseOctave(octave);
+    }
+}
+
+void VPiano::slotOutChannel(const int channel)
+{
+    int c = channel - 1; 
+    if (c != dlgPreferences.getOutChannel()) {
+        dlgPreferences.setOutChannel(c);
     }
 }

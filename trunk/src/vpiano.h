@@ -99,9 +99,10 @@ public slots:
     void slotResetBender();
     void slotController();
     void slotBender();
-    void slotBankChanged(int index);
-    void slotProgChanged(int index);
-    void slotBaseOctave(int octave);
+    void slotBankChanged(const int index);
+    void slotProgChanged(const int index);
+    void slotBaseOctave(const int octave);
+    void slotOutChannel(const int channel);
     
     // slots for note signals 
     // void slotNoteOn(int midiNote);
@@ -116,13 +117,13 @@ private:
     void applyConnections();
     void refreshConnections();
     void initToolBars();
-    void sendController(int controller, int value);
+    void sendController(const int controller, const int value);
     void resetAllControllers();
     void allNotesOff();
-    void bankChange(int bank);
-    void programChange(int program);
-    void bender(int value);
-    void messageWrapper(std::vector<unsigned char> *message);
+    void bankChange(const int bank);
+    void programChange(const int program);
+    void bender(const int value);
+    void messageWrapper(std::vector<unsigned char> *message) const;
 
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;

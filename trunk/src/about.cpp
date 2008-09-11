@@ -31,7 +31,9 @@ About::About(QWidget *parent)
             "<body style=\"font-family:'Sans Serif'; font-size:12pt; font-weight:400; font-style:normal;\">"
               "<p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
                 "Version: " VERSION "<br />"
-                "Build date: " __DATE__
+                "Build date: " __DATE__ "<br />"
+                "Build time: " __TIME__ "<br />"
+                "Compiler: " __VERSION__
               "</p>"
             "</body>"
             "</html>");

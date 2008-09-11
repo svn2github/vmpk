@@ -19,7 +19,7 @@
 <folderInfo id="cdt.managedbuild.toolchain.gnu.base.394656128.1045691004" name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.base.1751630374" name="cdt.managedbuild.toolchain.gnu.base" superClass="cdt.managedbuild.toolchain.gnu.base">
 <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.2097705038" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
-<builder autoBuildTarget="all" buildPath="${workspace_loc:/vmpk}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="cdt.managedbuild.target.gnu.builder.base.1519672893" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
+<builder autoBuildTarget="all" buildPath="${workspace_loc:/vmpk}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="cdt.managedbuild.target.gnu.builder.base.1519672893" incrementalBuildTarget="all  VERBOSE=1" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
 <tool id="cdt.managedbuild.tool.gnu.archiver.base.2128748777" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.89537719" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1152436046" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -292,6 +292,7 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
+
 <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 <buildTargets>
 <target name="distclean" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
@@ -305,10 +306,17 @@
 <target name="qmake" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>qmake</buildCommand>
 <buildArguments/>
-<buildTarget/>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>false</runAllBuilders>
+</target>
+<target name="cmake" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<buildCommand>cmake</buildCommand>
+<buildArguments/>
+<buildTarget>. -DCMAKE_BUILD_TYPE=Debug</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+<runAllBuilders>true</runAllBuilders>
 </target>
 </buildTargets>
 </storageModule>

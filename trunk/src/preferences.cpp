@@ -44,8 +44,8 @@ void Preferences::slotButtonClicked(QAbstractButton *button)
 void Preferences::showEvent ( QShowEvent *event )
 {
     if (event->type() == QEvent::Show) {
-        ui.spinInChan->setValue( m_inChannel );
-        ui.spinOutChan->setValue( m_outChannel );
+        ui.spinInChan->setValue( m_inChannel + 1);
+        ui.spinOutChan->setValue( m_outChannel + 1);
         ui.spinVelocity->setValue( m_velocity );
         ui.spinBaseOctave->setValue( m_baseOctave );
         ui.spinNumOctaves->setValue( m_numOctaves );
@@ -54,8 +54,8 @@ void Preferences::showEvent ( QShowEvent *event )
 
 void Preferences::apply()
 {
-    m_inChannel = ui.spinInChan->value();
-    m_outChannel = ui.spinOutChan->value();
+    m_inChannel = ui.spinInChan->value() - 1;
+    m_outChannel = ui.spinOutChan->value() - 1;
     m_velocity = ui.spinVelocity->value();
     m_baseOctave = ui.spinBaseOctave->value();
     m_numOctaves = ui.spinNumOctaves->value();

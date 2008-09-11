@@ -83,6 +83,12 @@
    </property>
   </widget>
   <widget class="QToolBar" name="toolBarNotes" >
+   <property name="sizePolicy" >
+    <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="windowTitle" >
     <string>&amp;Notes</string>
    </property>
@@ -99,6 +105,12 @@
    <addaction name="separator" />
   </widget>
   <widget class="QToolBar" name="toolBarControllers" >
+   <property name="sizePolicy" >
+    <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="windowTitle" >
     <string>&amp;Controllers</string>
    </property>
@@ -115,6 +127,12 @@
    <addaction name="separator" />
   </widget>
   <widget class="QToolBar" name="toolBarBender" >
+   <property name="sizePolicy" >
+    <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="windowTitle" >
     <string>Pitch &amp;Bender</string>
    </property>
@@ -131,6 +149,12 @@
    <addaction name="separator" />
   </widget>
   <widget class="QToolBar" name="toolBarPrograms" >
+   <property name="sizePolicy" >
+    <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="windowTitle" >
     <string>&amp;Programs</string>
    </property>

@@ -31,8 +31,11 @@
    </item>
    <item row="0" column="3" >
     <widget class="QSpinBox" name="spinInChan" >
+     <property name="minimum" >
+      <number>1</number>
+     </property>
      <property name="maximum" >
-      <number>15</number>
+      <number>16</number>
      </property>
     </widget>
    </item>
@@ -54,8 +57,11 @@
    </item>
    <item row="1" column="3" >
     <widget class="QSpinBox" name="spinOutChan" >
+     <property name="minimum" >
+      <number>1</number>
+     </property>
      <property name="maximum" >
-      <number>15</number>
+      <number>16</number>
      </property>
     </widget>
    </item>
