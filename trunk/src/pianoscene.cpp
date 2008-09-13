@@ -130,10 +130,8 @@ void PianoScene::mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent )
         if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed()) {
             keyOff(lastkey);
         }
-        if (key == NULL) {
-            m_mousePressed = false;
-        } else {
-            if (!key->isPressed()) keyOn(key);
+        if ((key != NULL) && !key->isPressed()) { 
+            keyOn(key);
         }
         mouseEvent->accept();
         return;
@@ -155,10 +153,10 @@ void PianoScene::mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent )
 
 void PianoScene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
 {
+    m_mousePressed = false; 
     PianoKey* key = getKeyForPos(mouseEvent->scenePos());
     if (key != NULL) {
         keyOff(key);
-        m_mousePressed = false; 
         mouseEvent->accept();
         return;
     }
