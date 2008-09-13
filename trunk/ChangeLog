@@ -1,6 +1,8 @@
 2008-09-13
     * implemented RFE: #2107732 mouse handling
-    
+    * implemented RFE: #2106021 let the user to choose a custom highligh color
+    * reorganisations    
+
 2008-09-11
     * New icon, by Theresa Knott
     * fix for bug: #2105246 Channel numbers starting from 1 instead of 0

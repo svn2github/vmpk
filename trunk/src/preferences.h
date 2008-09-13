@@ -34,6 +34,7 @@ public:
     int getVelocity() const { return m_velocity; }
     int getBaseOctave() const { return m_baseOctave; }
     int getNumOctaves() const { return m_numOctaves; }
+    QColor getKeyPressedColor() const { return m_keyPressedColor; }
     void setInstrumentsFileName( const QString fileName );
     QString getInstrumentsFileName();
     void setInstrumentName( const QString name );
@@ -47,8 +48,10 @@ public slots:
     void setVelocity(int value) { m_velocity = value; }
     void setBaseOctave(int value) { m_baseOctave = value; }
     void setNumOctaves(int value) { m_numOctaves = value; }
+    void setKeyPressedColor(QColor value);
     void slotButtonClicked(QAbstractButton *button);
     void slotOpenInstrumentFile();
+    void slotSelectColor();
     void accept();
 
 protected:
@@ -63,6 +66,7 @@ private:
     int m_velocity;
     int m_baseOctave;
     int m_numOctaves;
+    QColor m_keyPressedColor;
 };
 
 #endif // PREFERENCES_H

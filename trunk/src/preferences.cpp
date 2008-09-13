@@ -17,9 +17,12 @@
 */
 
 #include "preferences.h"
+#include "constants.h"
+
 #include <QPushButton>
 #include <QShowEvent>
 #include <QFileDialog>
+#include <QColorDialog>
 
 Preferences::Preferences(QWidget *parent)
     : QDialog(parent),
@@ -32,6 +35,7 @@ Preferences::Preferences(QWidget *parent)
     ui.setupUi( this );
     connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotButtonClicked(QAbstractButton*)));
     connect(ui.btnInstrument, SIGNAL(clicked()), SLOT(slotOpenInstrumentFile()));
+    connect(ui.btnColor, SIGNAL(clicked()), SLOT(slotSelectColor()));
 }
 
 void Preferences::slotButtonClicked(QAbstractButton *button)
@@ -59,6 +63,7 @@ void Preferences::apply()
     m_velocity = ui.spinVelocity->value();
     m_baseOctave = ui.spinBaseOctave->value();
     m_numOctaves = ui.spinNumOctaves->value();
+    m_keyPressedColor = QColor(ui.lblColorName->text());
 }
 
 void Preferences::accept()
@@ -71,9 +76,19 @@ void Preferences::slotOpenInstrumentFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
                                 tr("Open instruments definition"),
-                                "", tr("Instrument definitions (*.ins)"));
+                                getDataDirectory(), tr("Instrument definitions (*.ins)"));
     if (!fileName.isEmpty()) {
         setInstrumentsFileName(fileName);
+    }
+}
+
+void Preferences::slotSelectColor()
+{
+    QColor color = QColorDialog::getColor(m_keyPressedColor, this);
+    if (color.isValid()) {
+        ui.lblColorName->setText(color.name());
+        ui.lblColorName->setPalette(QPalette(color));
+        ui.lblColorName->setAutoFillBackground(true);
     }
 }
 
@@ -114,4 +129,14 @@ void Preferences::setInstrumentName( const QString name )
 QString Preferences::getInstrumentName()
 {
     return ui.cboInstrument->currentText();    
+}
+
+void Preferences::setKeyPressedColor(QColor value)
+{
+    if (m_keyPressedColor != value) {
+        m_keyPressedColor = value;
+        ui.lblColorName->setText(value.name());
+        ui.lblColorName->setPalette(QPalette(value));
+        ui.lblColorName->setAutoFillBackground(true);
+    }
 }

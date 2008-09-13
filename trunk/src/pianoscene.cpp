@@ -19,6 +19,8 @@
 #include "pianoscene.h"
 #include "pianokey.h"
 
+#include <QApplication>
+#include <QPalette>
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 
@@ -27,18 +29,18 @@
 
 PianoScene::PianoScene ( const int baseOctave, 
                          const int numOctaves, 
-                         const QColor& selectedColor,
+                         const QColor& keyPressedColor,
                          QObject * parent )
     : QGraphicsScene( QRectF(0, 0, KEYWIDTH * numOctaves * 7, KEYHEIGHT), parent ),
     m_baseOctave( baseOctave ),
     m_numOctaves( numOctaves ),
-    m_selectedColor( selectedColor ),
+    m_keyPressedColor( keyPressedColor ),
     m_mousePressed( false ),
     m_handler( NULL )
 {
     QBrush blackBrush(Qt::black);
     QBrush whiteBrush(Qt::white);
-    QBrush selBrush(m_selectedColor);
+    QBrush hilightBrush(m_keyPressedColor.isValid() ? m_keyPressedColor : QApplication::palette().highlight());
     int i, numkeys = m_numOctaves * 12;
     for(i = 0; i < numkeys; ++i)
     {
@@ -54,8 +56,8 @@ PianoScene::PianoScene ( const int baseOctave,
             key = new PianoKey( QRectF( x, 0, KEYWIDTH * 8/10 - 1, KEYHEIGHT * 6/10 ), blackBrush, i );
             key->setZValue( 1 );
         }
-        if (m_selectedColor.isValid())
-            key->setPressedBrush(selBrush);
+        if (m_keyPressedColor.isValid())
+            key->setPressedBrush(hilightBrush);
         m_keys.insert(i, key);
         addItem( key );
     }
@@ -163,18 +165,15 @@ void PianoScene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
     mouseEvent->ignore();
 }
 
-void PianoScene::setKeyboardMap(const KeyboardMap* map)
-{
-    m_keybdMap = *map;
-}
-
 PianoKey* PianoScene::getPianoKey( const int key ) const
 {
-    KeyboardMap::ConstIterator it = m_keybdMap.find(key);
-    if ((it != m_keybdMap.end()) && (it.key() == key)) {
-        int note = it.value();
-        if (note < m_keys.size())
-            return m_keys[note];
+    if (m_keybdMap != NULL) {
+        KeyboardMap::ConstIterator it = m_keybdMap->find(key);
+        if ((it != m_keybdMap->end()) && (it.key() == key)) {
+            int note = it.value();
+            if (note < m_keys.size())
+                return m_keys[note];
+        }
     }
     return NULL;
 }
@@ -206,5 +205,16 @@ void PianoScene::allKeysOff()
     QList<PianoKey*>::ConstIterator it; 
     for(it = m_keys.begin(); it != m_keys.end(); ++it) {
         (*it)->setPressed(false);
+    }
+}
+
+void PianoScene::setKeyPressedColor(const QColor& color)
+{
+    if (color.isValid() && (color != m_keyPressedColor)) {
+        m_keyPressedColor = color;
+        QBrush hilightBrush(m_keyPressedColor);
+        foreach(PianoKey* key, m_keys) {
+            key->setPressedBrush(hilightBrush);
+        }
     }
 }

@@ -21,11 +21,12 @@
 
 #include <QHash>
 #include <QIODevice>
+#include "constants.h"
 
 class KeyboardMap : public QHash<int, int>  
 {
 public:
-    KeyboardMap() : QHash<int, int>(), m_fileName("default") {}
+    KeyboardMap() : QHash<int, int>(), m_fileName(QSTR_DEFAULT) {}
     QString loadFromXMLFile(const QString fileName);
     void saveToXMLFile(const QString fileName);
     QString initializeFromXML(QIODevice *dev);

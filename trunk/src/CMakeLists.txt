@@ -37,6 +37,7 @@ SET(vmpk_SRCS
     about.h
     classicstyle.cpp
     classicstyle.h
+    constants.h
     instrument.cpp
     instrument.h
     keyboardmap.cpp

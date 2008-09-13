@@ -55,7 +55,8 @@ HEADERS += src/kmapdialog.h \
     src/vpiano.h \
     src/about.h \
     src/preferences.h \
-    src/instrument.h
+    src/instrument.h \
+    src/constants.h
 SOURCES += src/kmapdialog.cpp \
     src/keyboardmap.cpp \
     src/midisetup.cpp \
