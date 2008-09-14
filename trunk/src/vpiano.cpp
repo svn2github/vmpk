@@ -630,7 +630,8 @@ void VPiano::slotLoadKeyboardMap()
     ui.pianokeybd->releaseKeyboard();
     QString fileName = QFileDialog::getOpenFileName(0,
                                 tr("Open keyboard map definition"),
-                                getDataDirectory(), tr("Keyboard map (*.xml)"));
+                                getDataDirectory(), 
+                                tr("Keyboard map (*.xml)"));
     if (!fileName.isEmpty()) {
         ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(fileName);
     }
@@ -642,7 +643,8 @@ void VPiano::slotSaveKeyboardMap()
     ui.pianokeybd->releaseKeyboard();
     QString fileName = QFileDialog::getSaveFileName(this,
                                 tr("Save keyboard map definition"),
-                                getDataDirectory(), tr("Keyboard map (*.xml)"));
+                                getDataDirectory(), 
+                                tr("Keyboard map (*.xml)"));
     if (!fileName.isEmpty()) {
         ui.pianokeybd->getKeyboardMap()->saveToXMLFile(fileName);
     }

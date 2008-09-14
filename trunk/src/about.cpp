@@ -21,20 +21,24 @@
 About::About(QWidget *parent)
     : QDialog(parent)
 {
+    const QString PGM_VERSION(VERSION);
+    const QString BLD_DATE(__DATE__);
+    const QString BLD_TIME(__TIME__);
+    const QString CMP_VERSION(__VERSION__);
+    
     ui.setupUi(this);
-    ui.labelVersion->setText(
-            "<html>"
+    ui.labelVersion->setText(tr("<html>"
             "<head>"
               "<meta name=\"qrichtext\" content=\"1\" />"
               "<style type=\"text/css\">\np, li { white-space: pre-wrap; }</style>"
             "</head>"
             "<body style=\"font-family:'Sans Serif'; font-size:12pt; font-weight:400; font-style:normal;\">"
               "<p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                "Version: " VERSION "<br />"
-                "Build date: " __DATE__ "<br />"
-                "Build time: " __TIME__ "<br />"
-                "Compiler: " __VERSION__
+                "Version: %1<br/>"
+                "Build date: %2<br/>"
+                "Build time: %3<br/>"
+                "Compiler: %4" 
               "</p>"
             "</body>"
-            "</html>");
+            "</html>").arg(PGM_VERSION, BLD_DATE, BLD_TIME, CMP_VERSION));
 }

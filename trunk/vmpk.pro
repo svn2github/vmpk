@@ -72,3 +72,4 @@ SOURCES += src/kmapdialog.cpp \
     src/instrument.cpp \
     src/main.cpp
 RESOURCES += data/vmpk.qrc
+TRANSLATIONS += translations/vmpk_es.ts

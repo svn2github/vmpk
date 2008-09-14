@@ -76,7 +76,8 @@ void Preferences::slotOpenInstrumentFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
                                 tr("Open instruments definition"),
-                                getDataDirectory(), tr("Instrument definitions (*.ins)"));
+                                getDataDirectory(), 
+                                tr("Instrument definitions (*.ins)"));
     if (!fileName.isEmpty()) {
         setInstrumentsFileName(fileName);
     }

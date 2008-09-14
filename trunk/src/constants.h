@@ -23,6 +23,10 @@
 
 /* Don't translate any string defined in this header */
 
+const QString QSTR_APPNAME("Virtual MIDI Piano Keyboard");
+const QString QSTR_DOMAIN("vmpk.sourceforge.net");
+const QString QSTR_VMPKPX("vmpk_");
+
 const QString QSTR_WINDOW("Window");
 const QString QSTR_GEOMETRY("Geometry");
 const QString QSTR_STATE("State");

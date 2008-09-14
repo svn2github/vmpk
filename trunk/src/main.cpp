@@ -16,6 +16,7 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "constants.h"
 #include "vpiano.h"
 
 #include <QtGui>
@@ -23,10 +24,16 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setOrganizationName("vmpk.sourceforge.net");
-    QCoreApplication::setOrganizationDomain("vmpk.sourceforge.net");
-    QCoreApplication::setApplicationName("Virtual MIDI Piano Keyboard");    
+    QCoreApplication::setOrganizationName(QSTR_DOMAIN);
+    QCoreApplication::setOrganizationDomain(QSTR_DOMAIN);
+    QCoreApplication::setApplicationName(QSTR_APPNAME);    
     QApplication a(argc, argv);
+
+    QString locale = QLocale::system().name();
+    QTranslator translator;
+    translator.load(QString(QSTR_VMPKPX) + locale);
+    a.installTranslator(&translator);
+    
     VPiano w;
     w.show();
     return a.exec();

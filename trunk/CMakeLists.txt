@@ -125,7 +125,10 @@ IF(${CMAKE_SYSTEM} MATCHES "Windows")
     LINK_LIBRARIES(winmm)
 ENDIF(${CMAKE_SYSTEM} MATCHES "Windows")
 
+FIND_PACKAGE(TranslationSupport)
+
 ADD_SUBDIRECTORY(src build)
+ADD_SUBDIRECTORY(translations build)
 
 CONFIGURE_FILE(vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
 
@@ -162,6 +165,7 @@ IF (UNIX)
         COMMAND cp -r cmake_admin vmpk-${VERSION}
         COMMAND cp -r data vmpk-${VERSION}
         COMMAND cp -r src vmpk-${VERSION}
+        COMMAND cp -r translations vmpk-${VERSION}
         COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.* vmpk-${VERSION}
         COMMAND tar -cj --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
         COMMAND tar -cz --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.gz vmpk-${VERSION}
