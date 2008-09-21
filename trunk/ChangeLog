@@ -1,5 +1,10 @@
+2008-09-21
+    * fix for bug: #2116713 - QJackCtl input port is shown for connections
+    * implemented RFE: #2106035 controllers state remembered
+    * implemented RFE: #2106031 settings persistence: controllers/bank/program
+
 2008-09-14
-    * Implemented RFE: #2106015 translation (Qt Linguist) support
+    * implemented RFE: #2106015 translation (Qt Linguist) support
   
 2008-09-13
     * implemented RFE: #2107732 mouse handling
@@ -7,14 +12,14 @@
     * reorganisations    
 
 2008-09-11
-    * New icon, by Theresa Knott
+    * new icon, by Theresa Knott
     * fix for bug: #2105246 Channel numbers starting from 1 instead of 0
     * better About dialog
     * toolbars: workaround for strange Qt4.4 behavior when restoring the main 
       window state.
  
 2008-09-05 0.1.1 
-    * Bugfixes and optimizations
+    * bugfixes and optimizations
 
 2008-08-31 0.1.0 
-    * First public release
+    * first public release

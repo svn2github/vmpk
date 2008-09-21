@@ -86,6 +86,7 @@ void VPiano::initialization()
     initToolBars();
     applyPreferences();
     applyConnections();
+    applyInitialSettings();
 }
 
 int VPiano::getInputChannel()
@@ -296,6 +297,22 @@ void VPiano::readSettings()
     settings.beginGroup(QSTR_KEYBOARD);
     QString mapFile = settings.value(QSTR_MAPFILE, QSTR_DEFAULT).toString();
     settings.endGroup();
+
+    settings.beginGroup(QSTR_INSTRUMENT);
+    m_lastBank = settings.value(QSTR_BANK, -1).toInt();
+    m_lastProg = settings.value(QSTR_PROGRAM, 0).toInt();
+    m_lastCtl = settings.value(QSTR_CONTROLLER, 1).toInt();
+    settings.endGroup();
+
+    settings.beginGroup(QSTR_CONTROLLERS);
+    QStringList keys = settings.allKeys();
+    QStringList::const_iterator it;
+    for(it = keys.constBegin(); it != keys.constEnd(); ++it) {
+        int ctl = (*it).toInt();
+        int val = settings.value(*it, 0).toInt();
+        m_ctlSettings[ctl] = val;
+    }
+    settings.endGroup();
     
     if (!mapFile.isEmpty() && (mapFile != QSTR_DEFAULT)) {
         QString msg = ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(mapFile);
@@ -331,6 +348,19 @@ void VPiano::writeSettings()
     
     settings.beginGroup(QSTR_KEYBOARD);
     settings.setValue(QSTR_MAPFILE, ui.pianokeybd->getKeyboardMap()->getFileName());
+    settings.endGroup();
+    
+    settings.beginGroup(QSTR_CONTROLLERS);
+    QMap<int,int>::const_iterator it;
+    for(it = m_ctlState.constBegin(); it != m_ctlState.constEnd(); ++it) { 
+        settings.setValue(QString::number(it.key()), it.value());
+    }
+    settings.endGroup();
+
+    settings.beginGroup(QSTR_INSTRUMENT);
+    settings.setValue(QSTR_BANK, m_comboBank->itemData(m_comboBank->currentIndex()).toInt());
+    settings.setValue(QSTR_PROGRAM, m_comboProg->itemData(m_comboProg->currentIndex()).toInt());
+    settings.setValue(QSTR_CONTROLLER, m_comboControl->itemData(m_comboControl->currentIndex()).toInt());
     settings.endGroup();
 }
 
@@ -642,6 +672,41 @@ void VPiano::applyPreferences()
             InstrumentData patch = j.value();
             m_comboBank->addItem(patch.name(), j.key());
             //qDebug() << "---- Bank[" << j.key() << "]=" << patch.name();
+        }
+    }
+}
+
+void VPiano::applyInitialSettings() 
+{
+    int idx;
+    QMap<int,int>::Iterator i, j; 
+    for(i = m_ctlSettings.begin(); i != m_ctlSettings.end(); ++i) {
+        j = m_ctlState.find(i.key());
+        if (j != m_ctlState.end())
+            m_ctlState[i.key()] = i.value();
+    }
+    
+    for(idx = 0; idx < m_comboControl->count(); ++idx) {
+        int ctl = m_comboControl->itemData(idx).toInt();
+        if (ctl == m_lastCtl) {
+            m_comboControl->setCurrentIndex(idx);
+            break;
+        }
+    }
+
+    for(idx = 0; idx < m_comboBank->count(); ++idx) {
+        int bank = m_comboBank->itemData(idx).toInt();
+        if (bank == m_lastBank) {
+            m_comboBank->setCurrentIndex(idx);
+            break;
+        }
+    }
+    
+    for(idx = 0; idx < m_comboProg->count(); ++idx) {
+        int pgm = m_comboProg->itemData(idx).toInt();
+        if (pgm == m_lastProg) {
+            m_comboProg->setCurrentIndex(idx);
+            break;
         }
     }
 }

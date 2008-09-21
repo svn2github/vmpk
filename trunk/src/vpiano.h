@@ -132,6 +132,7 @@ private:
     void writeSettings();
     void applyPreferences();
     void applyConnections();
+    void applyInitialSettings();    
     void refreshConnections();
     void initToolBars();
     void sendController(const int controller, const int value);
@@ -165,7 +166,10 @@ private:
     QComboBox* m_comboProg;
     QStyle* m_dialStyle;
     Instrument* m_ins;
-    QMap<int,int> m_ctlState;
+    QMap<int,int> m_ctlState, m_ctlSettings;
+    int m_lastBank;
+    int m_lastProg;
+    int m_lastCtl;
 };
 
 #endif // VPIANO_H

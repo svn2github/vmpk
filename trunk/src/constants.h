@@ -46,6 +46,11 @@ const QString QSTR_OUTPORT("OutPort");
 const QString QSTR_KEYBOARD("Keyboard");
 const QString QSTR_MAPFILE("MapFile");
 const QString QSTR_DEFAULT("default");
+const QString QSTR_CONTROLLERS("Controllers");
+const QString QSTR_INSTRUMENT("Instrument");
+const QString QSTR_BANK("Bank");
+const QString QSTR_PROGRAM("Program");
+const QString QSTR_CONTROLLER("Controller");
 
 const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUTCLIENT("VMPK Input Client");
