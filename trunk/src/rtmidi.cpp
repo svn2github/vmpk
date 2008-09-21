@@ -869,30 +869,39 @@ void RtMidiIn :: initialize( const std::string& clientName )
 }
 
 // This function is used to count or get the pinfo structure for a given port number.
-unsigned int portInfo( snd_seq_t *seq, snd_seq_port_info_t *pinfo, unsigned int type, int portNumber )
+unsigned int portInfo(snd_seq_t *seq, snd_seq_port_info_t *pinfo,
+                      unsigned int type, int portNumber)
 {
-	snd_seq_client_info_t *cinfo;
-  int client;
-  int count = 0;
-	snd_seq_client_info_alloca( &cinfo );
+    snd_seq_client_info_t *cinfo;
+    int client;
+    int count = 0;
+    snd_seq_client_info_alloca( &cinfo );
 
-	snd_seq_client_info_set_client( cinfo, -1 );
-	while ( snd_seq_query_next_client( seq, cinfo ) >= 0 ) {
-    client = snd_seq_client_info_get_client( cinfo );
-    if ( client == 0 ) continue;
-		// Reset query info
-		snd_seq_port_info_set_client( pinfo, client );
-		snd_seq_port_info_set_port( pinfo, -1 );
-		while ( snd_seq_query_next_port( seq, pinfo ) >= 0 ) {
-      if ( !PORT_TYPE( pinfo, type ) )  continue;
-      if ( count == portNumber ) return 1;
-      count++;
-		}
-	}
+    snd_seq_client_info_set_client(cinfo, -1);
+    while (snd_seq_query_next_client(seq, cinfo) >= 0) {
+        client = snd_seq_client_info_get_client(cinfo);
+        if (client == 0)
+            continue;
+        // Reset query info
+        snd_seq_port_info_set_client(pinfo, client);
+        snd_seq_port_info_set_port(pinfo, -1);
+        while (snd_seq_query_next_port(seq, pinfo) >= 0) {
+            unsigned int atyp = snd_seq_port_info_get_type(pinfo);
+            if ((atyp & SND_SEQ_PORT_TYPE_MIDI_GENERIC) == 0)
+                continue;
+            unsigned int caps = snd_seq_port_info_get_capability(pinfo);
+            if ((caps & type) != type)
+                continue;
+            if (count == portNumber)
+                return 1;
+            count++;
+        }
+    }
 
-  // If a negative portNumber was used, return the port count.
-  if ( portNumber < 0 ) return count;
-  return 0;
+    // If a negative portNumber was used, return the port count.
+    if (portNumber < 0)
+        return count;
+    return 0;
 }
 
 void RtMidiIn :: openPort( unsigned int portNumber )
