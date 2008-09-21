@@ -38,8 +38,9 @@ class Instrument;
 class RtMidiIn;
 class RtMidiOut;
 
-const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::User + 0x90 );  
-const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::User + 0x80 );  
+const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::User + STATUS_NOTEON );  
+const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::User + STATUS_NOTEOFF );  
+const QEvent::Type ControllerEventType = QEvent::Type( QEvent::User + STATUS_CONTROLLER );  
 
 class NoteEvent : public QEvent
 {
@@ -66,6 +67,21 @@ public:
     NoteOffEvent(unsigned char note) 
         : NoteEvent(note, NoteOffEventType)
     { }
+};
+
+class ControllerEvent : public QEvent
+{
+public:
+    ControllerEvent(unsigned char ctl, unsigned char val)
+        : QEvent(ControllerEventType),
+        m_ctl(ctl),
+        m_value(val)
+        { }
+    unsigned char getController() const { return m_ctl; }
+    unsigned char getValue() const { return m_value; }
+private:
+    unsigned char m_ctl;
+    unsigned char m_value;
 };
 
 class VPiano : public QMainWindow, public PianoHandler
@@ -103,6 +119,7 @@ public slots:
     void slotProgChanged(const int index);
     void slotBaseOctave(const int octave);
     void slotOutChannel(const int channel);
+    void slotCtlChanged(const int index);
     
     // slots for note signals 
     // void slotNoteOn(int midiNote);
@@ -124,6 +141,7 @@ private:
     void programChange(const int program);
     void bender(const int value);
     void messageWrapper(std::vector<unsigned char> *message) const;
+    void updateController(int ctl, int val);
 
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;
@@ -147,6 +165,7 @@ private:
     QComboBox* m_comboProg;
     QStyle* m_dialStyle;
     Instrument* m_ins;
+    QMap<int,int> m_ctlState;
 };
 
 #endif // VPIANO_H

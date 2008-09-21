@@ -97,22 +97,31 @@ void midiCallback( double /*deltatime*/,
                    std::vector< unsigned char > *message, 
                    void *userData )
 {
+    QEvent* ev = NULL;
+    VPiano* instance = static_cast<VPiano*>(userData);
     unsigned char status = message->at(0) & MASK_STATUS;
     if ((status == STATUS_NOTEON) || (status == STATUS_NOTEOFF)) { 
-        VPiano* instance = static_cast<VPiano*>(userData);
         unsigned char channel = message->at(0) & MASK_CHANNEL;
         unsigned char channelFilter = instance->getInputChannel();
         if (channel == channelFilter) {
             unsigned char midi_note = message->at(1);
             unsigned char vel = message->at(2);
-            QEvent* ev;
             if ((status == STATUS_NOTEOFF) || (vel == 0))
                 ev = new NoteOffEvent(midi_note);
             else
                 ev = new NoteOnEvent(midi_note);
-            QApplication::postEvent(instance, ev);
+        }
+    } else if (status == STATUS_CONTROLLER) {
+        unsigned char channel = message->at(0) & MASK_CHANNEL;
+        unsigned char channelFilter = instance->getInputChannel();
+        if (channel == channelFilter) {
+            unsigned char ctl = message->at(1);
+            unsigned char val = message->at(2);
+            ev = new ControllerEvent(ctl, val);
         }
     }
+    if (ev != NULL)
+        QApplication::postEvent(instance, ev);
 }
 
 void VPiano::initMidi()
@@ -198,6 +207,7 @@ void VPiano::initToolBars()
     m_Control->setDefaultValue(0);
     m_Control->setDialMode(Knob::LinearMode);
     ui.toolBarControllers->addWidget(m_Control);
+    connect( m_comboControl, SIGNAL(currentIndexChanged(int)), SLOT(slotCtlChanged(int)) );
     connect( m_Control, SIGNAL(valueChanged(int)), SLOT(slotController()) );
     // Pitch bender tool bar
     ui.toolBarBender->addWidget(new QLabel(tr(" Bender: "), this));
@@ -339,6 +349,10 @@ void VPiano::customEvent ( QEvent *event )
     } else if (event->type() == NoteOffEventType ) {
         NoteOffEvent *ev = static_cast<NoteOffEvent*>(event);
         ui.pianokeybd->showNoteOff(ev->getNote());
+        event->accept();
+    } else if (event->type() == ControllerEventType ) {
+        ControllerEvent *ev = static_cast<ControllerEvent*>(event);
+        updateController(ev->getController(), ev->getValue());
         event->accept();
     }
 }
@@ -483,6 +497,7 @@ void VPiano::slotController()
     int controller = m_comboControl->itemData(index).toInt();
     int value = m_Control->value();
     sendController( controller, value );
+    m_ctlState[ controller ] = value;
 }
 
 void VPiano::slotBender()
@@ -599,11 +614,26 @@ void VPiano::applyPreferences()
         ((m_ins = dlgPreferences.getInstrument()) != NULL)) {
         //qDebug() << "Instrument Name:" << m_ins->instrumentName();
         //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
+        m_ctlState.clear();
         InstrumentData controls = m_ins->control();
         InstrumentData::ConstIterator i;
         for( i=controls.begin(); i!=controls.end(); ++i ) {
             m_comboControl->addItem(i.value(), i.key());
             //qDebug() << "Control[" << i.key() << "]=" << i.value();
+            // initialize controller values
+            switch (i.key()) {
+            case CTL_VOLUME:
+                m_ctlState[CTL_VOLUME] = 100;
+                break;
+            case CTL_PAN:
+                m_ctlState[CTL_PAN] = 64;
+                break;
+            case CTL_EXPRESSION:
+                m_ctlState[CTL_EXPRESSION] = 127;
+                break;
+            default:
+                m_ctlState[i.key()] = 0;
+            }
         }
         InstrumentPatches patches = m_ins->patches();
         InstrumentPatches::ConstIterator j;
@@ -701,4 +731,20 @@ void VPiano::slotOutChannel(const int channel)
     if (c != dlgPreferences.getOutChannel()) {
         dlgPreferences.setOutChannel(c);
     }
+}
+
+void VPiano::updateController(int ctl, int val)
+{
+    int index = m_comboControl->currentIndex();
+    int controller = m_comboControl->itemData(index).toInt();
+    if (controller == ctl) {
+        m_Control->setValue(val);
+    }
+    m_ctlState[ctl] = val;
+}
+
+void VPiano::slotCtlChanged(const int index)
+{
+    int ctl = m_comboControl->itemData(index).toInt();
+    m_Control->setValue(m_ctlState[ctl]);
 }
