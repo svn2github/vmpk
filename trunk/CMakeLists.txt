@@ -128,7 +128,7 @@ ENDIF(${CMAKE_SYSTEM} MATCHES "Windows")
 FIND_PACKAGE(TranslationSupport)
 
 ADD_SUBDIRECTORY(src build)
-ADD_SUBDIRECTORY(translations build)
+ADD_SUBDIRECTORY(translations build/translations)
 
 CONFIGURE_FILE(vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
 

@@ -52,6 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%name/*
 %{_datadir}/pixmaps/*.png
 %{_datadir}/applications/%name.desktop
+%{_datadir}/locale/*
 
 %changelog
 * Fri Sep 5 2008 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.1.1  
