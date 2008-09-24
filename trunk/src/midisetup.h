@@ -35,9 +35,13 @@ public:
 	void addInputPortName(const QString& name, int index);
     void addOutputPortName(const QString& output, int index);
     void setCurrentInput(int index);
+    void setCurrentInput(const QString name);
     void setCurrentOutput(int index);
+    void setCurrentOutput(const QString name);
 	int  selectedInput();
 	int  selectedOutput();
+    QString selectedInputName() const;
+    QString selectedOutputName() const;
 
 public slots:
     void toggledInput(bool state);

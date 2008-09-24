@@ -1,3 +1,6 @@
+2008-09-25
+    * implemented RFE: #2106026 store connection names in settings
+
 2008-09-21
     * fix for bug: #2116713 - QJackCtl input port is shown for connections
     * implemented RFE: #2106035 controllers state remembered

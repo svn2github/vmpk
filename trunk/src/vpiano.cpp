@@ -128,7 +128,7 @@ void midiCallback( double /*deltatime*/,
 void VPiano::initMidi()
 {
     try {
-        m_midiout = new RtMidiOut(QSTR_VMPKOUTPUTCLIENT.toStdString());
+        m_midiout = new RtMidiOut(QSTR_VMPKOUTPUT.toStdString());
         int nOutPorts = m_midiout->getPortCount();
         if (nOutPorts == 0) {
             delete m_midiout;
@@ -137,7 +137,7 @@ void VPiano::initMidi()
                                   tr("No MIDI output ports available. Aborting"));
             qApp->quit();
         }
-        m_midiin = new RtMidiIn(QSTR_VMPKINPUTCLIENT.toStdString());
+        m_midiin = new RtMidiIn(QSTR_VMPKINPUT.toStdString());
         int nInPorts = m_midiin->getPortCount();
         if (nInPorts == 0) {
             delete m_midiin;
@@ -282,8 +282,8 @@ void VPiano::readSettings()
     
     settings.beginGroup(QSTR_CONNECTIONS);
     bool inEnabled = settings.value(QSTR_INENABLED, true).toBool();
-    int in_port = settings.value(QSTR_INPORT, -1).toInt();
-    int out_port = settings.value(QSTR_OUTPORT, -1).toInt();
+    QString in_port = settings.value(QSTR_INPORT).toString();
+    QString out_port = settings.value(QSTR_OUTPORT).toString();
     settings.endGroup();
 
     if (m_midiin == NULL) {
@@ -342,8 +342,8 @@ void VPiano::writeSettings()
     
     settings.beginGroup(QSTR_CONNECTIONS);
     settings.setValue(QSTR_INENABLED, dlgMidiSetup.inputIsEnabled());
-    settings.setValue(QSTR_INPORT,  dlgMidiSetup.selectedInput());
-    settings.setValue(QSTR_OUTPORT, dlgMidiSetup.selectedOutput());
+    settings.setValue(QSTR_INPORT,  dlgMidiSetup.selectedInputName());
+    settings.setValue(QSTR_OUTPORT, dlgMidiSetup.selectedOutputName());
     settings.endGroup();
     
     settings.beginGroup(QSTR_KEYBOARD);

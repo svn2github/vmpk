@@ -1082,12 +1082,21 @@ unsigned int RtMidiIn :: getPortCount()
 
 std::string RtMidiIn :: getPortName( unsigned int portNumber )
 {
-	snd_seq_port_info_t *pinfo;
-	snd_seq_port_info_alloca( &pinfo );
+  snd_seq_client_info_t *cinfo;
+  snd_seq_port_info_t *pinfo;
+  snd_seq_client_info_alloca( &cinfo );
+  snd_seq_port_info_alloca( &pinfo );
 
   AlsaMidiData *data = static_cast<AlsaMidiData *> (apiData_);
   if ( portInfo( data->seq, pinfo, SND_SEQ_PORT_CAP_READ|SND_SEQ_PORT_CAP_SUBS_READ, (int) portNumber ) ) {
-    std::string stringName = std::string( snd_seq_port_info_get_name( pinfo ) );
+    int cnum = snd_seq_port_info_get_client(pinfo);
+    snd_seq_get_any_client_info( data->seq, cnum, cinfo );
+    std::ostringstream os;
+    os << snd_seq_client_info_get_name(cinfo);
+    os << ":";
+    os << snd_seq_port_info_get_port(pinfo);
+    std::string stringName = os.str();
+    //std::string stringName = std::string( snd_seq_port_info_get_name( pinfo ) );
     return stringName;
   }
 
@@ -1113,12 +1122,21 @@ unsigned int RtMidiOut :: getPortCount()
 
 std::string RtMidiOut :: getPortName( unsigned int portNumber )
 {
-	snd_seq_port_info_t *pinfo;
-	snd_seq_port_info_alloca( &pinfo );
+  snd_seq_client_info_t *cinfo;
+  snd_seq_port_info_t *pinfo;
+  snd_seq_client_info_alloca( &cinfo );
+  snd_seq_port_info_alloca( &pinfo );
 
   AlsaMidiData *data = static_cast<AlsaMidiData *> (apiData_);
   if ( portInfo( data->seq, pinfo, SND_SEQ_PORT_CAP_WRITE|SND_SEQ_PORT_CAP_SUBS_WRITE, (int) portNumber ) ) {
-    std::string stringName = std::string( snd_seq_port_info_get_name( pinfo ) );
+    int cnum = snd_seq_port_info_get_client(pinfo);
+    snd_seq_get_any_client_info( data->seq, cnum, cinfo );
+    std::ostringstream os;
+    os << snd_seq_client_info_get_name(cinfo);
+    os << ":";
+    os << snd_seq_port_info_get_port(pinfo);
+    std::string stringName = os.str();
+    //std::string stringName = std::string( snd_seq_port_info_get_name( pinfo ) );
     return stringName;
   }
 

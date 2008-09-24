@@ -53,10 +53,8 @@ const QString QSTR_PROGRAM("Program");
 const QString QSTR_CONTROLLER("Controller");
 
 const QString QSTR_VMPK("VMPK");
-const QString QSTR_VMPKINPUTCLIENT("VMPK Input Client");
-const QString QSTR_VMPKOUTPUTCLIENT("VMPK Output Client");
-const QString QSTR_VMPKINPUT("VMPK output");
-const QString QSTR_VMPKOUTPUT("VMPK input");
+const QString QSTR_VMPKINPUT("VMPK Input");
+const QString QSTR_VMPKOUTPUT("VMPK Output");
 
 static QString getDataDirectory() 
 {

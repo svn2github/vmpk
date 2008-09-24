@@ -73,6 +73,18 @@ void MidiSetup::setCurrentInput(int index)
     }
 }
 
+void MidiSetup::setCurrentInput(const QString name)
+{
+    int i; 
+    for (i = 0; i < ui.comboInput->count(); ++i) {
+        if (name == ui.comboInput->itemText(i)) {
+            ui.comboInput->setCurrentIndex(i);
+            return;
+        }
+    }
+    ui.comboInput->setCurrentIndex(-1);
+}
+
 void MidiSetup::setCurrentOutput(int index)
 {
     if (index < 0)
@@ -86,6 +98,18 @@ void MidiSetup::setCurrentOutput(int index)
             }
         }
     }
+}
+
+void MidiSetup::setCurrentOutput(const QString name)
+{
+    int i; 
+    for (i = 0; i < ui.comboOutput->count(); ++i) {
+        if (name == ui.comboOutput->itemText(i)) {
+            ui.comboOutput->setCurrentIndex(i);
+            return;
+        }
+    }
+    ui.comboOutput->setCurrentIndex(-1);
 }
 
 void MidiSetup::addOutputPortName(const QString& output, int index)
@@ -111,3 +135,20 @@ int MidiSetup::selectedOutput()
         return -1;    
 }
 
+QString MidiSetup::selectedInputName() const
+{
+    int idx = ui.comboInput->currentIndex();    
+    if (idx >= 0)
+        return ui.comboInput->itemText(idx);
+    else
+        return QString();
+}
+
+QString MidiSetup::selectedOutputName() const
+{
+    int idx = ui.comboOutput->currentIndex();    
+    if (idx >= 0)
+        return ui.comboOutput->itemText(idx);
+    else
+        return QString();
+}
