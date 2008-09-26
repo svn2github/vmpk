@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>336</width>
-    <height>142</height>
+    <width>333</width>
+    <height>170</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -23,7 +23,14 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
+   <item row="1" column="0" colspan="2" >
+    <widget class="QCheckBox" name="chkEnableThru" >
+     <property name="text" >
+      <string>Enable MIDI Thru on MIDI Output</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
     <widget class="QLabel" name="labelInput" >
      <property name="text" >
       <string>Input MIDI Connection</string>
@@ -33,10 +40,17 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="QComboBox" name="comboInput" />
+   <item row="2" column="1" >
+    <widget class="QComboBox" name="comboInput" >
+     <property name="minimumSize" >
+      <size>
+       <width>180</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="2" column="0" >
+   <item row="3" column="0" >
     <widget class="QLabel" name="labelOutput" >
      <property name="text" >
       <string>Output MIDI Connection</string>
@@ -46,10 +60,17 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1" >
-    <widget class="QComboBox" name="comboOutput" />
+   <item row="3" column="1" >
+    <widget class="QComboBox" name="comboOutput" >
+     <property name="minimumSize" >
+      <size>
+       <width>180</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="3" column="0" colspan="2" >
+   <item row="4" column="0" colspan="2" >
     <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
@@ -70,8 +91,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>227</x>
-     <y>115</y>
+     <x>236</x>
+     <y>160</y>
     </hint>
     <hint type="destinationlabel" >
      <x>157</x>
@@ -86,8 +107,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>295</x>
-     <y>121</y>
+     <x>304</x>
+     <y>160</y>
     </hint>
     <hint type="destinationlabel" >
      <x>286</x>
@@ -106,8 +127,24 @@
      <y>18</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>198</x>
-     <y>42</y>
+     <x>323</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkEnableInput</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>chkEnableThru</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>212</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>193</x>
+     <y>44</y>
     </hint>
    </hints>
   </connection>

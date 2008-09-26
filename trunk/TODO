@@ -8,7 +8,7 @@ MIDI CONTROLLERS, PROGRAMS
 
 MIDI CONNECTIONS
 
-* 2106023 MIDI thru: optionally send the received events to the output port.
+* DONE. 2106023 MIDI thru: optionally send the received events to the output port.
 * DONE. 2106026 store connection names instead of numbers in the settings
 
 PRESENTATION

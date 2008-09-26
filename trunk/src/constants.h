@@ -41,6 +41,7 @@ const QString QSTR_INSTRUMENTNAME("InstrumentName");
 const QString QSTR_KEYPRESSEDCOLOR("KeyPressedColor");
 const QString QSTR_CONNECTIONS("Connections");
 const QString QSTR_INENABLED("InEnabled");
+const QString QSTR_THRUENABLED("ThruEnabled");
 const QString QSTR_INPORT("InPort");
 const QString QSTR_OUTPORT("OutPort");
 const QString QSTR_KEYBOARD("Keyboard");

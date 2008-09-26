@@ -149,6 +149,7 @@ private:
     int m_currentOut;
     int m_currentIn;
     bool m_inputActive;
+    bool m_midiThru;
     
     Ui::VPiano ui;
     About dlgAbout;

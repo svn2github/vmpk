@@ -27,24 +27,38 @@ MidiSetup::MidiSetup()
 
 void MidiSetup::toggledInput(bool state)
 {
-    if (!state) ui.comboInput->setCurrentIndex(-1);
+    if (!state) {
+        ui.chkEnableThru->setChecked(false);
+        ui.comboInput->setCurrentIndex(-1);
+    }
 }
 
 void MidiSetup::inputNotAvailable()
 {
     setInputEnabled(false);
     ui.chkEnableInput->setEnabled(false);
+    ui.chkEnableThru->setEnabled(false);
     ui.comboInput->setCurrentIndex(-1);
 }
 
-bool MidiSetup::inputIsEnabled()
+bool MidiSetup::inputIsEnabled() const
 {
     return ui.chkEnableInput->isChecked();
+}
+
+bool MidiSetup::thruIsEnabled() const
+{
+    return ui.chkEnableThru->isChecked();
 }
 
 void MidiSetup::setInputEnabled(const bool state)
 {
     ui.chkEnableInput->setChecked(state);
+}
+
+void MidiSetup::setThruEnabled(const bool state)
+{
+    ui.chkEnableThru->setChecked(state);
 }
 
 void MidiSetup::clearCombos()

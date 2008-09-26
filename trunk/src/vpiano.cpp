@@ -42,7 +42,8 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     m_midiin(0),
     m_currentOut(-1),
     m_currentIn(-1),
-    m_inputActive(false)
+    m_inputActive(false),
+    m_midiThru(false)
 {
     ui.setupUi(this);
     ui.actionStatusBar->setChecked(false);
@@ -282,6 +283,7 @@ void VPiano::readSettings()
     
     settings.beginGroup(QSTR_CONNECTIONS);
     bool inEnabled = settings.value(QSTR_INENABLED, true).toBool();
+    bool thruEnabled = settings.value(QSTR_THRUENABLED, false).toBool();
     QString in_port = settings.value(QSTR_INPORT).toString();
     QString out_port = settings.value(QSTR_OUTPORT).toString();
     settings.endGroup();
@@ -290,6 +292,7 @@ void VPiano::readSettings()
         dlgMidiSetup.inputNotAvailable();
     } else {
         dlgMidiSetup.setInputEnabled(inEnabled);
+        dlgMidiSetup.setThruEnabled(thruEnabled);
         dlgMidiSetup.setCurrentInput(in_port);
     }
     dlgMidiSetup.setCurrentOutput(out_port);
@@ -342,6 +345,7 @@ void VPiano::writeSettings()
     
     settings.beginGroup(QSTR_CONNECTIONS);
     settings.setValue(QSTR_INENABLED, dlgMidiSetup.inputIsEnabled());
+    settings.setValue(QSTR_THRUENABLED, dlgMidiSetup.thruIsEnabled());
     settings.setValue(QSTR_INPORT,  dlgMidiSetup.selectedInputName());
     settings.setValue(QSTR_OUTPORT, dlgMidiSetup.selectedOutputName());
     settings.endGroup();
@@ -375,14 +379,17 @@ void VPiano::customEvent ( QEvent *event )
     if (event->type() == NoteOnEventType ) {
         NoteOnEvent *ev = static_cast<NoteOnEvent*>(event);
         ui.pianokeybd->showNoteOn(ev->getNote());
+        if (m_midiThru) noteOn(ev->getNote());
         event->accept();
     } else if (event->type() == NoteOffEventType ) {
         NoteOffEvent *ev = static_cast<NoteOffEvent*>(event);
         ui.pianokeybd->showNoteOff(ev->getNote());
+        if (m_midiThru) noteOff(ev->getNote());
         event->accept();
     } else if (event->type() == ControllerEventType ) {
         ControllerEvent *ev = static_cast<ControllerEvent*>(event);
         updateController(ev->getController(), ev->getValue());
+        if (m_midiThru) sendController(ev->getController(), ev->getValue());
         event->accept();
     }
 }
@@ -614,6 +621,7 @@ void VPiano::applyConnections()
                 m_inputActive = true;
             }
             m_currentIn = i;
+            m_midiThru = dlgMidiSetup.thruIsEnabled();
         }
     } catch (RtError& err) {
         ui.statusBar->showMessage(QString::fromStdString(err.getMessage()));
