@@ -1,12 +1,12 @@
 Name "Virtual MIDI Piano Keyboard"
 
 # Defines
-!define QTFILES "C:\Qt\4.4.0\bin"
+!define QTFILES "C:\Qt\4.4.1\bin"
 !define MINGWFILES "C:\MinGW\bin"
-!define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.1.1"
+!define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.2.0"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.1.1
+!define VERSION 0.2.0
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -44,12 +44,12 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE "Spanish"
 
 # Installer attributes
-OutFile vmpk-0.1.1-setup.exe
+OutFile vmpk-${VERSION}-setup.exe
 InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.1.1.0
+VIProductVersion 0.2.0.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
@@ -71,18 +71,20 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\it-qwerty.xml
     File ${VMPKDIR}\data\vkeybd-default.xml
     File ${VMPKDIR}\data\gmgsxg.ins
+    SetOutPath $INSTDIR\share\locale
+    File ${VMPKDIR}\build\translations\vmpk_es.qm
 
     # Installing library C:\MinGW\bin\mingwm10.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
 
-    # Installing library C:\Qt\4.4.0\bin\QtCore4.dll
+    # Installing library C:\Qt\4.4.1\bin\QtCore4.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtCore4.dll $INSTDIR\QtCore4.dll $INSTDIR
 
-    # Installing library C:\Qt\4.4.0\bin\QtGui4.dll
+    # Installing library C:\Qt\4.4.1\bin\QtGui4.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtGui4.dll $INSTDIR\QtGui4.dll $INSTDIR
 
-    # Installing library C:\Qt\4.4.0\bin\QtXml4.dll
-    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtGui4.dll $INSTDIR\QtXml4.dll $INSTDIR
+    # Installing library C:\Qt\4.4.1\bin\QtXml4.dll
+    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtXml4.dll $INSTDIR\QtXml4.dll $INSTDIR
 
     WriteRegStr HKLM "${REGKEY}\Components" Main 1
 SectionEnd
@@ -92,6 +94,7 @@ Section -post SEC0001
     SetOutPath $INSTDIR
     WriteUninstaller $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
+    CreateDirectory $SMPROGRAMS\$StartMenuGroup
     SetOutPath $SMPROGRAMS\$StartMenuGroup
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall VMPK.lnk" $INSTDIR\uninstall.exe
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\VMPK.lnk" $INSTDIR\vmpk.exe
@@ -121,6 +124,7 @@ done${UNSECTION_ID}:
 
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
+    Delete /REBOOTOK $INSTDIR\share\locale\vmpk_es.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
     Delete /REBOOTOK $INSTDIR\german.xml

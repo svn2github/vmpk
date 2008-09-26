@@ -54,7 +54,7 @@ INSTALLATION
 Download the sources from http://sourceforge.net/projects/vmpk
 Unpack the sources in your home directory, and change to the unpacked dir.
 
-$ cd vmpk-0.1.0
+$ cd vmpk-x.x.x
 
 You can choose between CMake and Qmake to prepare the build system, but qmake is
 intended only for testing and development.

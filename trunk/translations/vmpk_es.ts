@@ -714,14 +714,19 @@ p, li { white-space: pre-wrap; }
         <translation>Habilitar entrada MIDI</translation>
     </message>
     <message>
-        <location filename="../src/midisetup.ui" line="29"/>
+        <location filename="../src/midisetup.ui" line="36"/>
         <source>Input MIDI Connection</source>
         <translation>Conexión de entrada MIDI</translation>
     </message>
     <message>
-        <location filename="../src/midisetup.ui" line="42"/>
+        <location filename="../src/midisetup.ui" line="56"/>
         <source>Output MIDI Connection</source>
         <translation>Conexión de salida MIDI</translation>
+    </message>
+    <message>
+        <location filename="../src/midisetup.ui" line="29"/>
+        <source>Enable MIDI Thru on MIDI Output</source>
+        <translation>Copiar la entrada MIDI en la salida</translation>
     </message>
 </context>
 <context>
@@ -732,7 +737,7 @@ p, li { white-space: pre-wrap; }
         <translation>Abrir definición de instrumentos</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="79"/>
+        <location filename="../src/preferences.cpp" line="80"/>
         <source>Instrument definitions (*.ins)</source>
         <translation>Definición de instrumentos (*.ins)</translation>
     </message>
@@ -785,17 +790,17 @@ p, li { white-space: pre-wrap; }
         <translation>Archivo de instrumentos</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="177"/>
+        <location filename="../src/preferences.ui" line="183"/>
         <source>default</source>
         <translation>default</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="187"/>
+        <location filename="../src/preferences.ui" line="193"/>
         <source>load...</source>
         <translation>abrir...</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="194"/>
+        <location filename="../src/preferences.ui" line="200"/>
         <source>Instrument</source>
         <translation>Instrumento</translation>
     </message>
@@ -821,72 +826,72 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="126"/>
+        <location filename="../src/vpiano.cpp" line="137"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="127"/>
+        <location filename="../src/vpiano.cpp" line="138"/>
         <source>No MIDI output ports available. Aborting</source>
         <translation>No existen puertos MIDI de salida. Abortar</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="148"/>
+        <location filename="../src/vpiano.cpp" line="159"/>
         <source>Error. Aborting</source>
         <translation>Error. Abortar</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="158"/>
+        <location filename="../src/vpiano.cpp" line="169"/>
         <source> Channel: </source>
         <translation> Canal: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="164"/>
+        <location filename="../src/vpiano.cpp" line="175"/>
         <source> Base Octave: </source>
         <translation> Octava base: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="170"/>
+        <location filename="../src/vpiano.cpp" line="181"/>
         <source> Velocity: </source>
         <translation> Velocidad: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="187"/>
+        <location filename="../src/vpiano.cpp" line="198"/>
         <source> Control: </source>
         <translation> Control: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="191"/>
+        <location filename="../src/vpiano.cpp" line="202"/>
         <source> Value: </source>
         <translation> Valor: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="203"/>
+        <location filename="../src/vpiano.cpp" line="215"/>
         <source> Bender: </source>
         <translation> Inflexión: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="212"/>
+        <location filename="../src/vpiano.cpp" line="224"/>
         <source> Bank: </source>
         <translation> Banco: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="216"/>
+        <location filename="../src/vpiano.cpp" line="228"/>
         <source> Program: </source>
         <translation> Programa: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="632"/>
+        <location filename="../src/vpiano.cpp" line="735"/>
         <source>Open keyboard map definition</source>
         <translation>Abrir definición de mapa de teclado</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="645"/>
+        <location filename="../src/vpiano.cpp" line="750"/>
         <source>Keyboard map (*.xml)</source>
         <translation>Mapa de teclado (*.xml)</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="644"/>
+        <location filename="../src/vpiano.cpp" line="748"/>
         <source>Save keyboard map definition</source>
         <translation>Guardar definición de mapa de teclado</translation>
     </message>
