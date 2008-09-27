@@ -71,7 +71,6 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\it-qwerty.xml
     File ${VMPKDIR}\data\vkeybd-default.xml
     File ${VMPKDIR}\data\gmgsxg.ins
-    SetOutPath $INSTDIR\share\locale
     File ${VMPKDIR}\build\translations\vmpk_es.qm
 
     # Installing library C:\MinGW\bin\mingwm10.dll
@@ -124,7 +123,7 @@ done${UNSECTION_ID}:
 
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
-    Delete /REBOOTOK $INSTDIR\share\locale\vmpk_es.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_es.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
     Delete /REBOOTOK $INSTDIR\german.xml
