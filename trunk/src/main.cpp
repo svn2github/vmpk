@@ -29,9 +29,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(QSTR_APPNAME);    
     QApplication a(argc, argv);
 
-    QString locale = QLocale::system().name();
+    QString locale = QSTR_VMPKPX + QLocale::system().name();
     QTranslator translator;
-    translator.load(QString(QSTR_VMPKPX) + locale);
+    translator.load(locale, localeDirectory());
     a.installTranslator(&translator);
     
     VPiano w;

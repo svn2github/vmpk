@@ -57,12 +57,21 @@ const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");
 const QString QSTR_VMPKOUTPUT("VMPK Output");
 
-static QString getDataDirectory() 
+static QString dataDirectory() 
 {
 #ifdef Q_OS_WIN32                           
     return QApplication::applicationDirPath();
 #else
     return QApplication::applicationDirPath() + "/../share/vmpk/";
+#endif
+}
+
+static QString localeDirectory() 
+{
+#ifdef Q_OS_WIN32                           
+    return QApplication::applicationDirPath();
+#else
+    return QApplication::applicationDirPath() + "/../share/locale/";
 #endif
 }
 
