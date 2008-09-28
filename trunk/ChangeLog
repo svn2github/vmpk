@@ -1,5 +1,6 @@
 2008-09-28
-    * drag keyboard: workaround for broken WMs, now this feature is optional   
+    * drag keyboard: workaround for broken WMs, now this feature is optional
+    * fix generic Qt translations 
 
 2008-09-26 0.2.0
     * implemented RFE: #2106023 MIDI thru

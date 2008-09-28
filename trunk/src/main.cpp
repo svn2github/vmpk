@@ -21,6 +21,7 @@
 
 #include <QtGui>
 #include <QApplication>
+#include <QLibraryInfo>
 
 int main(int argc, char *argv[])
 {
@@ -29,10 +30,13 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(QSTR_APPNAME);    
     QApplication a(argc, argv);
 
-    QString locale = QSTR_VMPKPX + QLocale::system().name();
-    QTranslator translator;
-    translator.load(locale, localeDirectory());
-    a.installTranslator(&translator);
+    QTranslator tr_q, tr_p;
+    QString loc_q = QSTR_QTPX + QLocale::system().name();
+    QString loc_p = QSTR_VMPKPX + QLocale::system().name();
+    tr_q.load(loc_q, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    tr_p.load(loc_p, localeDirectory());
+    a.installTranslator(&tr_q);
+    a.installTranslator(&tr_p);
     
     VPiano w;
     w.show();
