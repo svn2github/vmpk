@@ -266,6 +266,7 @@ void VPiano::readSettings()
     QString insName = settings.value(QSTR_INSTRUMENTNAME).toString();
     QColor defColor = QApplication::palette().highlight().color();
     QColor keyColor = settings.value(QSTR_KEYPRESSEDCOLOR, defColor).value<QColor>();
+    bool grabKb = settings.value(QSTR_GRABKB, false).toBool();
     settings.endGroup();
     
     dlgPreferences.setInChannel(in_channel);
@@ -274,6 +275,7 @@ void VPiano::readSettings()
     dlgPreferences.setBaseOctave(base_octave);
     dlgPreferences.setNumOctaves(num_octaves);
     dlgPreferences.setKeyPressedColor(keyColor);
+    dlgPreferences.setGrabKeyboard(grabKb);
     if (!insFileName.isEmpty()) {
         dlgPreferences.setInstrumentsFileName(insFileName);
         if (!insName.isEmpty()) {
@@ -341,6 +343,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_INSTRUMENTSDEFINITION, dlgPreferences.getInstrumentsFileName());
     settings.setValue(QSTR_INSTRUMENTNAME, dlgPreferences.getInstrumentName());
     settings.setValue(QSTR_KEYPRESSEDCOLOR, dlgPreferences.getKeyPressedColor());
+    settings.setValue(QSTR_GRABKB, dlgPreferences.getGrabKeyboard());
     settings.endGroup();
     
     settings.beginGroup(QSTR_CONNECTIONS);
@@ -398,12 +401,12 @@ void VPiano::showEvent ( QShowEvent *event )
 {
     QMainWindow::showEvent(event);
     ui.pianokeybd->setFocus();
-    ui.pianokeybd->grabKeyboard();
+    grabKb();
 }
 
 void VPiano::hideEvent( QHideEvent *event )
 {
-    ui.pianokeybd->releaseKeyboard();    
+    releaseKb();    
     QMainWindow::hideEvent(event);
 }
 
@@ -587,11 +590,11 @@ void VPiano::slotConnections()
     refreshConnections();
     dlgMidiSetup.setCurrentInput(m_currentIn);
     dlgMidiSetup.setCurrentOutput(m_currentOut);
-    ui.pianokeybd->releaseKeyboard();
+    releaseKb();
     if (dlgMidiSetup.exec() == QDialog::Accepted) {
         applyConnections();
     }
-    ui.pianokeybd->grabKeyboard();
+    grabKb();
 }
 
 void VPiano::applyConnections()
@@ -721,16 +724,16 @@ void VPiano::applyInitialSettings()
 
 void VPiano::slotPreferences()
 {
-    ui.pianokeybd->releaseKeyboard();
+    releaseKb();
     if (dlgPreferences.exec() == QDialog::Accepted) {
         applyPreferences();
     }
-    ui.pianokeybd->grabKeyboard();
+    grabKb();
 }
 
 void VPiano::slotLoadKeyboardMap()
 {
-    ui.pianokeybd->releaseKeyboard();
+    releaseKb();
     QString fileName = QFileDialog::getOpenFileName(0,
                                 tr("Open keyboard map definition"),
                                 dataDirectory(), 
@@ -738,12 +741,12 @@ void VPiano::slotLoadKeyboardMap()
     if (!fileName.isEmpty()) {
         ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(fileName);
     }
-    ui.pianokeybd->grabKeyboard();
+    grabKb();
 }
 
 void VPiano::slotSaveKeyboardMap()
 {
-    ui.pianokeybd->releaseKeyboard();
+    releaseKb();
     QString fileName = QFileDialog::getSaveFileName(this,
                                 tr("Save keyboard map definition"),
                                 dataDirectory(), 
@@ -751,17 +754,17 @@ void VPiano::slotSaveKeyboardMap()
     if (!fileName.isEmpty()) {
         ui.pianokeybd->getKeyboardMap()->saveToXMLFile(fileName);
     }
-    ui.pianokeybd->grabKeyboard();
+    grabKb();
 }
 
 void VPiano::slotEditKeyboardMap()
 {
     dlgKeyMap.displayMap(ui.pianokeybd->getKeyboardMap());
-    ui.pianokeybd->releaseKeyboard();
+    releaseKb();
     if (dlgKeyMap.exec() == QDialog::Accepted) {
         ui.pianokeybd->setKeyboardMap(dlgKeyMap.getMap()); 
     }
-    ui.pianokeybd->grabKeyboard();
+    grabKb();
 }
 
 void VPiano::slotBankChanged(const int index)
@@ -820,4 +823,18 @@ void VPiano::slotCtlChanged(const int index)
 {
     int ctl = m_comboControl->itemData(index).toInt();
     m_Control->setValue(m_ctlState[ctl]);
+}
+
+void VPiano::grabKb() const
+{
+    if (dlgPreferences.getGrabKeyboard()) {
+        ui.pianokeybd->grabKeyboard();
+    }
+}
+
+void VPiano::releaseKb() const
+{
+    if (dlgPreferences.getGrabKeyboard()) {
+        ui.pianokeybd->releaseKeyboard();
+    }
 }

@@ -143,6 +143,8 @@ private:
     void bender(const int value);
     void messageWrapper(std::vector<unsigned char> *message) const;
     void updateController(int ctl, int val);
+    void grabKb() const;
+    void releaseKb() const;
 
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;

@@ -30,7 +30,8 @@ Preferences::Preferences(QWidget *parent)
     m_outChannel(0),
     m_velocity(100),
     m_baseOctave(4),
-    m_numOctaves(5)
+    m_numOctaves(5),
+    m_grabKb(false)
 {
     ui.setupUi( this );
     connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotButtonClicked(QAbstractButton*)));
@@ -53,6 +54,7 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.spinVelocity->setValue( m_velocity );
         ui.spinBaseOctave->setValue( m_baseOctave );
         ui.spinNumOctaves->setValue( m_numOctaves );
+        ui.chkGrabKb->setChecked( m_grabKb );
     }
 }
 
@@ -64,6 +66,7 @@ void Preferences::apply()
     m_baseOctave = ui.spinBaseOctave->value();
     m_numOctaves = ui.spinNumOctaves->value();
     m_keyPressedColor = QColor(ui.lblColorName->text());
+    m_grabKb = ui.chkGrabKb->isChecked();
 }
 
 void Preferences::accept()

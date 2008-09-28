@@ -52,6 +52,7 @@ const QString QSTR_INSTRUMENT("Instrument");
 const QString QSTR_BANK("Bank");
 const QString QSTR_PROGRAM("Program");
 const QString QSTR_CONTROLLER("Controller");
+const QString QSTR_GRABKB("GrabKeyboard");
 
 const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");
