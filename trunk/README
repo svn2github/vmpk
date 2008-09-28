@@ -42,12 +42,29 @@ http://sourceforge.net/projects/vmpk
 
 REQUIREMENTS
 
-You need Qt 4.3 or newer. (install the -devel package for your system, or 
-download the open source edition from Trolltech.)
+You need Qt 4.3 or newer. Install the -devel package for your system, or 
+download the open source edition from Trolltech:
+
+    http://trolltech.com/downloads/opensource
 
 RtMIDI is included in the source package. It uses ALSA sequencer in Linux, 
 WinMM in Windows and CoreMIDI in Mac OSX, which are the native MIDI systems in 
 all the supported platforms.
+
+    http://www.music.mcgill.ca/~gary/rtmidi/
+
+The build system is based on CMake. You can download it from:
+
+    http://www.cmake.org
+    
+You need also the GCC C++ compiler.
+
+    http://gcc.gnu.org
+    http://www.mingw.org
+
+Optionally, you can buid a Windows setup program using NSIS.
+    
+    http://nsis.sourceforge.net
 
 INSTALLATION
 
@@ -96,3 +113,49 @@ You need to find the better CXXFLAGS for your own system.
 If you want to install the program at some place other than the default 
 (/usr/local) use the following CMake option:
 $ cmake . -DCMAKE_INSTALL_PREFIX=/usr
+
+NOTES FOR WINDOWS USERS
+
+To compile the sources in Windows, you need to download either the .bz2 or .gz 
+archive and uncompress it using any utility that supports the format, like 
+7-Zip (http://www.7-zip.org)
+
+To configure the sources, you need qmake (from Qt4) or CMake. You need to set
+the PATH including the directories for Qt4 binaries, MinGW binaries, and also
+CMake binaries. The program CMakeSetup.exe is the graphic version of CMake for
+Windows.
+
+To use the program in Windows, you need some MIDI synth. It is possible to use  
+the "Microsoft GS Wavetable SW Synth" that cames with XP, but for better 
+performance and quality, you may want to try QSynth/FluidSynth:
+
+    http://qsynth.sourceforge.net
+
+Of course, an external MIDI hardware synth would be an even better approach. 
+
+To connect VMPK to/from other MIDI programs, you need some virtual MIDI cable 
+software, like MIDI Yoke, Maple, LoopBe1 or Sony Virtual MIDI Router.
+
+    http://www.midiox.com/myoke.htm
+    http://www.nerds.de/en/loopbe1.html
+    http://www.sonycreativesoftware.com/dl/dl.aspx?dwnid=77
+
+ACKNOWLEDGEMENTS
+
+In addition to the aforementioned tools, VMPK uses work from the following
+open source projects. 
+
+* from Qtractor, by Rui Nuno Capela 
+  http://qtractor.sourceforge.net 
+  Instrument definition data classes
+  
+* from QSynth, by Rui Nuno Capela  
+  http://qsynth.sourceforge.net
+  Knob widget
+
+* Icon and logo by Theresa Knott
+  http://openclipart.org/media/files/TheresaKnott/346
+  
+Thank you very much.
+
+
