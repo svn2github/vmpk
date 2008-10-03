@@ -419,30 +419,32 @@ void VPiano::messageWrapper(std::vector<unsigned char> *message) const
     }
 }
 
-//void VPiano::slotNoteOn(int midiNote)
 void VPiano::noteOn(const int midiNote)
 {
     std::vector<unsigned char> message;
-    unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
-    unsigned char vel = static_cast<unsigned char>(dlgPreferences.getVelocity());
-    // Note On: 0x90 + channel, note, vel
-    message.push_back(STATUS_NOTEON + (chan & MASK_CHANNEL));
-    message.push_back(midiNote & MASK_SAFETY);
-    message.push_back(vel & MASK_SAFETY);
-    messageWrapper( &message );
+    if ((midiNote & MASK_SAFETY) == midiNote) {
+        unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
+        unsigned char vel = static_cast<unsigned char>(dlgPreferences.getVelocity());
+        // Note On: 0x90 + channel, note, vel
+        message.push_back(STATUS_NOTEON + (chan & MASK_CHANNEL));
+        message.push_back(midiNote & MASK_SAFETY);
+        message.push_back(vel & MASK_SAFETY);
+        messageWrapper( &message );
+    }
 }
 
-//void VPiano::slotNoteOff(int midiNote)
 void VPiano::noteOff(const int midiNote)
 {
     std::vector<unsigned char> message;
-    unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
-    unsigned char vel = static_cast<unsigned char>(dlgPreferences.getVelocity());
-    // Note Off: 0x80 + channel, note, vel
-    message.push_back(STATUS_NOTEOFF + (chan & MASK_CHANNEL));
-    message.push_back(midiNote & MASK_SAFETY);
-    message.push_back(vel & MASK_SAFETY);
-    messageWrapper( &message );
+    if ((midiNote & MASK_SAFETY) == midiNote) {
+        unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
+        unsigned char vel = static_cast<unsigned char>(dlgPreferences.getVelocity());
+        // Note Off: 0x80 + channel, note, vel
+        message.push_back(STATUS_NOTEOFF + (chan & MASK_CHANNEL));
+        message.push_back(midiNote & MASK_SAFETY);
+        message.push_back(vel & MASK_SAFETY);
+        messageWrapper( &message );
+    }
 }
 
 void VPiano::sendController(const int controller, const int value)
@@ -461,6 +463,11 @@ void VPiano::sendController(const int controller, const int value)
 void VPiano::resetAllControllers()
 {
     sendController(CTL_RESET_ALL_CTL, 0);
+    int index = m_comboControl->currentIndex();
+    int ctl = m_comboControl->itemData(index).toInt();
+    initControllers();
+    m_comboControl->setCurrentIndex(index);
+    m_Control->setValue(m_ctlState[ctl]);
 }
 
 void VPiano::allNotesOff()
@@ -631,31 +638,11 @@ void VPiano::applyConnections()
     }
 }
 
-void VPiano::applyPreferences()
+void VPiano::initControllers()
 {
-    ui.pianokeybd->allKeysOff();
-    if (ui.pianokeybd->baseOctave() != dlgPreferences.getBaseOctave()) {
-        ui.pianokeybd->setBaseOctave(dlgPreferences.getBaseOctave());
-    }
-    if (ui.pianokeybd->numOctaves() != dlgPreferences.getNumOctaves()) {
-        ui.pianokeybd->setNumOctaves(dlgPreferences.getNumOctaves());
-    }
-    ui.pianokeybd->setKeyPressedColor(dlgPreferences.getKeyPressedColor());
-
-    m_sboxChannel->setValue(dlgPreferences.getOutChannel() + 1);
-    m_sboxOctave->setValue(dlgPreferences.getBaseOctave());
-    m_Velocity->setValue(dlgPreferences.getVelocity());
-    
-    m_ins = NULL;
+    m_comboControl->blockSignals(true);
     m_comboControl->clear();
-    m_comboBank->clear();
-    m_comboProg->clear();
-    
-    if (!dlgPreferences.getInstrumentsFileName().isEmpty() &&
-        ((m_ins = dlgPreferences.getInstrument()) != NULL)) {
-        //qDebug() << "Instrument Name:" << m_ins->instrumentName();
-        //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
-        m_ctlState.clear();
+    if (m_ins != NULL) {
         InstrumentData controls = m_ins->control();
         InstrumentData::ConstIterator i;
         for( i=controls.begin(); i!=controls.end(); ++i ) {
@@ -676,6 +663,35 @@ void VPiano::applyPreferences()
                 m_ctlState[i.key()] = 0;
             }
         }
+    }
+    m_comboControl->blockSignals(false);
+}
+
+void VPiano::applyPreferences()
+{
+    ui.pianokeybd->allKeysOff();
+    if (ui.pianokeybd->baseOctave() != dlgPreferences.getBaseOctave()) {
+        ui.pianokeybd->setBaseOctave(dlgPreferences.getBaseOctave());
+    }
+    if (ui.pianokeybd->numOctaves() != dlgPreferences.getNumOctaves()) {
+        ui.pianokeybd->setNumOctaves(dlgPreferences.getNumOctaves());
+    }
+    ui.pianokeybd->setKeyPressedColor(dlgPreferences.getKeyPressedColor());
+
+    m_sboxChannel->setValue(dlgPreferences.getOutChannel() + 1);
+    m_sboxOctave->setValue(dlgPreferences.getBaseOctave());
+    m_Velocity->setValue(dlgPreferences.getVelocity());
+    
+    m_ins = NULL;
+    m_comboBank->clear();
+    m_comboProg->clear();
+    
+    if (!dlgPreferences.getInstrumentsFileName().isEmpty() &&
+        ((m_ins = dlgPreferences.getInstrument()) != NULL)) {
+        //qDebug() << "Instrument Name:" << m_ins->instrumentName();
+        //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
+        m_ctlState.clear();
+        initControllers();
         InstrumentPatches patches = m_ins->patches();
         InstrumentPatches::ConstIterator j;
         for( j=patches.begin(); j!=patches.end(); ++j ) {
