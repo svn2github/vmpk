@@ -49,11 +49,15 @@ public:
     void setPianoHandler(PianoHandler* handler) { m_handler = handler; }
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
     void setKeyPressedColor(const QColor& color);
+    int getMinNote() const { return m_minNote; } 
+    void setMinNote(const int note);
+    int getMaxNote() const { return m_maxNote; }
+    void setMaxNote(const int note);
 
     void showNoteOn( const int note );
     void showNoteOff( const int note );
     int baseOctave() const { return m_baseOctave; }
-    void setBaseOctave( const int base ) { m_baseOctave = base; }
+    void setBaseOctave( const int base );
     int numOctaves() const { return m_numOctaves; }
     void allKeysOff();
     
@@ -76,8 +80,12 @@ protected:
     void keyReleaseEvent ( QKeyEvent * keyEvent );
 
 private:
+    void hideOrShowKeys();
+    
     int m_baseOctave;
     int m_numOctaves;
+    int m_minNote;
+    int m_maxNote;
     QColor m_keyPressedColor;
     bool m_mousePressed;
     PianoHandler* m_handler;

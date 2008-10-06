@@ -48,7 +48,11 @@ public:
     void setKeyPressedColor(const QColor& c) { m_scene->setKeyPressedColor(c); }
     void allKeysOff() { m_scene->allKeysOff(); }
     void setPianoHandler(PianoHandler* handler) { m_scene->setPianoHandler(handler); }
-    
+    int minNote() const { return m_scene->getMinNote(); }
+    void setMinNote(int n) { m_scene->setMinNote(n); }
+    int maxNote() const { return m_scene->getMaxNote(); }
+    void setMaxNote(int n) { m_scene->setMaxNote(n); }
+
 public slots:
     void showNoteOn( int midiNote );
     void showNoteOff( int midiNote );
