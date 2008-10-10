@@ -144,6 +144,7 @@ void VPiano::initMidi()
             delete m_midiin;
             m_midiin = NULL;
         }
+        m_midiin->ignoreTypes(false,false,false);
 #if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)     
         m_midiout->openVirtualPort(QSTR_VMPKOUTPUT.toStdString());
         if (m_midiin != NULL)
