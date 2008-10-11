@@ -1,9 +1,15 @@
+2008-10-11 0.2.1
+    * fix for bug #2143187 Documentation needed
+
+2008-10-10
+    * workaround for bug #2158014 Crash in windows
+
 2008-10-03
     * fix for bug: #2142335 Keys played beyond the upper MIDI note limits
     * fix for bug: #2142321 the reset all button
 
 2008-09-28
-    * drag keyboard: workaround for broken WMs, now this feature is optional
+    * grab keyboard: workaround for broken WMs, now this feature is optional
     * fix generic Qt translations 
 
 2008-09-26 0.2.0
