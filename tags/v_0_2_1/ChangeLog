@@ -1,0 +1,45 @@
+2008-10-11 0.2.1
+    * fix for bug #2143187 Documentation needed
+
+2008-10-10
+    * workaround for bug #2158014 Crash in windows
+
+2008-10-03
+    * fix for bug: #2142335 Keys played beyond the upper MIDI note limits
+    * fix for bug: #2142321 the reset all button
+
+2008-09-28
+    * grab keyboard: workaround for broken WMs, now this feature is optional
+    * fix generic Qt translations 
+
+2008-09-26 0.2.0
+    * implemented RFE: #2106023 MIDI thru
+
+2008-09-25
+    * implemented RFE: #2106026 store connection names in settings
+
+2008-09-21
+    * fix for bug: #2116713 - QJackCtl input port is shown for connections
+    * implemented RFE: #2106035 controllers state remembered
+    * implemented RFE: #2106031 settings persistence: controllers/bank/program
+
+2008-09-14
+    * implemented RFE: #2106015 translation (Qt Linguist) support
+  
+2008-09-13
+    * implemented RFE: #2107732 mouse handling
+    * implemented RFE: #2106021 let the user to choose a custom highligh color
+    * reorganisations    
+
+2008-09-11
+    * new icon, by Theresa Knott
+    * fix for bug: #2105246 Channel numbers starting from 1 instead of 0
+    * better About dialog
+    * toolbars: workaround for strange Qt4.4 behavior when restoring the main 
+      window state.
+ 
+2008-09-05 0.1.1 
+    * bugfixes and optimizations
+
+2008-08-31 0.1.0 
+    * first public release
