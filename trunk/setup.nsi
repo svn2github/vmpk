@@ -3,10 +3,10 @@ Name "Virtual MIDI Piano Keyboard"
 # Defines
 !define QTFILES "C:\Qt\4.4.1\bin"
 !define MINGWFILES "C:\MinGW\bin"
-!define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.2.0"
+!define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.2.1"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.2.0
+!define VERSION 0.2.1
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -49,7 +49,7 @@ InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.2.0.0
+VIProductVersion 0.2.1.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
