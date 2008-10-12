@@ -1,3 +1,6 @@
+2008-10-12
+    * check for IO errors (keyboard map and instruments files)
+
 2008-10-11 0.2.1
     * fix for bug #2143187 Documentation needed
 

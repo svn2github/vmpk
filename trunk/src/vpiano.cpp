@@ -321,8 +321,7 @@ void VPiano::readSettings()
     settings.endGroup();
     
     if (!mapFile.isEmpty() && (mapFile != QSTR_DEFAULT)) {
-        QString msg = ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(mapFile);
-        ui.statusBar->showMessage(msg);
+        ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(mapFile);
     }
 }
 
@@ -555,12 +554,16 @@ void VPiano::slotBender()
 
 void VPiano::slotAbout()
 {
+    releaseKb();
     dlgAbout.exec();
+    grabKb();
 }
 
 void VPiano::slotAboutQt()
 {
+    releaseKb();
     qApp->aboutQt();
+    grabKb();
 }
 
 void VPiano::refreshConnections()

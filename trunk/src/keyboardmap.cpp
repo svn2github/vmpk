@@ -22,25 +22,35 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include <QKeySequence>
+#include <QMessageBox>
 
-QString KeyboardMap::loadFromXMLFile(const QString fileName)
+void KeyboardMap::loadFromXMLFile(const QString fileName)
 {
-    QFile f(m_fileName = fileName);
-    f.open(QFile::ReadOnly | QFile::Text);
-    QString res = initializeFromXML(&f);
-    f.close();
-    return res;
+    QFile f(fileName);
+    if (f.open(QFile::ReadOnly | QFile::Text)) { 
+        initializeFromXML(&f);
+        f.close();
+        m_fileName = fileName;
+    }
+    if (f.error() != QFile::NoError) {
+        reportError(fileName, tr("loading a file"), f.errorString());
+    }
 }
 
 void KeyboardMap::saveToXMLFile(const QString fileName)
 {
-    QFile f(m_fileName = fileName);
-    f.open(QFile::WriteOnly | QFile::Text);
-    serializeToXML(&f);
-    f.close();
+    QFile f(fileName);
+    if (f.open(QFile::WriteOnly | QFile::Text)) {
+        serializeToXML(&f);
+        f.close();
+        m_fileName = fileName;
+    }
+    if (f.error() != QFile::NoError) {
+        reportError(fileName, tr("saving a file"), f.errorString()); 
+    }
 }
 
-QString KeyboardMap::initializeFromXML(QIODevice *dev)
+void KeyboardMap::initializeFromXML(QIODevice *dev)
 {
     QXmlStreamReader reader(dev);
     clear();
@@ -72,9 +82,8 @@ QString KeyboardMap::initializeFromXML(QIODevice *dev)
         }
     }
     if (reader.hasError()) {
-        return reader.errorString();
+        reportError(QString(), tr("reading XML"), reader.errorString() );
     }
-    return QString();
 }
 
 void KeyboardMap::serializeToXML(QIODevice *dev)
@@ -94,4 +103,12 @@ void KeyboardMap::serializeToXML(QIODevice *dev)
     }
     writer.writeEndElement();
     writer.writeEndDocument();
+}
+
+void KeyboardMap::reportError( const QString filename, 
+                               const QString title, 
+                               const QString err )
+{
+    QMessageBox::warning(0, tr("Error %1").arg(title), 
+                         tr("File: %1\n%2").arg(filename).arg(err));
 }

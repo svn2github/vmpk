@@ -25,15 +25,17 @@
 
 class KeyboardMap : public QHash<int, int>  
 {
+    Q_DECLARE_TR_FUNCTIONS(KeyboardMap)
 public:
     KeyboardMap() : QHash<int, int>(), m_fileName(QSTR_DEFAULT) {}
-    QString loadFromXMLFile(const QString fileName);
+    void loadFromXMLFile(const QString fileName);
     void saveToXMLFile(const QString fileName);
-    QString initializeFromXML(QIODevice *dev);
+    void initializeFromXML(QIODevice *dev);
 	void serializeToXML(QIODevice *dev);
 	const QString& getFileName() const { return m_fileName; }
 	
 private:
+    void reportError( const QString filename, const QString title, const QString err );
     QString m_fileName;
 };
 

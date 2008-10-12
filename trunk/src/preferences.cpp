@@ -107,16 +107,22 @@ Instrument* Preferences::getInstrument()
 void Preferences::setInstrumentsFileName( const QString fileName )
 {
     QFileInfo f(fileName);
-    m_ins.clear();
-    m_ins.load(fileName);
-    ui.txtFileInstrument->setText(f.fileName());
-    ui.cboInstrument->clear();
-    InstrumentList::ConstIterator it; 
-    for(it = m_ins.begin(); it != m_ins.end(); ++it) {
-        ui.cboInstrument->addItem(it.key());
+    if (f.isReadable()) {
+        m_ins.clear();
+        ui.cboInstrument->clear();
+        if (m_ins.load(fileName)) {
+            ui.txtFileInstrument->setText(f.fileName());
+            InstrumentList::ConstIterator it; 
+            for(it = m_ins.begin(); it != m_ins.end(); ++it) {
+                ui.cboInstrument->addItem(it.key());
+            }
+            ui.cboInstrument->setCurrentIndex(-1);
+            m_insFileName = fileName;
+        } else {
+            m_insFileName.clear();
+            ui.txtFileInstrument->setText(m_insFileName);
+        }
     }
-    ui.cboInstrument->setCurrentIndex(-1);
-    m_insFileName = fileName;
 }
 
 QString Preferences::getInstrumentsFileName()
