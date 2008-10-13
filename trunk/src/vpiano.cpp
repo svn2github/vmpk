@@ -166,6 +166,7 @@ void VPiano::initMidi()
 void VPiano::initToolBars()
 {
     m_dialStyle = new ClassicStyle();
+    m_dialStyle->setParent(this);
     // Notes tool bar
     ui.toolBarNotes->addWidget(new QLabel(tr(" Channel: "), this));
     m_sboxChannel = new QSpinBox(this);
