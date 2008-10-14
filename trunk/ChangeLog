@@ -1,3 +1,6 @@
+2008-10-14
+    * fix for bug: #2164586 segmentation fault at startup
+    
 2008-10-13
     * version string changed
 
