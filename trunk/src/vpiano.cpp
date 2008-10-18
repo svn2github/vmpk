@@ -121,6 +121,8 @@ void midiCallback( double /*deltatime*/,
             unsigned char val = message->at(2);
             ev = new ControllerEvent(ctl, val);
         }
+    } else {
+        qDebug() << "message received: " << status << " size: " << message->size();
     }
     if (ev != NULL)
         QApplication::postEvent(instance, ev);
@@ -152,7 +154,7 @@ void VPiano::initMidi()
         m_midiout->openPort( m_currentOut = 0 );
 #endif
         if (m_midiin != NULL) {
-            m_midiin->ignoreTypes(false,false,false);
+            m_midiin->ignoreTypes(true,true,true); //ignore SYX, clock and active sense
             m_midiin->setCallback( &midiCallback, this );
             m_inputActive = true;
         }

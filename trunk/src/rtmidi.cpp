@@ -57,8 +57,12 @@
 
 /* 
  * Changes by Pedro Lopez-Cabanillas for Virtual MIDI Piano Keyboard:
- * Added an optional clientName parameter to RtMidiIn and RtMidiOut
- * constructors.
+ * 
+ * - Added an optional clientName parameter to RtMidiIn and RtMidiOut
+ *   constructors.
+ * - Changed the ALSA sequencer port enumeration names
+ * - Fixed a crash in Windows when receiving SYXEX messages if the ignore
+ *   setting has been set for SYSEX events 
  */
 
 #include "rtmidi.h"
@@ -1805,21 +1809,25 @@ static void CALLBACK midiInputCallback( HMIDIOUT hmin,
     unsigned char *ptr = (unsigned char *) &midiMessage;
     for ( int i=0; i<nBytes; i++ ) apiData->message.bytes.push_back( *ptr++ );
   }
-  else if ( !(data->ignoreFlags & 0x01) ) {
-    // Sysex message and we're not ignoring it
-    MIDIHDR *sysex = ( MIDIHDR *) midiMessage;
-    for ( int i=0; i<(int)sysex->dwBytesRecorded; i++ )
-      apiData->message.bytes.push_back( sysex->lpData[i] );
-
+  else // Sysex message (MIM_LONGDATA)
+  {
+    MIDIHDR *sysex = ( MIDIHDR *) midiMessage; 
+    if ( !(data->ignoreFlags & 0x01) ) {  
+        // Sysex message and we're not ignoring it
+        for ( int i=0; i<(int)sysex->dwBytesRecorded; i++ )
+          apiData->message.bytes.push_back( sysex->lpData[i] );
+    }
     // When the callback has to be unaffected (application closes), 
     // it seems WinMM calls it with an empty sysex to de-queue the buffer
     // If the buffer is requeued afer that message, the PC suddenly reboots
     // after one or two minutes (JB).
-    if ( apiData->sysexBuffer->dwBytesRecorded > 0 ) {
+    if ( sysex->dwBytesRecorded > 0 ) {
       MMRESULT result = midiInAddBuffer( apiData->inHandle, apiData->sysexBuffer, sizeof(MIDIHDR) );
       if ( result != MMSYSERR_NOERROR )
         std::cerr << "\nRtMidiIn::midiInputCallback: error sending sysex to Midi device!!\n\n";
     }
+    if ( (data->ignoreFlags & 0x01) || ( sysex->dwBytesRecorded == 0 ) )
+        return;
   }
 
   if ( data->usingCallback ) {
