@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=vmpk
+Exec=vmpk
+Icon=vmpk_48x48
+Terminal=false
+Type=Application
+Comment=Virtual MIDI Piano Keyboard
+Categories=Application;AudioVideo;Audio;Music
