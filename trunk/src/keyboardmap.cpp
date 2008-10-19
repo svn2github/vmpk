@@ -33,7 +33,7 @@ void KeyboardMap::loadFromXMLFile(const QString fileName)
         m_fileName = fileName;
     }
     if (f.error() != QFile::NoError) {
-        reportError(fileName, tr("loading a file"), f.errorString());
+        reportError(fileName, tr("Error loading a file"), f.errorString());
     }
 }
 
@@ -46,7 +46,7 @@ void KeyboardMap::saveToXMLFile(const QString fileName)
         m_fileName = fileName;
     }
     if (f.error() != QFile::NoError) {
-        reportError(fileName, tr("saving a file"), f.errorString()); 
+        reportError(fileName, tr("Error saving a file"), f.errorString()); 
     }
 }
 
@@ -82,7 +82,7 @@ void KeyboardMap::initializeFromXML(QIODevice *dev)
         }
     }
     if (reader.hasError()) {
-        reportError(QString(), tr("reading XML"), reader.errorString() );
+        reportError(QString(), tr("Error reading XML"), reader.errorString() );
     }
 }
 
@@ -109,6 +109,5 @@ void KeyboardMap::reportError( const QString filename,
                                const QString title, 
                                const QString err )
 {
-    QMessageBox::warning(0, tr("Error %1").arg(title), 
-                         tr("File: %1\n%2").arg(filename).arg(err));
+    QMessageBox::warning(0, title, tr("File: %1\n%2").arg(filename).arg(err));
 }

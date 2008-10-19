@@ -1,6 +1,10 @@
+2008-10-19 0.2.2
+    * true fix for RtMIDI bug #2158014 Crash in windows
+    * Spanish translation updated
+
 2008-10-14
     * fix for bug: #2164586 segmentation fault at startup
-    
+
 2008-10-13
     * version string changed
 
