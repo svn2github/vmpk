@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="es">
+<defaultcodec></defaultcodec>
 <context>
     <name>About</name>
     <message>
@@ -790,7 +791,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="100"/>
         <source>Base octave</source>
-        <translation>Octaba base</translation>
+        <translation>Octava base</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="126"/>

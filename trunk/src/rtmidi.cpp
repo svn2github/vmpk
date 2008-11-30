@@ -62,7 +62,11 @@
  *   constructors.
  * - Changed the ALSA sequencer port enumeration names
  * - Fixed a crash in Windows when receiving SYXEX messages if the ignore
- *   setting has been set for SYSEX events 
+ *   setting has been set for SYSEX events
+ * - Fix a bug in Linux: do not disable input when receiving a port
+ *   disconnect event
+ * - Linux optimization: do not use a queue for input, because VMPK doesn't
+ *   need incoming event timestamp 
  */
 
 #include "rtmidi.h"
@@ -744,15 +748,17 @@ extern "C" void *alsaMidiHandler( void *ptr )
     message.bytes.clear();
     switch ( ev->type ) {
 
-		case SND_SEQ_EVENT_PORT_SUBSCRIBED:
+	  case SND_SEQ_EVENT_PORT_SUBSCRIBED:
 #if defined(__RTMIDI_DEBUG__)
       std::cout << "RtMidiIn::alsaMidiHandler: port connection made!\n";
 #endif
       break;
 
 		case SND_SEQ_EVENT_PORT_UNSUBSCRIBED:
+#if defined(__RTMIDI_DEBUG__)
       std::cerr << "RtMidiIn::alsaMidiHandler: port connection has closed!\n";
-      data->doInput = false;
+#endif
+      //data->doInput = false;
       break;
 
     case SND_SEQ_EVENT_QFRAME: // MIDI time code
@@ -862,6 +868,8 @@ void RtMidiIn :: initialize( const std::string& clientName )
   inputData_.apiData = (void *) data;
 
   // Create the input queue
+/* Don't use a queue (in VMPK, it is not needed. 
+ * This saves valuable system resources.)
   data->queue_id = snd_seq_alloc_named_queue(seq, "RtMidi Queue");
   // Set arbitrary tempo (mm=100) and resolution (240)
   snd_seq_queue_tempo_t *qtempo;
@@ -870,6 +878,7 @@ void RtMidiIn :: initialize( const std::string& clientName )
   snd_seq_queue_tempo_set_ppq(qtempo, 240);
   snd_seq_set_queue_tempo(data->seq, data->queue_id, qtempo);
   snd_seq_drain_output(data->seq);
+*/
 }
 
 // This function is used to count or get the pinfo structure for a given port number.
@@ -947,9 +956,12 @@ void RtMidiIn :: openPort( unsigned int portNumber )
                                 SND_SEQ_PORT_TYPE_MIDI_GENERIC |
                                 SND_SEQ_PORT_TYPE_APPLICATION );
     snd_seq_port_info_set_midi_channels(pinfo, 16);
+ /* Don't use a queue (in VMPK, it is not needed. 
+  * This saves valuable system resources.)
     snd_seq_port_info_set_timestamping(pinfo, 1);
     snd_seq_port_info_set_timestamp_real(pinfo, 1);    
     snd_seq_port_info_set_timestamp_queue(pinfo, data->queue_id);
+  */
     snd_seq_port_info_set_name(pinfo, "RtMidi Input");
     data->vport = snd_seq_create_port(data->seq, pinfo);
   
@@ -972,8 +984,11 @@ void RtMidiIn :: openPort( unsigned int portNumber )
 
   if ( inputData_.doInput == false ) {
     // Start the input queue
+ /* Don't use a queue (in VMPK, it is not needed. 
+  * This saves valuable system resources.)
     snd_seq_start_queue( data->seq, data->queue_id, NULL );
     snd_seq_drain_output( data->seq );
+  */
     // Start our MIDI input thread.
     pthread_attr_t attr;
     pthread_attr_init(&attr);
@@ -1008,9 +1023,12 @@ void RtMidiIn :: openVirtualPort( std::string portName )
 				SND_SEQ_PORT_TYPE_MIDI_GENERIC |
 				SND_SEQ_PORT_TYPE_APPLICATION );
     snd_seq_port_info_set_midi_channels(pinfo, 16);
+ /* Don't use a queue (in VMPK, it is not needed. 
+  * This saves valuable system resources.)
     snd_seq_port_info_set_timestamping(pinfo, 1);
     snd_seq_port_info_set_timestamp_real(pinfo, 1);    
     snd_seq_port_info_set_timestamp_queue(pinfo, data->queue_id);
+  */
     snd_seq_port_info_set_name(pinfo, portName.c_str());
     data->vport = snd_seq_create_port(data->seq, pinfo);
 
@@ -1022,8 +1040,11 @@ void RtMidiIn :: openVirtualPort( std::string portName )
 
   if ( inputData_.doInput == false ) {
     // Start the input queue
+ /* Don't use a queue (in VMPK, it is not needed. 
+  * This saves valuable system resources.)  
     snd_seq_start_queue( data->seq, data->queue_id, NULL );
     snd_seq_drain_output( data->seq );
+  */
     // Start our MIDI input thread.
     pthread_attr_t attr;
     pthread_attr_init(&attr);
@@ -1050,8 +1071,11 @@ void RtMidiIn :: closePort( void )
     snd_seq_unsubscribe_port( data->seq, data->subscription );
     snd_seq_port_subscribe_free( data->subscription );
     // Stop the input queue
+ /* Don't use a queue (in VMPK, it is not needed. 
+  * This saves valuable system resources.)
     snd_seq_stop_queue( data->seq, data->queue_id, NULL );
     snd_seq_drain_output( data->seq );
+  */
     connected_ = false;
   }
 }
@@ -1070,7 +1094,12 @@ RtMidiIn :: ~RtMidiIn()
 
   // Cleanup.
   if ( data->vport >= 0 ) snd_seq_delete_port( data->seq, data->vport );
-  snd_seq_free_queue( data->seq, data->queue_id );
+  
+/* Don't use a queue (in VMPK, it is not needed. 
+ * This saves valuable system resources.)
+   snd_seq_free_queue( data->seq, data->queue_id );
+*/
+
   snd_seq_close( data->seq );
   delete data;
 }
