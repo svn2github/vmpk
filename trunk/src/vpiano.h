@@ -91,6 +91,7 @@ public:
     VPiano( QWidget * parent = 0, Qt::WindowFlags flags = 0 );
     virtual ~VPiano();
     int getInputChannel();
+    void midiThru(std::vector<unsigned char> *message) const;
     
     // PianoHandler methods
     void noteOn(const int midiNote);

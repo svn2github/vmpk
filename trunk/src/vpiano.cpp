@@ -121,9 +121,8 @@ void midiCallback( double /*deltatime*/,
             unsigned char val = message->at(2);
             ev = new ControllerEvent(ctl, val);
         }
-    } else {
-        qDebug() << "message received: " << status << " size: " << message->size();
     }
+    instance->midiThru(message);
     if (ev != NULL)
         QApplication::postEvent(instance, ev);
 }
@@ -385,17 +384,14 @@ void VPiano::customEvent ( QEvent *event )
     if (event->type() == NoteOnEventType ) {
         NoteOnEvent *ev = static_cast<NoteOnEvent*>(event);
         ui.pianokeybd->showNoteOn(ev->getNote());
-        if (m_midiThru) noteOn(ev->getNote());
         event->accept();
     } else if (event->type() == NoteOffEventType ) {
         NoteOffEvent *ev = static_cast<NoteOffEvent*>(event);
         ui.pianokeybd->showNoteOff(ev->getNote());
-        if (m_midiThru) noteOff(ev->getNote());
         event->accept();
     } else if (event->type() == ControllerEventType ) {
         ControllerEvent *ev = static_cast<ControllerEvent*>(event);
         updateController(ev->getController(), ev->getValue());
-        if (m_midiThru) sendController(ev->getController(), ev->getValue());
         event->accept();
     }
 }
@@ -411,6 +407,17 @@ void VPiano::hideEvent( QHideEvent *event )
 {
     releaseKb();    
     QMainWindow::hideEvent(event);
+}
+
+void VPiano::midiThru(std::vector<unsigned char> *message) const
+{
+    if (m_midiThru) {
+        try {
+            m_midiout->sendMessage( message );
+        } catch (RtError& err) {
+            qWarning() << QString::fromStdString(err.getMessage());
+        }
+    }
 }
 
 void VPiano::messageWrapper(std::vector<unsigned char> *message) const
