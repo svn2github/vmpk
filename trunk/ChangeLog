@@ -1,7 +1,14 @@
+2008-12-03    
+    * version string = 0.2.4cvs
+    * better about dialog
+    * thru function: Send every incoming event to the output port, do not 
+      modify incoming channels. Process inside MIDI callback for better 
+      performance.
+
 2008-11-30 0.2.3
     * fix for bug #2364787 Rosegarden renders vmpk input unusable
     * optimization for Linux: do not create an ALSA queue
-    
+
 2008-10-19 0.2.2
     * true fix for RtMIDI bug #2158014 Crash in windows
     * Spanish translation updated
