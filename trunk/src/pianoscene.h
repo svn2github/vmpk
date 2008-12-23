@@ -28,6 +28,7 @@
 class PianoHandler
 {
 public:
+    virtual ~PianoHandler() {}
     virtual void noteOn( const int note ) = 0;
     virtual void noteOff( const int note ) = 0;
 };
