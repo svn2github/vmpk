@@ -1,39 +1,36 @@
 TEMPLATE = app
 TARGET = vmpk
-QT += core \
-    gui \
-    xml
-CONFIG -= release
-CONFIG -= debug_and_release
-CONFIG += debug
+VERSION = 0.2.4cvs
+DEFINES += \'VERSION=\"$$VERSION\"\'
+OBJECTS_DIR = build
+UI_DIR = build
+MOC_DIR = build
+RCC_DIR = build
+QT += core gui xml
+#CONFIG -= release
+#CONFIG -= debug_and_release
+#CONFIG += debug
 win32 { 
     DEFINES += __WINDOWS_MM__
     LIBS += -lwinmm
     RC_FILE = src/vpianoico.rc
     CONFIG += console
 }
-linux-g++ { 
+linux* { 
     DEFINES += __LINUX_ALSASEQ__
-    LIBS += -lasound \
-        -lpthread
+    LIBS += -lasound -lpthread
 }
-macx-g++ { 
+macx {
+    CONFIG += x86 ppc 
     DEFINES += __MACOSX_CORE__
-    LIBS += -framework \
-        CoreMidi \
-        -framework \
-        CoreAudio \
-        -framework \
-        CoreFoundation
+    LIBS += -framework CoreMidi -framework CoreAudio -framework CoreFoundation
 }
-irix-g++ { 
+irix* { 
     DEFINES += __IRIX_MD__
-    LIBS += -laudio \
-        -lpthread
+    LIBS += -laudio -lpthread
 }
 debug:DEFINES += __RTMIDI_DEBUG__
 INCLUDEPATH = src/
-
 # Input
 FORMS += src/kmapdialog.ui \
     src/midisetup.ui \
