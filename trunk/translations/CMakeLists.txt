@@ -1,1 +1,4 @@
-ADD_TRANSLATIONS(vmpk_es.ts)
+ADD_TRANSLATIONS (
+    vmpk_es.ts 
+    vmpk_tr.ts
+)

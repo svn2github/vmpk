@@ -1,5 +1,5 @@
 /*
-    MIDI Virtual Piano Keyboard 
+    MIDI Virtual Piano Keyboard
     Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -95,14 +95,14 @@ int VPiano::getInputChannel()
     return dlgPreferences.getInChannel();
 }
 
-void midiCallback( double /*deltatime*/, 
-                   std::vector< unsigned char > *message, 
+void midiCallback( double /*deltatime*/,
+                   std::vector< unsigned char > *message,
                    void *userData )
 {
     QEvent* ev = NULL;
     VPiano* instance = static_cast<VPiano*>(userData);
     unsigned char status = message->at(0) & MASK_STATUS;
-    if ((status == STATUS_NOTEON) || (status == STATUS_NOTEOFF)) { 
+    if ((status == STATUS_NOTEON) || (status == STATUS_NOTEOFF)) {
         unsigned char channel = message->at(0) & MASK_CHANNEL;
         unsigned char channelFilter = instance->getInputChannel();
         if (channel == channelFilter) {
@@ -135,7 +135,7 @@ void VPiano::initMidi()
         if (nOutPorts == 0) {
             delete m_midiout;
             m_midiout = 0;
-            QMessageBox::critical(0, tr("Error"), 
+            QMessageBox::critical(0, tr("Error"),
                                   tr("No MIDI output ports available. Aborting"));
             qApp->quit();
         }
@@ -145,11 +145,11 @@ void VPiano::initMidi()
             delete m_midiin;
             m_midiin = NULL;
         }
-#if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)     
+#if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)
         m_midiout->openVirtualPort(QSTR_VMPKOUTPUT.toStdString());
         if (m_midiin != NULL)
             m_midiin->openVirtualPort(QSTR_VMPKINPUT.toStdString());
-#else //if defined(__WINDOWS_MM__) || defined(__IRIX_MD__) 
+#else //if defined(__WINDOWS_MM__) || defined(__IRIX_MD__)
         m_midiout->openPort( m_currentOut = 0 );
 #endif
         if (m_midiin != NULL) {
@@ -191,11 +191,11 @@ void VPiano::initToolBars()
     m_Velocity->setDialMode(Knob::LinearMode);
     m_Velocity->setValue(dlgPreferences.getVelocity());
     ui.toolBarNotes->addWidget(m_Velocity);
-    connect( m_sboxChannel, SIGNAL(valueChanged(int)), 
+    connect( m_sboxChannel, SIGNAL(valueChanged(int)),
              this, SLOT(slotOutChannel(int)) );
-    connect( m_sboxOctave, SIGNAL(valueChanged(int)), 
+    connect( m_sboxOctave, SIGNAL(valueChanged(int)),
              this, SLOT(slotBaseOctave(int)) );
-    connect( m_Velocity, SIGNAL(valueChanged(int)), 
+    connect( m_Velocity, SIGNAL(valueChanged(int)),
              &dlgPreferences, SLOT(setVelocity(int)) );
     // Controllers tool bar
     ui.toolBarControllers->addWidget(new QLabel(tr(" Control: "), this));
@@ -253,12 +253,12 @@ void VPiano::initToolBars()
 void VPiano::readSettings()
 {
     QSettings settings;
-    
+
     settings.beginGroup(QSTR_WINDOW);
     restoreGeometry(settings.value(QSTR_GEOMETRY).toByteArray());
     restoreState(settings.value(QSTR_STATE).toByteArray());
     settings.endGroup();
-    
+
     settings.beginGroup(QSTR_PREFERENCES);
     int in_channel  = settings.value(QSTR_INCHANNEL,  0).toInt();
     int out_channel = settings.value(QSTR_OUTCHANNEL, 0).toInt();
@@ -271,7 +271,7 @@ void VPiano::readSettings()
     QColor keyColor = settings.value(QSTR_KEYPRESSEDCOLOR, defColor).value<QColor>();
     bool grabKb = settings.value(QSTR_GRABKB, false).toBool();
     settings.endGroup();
-    
+
     dlgPreferences.setInChannel(in_channel);
     dlgPreferences.setOutChannel(out_channel);
     dlgPreferences.setVelocity(velocity);
@@ -285,7 +285,7 @@ void VPiano::readSettings()
             dlgPreferences.setInstrumentName(insName);
         }
     }
-    
+
     settings.beginGroup(QSTR_CONNECTIONS);
     bool inEnabled = settings.value(QSTR_INENABLED, true).toBool();
     bool thruEnabled = settings.value(QSTR_THRUENABLED, false).toBool();
@@ -301,7 +301,7 @@ void VPiano::readSettings()
         dlgMidiSetup.setCurrentInput(in_port);
     }
     dlgMidiSetup.setCurrentOutput(out_port);
-    
+
     settings.beginGroup(QSTR_KEYBOARD);
     QString mapFile = settings.value(QSTR_MAPFILE, QSTR_DEFAULT).toString();
     settings.endGroup();
@@ -321,7 +321,7 @@ void VPiano::readSettings()
         m_ctlSettings[ctl] = val;
     }
     settings.endGroup();
-    
+
     if (!mapFile.isEmpty() && (mapFile != QSTR_DEFAULT)) {
         ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(mapFile);
     }
@@ -330,12 +330,12 @@ void VPiano::readSettings()
 void VPiano::writeSettings()
 {
     QSettings settings;
-    
+
     settings.beginGroup(QSTR_WINDOW);
     settings.setValue(QSTR_GEOMETRY, saveGeometry());
     settings.setValue(QSTR_STATE, saveState());
     settings.endGroup();
-    
+
     settings.beginGroup(QSTR_PREFERENCES);
     settings.setValue(QSTR_INCHANNEL, dlgPreferences.getInChannel());
     settings.setValue(QSTR_OUTCHANNEL, dlgPreferences.getOutChannel());
@@ -347,21 +347,21 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_KEYPRESSEDCOLOR, dlgPreferences.getKeyPressedColor());
     settings.setValue(QSTR_GRABKB, dlgPreferences.getGrabKeyboard());
     settings.endGroup();
-    
+
     settings.beginGroup(QSTR_CONNECTIONS);
     settings.setValue(QSTR_INENABLED, dlgMidiSetup.inputIsEnabled());
     settings.setValue(QSTR_THRUENABLED, dlgMidiSetup.thruIsEnabled());
     settings.setValue(QSTR_INPORT,  dlgMidiSetup.selectedInputName());
     settings.setValue(QSTR_OUTPORT, dlgMidiSetup.selectedOutputName());
     settings.endGroup();
-    
+
     settings.beginGroup(QSTR_KEYBOARD);
     settings.setValue(QSTR_MAPFILE, ui.pianokeybd->getKeyboardMap()->getFileName());
     settings.endGroup();
-    
+
     settings.beginGroup(QSTR_CONTROLLERS);
     QMap<int,int>::const_iterator it;
-    for(it = m_ctlState.constBegin(); it != m_ctlState.constEnd(); ++it) { 
+    for(it = m_ctlState.constBegin(); it != m_ctlState.constEnd(); ++it) {
         settings.setValue(QString::number(it.key()), it.value());
     }
     settings.endGroup();
@@ -405,7 +405,7 @@ void VPiano::showEvent ( QShowEvent *event )
 
 void VPiano::hideEvent( QHideEvent *event )
 {
-    releaseKb();    
+    releaseKb();
     QMainWindow::hideEvent(event);
 }
 
@@ -483,7 +483,7 @@ void VPiano::resetAllControllers()
 void VPiano::allNotesOff()
 {
     sendController(CTL_ALL_NOTES_OFF, 0);
-    ui.pianokeybd->allKeysOff();    
+    ui.pianokeybd->allKeysOff();
 }
 
 void VPiano::programChange(const int program)
@@ -599,7 +599,7 @@ void VPiano::refreshConnections()
         for ( i = 0; i < nOutPorts; i++ ) {
             QString name = QString::fromStdString(m_midiout->getPortName(i));
             if (!name.startsWith(QSTR_VMPK))
-                dlgMidiSetup.addOutputPortName(name, i); 
+                dlgMidiSetup.addOutputPortName(name, i);
         }
     } catch (RtError& err) {
         ui.statusBar->showMessage(QString::fromStdString(err.getMessage()));
@@ -638,7 +638,7 @@ void VPiano::applyConnections()
                 if (m_currentIn > -1)
                     m_midiin->closePort();
             }
-            if ((i >= 0) && (i < nInPorts) && (i != m_currentIn) &&  
+            if ((i >= 0) && (i < nInPorts) && (i != m_currentIn) &&
                 dlgMidiSetup.inputIsEnabled()) {
                 m_midiin->openPort(i);
                 m_midiin->setCallback( &midiCallback, this );
@@ -695,11 +695,11 @@ void VPiano::applyPreferences()
     m_sboxChannel->setValue(dlgPreferences.getOutChannel() + 1);
     m_sboxOctave->setValue(dlgPreferences.getBaseOctave());
     m_Velocity->setValue(dlgPreferences.getVelocity());
-    
+
     m_ins = NULL;
     m_comboBank->clear();
     m_comboProg->clear();
-    
+
     if (!dlgPreferences.getInstrumentsFileName().isEmpty() &&
         ((m_ins = dlgPreferences.getInstrument()) != NULL)) {
         //qDebug() << "Instrument Name:" << m_ins->instrumentName();
@@ -717,16 +717,16 @@ void VPiano::applyPreferences()
     }
 }
 
-void VPiano::applyInitialSettings() 
+void VPiano::applyInitialSettings()
 {
     int idx;
-    QMap<int,int>::Iterator i, j; 
+    QMap<int,int>::Iterator i, j;
     for(i = m_ctlSettings.begin(); i != m_ctlSettings.end(); ++i) {
         j = m_ctlState.find(i.key());
         if (j != m_ctlState.end())
             m_ctlState[i.key()] = i.value();
     }
-    
+
     for(idx = 0; idx < m_comboControl->count(); ++idx) {
         int ctl = m_comboControl->itemData(idx).toInt();
         if (ctl == m_lastCtl) {
@@ -742,7 +742,7 @@ void VPiano::applyInitialSettings()
             break;
         }
     }
-    
+
     for(idx = 0; idx < m_comboProg->count(); ++idx) {
         int pgm = m_comboProg->itemData(idx).toInt();
         if (pgm == m_lastProg) {
@@ -763,10 +763,21 @@ void VPiano::slotPreferences()
 
 void VPiano::slotLoadKeyboardMap()
 {
+    const QString dataDirectory =
+#ifdef Q_OS_WIN32
+        QApplication::applicationDirPath();
+#endif
+#ifdef Q_OS_LINUX
+        QApplication::applicationDirPath() + "/../share/vmpk/";
+#endif
+#ifdef Q_OS_DARWIN
+        QApplication::applicationDirPath() + "/../Resources/";
+#endif
+
     releaseKb();
     QString fileName = QFileDialog::getOpenFileName(0,
                                 tr("Open keyboard map definition"),
-                                dataDirectory(), 
+                                dataDirectory,
                                 tr("Keyboard map (*.xml)"));
     if (!fileName.isEmpty()) {
         ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(fileName);
@@ -776,10 +787,21 @@ void VPiano::slotLoadKeyboardMap()
 
 void VPiano::slotSaveKeyboardMap()
 {
+    const QString dataDirectory =
+#ifdef Q_OS_WIN32
+        QApplication::applicationDirPath();
+#endif
+#ifdef Q_OS_LINUX
+        QApplication::applicationDirPath() + "/../share/vmpk/";
+#endif
+#ifdef Q_OS_DARWIN
+        QApplication::applicationDirPath() + "/../Resources/";
+#endif
+
     releaseKb();
     QString fileName = QFileDialog::getSaveFileName(this,
                                 tr("Save keyboard map definition"),
-                                dataDirectory(), 
+                                dataDirectory,
                                 tr("Keyboard map (*.xml)"));
     if (!fileName.isEmpty()) {
         ui.pianokeybd->getKeyboardMap()->saveToXMLFile(fileName);
@@ -792,7 +814,7 @@ void VPiano::slotEditKeyboardMap()
     dlgKeyMap.displayMap(ui.pianokeybd->getKeyboardMap());
     releaseKb();
     if (dlgKeyMap.exec() == QDialog::Accepted) {
-        ui.pianokeybd->setKeyboardMap(dlgKeyMap.getMap()); 
+        ui.pianokeybd->setKeyboardMap(dlgKeyMap.getMap());
     }
     grabKb();
 }
@@ -833,7 +855,7 @@ void VPiano::slotBaseOctave(const int octave)
 
 void VPiano::slotOutChannel(const int channel)
 {
-    int c = channel - 1; 
+    int c = channel - 1;
     if (c != dlgPreferences.getOutChannel()) {
         dlgPreferences.setOutChannel(c);
     }

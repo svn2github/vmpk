@@ -1,8 +1,9 @@
 [Desktop Entry]
-Name=vmpk
+Name=VMPK
 Exec=vmpk
 Icon=vmpk_48x48
 Terminal=false
 Type=Application
 Comment=Virtual MIDI Piano Keyboard
 Categories=Application;AudioVideo;Audio;Music
+GenericName[tr]=Sanal MIDI Piyano Klavyesi

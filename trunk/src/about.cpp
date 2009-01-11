@@ -1,5 +1,5 @@
 /*
-    MIDI Virtual Piano Keyboard 
+    MIDI Virtual Piano Keyboard
     Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
@@ -12,20 +12,16 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "about.h"
+#include "constants.h"
 
 About::About(QWidget *parent)
     : QDialog(parent)
 {
-    const QString PGM_VERSION(VERSION);
-    const QString BLD_DATE(__DATE__);
-    const QString BLD_TIME(__TIME__);
-    const QString CMP_VERSION(__VERSION__);
-    
     ui.setupUi(this);
     ui.labelVersion->setText(tr("<html>"
             "<head>"
@@ -37,7 +33,7 @@ About::About(QWidget *parent)
                 "Version: %1<br/>"
                 "Build date: %2<br/>"
                 "Build time: %3<br/>"
-                "Compiler: %4" 
+                "Compiler: %4"
               "</p>"
             "</body>"
             "</html>").arg(PGM_VERSION, BLD_DATE, BLD_TIME, CMP_VERSION));

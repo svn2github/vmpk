@@ -1,5 +1,5 @@
 /*
-    MIDI Virtual Piano Keyboard 
+    MIDI Virtual Piano Keyboard
     Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -20,8 +20,17 @@
 #define CONSTANTS_H_
 
 #include <QApplication>
+#include <QString>
+#include "vmpk_version.h"
 
 /* Don't translate any string defined in this header */
+
+//replaced with the generated header "vmpk_version.h"
+//const QString PGM_VERSION("0.2.4cvs");
+
+const QString BLD_DATE(__DATE__);
+const QString BLD_TIME(__TIME__);
+const QString CMP_VERSION(__VERSION__);
 
 const QString QSTR_APPNAME("Virtual MIDI Piano Keyboard");
 const QString QSTR_DOMAIN("vmpk.sourceforge.net");
@@ -58,23 +67,5 @@ const QString QSTR_GRABKB("GrabKeyboard");
 const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");
 const QString QSTR_VMPKOUTPUT("VMPK Output");
-
-static QString dataDirectory() 
-{
-#ifdef Q_OS_WIN32                           
-    return QApplication::applicationDirPath();
-#else
-    return QApplication::applicationDirPath() + "/../share/vmpk/";
-#endif
-}
-
-static QString localeDirectory() 
-{
-#ifdef Q_OS_WIN32                           
-    return QApplication::applicationDirPath();
-#else
-    return QApplication::applicationDirPath() + "/../share/locale/";
-#endif
-}
 
 #endif /*CONSTANTS_H_*/

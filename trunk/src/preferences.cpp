@@ -1,18 +1,18 @@
 /*
-    MIDI Virtual Piano Keyboard 
+    MIDI Virtual Piano Keyboard
     Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This library is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 3 of the License, or
     (at your option) any later version.
- 
+
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
- 
-    You should have received a copy of the GNU General Public License along 
+
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -75,11 +75,22 @@ void Preferences::accept()
     QDialog::accept();
 }
 
-void Preferences::slotOpenInstrumentFile() 
+void Preferences::slotOpenInstrumentFile()
 {
+    QString dataDirectory =
+#ifdef Q_OS_WIN32
+        QApplication::applicationDirPath();
+#endif
+#ifdef Q_OS_LINUX
+        QApplication::applicationDirPath() + "/../share/vmpk/";
+#endif
+#ifdef Q_OS_DARWIN
+        QApplication::applicationDirPath() + "/../Resources/";
+#endif
+
     QString fileName = QFileDialog::getOpenFileName(this,
                                 tr("Open instruments definition"),
-                                dataDirectory(), 
+                                dataDirectory,
                                 tr("Instrument definitions (*.ins)"));
     if (!fileName.isEmpty()) {
         setInstrumentsFileName(fileName);
@@ -112,7 +123,7 @@ void Preferences::setInstrumentsFileName( const QString fileName )
         ui.cboInstrument->clear();
         if (m_ins.load(fileName)) {
             ui.txtFileInstrument->setText(f.fileName());
-            InstrumentList::ConstIterator it; 
+            InstrumentList::ConstIterator it;
             for(it = m_ins.begin(); it != m_ins.end(); ++it) {
                 ui.cboInstrument->addItem(it.key());
             }
@@ -133,12 +144,12 @@ QString Preferences::getInstrumentsFileName()
 void Preferences::setInstrumentName( const QString name )
 {
     int index = ui.cboInstrument->findText( name );
-    ui.cboInstrument->setCurrentIndex( index );    
+    ui.cboInstrument->setCurrentIndex( index );
 }
 
 QString Preferences::getInstrumentName()
 {
-    return ui.cboInstrument->currentText();    
+    return ui.cboInstrument->currentText();
 }
 
 void Preferences::setKeyPressedColor(QColor value)

@@ -1,36 +1,59 @@
+# Virtual MIDI Piano Keyboard
+# Copyright (C) 2008 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along 
+# with this program; If not, see <http://www.gnu.org/licenses/>.
+
 TEMPLATE = app
 TARGET = vmpk
 VERSION = 0.2.4cvs
-DEFINES += \'VERSION=\"$$VERSION\"\'
+DESTDIR = build
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
 QT += core gui xml
-#CONFIG -= release
-#CONFIG -= debug_and_release
+#CONFIG += release
+#CONFIG += debug_and_release
 #CONFIG += debug
-win32 { 
+VERSIONH = $$sprintf(const QString PGM_VERSION(\"%1\");,$$VERSION)
+win32 {
     DEFINES += __WINDOWS_MM__
     LIBS += -lwinmm
     RC_FILE = src/vpianoico.rc
-    CONFIG += console
+    debug:CONFIG += console
+    system(echo $$VERSIONH > $$DESTDIR/vmpk_version.h)
 }
 linux* { 
     DEFINES += __LINUX_ALSASEQ__
-    LIBS += -lasound -lpthread
+    CONFIG += link_pkgconfig
+    PKGCONFIG += alsa
+    system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 macx {
     CONFIG += x86 ppc 
+    ICON = data/vmpk.icns
     DEFINES += __MACOSX_CORE__
     LIBS += -framework CoreMidi -framework CoreAudio -framework CoreFoundation
+    system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 irix* { 
     DEFINES += __IRIX_MD__
     LIBS += -laudio -lpthread
+    system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 debug:DEFINES += __RTMIDI_DEBUG__
-INCLUDEPATH = src/
+INCLUDEPATH += src
 # Input
 FORMS += src/kmapdialog.ui \
     src/midisetup.ui \
@@ -69,4 +92,5 @@ SOURCES += src/kmapdialog.cpp \
     src/instrument.cpp \
     src/main.cpp
 RESOURCES += data/vmpk.qrc
-TRANSLATIONS += translations/vmpk_es.ts
+TRANSLATIONS += translations/vmpk_es.ts \
+    translations/vmpk_tr.ts 
