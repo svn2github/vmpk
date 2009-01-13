@@ -249,7 +249,6 @@ void VPiano::initToolBars()
     connect(ui.actionReset, SIGNAL(triggered()), SLOT(slotResetBender()));
 }
 
-
 void VPiano::readSettings()
 {
     QSettings settings;
