@@ -1,3 +1,8 @@
+2009-01-18
+    * implemented RFE #2488065 - online help
+    * applied patch #2490414 from Serdar Soytetir: Turkish translation
+    * build app bundle in Mac OSX 
+
 2008-12-03    
     * version string = 0.2.4cvs
     * better about dialog

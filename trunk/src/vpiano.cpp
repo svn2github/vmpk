@@ -54,6 +54,8 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionLoadKM, SIGNAL(triggered()), SLOT(slotLoadKeyboardMap()));
     connect(ui.actionSaveKM, SIGNAL(triggered()), SLOT(slotSaveKeyboardMap()));
     connect(ui.actionEditKM, SIGNAL(triggered()), SLOT(slotEditKeyboardMap()));
+    connect(ui.actionContents, SIGNAL(triggered()), SLOT(slotHelpContents()));
+    connect(ui.actionWebSite, SIGNAL(triggered()), SLOT(slotOpenWebSite()));
     ui.pianokeybd->setPianoHandler(this);
     initialization();
 }
@@ -760,23 +762,27 @@ void VPiano::slotPreferences()
     grabKb();
 }
 
-void VPiano::slotLoadKeyboardMap()
+QString VPiano::dataDirectory()
 {
-    const QString dataDirectory =
 #ifdef Q_OS_WIN32
-        QApplication::applicationDirPath();
+    return QApplication::applicationDirPath();
 #endif
 #ifdef Q_OS_LINUX
-        QApplication::applicationDirPath() + "/../share/vmpk/";
+    return QApplication::applicationDirPath() + "/../share/vmpk/";
 #endif
 #ifdef Q_OS_DARWIN
-        QApplication::applicationDirPath() + "/../Resources/";
+    return QApplication::applicationDirPath() + "/../Resources/";
 #endif
+    return QString();
+}
+
+void VPiano::slotLoadKeyboardMap()
+{
 
     releaseKb();
     QString fileName = QFileDialog::getOpenFileName(0,
                                 tr("Open keyboard map definition"),
-                                dataDirectory,
+                                VPiano::dataDirectory(),
                                 tr("Keyboard map (*.xml)"));
     if (!fileName.isEmpty()) {
         ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(fileName);
@@ -786,21 +792,10 @@ void VPiano::slotLoadKeyboardMap()
 
 void VPiano::slotSaveKeyboardMap()
 {
-    const QString dataDirectory =
-#ifdef Q_OS_WIN32
-        QApplication::applicationDirPath();
-#endif
-#ifdef Q_OS_LINUX
-        QApplication::applicationDirPath() + "/../share/vmpk/";
-#endif
-#ifdef Q_OS_DARWIN
-        QApplication::applicationDirPath() + "/../Resources/";
-#endif
-
     releaseKb();
     QString fileName = QFileDialog::getSaveFileName(this,
                                 tr("Save keyboard map definition"),
-                                dataDirectory,
+                                VPiano::dataDirectory(),
                                 tr("Keyboard map (*.xml)"));
     if (!fileName.isEmpty()) {
         ui.pianokeybd->getKeyboardMap()->saveToXMLFile(fileName);
@@ -888,4 +883,22 @@ void VPiano::releaseKb() const
     if (dlgPreferences.getGrabKeyboard()) {
         ui.pianokeybd->releaseKeyboard();
     }
+}
+
+void VPiano::slotHelpContents()
+{
+    QUrl url;
+    QString hlp_name = QString("help_%1.html").arg(QLocale::system().name());
+    if (QFile::exists(hlp_name)) {
+        url = QUrl::fromLocalFile(VPiano::dataDirectory() + hlp_name );
+    } else {
+        url = QUrl::fromLocalFile(VPiano::dataDirectory() + "help.html");
+    }
+    QDesktopServices::openUrl(url);
+}
+
+void VPiano::slotOpenWebSite()
+{
+    QUrl url(QSTR_VMPKURL);
+    QDesktopServices::openUrl(url);
 }

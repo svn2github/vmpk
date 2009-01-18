@@ -1,5 +1,5 @@
 /*
-    MIDI Virtual Piano Keyboard 
+    MIDI Virtual Piano Keyboard
     Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -38,14 +38,14 @@ class Instrument;
 class RtMidiIn;
 class RtMidiOut;
 
-const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::User + STATUS_NOTEON );  
-const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::User + STATUS_NOTEOFF );  
-const QEvent::Type ControllerEventType = QEvent::Type( QEvent::User + STATUS_CONTROLLER );  
+const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::User + STATUS_NOTEON );
+const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::User + STATUS_NOTEOFF );
+const QEvent::Type ControllerEventType = QEvent::Type( QEvent::User + STATUS_CONTROLLER );
 
 class NoteEvent : public QEvent
 {
-public:    
-    NoteEvent(unsigned char note, QEvent::Type type) 
+public:
+    NoteEvent(unsigned char note, QEvent::Type type)
         : QEvent(type),
         m_note(note) { }
     unsigned char getNote() const { return m_note; }
@@ -55,16 +55,16 @@ private:
 
 class NoteOnEvent : public NoteEvent
 {
-public:    
-    NoteOnEvent(unsigned char note) 
+public:
+    NoteOnEvent(unsigned char note)
         : NoteEvent(note, NoteOnEventType)
     { }
 };
 
 class NoteOffEvent : public NoteEvent
 {
-public:    
-    NoteOffEvent(unsigned char note) 
+public:
+    NoteOffEvent(unsigned char note)
         : NoteEvent(note, NoteOffEventType)
     { }
 };
@@ -92,17 +92,20 @@ public:
     virtual ~VPiano();
     int getInputChannel();
     void midiThru(std::vector<unsigned char> *message) const;
-    
+
     // PianoHandler methods
     void noteOn(const int midiNote);
     void noteOff(const int midiNote);
-    
+
+    // static methods
+    static QString dataDirectory();
+
 protected:
     void closeEvent ( QCloseEvent *event );
-    void customEvent ( QEvent *event );  
-    void showEvent ( QShowEvent *event ); 
+    void customEvent ( QEvent *event );
+    void showEvent ( QShowEvent *event );
     void hideEvent( QHideEvent *event );
-    
+
 public slots:
     void slotAbout();
     void slotAboutQt();
@@ -121,11 +124,13 @@ public slots:
     void slotBaseOctave(const int octave);
     void slotOutChannel(const int channel);
     void slotCtlChanged(const int index);
-    
-    // slots for note signals 
+    void slotHelpContents();
+    void slotOpenWebSite();
+
+    // slots for note signals
     // void slotNoteOn(int midiNote);
     // void slotNoteOff(int midiNote);
-    
+
 private:
     void initialization();
     void initMidi();
@@ -134,7 +139,7 @@ private:
     void writeSettings();
     void applyPreferences();
     void applyConnections();
-    void applyInitialSettings();    
+    void applyInitialSettings();
     void refreshConnections();
     void initToolBars();
     void sendController(const int controller, const int value);
@@ -154,7 +159,7 @@ private:
     int m_currentIn;
     bool m_inputActive;
     bool m_midiThru;
-    
+
     Ui::VPiano ui;
     About dlgAbout;
     Preferences dlgPreferences;

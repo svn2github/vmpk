@@ -190,6 +190,7 @@ INSTALL ( FILES
     data/german.xml
     data/gmgsxg.ins
     data/spanish.xml
+    data/help.html
 DESTINATION 
     share/vmpk 
 )

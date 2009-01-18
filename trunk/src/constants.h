@@ -68,4 +68,6 @@ const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");
 const QString QSTR_VMPKOUTPUT("VMPK Output");
 
+const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
+
 #endif /*CONSTANTS_H_*/

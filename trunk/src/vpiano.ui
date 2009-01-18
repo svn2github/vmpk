@@ -58,6 +58,9 @@
     <property name="title" >
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionContents" />
+    <addaction name="actionWebSite" />
+    <addaction name="separator" />
     <addaction name="actionAbout" />
     <addaction name="actionAbout_Qt" />
    </widget>
@@ -309,6 +312,22 @@
    </property>
    <property name="statusTip" >
     <string>Edit the current keyboard layout</string>
+   </property>
+  </action>
+  <action name="actionContents" >
+   <property name="text" >
+    <string>&amp;Contents</string>
+   </property>
+   <property name="statusTip" >
+    <string>Open the index of the help document</string>
+   </property>
+  </action>
+  <action name="actionWebSite" >
+   <property name="text" >
+    <string>VMPK &amp;Web site</string>
+   </property>
+   <property name="statusTip" >
+    <string>Open the VMPK web site address using a web browser</string>
    </property>
   </action>
  </widget>

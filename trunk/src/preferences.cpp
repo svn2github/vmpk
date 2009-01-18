@@ -18,6 +18,7 @@
 
 #include "preferences.h"
 #include "constants.h"
+#include "vpiano.h"
 
 #include <QPushButton>
 #include <QShowEvent>
@@ -77,20 +78,9 @@ void Preferences::accept()
 
 void Preferences::slotOpenInstrumentFile()
 {
-    QString dataDirectory =
-#ifdef Q_OS_WIN32
-        QApplication::applicationDirPath();
-#endif
-#ifdef Q_OS_LINUX
-        QApplication::applicationDirPath() + "/../share/vmpk/";
-#endif
-#ifdef Q_OS_DARWIN
-        QApplication::applicationDirPath() + "/../Resources/";
-#endif
-
     QString fileName = QFileDialog::getOpenFileName(this,
                                 tr("Open instruments definition"),
-                                dataDirectory,
+                                VPiano::dataDirectory(),
                                 tr("Instrument definitions (*.ins)"));
     if (!fileName.isEmpty()) {
         setInstrumentsFileName(fileName);
