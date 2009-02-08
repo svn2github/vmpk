@@ -1,3 +1,7 @@
+2009-02-08
+    * merged RtMIDI 1.0.8
+    * overhauled preferences: removed channels, velocity, base octave 
+
 2009-01-18
     * implemented RFE #2488065 - online help
     * applied patch #2490414 from Serdar Soytetir: Turkish translation
