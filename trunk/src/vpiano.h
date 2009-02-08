@@ -126,6 +126,7 @@ public slots:
     void slotCtlChanged(const int index);
     void slotHelpContents();
     void slotOpenWebSite();
+    void setVelocity(int value) { m_velocity = value; }
 
     // slots for note signals
     // void slotNoteOn(int midiNote);
@@ -152,6 +153,7 @@ private:
     void updateController(int ctl, int val);
     void grabKb() const;
     void releaseKb() const;
+    void updateKnobs();
 
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;
@@ -180,6 +182,9 @@ private:
     int m_lastBank;
     int m_lastProg;
     int m_lastCtl;
+    int m_channel;
+    int m_velocity;
+    int m_baseOctave;
 };
 
 #endif // VPIANO_H

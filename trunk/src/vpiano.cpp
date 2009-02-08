@@ -94,7 +94,7 @@ void VPiano::initialization()
 
 int VPiano::getInputChannel()
 {
-    return dlgPreferences.getInChannel();
+    return m_channel;
 }
 
 void midiCallback( double /*deltatime*/,
@@ -175,30 +175,30 @@ void VPiano::initToolBars()
     m_sboxChannel = new QSpinBox(this);
     m_sboxChannel->setMinimum(1);
     m_sboxChannel->setMaximum(16);
-    m_sboxChannel->setValue(dlgPreferences.getOutChannel() + 1);
+    m_sboxChannel->setValue(m_channel + 1);
     ui.toolBarNotes->addWidget(m_sboxChannel);
     ui.toolBarNotes->addWidget(new QLabel(tr(" Base Octave: "), this));
     m_sboxOctave = new QSpinBox(this);
     m_sboxOctave->setMinimum(0);
     m_sboxOctave->setMaximum(9);
-    m_sboxOctave->setValue(dlgPreferences.getBaseOctave());
+    m_sboxOctave->setValue(m_baseOctave);
     ui.toolBarNotes->addWidget(m_sboxOctave);
     ui.toolBarNotes->addWidget(new QLabel(tr(" Velocity: "), this));
     m_Velocity = new Knob(this);
     m_Velocity->setFixedSize(32, 32);
-    m_Velocity->setStyle(m_dialStyle);
+    m_Velocity->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
     m_Velocity->setMinimum(0);
     m_Velocity->setMaximum(127);
     m_Velocity->setDefaultValue(100);
     m_Velocity->setDialMode(Knob::LinearMode);
-    m_Velocity->setValue(dlgPreferences.getVelocity());
+    m_Velocity->setValue(m_velocity);
     ui.toolBarNotes->addWidget(m_Velocity);
     connect( m_sboxChannel, SIGNAL(valueChanged(int)),
              this, SLOT(slotOutChannel(int)) );
     connect( m_sboxOctave, SIGNAL(valueChanged(int)),
              this, SLOT(slotBaseOctave(int)) );
     connect( m_Velocity, SIGNAL(valueChanged(int)),
-             &dlgPreferences, SLOT(setVelocity(int)) );
+             this, SLOT(setVelocity(int)) );
     // Controllers tool bar
     ui.toolBarControllers->addWidget(new QLabel(tr(" Control: "), this));
     m_comboControl = new QComboBox(this);
@@ -207,7 +207,7 @@ void VPiano::initToolBars()
     ui.toolBarControllers->addWidget(new QLabel(tr(" Value: "), this));
     m_Control= new Knob(this);
     m_Control->setFixedSize(32, 32);
-    m_Control->setStyle(m_dialStyle);
+    m_Control->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
     m_Control->setMinimum(0);
     m_Control->setMaximum(127);
     m_Control->setValue(0);
@@ -261,25 +261,22 @@ void VPiano::readSettings()
     settings.endGroup();
 
     settings.beginGroup(QSTR_PREFERENCES);
-    int in_channel  = settings.value(QSTR_INCHANNEL,  0).toInt();
-    int out_channel = settings.value(QSTR_OUTCHANNEL, 0).toInt();
-    int velocity    = settings.value(QSTR_VELOCITY, 100).toInt();
-    int base_octave = settings.value(QSTR_BASEOCTAVE, 3).toInt();
+    m_channel = settings.value(QSTR_CHANNEL, 0).toInt();
+    m_velocity = settings.value(QSTR_VELOCITY, 100).toInt();
+    m_baseOctave = settings.value(QSTR_BASEOCTAVE, 3).toInt();
     int num_octaves = settings.value(QSTR_NUMOCTAVES, 5).toInt();
     QString insFileName = settings.value(QSTR_INSTRUMENTSDEFINITION).toString();
     QString insName = settings.value(QSTR_INSTRUMENTNAME).toString();
     QColor defColor = QApplication::palette().highlight().color();
     QColor keyColor = settings.value(QSTR_KEYPRESSEDCOLOR, defColor).value<QColor>();
     bool grabKb = settings.value(QSTR_GRABKB, false).toBool();
+    bool styledKnobs = settings.value(QSTR_STYLEDKNOBS, true).toBool();
     settings.endGroup();
 
-    dlgPreferences.setInChannel(in_channel);
-    dlgPreferences.setOutChannel(out_channel);
-    dlgPreferences.setVelocity(velocity);
-    dlgPreferences.setBaseOctave(base_octave);
     dlgPreferences.setNumOctaves(num_octaves);
     dlgPreferences.setKeyPressedColor(keyColor);
     dlgPreferences.setGrabKeyboard(grabKb);
+    dlgPreferences.setStyledKnobs(styledKnobs);
     if (!insFileName.isEmpty()) {
         dlgPreferences.setInstrumentsFileName(insFileName);
         if (!insName.isEmpty()) {
@@ -338,15 +335,17 @@ void VPiano::writeSettings()
     settings.endGroup();
 
     settings.beginGroup(QSTR_PREFERENCES);
-    settings.setValue(QSTR_INCHANNEL, dlgPreferences.getInChannel());
-    settings.setValue(QSTR_OUTCHANNEL, dlgPreferences.getOutChannel());
-    settings.setValue(QSTR_VELOCITY, dlgPreferences.getVelocity());
-    settings.setValue(QSTR_BASEOCTAVE, dlgPreferences.getBaseOctave());
+
+    settings.setValue(QSTR_CHANNEL, m_channel);
+    settings.setValue(QSTR_VELOCITY, m_velocity);
+    settings.setValue(QSTR_BASEOCTAVE, m_baseOctave);
+
     settings.setValue(QSTR_NUMOCTAVES, dlgPreferences.getNumOctaves());
     settings.setValue(QSTR_INSTRUMENTSDEFINITION, dlgPreferences.getInstrumentsFileName());
     settings.setValue(QSTR_INSTRUMENTNAME, dlgPreferences.getInstrumentName());
     settings.setValue(QSTR_KEYPRESSEDCOLOR, dlgPreferences.getKeyPressedColor());
     settings.setValue(QSTR_GRABKB, dlgPreferences.getGrabKeyboard());
+    settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences.getStyledKnobs());
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONNECTIONS);
@@ -434,8 +433,8 @@ void VPiano::noteOn(const int midiNote)
 {
     std::vector<unsigned char> message;
     if ((midiNote & MASK_SAFETY) == midiNote) {
-        unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
-        unsigned char vel = static_cast<unsigned char>(dlgPreferences.getVelocity());
+        unsigned char chan = static_cast<unsigned char>(m_channel);
+        unsigned char vel = static_cast<unsigned char>(m_velocity);
         // Note On: 0x90 + channel, note, vel
         message.push_back(STATUS_NOTEON + (chan & MASK_CHANNEL));
         message.push_back(midiNote & MASK_SAFETY);
@@ -448,8 +447,8 @@ void VPiano::noteOff(const int midiNote)
 {
     std::vector<unsigned char> message;
     if ((midiNote & MASK_SAFETY) == midiNote) {
-        unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
-        unsigned char vel = static_cast<unsigned char>(dlgPreferences.getVelocity());
+        unsigned char chan = static_cast<unsigned char>(m_channel);
+        unsigned char vel = static_cast<unsigned char>(m_velocity);
         // Note Off: 0x80 + channel, note, vel
         message.push_back(STATUS_NOTEOFF + (chan & MASK_CHANNEL));
         message.push_back(midiNote & MASK_SAFETY);
@@ -461,7 +460,7 @@ void VPiano::noteOff(const int midiNote)
 void VPiano::sendController(const int controller, const int value)
 {
     std::vector<unsigned char> message;
-    unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
+    unsigned char chan = static_cast<unsigned char>(m_channel);
     unsigned char ctl  = static_cast<unsigned char>(controller);
     unsigned char val  = static_cast<unsigned char>(value);
     // Controller: 0xB0 + channel, ctl, val
@@ -490,7 +489,7 @@ void VPiano::allNotesOff()
 void VPiano::programChange(const int program)
 {
     std::vector<unsigned char> message;
-    unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
+    unsigned char chan = static_cast<unsigned char>(m_channel);
     unsigned char pgm  = static_cast<unsigned char>(program);
     // Program: 0xC0 + channel, pgm
     message.push_back(STATUS_PROGRAM + (chan & MASK_CHANNEL));
@@ -524,7 +523,7 @@ void VPiano::bender(const int value)
 {
     std::vector<unsigned char> message;
     int v = value + BENDER_MID; // v >= 0, v <= 16384
-    unsigned char chan = static_cast<unsigned char>(dlgPreferences.getOutChannel());
+    unsigned char chan = static_cast<unsigned char>(m_channel);
     unsigned char lsb  = static_cast<unsigned char>(CALC_LSB(v));
     unsigned char msb  = static_cast<unsigned char>(CALC_MSB(v));
     // Program: 0xE0 + channel, lsb, msb
@@ -685,17 +684,14 @@ void VPiano::initControllers()
 void VPiano::applyPreferences()
 {
     ui.pianokeybd->allKeysOff();
-    if (ui.pianokeybd->baseOctave() != dlgPreferences.getBaseOctave()) {
-        ui.pianokeybd->setBaseOctave(dlgPreferences.getBaseOctave());
+
+    if (ui.pianokeybd->baseOctave() != m_baseOctave) {
+        ui.pianokeybd->setBaseOctave(m_baseOctave);
     }
     if (ui.pianokeybd->numOctaves() != dlgPreferences.getNumOctaves()) {
         ui.pianokeybd->setNumOctaves(dlgPreferences.getNumOctaves());
     }
     ui.pianokeybd->setKeyPressedColor(dlgPreferences.getKeyPressedColor());
-
-    m_sboxChannel->setValue(dlgPreferences.getOutChannel() + 1);
-    m_sboxOctave->setValue(dlgPreferences.getBaseOctave());
-    m_Velocity->setValue(dlgPreferences.getVelocity());
 
     m_ins = NULL;
     m_comboBank->clear();
@@ -716,6 +712,8 @@ void VPiano::applyPreferences()
             //qDebug() << "---- Bank[" << j.key() << "]=" << patch.name();
         }
     }
+
+    updateKnobs();
 }
 
 void VPiano::applyInitialSettings()
@@ -840,18 +838,18 @@ void VPiano::slotProgChanged(const int index)
 
 void VPiano::slotBaseOctave(const int octave)
 {
-    if (octave != dlgPreferences.getBaseOctave()) {
+    if (octave != m_baseOctave) {
         ui.pianokeybd->allKeysOff();
-        dlgPreferences.setBaseOctave(octave);
         ui.pianokeybd->setBaseOctave(octave);
+        m_baseOctave = octave;
     }
 }
 
 void VPiano::slotOutChannel(const int channel)
 {
     int c = channel - 1;
-    if (c != dlgPreferences.getOutChannel()) {
-        dlgPreferences.setOutChannel(c);
+    if (c != m_channel) {
+        m_channel = c;
     }
 }
 
@@ -901,4 +899,12 @@ void VPiano::slotOpenWebSite()
 {
     QUrl url(QSTR_VMPKURL);
     QDesktopServices::openUrl(url);
+}
+
+void VPiano::updateKnobs()
+{
+    QList<Knob *> allKnobs = findChildren<Knob *> ();
+    foreach(Knob* knob, allKnobs) {
+        knob->setStyle(dlgPreferences.getStyledKnobs() ? m_dialStyle : NULL);
+    }
 }

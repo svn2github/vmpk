@@ -27,12 +27,9 @@
 
 Preferences::Preferences(QWidget *parent)
     : QDialog(parent),
-    m_inChannel(0),
-    m_outChannel(0),
-    m_velocity(100),
-    m_baseOctave(4),
     m_numOctaves(5),
-    m_grabKb(false)
+    m_grabKb(false),
+    m_styledKnobs(true)
 {
     ui.setupUi( this );
     connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotButtonClicked(QAbstractButton*)));
@@ -50,24 +47,18 @@ void Preferences::slotButtonClicked(QAbstractButton *button)
 void Preferences::showEvent ( QShowEvent *event )
 {
     if (event->type() == QEvent::Show) {
-        ui.spinInChan->setValue( m_inChannel + 1);
-        ui.spinOutChan->setValue( m_outChannel + 1);
-        ui.spinVelocity->setValue( m_velocity );
-        ui.spinBaseOctave->setValue( m_baseOctave );
         ui.spinNumOctaves->setValue( m_numOctaves );
         ui.chkGrabKb->setChecked( m_grabKb );
+        ui.chkStyledKnobs->setChecked( m_styledKnobs );
     }
 }
 
 void Preferences::apply()
 {
-    m_inChannel = ui.spinInChan->value() - 1;
-    m_outChannel = ui.spinOutChan->value() - 1;
-    m_velocity = ui.spinVelocity->value();
-    m_baseOctave = ui.spinBaseOctave->value();
     m_numOctaves = ui.spinNumOctaves->value();
     m_keyPressedColor = QColor(ui.lblColorName->text());
     m_grabKb = ui.chkGrabKb->isChecked();
+    m_styledKnobs = ui.chkStyledKnobs->isChecked();
 }
 
 void Preferences::accept()

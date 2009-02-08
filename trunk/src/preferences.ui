@@ -6,115 +6,14 @@
     <x>0</x>
     <y>0</y>
     <width>329</width>
-    <height>334</height>
+    <height>219</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Preferences</string>
   </property>
-  <layout class="QGridLayout" >
+  <layout class="QGridLayout" name="gridLayout" >
    <item row="0" column="0" colspan="3" >
-    <widget class="QLabel" name="lblInChan" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text" >
-      <string>Input Channel</string>
-     </property>
-     <property name="buddy" >
-      <cstring>spinInChan</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3" >
-    <widget class="QSpinBox" name="spinInChan" >
-     <property name="minimum" >
-      <number>1</number>
-     </property>
-     <property name="maximum" >
-      <number>16</number>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="3" >
-    <widget class="QLabel" name="lblOutChan" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text" >
-      <string>Output Channel</string>
-     </property>
-     <property name="buddy" >
-      <cstring>spinOutChan</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="3" >
-    <widget class="QSpinBox" name="spinOutChan" >
-     <property name="minimum" >
-      <number>1</number>
-     </property>
-     <property name="maximum" >
-      <number>16</number>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="3" >
-    <widget class="QLabel" name="lblVelocity" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text" >
-      <string>Velocity</string>
-     </property>
-     <property name="buddy" >
-      <cstring>spinVelocity</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="3" >
-    <widget class="QSpinBox" name="spinVelocity" >
-     <property name="maximum" >
-      <number>127</number>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="3" >
-    <widget class="QLabel" name="lblBaseOctave" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text" >
-      <string>Base octave</string>
-     </property>
-     <property name="buddy" >
-      <cstring>spinBaseOctave</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="3" >
-    <widget class="QSpinBox" name="spinBaseOctave" >
-     <property name="minimum" >
-      <number>0</number>
-     </property>
-     <property name="maximum" >
-      <number>9</number>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="3" >
     <widget class="QLabel" name="lblNumOctaves" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
@@ -130,7 +29,7 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="3" >
+   <item row="0" column="3" >
     <widget class="QSpinBox" name="spinNumOctaves" >
      <property name="minimum" >
       <number>1</number>
@@ -140,21 +39,21 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0" colspan="4" >
+   <item row="1" column="0" colspan="4" >
     <widget class="QCheckBox" name="chkGrabKb" >
      <property name="text" >
       <string>Grab keyboard</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="0" >
+   <item row="2" column="0" >
     <widget class="QLabel" name="lblKeyPressColor" >
      <property name="text" >
       <string>Key pressed color</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1" >
+   <item row="2" column="1" >
     <widget class="QLabel" name="lblColorName" >
      <property name="frameShape" >
       <enum>QFrame::StyledPanel</enum>
@@ -164,21 +63,21 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="2" colspan="2" >
+   <item row="2" column="2" colspan="2" >
     <widget class="QPushButton" name="btnColor" >
      <property name="text" >
       <string>color...</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="0" >
+   <item row="3" column="0" >
     <widget class="QLabel" name="lblFileInstrument" >
      <property name="text" >
       <string>Instruments file</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="1" >
+   <item row="3" column="1" >
     <widget class="QLineEdit" name="txtFileInstrument" >
      <property name="minimumSize" >
       <size>
@@ -194,21 +93,21 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="2" colspan="2" >
+   <item row="3" column="2" colspan="2" >
     <widget class="QPushButton" name="btnInstrument" >
      <property name="text" >
       <string>load...</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="0" >
+   <item row="4" column="0" >
     <widget class="QLabel" name="lblInstrument" >
      <property name="text" >
       <string>Instrument</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="1" colspan="3" >
+   <item row="4" column="1" colspan="3" >
     <widget class="QComboBox" name="cboInstrument" >
      <property name="minimumSize" >
       <size>
@@ -218,10 +117,20 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="0" colspan="4" >
+   <item row="5" column="0" colspan="4" >
+    <widget class="QCheckBox" name="chkStyledKnobs" >
+     <property name="text" >
+      <string>Styled Knobs</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="4" >
     <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -229,10 +138,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11" />
  <tabstops>
-  <tabstop>spinInChan</tabstop>
-  <tabstop>spinOutChan</tabstop>
-  <tabstop>spinVelocity</tabstop>
-  <tabstop>spinBaseOctave</tabstop>
   <tabstop>spinNumOctaves</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
