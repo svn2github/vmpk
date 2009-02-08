@@ -61,9 +61,9 @@ SET(vmpk_SRCS
     pianoscene.h
     preferences.cpp
     preferences.h
-    rterror.h
-    rtmidi.cpp
-    rtmidi.h
+    RtError.h
+    RtMidi.cpp
+    RtMidi.h
     vpiano.cpp
     vpiano.h
 )
@@ -118,5 +118,5 @@ ENDIF(APPLE)
 
 INSTALL ( TARGETS vmpk
           RUNTIME DESTINATION bin 
-	    BUNDLE DESTINATION bin
+	      BUNDLE DESTINATION bin
           RESOURCE DESTINATION share/vmpk )

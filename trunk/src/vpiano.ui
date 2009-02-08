@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>268</height>
+    <width>638</width>
+    <height>228</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -14,6 +14,9 @@
   </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" >
+    <property name="margin" >
+     <number>0</number>
+    </property>
     <item row="0" column="0" >
      <widget class="PianoKeybd" name="pianokeybd" >
       <property name="numOctaves" >
@@ -28,8 +31,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>640</width>
-     <height>29</height>
+     <width>638</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >

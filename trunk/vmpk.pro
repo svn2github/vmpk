@@ -36,6 +36,7 @@ win32 {
 }
 linux* { 
     DEFINES += __LINUX_ALSASEQ__
+    DEFINES += AVOID_TIMESTAMPING
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa
     system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
@@ -65,8 +66,8 @@ HEADERS += src/kmapdialog.h \
     src/mididefs.h \
     src/instrument.h \
     src/midisetup.h \
-    src/rterror.h \
-    src/rtmidi.h \
+    src/RtError.h \
+    src/RtMidi.h \
     src/knob.h \
     src/pianokey.h \
     src/pianokeybd.h \
@@ -80,7 +81,7 @@ HEADERS += src/kmapdialog.h \
 SOURCES += src/kmapdialog.cpp \
     src/keyboardmap.cpp \
     src/midisetup.cpp \
-    src/rtmidi.cpp \
+    src/RtMidi.cpp \
     src/knob.cpp \
     src/pianokey.cpp \
     src/pianokeybd.cpp \

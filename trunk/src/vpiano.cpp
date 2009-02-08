@@ -33,7 +33,7 @@
 #include "mididefs.h"
 #include "knob.h"
 #include "classicstyle.h"
-#include "rtmidi.h"
+#include "RtMidi.h"
 #include "constants.h"
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
