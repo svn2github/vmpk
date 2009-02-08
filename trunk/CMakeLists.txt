@@ -15,7 +15,7 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 
 PROJECT(VMPK)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4.4)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 # Show full commands and messages. 
 # SET(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL)
