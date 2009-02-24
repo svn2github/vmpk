@@ -1,9 +1,9 @@
 /*
-    MIDI Virtual Piano Keyboard 
-    Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     For this file, the following copyright notice is also applicable:
-    Copyright (C) 2005-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+    Copyright (C) 2005-2009, rncbc aka Rui Nuno Capela. All rights reserved.
     See http://qsynth.sourceforge.net
 
     This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -167,7 +167,7 @@ void Knob::wheelEvent ( QWheelEvent *pWheelEvent )
 void Knob::setValue(int val)
 {
     QDial::setValue(val);
-    QString tip = QString::number(value()); 
+    QString tip = QString::number(value());
     setToolTip(tip);
     QToolTip::showText(QCursor::pos(), tip, this);
 }

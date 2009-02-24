@@ -1,6 +1,6 @@
 /*
-    MIDI Virtual Piano Keyboard 
-    Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -23,7 +23,7 @@
 #include "pianokey.h"
 #include <QGraphicsScene>
 
-//#define KeyboardMap QHash<int, int>  
+//#define KeyboardMap QHash<int, int>
 
 class PianoHandler
 {
@@ -36,13 +36,13 @@ public:
 class PianoScene : public QGraphicsScene
 {
     Q_OBJECT
-    
+
 public:
-    PianoScene ( const int baseOctave, 
+    PianoScene ( const int baseOctave,
                  const int numOctaves,
                  const QColor& keyPressedColor = QColor(),
                  QObject * parent = 0 );
-    
+
     QSize sizeHint() const;
     void setKeyboardMap( KeyboardMap* map ) { m_keybdMap = map; }
     KeyboardMap* getKeyboardMap() const { return m_keybdMap; }
@@ -50,7 +50,7 @@ public:
     void setPianoHandler(PianoHandler* handler) { m_handler = handler; }
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
     void setKeyPressedColor(const QColor& color);
-    int getMinNote() const { return m_minNote; } 
+    int getMinNote() const { return m_minNote; }
     void setMinNote(const int note);
     int getMaxNote() const { return m_maxNote; }
     void setMaxNote(const int note);
@@ -61,7 +61,7 @@ public:
     void setBaseOctave( const int base );
     int numOctaves() const { return m_numOctaves; }
     void allKeysOff();
-    
+
 signals:
     void noteOn(int n);
     void noteOff(int n);
@@ -82,7 +82,7 @@ protected:
 
 private:
     void hideOrShowKeys();
-    
+
     int m_baseOctave;
     int m_numOctaves;
     int m_minNote;

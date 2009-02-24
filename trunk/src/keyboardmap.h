@@ -1,6 +1,6 @@
 /*
-    MIDI Virtual Piano Keyboard 
-    Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -23,7 +23,7 @@
 #include <QIODevice>
 #include "constants.h"
 
-class KeyboardMap : public QHash<int, int>  
+class KeyboardMap : public QHash<int, int>
 {
     Q_DECLARE_TR_FUNCTIONS(KeyboardMap)
 public:
@@ -33,7 +33,7 @@ public:
     void initializeFromXML(QIODevice *dev);
 	void serializeToXML(QIODevice *dev);
 	const QString& getFileName() const { return m_fileName; }
-	
+
 private:
     void reportError( const QString filename, const QString title, const QString err );
     QString m_fileName;

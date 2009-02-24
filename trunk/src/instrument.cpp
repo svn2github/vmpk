@@ -1,10 +1,10 @@
 /*
-    MIDI Virtual Piano Keyboard 
-    Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     For this file, the following copyright notice is also applicable:
-    Copyright (C) 2005-2008, rncbc aka Rui Nuno Capela. All rights reserved.
-    See http://qtractor.sourceforge.net    
+    Copyright (C) 2005-2009, rncbc aka Rui Nuno Capela. All rights reserved.
+    See http://qtractor.sourceforge.net
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -97,14 +97,14 @@ void InstrumentList::clearAll (void)
 	m_files.clear();
 }
 
-	
+
 // Special list merge method.
 void InstrumentList::merge ( const InstrumentList& instruments )
 {
 	// Maybe its better not merging to itself.
 	if (this == &instruments)
 		return;
-	
+
 	// Names data lists merge...
 	mergeDataList(m_patches, instruments.patches());
 	mergeDataList(m_notes, instruments.notes());
@@ -170,7 +170,7 @@ bool InstrumentList::load ( const QString& sFilename )
 	QRegExp rxPatch   ("^Patch\\[([0-9]+|\\*)\\]=(.+)$");
 	QRegExp rxKey     ("^Key\\[([0-9]+|\\*),([0-9]+|\\*)\\]=(.+)$");
 	QRegExp rxDrum    ("^Drum\\[([0-9]+|\\*),([0-9]+|\\*)\\]=(0|1)$");
-	
+
 	const QString s0_127    = "0..127";
 	const QString s1_128    = "1..128";
 	const QString s0_16383  = "0..16383";

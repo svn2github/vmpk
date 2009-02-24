@@ -1,6 +1,6 @@
 /*
-    MIDI Virtual Piano Keyboard 
-    Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -27,7 +27,7 @@
 void KeyboardMap::loadFromXMLFile(const QString fileName)
 {
     QFile f(fileName);
-    if (f.open(QFile::ReadOnly | QFile::Text)) { 
+    if (f.open(QFile::ReadOnly | QFile::Text)) {
         initializeFromXML(&f);
         f.close();
         m_fileName = fileName;
@@ -46,7 +46,7 @@ void KeyboardMap::saveToXMLFile(const QString fileName)
         m_fileName = fileName;
     }
     if (f.error() != QFile::NoError) {
-        reportError(fileName, tr("Error saving a file"), f.errorString()); 
+        reportError(fileName, tr("Error saving a file"), f.errorString());
     }
 }
 
@@ -59,7 +59,7 @@ void KeyboardMap::initializeFromXML(QIODevice *dev)
         if (reader.isStartElement()) {
             if (reader.name() == "keyboardmap") {
                 reader.readNext();
-                while (reader.isWhitespace()) 
+                while (reader.isWhitespace())
                     reader.readNext();
                 while (reader.isStartElement()) {
                     if (reader.name() == "mapping") {
@@ -73,7 +73,7 @@ void KeyboardMap::initializeFromXML(QIODevice *dev)
                         }
                     }
                     reader.readNext();
-                    while (reader.isWhitespace() || reader.isEndElement()) 
+                    while (reader.isWhitespace() || reader.isEndElement())
                         reader.readNext();
                 }
             } else {
@@ -99,14 +99,14 @@ void KeyboardMap::serializeToXML(QIODevice *dev)
         QKeySequence ks(key);
         writer.writeEmptyElement("mapping");
         writer.writeAttribute("key", ks.toString(QKeySequence::PortableText));
-        writer.writeAttribute("note", QString::number(value(key))); 
+        writer.writeAttribute("note", QString::number(value(key)));
     }
     writer.writeEndElement();
     writer.writeEndDocument();
 }
 
-void KeyboardMap::reportError( const QString filename, 
-                               const QString title, 
+void KeyboardMap::reportError( const QString filename,
+                               const QString title,
                                const QString err )
 {
     QMessageBox::warning(0, title, tr("File: %1\n%2").arg(filename).arg(err));

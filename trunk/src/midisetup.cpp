@@ -1,6 +1,6 @@
 /*
-    MIDI Virtual Piano Keyboard 
-    Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -77,7 +77,7 @@ void MidiSetup::setCurrentInput(int index)
     if (index < 0)
         ui.comboInput->setCurrentIndex(index);
     else {
-        int i; 
+        int i;
         for (i = 0; i < ui.comboInput->count(); ++i) {
             if (index == ui.comboInput->itemData(i).toInt()) {
                 ui.comboInput->setCurrentIndex(i);
@@ -89,7 +89,7 @@ void MidiSetup::setCurrentInput(int index)
 
 void MidiSetup::setCurrentInput(const QString name)
 {
-    int i; 
+    int i;
     for (i = 0; i < ui.comboInput->count(); ++i) {
         if (name == ui.comboInput->itemText(i)) {
             ui.comboInput->setCurrentIndex(i);
@@ -104,7 +104,7 @@ void MidiSetup::setCurrentOutput(int index)
     if (index < 0)
         ui.comboOutput->setCurrentIndex(index);
     else {
-        int i; 
+        int i;
         for (i = 0; i < ui.comboOutput->count(); ++i) {
             if (index == ui.comboOutput->itemData(i).toInt()) {
                 ui.comboOutput->setCurrentIndex(i);
@@ -116,7 +116,7 @@ void MidiSetup::setCurrentOutput(int index)
 
 void MidiSetup::setCurrentOutput(const QString name)
 {
-    int i; 
+    int i;
     for (i = 0; i < ui.comboOutput->count(); ++i) {
         if (name == ui.comboOutput->itemText(i)) {
             ui.comboOutput->setCurrentIndex(i);
@@ -136,22 +136,22 @@ int MidiSetup::selectedInput()
     int idx = ui.comboInput->currentIndex();
     if (idx >= 0)
         return ui.comboInput->itemData(idx).toInt();
-    else 
-        return -1;    
+    else
+        return -1;
 }
 
 int MidiSetup::selectedOutput()
 {
-    int idx = ui.comboOutput->currentIndex();    
+    int idx = ui.comboOutput->currentIndex();
     if (idx >= 0)
         return ui.comboOutput->itemData(idx).toInt();
-    else 
-        return -1;    
+    else
+        return -1;
 }
 
 QString MidiSetup::selectedInputName() const
 {
-    int idx = ui.comboInput->currentIndex();    
+    int idx = ui.comboInput->currentIndex();
     if (idx >= 0)
         return ui.comboInput->itemText(idx);
     else
@@ -160,7 +160,7 @@ QString MidiSetup::selectedInputName() const
 
 QString MidiSetup::selectedOutputName() const
 {
-    int idx = ui.comboOutput->currentIndex();    
+    int idx = ui.comboOutput->currentIndex();
     if (idx >= 0)
         return ui.comboOutput->itemText(idx);
     else

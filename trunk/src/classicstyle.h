@@ -1,6 +1,6 @@
 /*
-    MIDI Virtual Piano Keyboard 
-    Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     Based on an original design by Thorsten Wilms.
     Implemented as a widget for the Rosegarden MIDI and audio sequencer
@@ -8,11 +8,11 @@
     Extracted into a standalone Qt3 widget by Pedro Lopez-Cabanillas
     and adapted for use in QSynth.
     Ported to Qt4 by Chris Cannam.
-    Adapted as a QStyle by Pedro Lopez-Cabanillas.   
-  
+    Adapted as a QStyle by Pedro Lopez-Cabanillas.
+
     For this file, the following copyright notices are also applicable:
-    This file copyright 2003-2006 Chris Cannam, 
-    copyright 2005,2008 Pedro Lopez-Cabanillas, 
+    This file copyright 2003-2006 Chris Cannam,
+    copyright 2005,2008 Pedro Lopez-Cabanillas,
     copyright 2006 Queen Mary, University of London.
 
     This program is free software; you can redistribute it and/or modify
@@ -25,7 +25,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 

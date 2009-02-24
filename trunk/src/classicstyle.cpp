@@ -1,6 +1,6 @@
 /*
-    MIDI Virtual Piano Keyboard 
-    Copyright (C) 2008, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     Based on an original design by Thorsten Wilms.
     Implemented as a widget for the Rosegarden MIDI and audio sequencer
@@ -8,11 +8,11 @@
     Extracted into a standalone Qt3 widget by Pedro Lopez-Cabanillas
     and adapted for use in QSynth.
     Ported to Qt4 by Chris Cannam.
-    Adapted as a QStyle by Pedro Lopez-Cabanillas.   
-  
+    Adapted as a QStyle by Pedro Lopez-Cabanillas.
+
     For this file, the following copyright notices are also applicable:
-    This file copyright 2003-2006 Chris Cannam, 
-    copyright 2005,2008 Pedro Lopez-Cabanillas, 
+    This file copyright 2003-2006 Chris Cannam,
+    copyright 2005,2008 Pedro Lopez-Cabanillas,
     copyright 2006 Queen Mary, University of London.
 
     This program is free software; you can redistribute it and/or modify
@@ -25,7 +25,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -56,18 +56,18 @@ static void drawTick(QPainter *p, float angle, int size, bool internal)
 	}
 }
 
-void 
+void
 ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *opt, QPainter *p, const QWidget *widget) const
 {
 	if (cc != QStyle::CC_Dial) {
 		QCommonStyle::drawComplexControl(cc, opt, p, widget);
 		return;
 	}
-	
-	const QStyleOptionSlider *dial = qstyleoption_cast<const QStyleOptionSlider *>(opt); 
+
+	const QStyleOptionSlider *dial = qstyleoption_cast<const QStyleOptionSlider *>(opt);
 	if (dial == NULL)
 		return;
-	
+
     float angle = DIAL_MIN + (DIAL_RANGE * (float(dial->sliderValue - dial->minimum) /
                    (float(dial->maximum - dial->minimum))));
 	int degrees = int(angle * 180.0 / M_PI);
@@ -78,9 +78,9 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     int width = size * scale;
     int indent = (int)(width * 0.15 + 1);
 
-	QPalette pal = opt->palette;    
+	QPalette pal = opt->palette;
     QColor knobColor = pal.mid().color(); //pal.background().color();
-    QColor meterColor = (dial->state & State_Enabled) ? pal.highlight().color() : pal.mid().color(); 
+    QColor meterColor = (dial->state & State_Enabled) ? pal.highlight().color() : pal.mid().color();
     QPen pen;
     QColor c;
 
@@ -94,11 +94,11 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     pen.setWidth(scale * 2);
     pen.setCapStyle(Qt::FlatCap);
     p->setPen(pen);
-    
+
     QRadialGradient gradient(size/2, size/2, size-indent, size/2-indent, size/2-indent);
 	gradient.setColorAt(0, knobColor.light());
 	gradient.setColorAt(1, knobColor.dark());
-	p->setBrush(gradient);    
+	p->setBrush(gradient);
     p->drawEllipse(indent, indent, width-2*indent, width-2*indent);
 
     // The bright metering bit...
@@ -188,5 +188,5 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     p->drawLine(int(x0), int(y0), int(x), int(y));
 
 	// done
-	p->restore();	
+	p->restore();
 }
