@@ -7,7 +7,7 @@ rm -f  CPackSourceConfig.cmake
 rm -f  install_manifest.txt
 rm -f  vmpk.spec
 rm -f  progress.make
-rm -f  Makefile
+rm -f  Makefile*
 rm -f  Info.plist
 rm -f  .DS_Store
 rm -f  translations/*.qm
