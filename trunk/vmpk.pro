@@ -16,7 +16,7 @@
 
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.2.4
+VERSION = 0.2.5cvs
 DESTDIR = build
 OBJECTS_DIR = build
 UI_DIR = build
