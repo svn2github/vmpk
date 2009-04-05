@@ -35,7 +35,7 @@ SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
 SET (VERSION_MAJOR "0")
 SET (VERSION_MINOR "2")
 SET (VERSION_PATCH "4")
-SET (VERSION_SUFFIX "cvs")
+SET (VERSION_SUFFIX "")
 SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX})
 
 MESSAGE(STATUS "vmpk ${VERSION} prefix: ${CMAKE_INSTALL_PREFIX}")
@@ -124,11 +124,8 @@ IF(${CMAKE_SYSTEM} MATCHES "Windows")
     LINK_LIBRARIES(winmm)
 ENDIF(${CMAKE_SYSTEM} MATCHES "Windows")
 
-FIND_PACKAGE(TranslationSupport)
-
 ADD_SUBDIRECTORY(src build)
 ADD_SUBDIRECTORY(translations build/translations)
-
 CONFIGURE_FILE(vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
 
 # uninstall custom target
@@ -140,7 +137,6 @@ CONFIGURE_FILE(
 ADD_CUSTOM_TARGET ( uninstall
     "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
-# Custom targets
 IF (UNIX)
     ADD_CUSTOM_TARGET ( distclean
         COMMAND rm -f  CMakeCache.txt
@@ -173,40 +169,72 @@ IF (UNIX)
     )
 ENDIF (UNIX)
 
-INSTALL ( FILES
-    AUTHORS
-    ChangeLog
-    COPYING
-    NEWS
-    README
-    TODO
-DESTINATION 
-    share/doc/packages/vmpk
-)
+IF (UNIX AND NOT APPLE)
+    INSTALL ( FILES
+        AUTHORS
+        ChangeLog
+        COPYING
+        NEWS
+        README
+        TODO
+    DESTINATION 
+        share/doc/packages/vmpk
+    )
+    
+    INSTALL ( FILES
+        data/azerty.xml
+        data/vkeybd-default.xml
+        data/it-qwerty.xml
+        data/german.xml
+        data/gmgsxg.ins
+        data/spanish.xml
+        data/help.html
+    DESTINATION 
+        share/vmpk 
+    )
+    
+    INSTALL ( FILES 
+        data/vmpk_16x16.png 
+        data/vmpk_32x32.png 
+        data/vmpk_48x48.png 
+        data/vmpk_64x64.png 
+    DESTINATION 
+        share/pixmaps 
+    )
+    
+    INSTALL ( FILES 
+        vmpk.desktop
+    DESTINATION 
+        share/applications
+    )
+ENDIF (UNIX AND NOT APPLE)
 
-INSTALL ( FILES
-    data/azerty.xml
-    data/vkeybd-default.xml
-    data/it-qwerty.xml
-    data/german.xml
-    data/gmgsxg.ins
-    data/spanish.xml
-    data/help.html
-DESTINATION 
-    share/vmpk 
-)
+IF (WIN32)
+    INCLUDE (InstallRequiredSystemLibraries)
+    SET ( QTLIBLIST QtCore QtGui QtXml )
+    GET_FILENAME_COMPONENT(QT_DLL_PATH_tmp ${QT_QMAKE_EXECUTABLE} PATH)
+    FOREACH(qtlib ${QTLIBLIST})
+        INSTALL ( FILES ${QT_DLL_PATH_tmp}/${qtlib}4.dll
+                  DESTINATION . )
+    ENDFOREACH(qtlib)
+    INSTALL ( FILES ${QT_DLL_PATH_tmp}/mingwm10.dll
+              DESTINATION . )
+    INSTALL ( FILES
+        data/azerty.xml
+        data/vkeybd-default.xml
+        data/it-qwerty.xml
+        data/german.xml
+        data/gmgsxg.ins
+        data/spanish.xml
+        data/help.html
+    DESTINATION . )
+ENDIF (WIN32)
 
-INSTALL ( FILES 
-    data/vmpk_16x16.png 
-    data/vmpk_32x32.png 
-    data/vmpk_48x48.png 
-    data/vmpk_64x64.png 
-DESTINATION 
-    share/pixmaps 
-)
-
-INSTALL ( FILES 
-    vmpk.desktop
-DESTINATION 
-    share/applications
-)
+IF (APPLE)
+    SET(target "vmpk")
+    CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/cmake_admin/CompleteBundle.cmake.in"
+      "${CMAKE_CURRENT_BINARY_DIR}/build/CompleteBundle.cmake" @ONLY IMMEDIATE)
+    CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/cmake_admin/CreateBundle.sh.in"
+      "${CMAKE_CURRENT_BINARY_DIR}/build/CreateBundle.sh" @ONLY IMMEDIATE)
+    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/build/CompleteBundle.cmake")
+ENDIF (APPLE)

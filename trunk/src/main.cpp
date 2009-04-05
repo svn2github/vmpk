@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_DARWIN
         QApplication::applicationDirPath() + "/../Resources/";
 #endif
-    qDebug() << localeDirectory;
+    //qDebug() << localeDirectory;
     QTranslator tr_q, tr_p;
     QString loc_q = QSTR_QTPX + QLocale::system().name();
     QString loc_p = QSTR_VMPKPX + QLocale::system().name();

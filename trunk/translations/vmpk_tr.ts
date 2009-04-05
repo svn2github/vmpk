@@ -37,26 +37,26 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Virtual MIDI Piano Keyboard&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../src/about.ui" line="101"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Copyright © 2008, &lt;/span&gt;&lt;a href=&quot;mailto:plcl@users.sf.net?subject=VMPK&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Pedro Lopez-Cabanillas &amp;lt;plcl@users.sf.net&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;The following copyright notice is also applicable:&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;This program contains &lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2007 Gary P. Scavone&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
-        <location filename="../src/about.ui" line="132"/>
+        <location filename="../src/about.ui" line="138"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://vmpk.sourceforge.net&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://vmpk.sourceforge.net&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <location filename="../src/about.ui" line="107"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Copyright © 2008-2009, &lt;/span&gt;&lt;a href=&quot;mailto:plcl@users.sf.net?subject=VMPK&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Pedro Lopez-Cabanillas &amp;lt;plcl@users.sf.net&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The following copyright notice is also applicable:&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This program contains &lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2007 Gary P. Scavone&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -769,12 +769,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../src/preferences.cpp" line="81"/>
+        <location filename="../src/preferences.cpp" line="73"/>
         <source>Open instruments definition</source>
         <translation>Enstrüman tanımlamalarını aç</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="83"/>
+        <location filename="../src/preferences.cpp" line="75"/>
         <source>Instrument definitions (*.ins)</source>
         <translation>Enstrüman tanımlaması (*.ins)</translation>
     </message>
@@ -789,62 +789,67 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="25"/>
         <source>Input Channel</source>
-        <translation>Girdi Kanalı</translation>
+        <translation type="obsolete">Girdi Kanalı</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="51"/>
         <source>Output Channel</source>
-        <translation>Çıktı Kanalı</translation>
+        <translation type="obsolete">Çıktı Kanalı</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="77"/>
         <source>Velocity</source>
-        <translation>Hız</translation>
+        <translation type="obsolete">Hız</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="100"/>
         <source>Base octave</source>
-        <translation>Temel Oktav</translation>
+        <translation type="obsolete">Temel Oktav</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="126"/>
+        <location filename="../src/preferences.ui" line="25"/>
         <source>Number of octaves</source>
         <translation>Oktav Sayısı</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="153"/>
+        <location filename="../src/preferences.ui" line="52"/>
         <source>Key pressed color</source>
         <translation>Tuş basılma rengi</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="170"/>
+        <location filename="../src/preferences.ui" line="69"/>
         <source>color...</source>
         <translation>renk...</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="177"/>
+        <location filename="../src/preferences.ui" line="76"/>
         <source>Instruments file</source>
         <translation>Enstrüman dosyası</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="190"/>
+        <location filename="../src/preferences.ui" line="89"/>
         <source>default</source>
         <translation>öntanımlı</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="200"/>
+        <location filename="../src/preferences.ui" line="99"/>
         <source>load...</source>
         <translation>yükle...</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="207"/>
+        <location filename="../src/preferences.ui" line="106"/>
         <source>Instrument</source>
         <translation>Enstrüman</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="146"/>
+        <location filename="../src/preferences.ui" line="45"/>
         <source>Grab keyboard</source>
         <translation>Klavyeyi yakala</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="123"/>
+        <source>Styled Knobs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -868,72 +873,72 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="138"/>
+        <location filename="../src/vpiano.cpp" line="140"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="139"/>
+        <location filename="../src/vpiano.cpp" line="141"/>
         <source>No MIDI output ports available. Aborting</source>
         <translation>Hiç MIDI çıktı portu yok. Çıkılıyor</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="161"/>
+        <location filename="../src/vpiano.cpp" line="163"/>
         <source>Error. Aborting</source>
         <translation>Hata. Çıkılıyor</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="172"/>
+        <location filename="../src/vpiano.cpp" line="174"/>
         <source> Channel: </source>
         <translation>Kanal:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="178"/>
+        <location filename="../src/vpiano.cpp" line="180"/>
         <source> Base Octave: </source>
         <translation>Temel Oktav:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="184"/>
+        <location filename="../src/vpiano.cpp" line="186"/>
         <source> Velocity: </source>
         <translation>Hız:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="201"/>
+        <location filename="../src/vpiano.cpp" line="203"/>
         <source> Control: </source>
         <translation>Denetle: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="205"/>
+        <location filename="../src/vpiano.cpp" line="207"/>
         <source> Value: </source>
         <translation>Değer:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="218"/>
+        <location filename="../src/vpiano.cpp" line="220"/>
         <source> Bender: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="227"/>
+        <location filename="../src/vpiano.cpp" line="229"/>
         <source> Bank: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="231"/>
+        <location filename="../src/vpiano.cpp" line="233"/>
         <source> Program: </source>
         <translation> Program:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="768"/>
+        <location filename="../src/vpiano.cpp" line="782"/>
         <source>Open keyboard map definition</source>
         <translation>Klavye düzeni tanımlaması aç</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="783"/>
+        <location filename="../src/vpiano.cpp" line="797"/>
         <source>Keyboard map (*.xml)</source>
         <translation>Klavye düzeni (*.xml)</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="781"/>
+        <location filename="../src/vpiano.cpp" line="795"/>
         <source>Save keyboard map definition</source>
         <translation>Klavye düzeni tanımlamasını kaydet</translation>
     </message>
@@ -943,184 +948,204 @@ p, li { white-space: pre-wrap; }
         <translation>Sanal Piyano Klavyesi</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="37"/>
+        <location filename="../src/vpiano.ui" line="40"/>
         <source>&amp;File</source>
         <translation>&amp;Dosya</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="43"/>
+        <location filename="../src/vpiano.ui" line="46"/>
         <source>&amp;Edit</source>
         <translation>&amp;Düzen</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="47"/>
+        <location filename="../src/vpiano.ui" line="50"/>
         <source>Keyboard map</source>
         <translation>Klavye düzeni</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="59"/>
+        <location filename="../src/vpiano.ui" line="62"/>
         <source>&amp;Help</source>
         <translation>&amp;Yardım</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="66"/>
+        <location filename="../src/vpiano.ui" line="72"/>
         <source>&amp;View</source>
         <translation>&amp;Görünüm</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="216"/>
+        <location filename="../src/vpiano.ui" line="222"/>
         <source>&amp;Notes</source>
         <translation>&amp;Notalar</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="227"/>
+        <location filename="../src/vpiano.ui" line="233"/>
         <source>&amp;Controllers</source>
         <translation>&amp;Denetleyiciler</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="238"/>
+        <location filename="../src/vpiano.ui" line="244"/>
         <source>Pitch &amp;Bender</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="249"/>
+        <location filename="../src/vpiano.ui" line="255"/>
         <source>&amp;Programs</source>
         <translation>&amp;Programlar</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="173"/>
+        <location filename="../src/vpiano.ui" line="179"/>
         <source>&amp;Quit</source>
         <translation>&amp;Çık</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="176"/>
+        <location filename="../src/vpiano.ui" line="182"/>
         <source>Exit the program</source>
         <translation>Uygulamadan çık</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="181"/>
+        <location filename="../src/vpiano.ui" line="187"/>
         <source>&amp;Preferences</source>
         <translation>&amp;Tercihler</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="184"/>
+        <location filename="../src/vpiano.ui" line="190"/>
         <source>Edit the program settings</source>
         <translation>Uygulamala ayarlarını düzenle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="189"/>
+        <location filename="../src/vpiano.ui" line="195"/>
         <source>&amp;Connections</source>
         <translation>&amp;Bağlantılar</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="192"/>
+        <location filename="../src/vpiano.ui" line="198"/>
         <source>Edit the MIDI connections</source>
         <translation>MIDI bağlantılarını düzenle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="197"/>
+        <location filename="../src/vpiano.ui" line="203"/>
         <source>&amp;About</source>
         <translation>&amp;Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="200"/>
+        <location filename="../src/vpiano.ui" line="206"/>
         <source>Show the About box</source>
         <translation>Hakkında Penceresini Göster</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="205"/>
+        <location filename="../src/vpiano.ui" line="211"/>
         <source>About Q&amp;t</source>
         <translation>Q&amp;t Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="208"/>
+        <location filename="../src/vpiano.ui" line="214"/>
         <source>Show the Qt about box</source>
         <translation>Qt Hakkında Penceresini Göster</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="219"/>
+        <location filename="../src/vpiano.ui" line="225"/>
         <source>Show or hide the Notes toolbar</source>
         <translation>Nota araç çubuğunu göster veya gizle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="230"/>
+        <location filename="../src/vpiano.ui" line="236"/>
         <source>Show or hide the Controller toolbar</source>
         <translation>Denetleyici araç çubuğunu göster veya gizle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="241"/>
+        <location filename="../src/vpiano.ui" line="247"/>
         <source>Show or hide the Pitch Bender toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="252"/>
+        <location filename="../src/vpiano.ui" line="258"/>
         <source>Show or hide the Programs toolbar</source>
         <translation>Programlar araç çubuğunu göster veya gizle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="263"/>
+        <location filename="../src/vpiano.ui" line="269"/>
         <source>&amp;Status Bar</source>
         <translation>&amp;Durum Çubuğu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="268"/>
+        <location filename="../src/vpiano.ui" line="274"/>
         <source>Panic</source>
         <translation>Panik</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="271"/>
+        <location filename="../src/vpiano.ui" line="277"/>
         <source>Stops all active notes</source>
         <translation>Tüm etkin notaları durdur</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="276"/>
+        <location filename="../src/vpiano.ui" line="282"/>
         <source>Reset All</source>
         <translation>Tümünü Sıfırla</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="279"/>
+        <location filename="../src/vpiano.ui" line="285"/>
         <source>Resets all the controllers</source>
         <translation>Tüm denetleyicileri sıfırla</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="284"/>
+        <location filename="../src/vpiano.ui" line="290"/>
         <source>Reset</source>
         <translation>Sıfırla</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="287"/>
+        <location filename="../src/vpiano.ui" line="293"/>
         <source>Resets the Bender value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="292"/>
+        <location filename="../src/vpiano.ui" line="298"/>
         <source>Load...</source>
         <translation>Yükle...</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="295"/>
+        <location filename="../src/vpiano.ui" line="301"/>
         <source>Load another keyboard layout</source>
         <translation>Başka bir klavye düzeni yükle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="300"/>
+        <location filename="../src/vpiano.ui" line="306"/>
         <source>Save...</source>
         <translation>Kaydet...</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="303"/>
+        <location filename="../src/vpiano.ui" line="309"/>
         <source>Save the current keyboard layout</source>
         <translation>Geçerli klavye düzenini kaydet</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="308"/>
+        <location filename="../src/vpiano.ui" line="314"/>
         <source>Edit...</source>
         <translation>Düzenle...</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="311"/>
+        <location filename="../src/vpiano.ui" line="317"/>
         <source>Edit the current keyboard layout</source>
         <translation>Geçerli klavye düzenini düzenle</translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.ui" line="322"/>
+        <source>&amp;Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.ui" line="325"/>
+        <source>Open the index of the help document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.ui" line="330"/>
+        <source>VMPK &amp;Web site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.ui" line="333"/>
+        <source>Open the VMPK web site address using a web browser</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

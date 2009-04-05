@@ -70,18 +70,6 @@ SET(vmpk_SRCS
 
 QT4_ADD_RESOURCES(vmpk_SRCS ../data/vmpk.qrc)
 
-IF(WIN32)
-    ADD_WINDRES_OBJS(vmpk_SRCS vpianoico.rc)
-ENDIF(WIN32)
-
-IF(APPLE)
-   SET(MACOSX_BUNDLE_INFO_STRING "Virtual MIDI Piano Keyboard" )
-   SET(MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION} )
-   SET(MACOSX_BUNDLE_ICON_FILE "vmpk.icns" )
-   SET(MACOSX_BUNDLE_GUI_IDENTIFIER "net.sourceforge" )
-   SET(MACOSX_BUNDLE_BUNDLE_NAME "vmpk" )
-ENDIF(APPLE)
-
 SET(vmpk_qtobject_SRCS
     about.h
     kmapdialog.h
@@ -95,28 +83,44 @@ SET(vmpk_qtobject_SRCS
 
 QT4_WRAP_CPP(vmpk_moc_SRCS ${vmpk_qtobject_SRCS})
 
-SET(vmpk_RESOURCES
-    ../data/vmpk.icns
-    ../data/azerty.xml
-    ../data/german.xml
-    ../data/spanish.xml
-    ../data/it-qwerty.xml
-    ../data/vkeybd-default.xml
-    ../data/gmgsxg.ins
-)
+IF (UNIX AND NOT APPLE)
+    ADD_EXECUTABLE ( vmpk
+        ${vmpk_ui_SRCS}
+        ${vmpk_moc_SRCS}
+        ${vmpk_SRCS} )
+    INSTALL ( TARGETS vmpk
+              RUNTIME DESTINATION bin )
+ENDIF (UNIX AND NOT APPLE)
 
-ADD_EXECUTABLE ( vmpk WIN32 MACOSX_BUNDLE
-    ${vmpk_ui_SRCS}
-    ${vmpk_moc_SRCS}
-    ${vmpk_SRCS}
-    ${vmpk_RESOURCES}
-)
+IF (WIN32)
+    ADD_WINDRES_OBJS(vmpk_SRCS vpianoico.rc)
+    ADD_EXECUTABLE ( vmpk WIN32
+        ${vmpk_ui_SRCS}
+        ${vmpk_moc_SRCS}
+        ${vmpk_SRCS} )
+    INSTALL ( TARGETS vmpk
+              RUNTIME DESTINATION . )
+ENDIF (WIN32)
 
-IF(APPLE)
-    SET_TARGET_PROPERTIES ( vmpk PROPERTIES RESOURCE ${vmpk_RESOURCES} )
-ENDIF(APPLE)
-
-INSTALL ( TARGETS vmpk
-          RUNTIME DESTINATION bin 
-	      BUNDLE DESTINATION bin
-          RESOURCE DESTINATION share/vmpk )
+IF (APPLE)
+    SET(MACOSX_BUNDLE_INFO_STRING "Virtual MIDI Piano Keyboard" )
+    SET(MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION} )
+    SET(MACOSX_BUNDLE_ICON_FILE "vmpk.icns" )
+    SET(MACOSX_BUNDLE_GUI_IDENTIFIER "net.sourceforge" )
+    SET(MACOSX_BUNDLE_BUNDLE_NAME "vmpk" )
+    SET(vmpk_RSC ../data/vmpk.icns
+		 ../data/help.html
+		 ../data/gmgsxg.ins
+    		 ../data/spanish.xml
+    		 ../data/german.xml
+    		 ../data/azerty.xml
+    		 ../data/it-qwerty.xml
+    		 ../data/vkeybd-default.xml)
+    SET_SOURCE_FILES_PROPERTIES(${vmpk_RSC} PROPERTIES
+                                MACOSX_PACKAGE_LOCATION Resources)
+    ADD_EXECUTABLE ( vmpk MACOSX_BUNDLE
+        ${vmpk_ui_SRCS}
+        ${vmpk_moc_SRCS}
+        ${vmpk_SRCS}
+        ${vmpk_RSC} )
+ENDIF (APPLE)

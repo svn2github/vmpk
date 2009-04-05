@@ -16,7 +16,7 @@
 
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.2.4cvs
+VERSION = 0.2.4
 DESTDIR = build
 OBJECTS_DIR = build
 UI_DIR = build
@@ -42,9 +42,20 @@ linux* {
     system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 macx {
-    CONFIG += x86 ppc 
+    CONFIG += x86 ppc
     ICON = data/vmpk.icns
     DEFINES += __MACOSX_CORE__
+    BUNDLE_RES.files = data/help.html \
+        data/gmgsxg.ins \
+        data/spanish.xml \
+        data/german.xml \
+        data/azerty.xml \
+        data/it-qwerty.xml \
+        data/vkeybd-default.xml \
+        translations/vmpk_es.qm \
+        translations/vmpk_tr.qm
+    BUNDLE_RES.path = Contents/Resources
+    QMAKE_BUNDLE_DATA += BUNDLE_RES
     LIBS += -framework CoreMidi -framework CoreAudio -framework CoreFoundation
     system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }

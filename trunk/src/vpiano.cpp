@@ -763,7 +763,7 @@ void VPiano::slotPreferences()
 QString VPiano::dataDirectory()
 {
 #ifdef Q_OS_WIN32
-    return QApplication::applicationDirPath();
+    return QApplication::applicationDirPath() + "/";
 #endif
 #ifdef Q_OS_LINUX
     return QApplication::applicationDirPath() + "/../share/vmpk/";
