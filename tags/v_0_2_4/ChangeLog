@@ -1,0 +1,79 @@
+2009-02-08
+    * merged RtMIDI 1.0.8
+    * overhauled preferences: removed channels, velocity, base octave 
+
+2009-01-18
+    * implemented RFE #2488065 - online help
+    * applied patch #2490414 from Serdar Soytetir: Turkish translation
+    * build app bundle in Mac OSX 
+
+2008-12-03    
+    * version string = 0.2.4cvs
+    * better about dialog
+    * thru function: Send every incoming event to the output port, do not 
+      modify incoming channels. Process inside MIDI callback for better 
+      performance.
+
+2008-11-30 0.2.3
+    * fix for bug #2364787 Rosegarden renders vmpk input unusable
+    * optimization for Linux: do not create an ALSA queue
+
+2008-10-19 0.2.2
+    * true fix for RtMIDI bug #2158014 Crash in windows
+    * Spanish translation updated
+
+2008-10-14
+    * fix for bug: #2164586 segmentation fault at startup
+
+2008-10-13
+    * version string changed
+
+2008-10-12
+    * check for IO errors (keyboard map and instruments files)
+    * fix for bug: #2162189 No warning message despite keymap not saved 
+
+2008-10-11 0.2.1
+    * fix for bug #2143187 Documentation needed
+
+2008-10-10
+    * workaround for bug #2158014 Crash in windows
+
+2008-10-03
+    * fix for bug: #2142335 Keys played beyond the upper MIDI note limits
+    * fix for bug: #2142321 the reset all button
+
+2008-09-28
+    * grab keyboard: workaround for broken WMs, now this feature is optional
+    * fix generic Qt translations 
+
+2008-09-26 0.2.0
+    * implemented RFE: #2106023 MIDI thru
+
+2008-09-25
+    * implemented RFE: #2106026 store connection names in settings
+
+2008-09-21
+    * fix for bug: #2116713 - QJackCtl input port is shown for connections
+    * implemented RFE: #2106035 controllers state remembered
+    * implemented RFE: #2106031 settings persistence: controllers/bank/program
+
+2008-09-14
+    * implemented RFE: #2106015 translation (Qt Linguist) support
+  
+2008-09-13
+    * implemented RFE: #2107732 mouse handling
+    * implemented RFE: #2106021 let the user to choose a custom highligh color
+    * reorganisations    
+
+2008-09-11
+    * new icon, by Theresa Knott
+    * fix for bug: #2105246 Channel numbers starting from 1 instead of 0
+    * better About dialog
+    * toolbars: workaround for strange Qt4.4 behavior when restoring the main 
+      window state.
+ 
+2008-09-05 0.1.1 
+    * bugfixes and optimizations
+
+2008-08-31 0.1.0 
+    * first public release
