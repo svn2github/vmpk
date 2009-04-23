@@ -142,11 +142,13 @@ void VPiano::initMidi()
             qApp->quit();
         }
         m_midiin = new RtMidiIn(QSTR_VMPKINPUT.toStdString());
+#if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__)
         int nInPorts = m_midiin->getPortCount();
         if (nInPorts == 0) {
             delete m_midiin;
             m_midiin = NULL;
         }
+#endif
 #if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)
         m_midiout->openVirtualPort(QSTR_VMPKOUTPUT.toStdString());
         if (m_midiin != NULL)
@@ -292,6 +294,9 @@ void VPiano::readSettings()
     QString in_port = settings.value(QSTR_INPORT).toString();
     QString out_port = settings.value(QSTR_OUTPORT).toString();
     settings.endGroup();
+#if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)
+    inEnabled = true;
+#endif
 
     if (m_midiin == NULL) {
         dlgMidiSetup.inputNotAvailable();
@@ -589,7 +594,9 @@ void VPiano::refreshConnections()
             dlgMidiSetup.inputNotAvailable();
             dlgMidiSetup.setInputEnabled(false);
         } else {
+#if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__)
             dlgMidiSetup.setInputEnabled(m_currentIn != -1);
+#endif
             nInPorts = m_midiin->getPortCount();
             for ( i = 0; i < nInPorts; i++ ) {
                 QString name = QString::fromStdString(m_midiin->getPortName(i));

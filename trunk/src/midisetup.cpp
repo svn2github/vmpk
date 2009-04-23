@@ -23,6 +23,9 @@ MidiSetup::MidiSetup()
 {
     ui.setupUi(this);
     connect(ui.chkEnableInput, SIGNAL(toggled(bool)), SLOT(toggledInput(bool)));
+#if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)
+    ui.chkEnableInput->setEnabled(false);
+#endif
 }
 
 void MidiSetup::toggledInput(bool state)
