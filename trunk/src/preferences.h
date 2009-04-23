@@ -33,6 +33,7 @@ public:
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
     bool getGrabKeyboard() const { return m_grabKb; }
     bool getStyledKnobs() const { return m_styledKnobs; }
+    bool getAlwaysOnTop() const { return m_alwaysOnTop; }
     void setInstrumentsFileName( const QString fileName );
     QString getInstrumentsFileName();
     void setInstrumentName( const QString name );
@@ -44,6 +45,7 @@ public slots:
     void setNumOctaves(int value) { m_numOctaves = value; }
     void setGrabKeyboard(bool value) { m_grabKb = value; }
     void setStyledKnobs(bool value) { m_styledKnobs = value; }
+    void setAlwaysOnTop(bool value) { m_alwaysOnTop = value; }
     void setKeyPressedColor(QColor value);
     void slotButtonClicked(QAbstractButton *button);
     void slotOpenInstrumentFile();
@@ -60,6 +62,7 @@ private:
     int m_numOctaves;
     bool m_grabKb;
     bool m_styledKnobs;
+    bool m_alwaysOnTop;
     QColor m_keyPressedColor;
 };
 

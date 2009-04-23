@@ -29,7 +29,8 @@ Preferences::Preferences(QWidget *parent)
     : QDialog(parent),
     m_numOctaves(5),
     m_grabKb(false),
-    m_styledKnobs(true)
+    m_styledKnobs(true),
+    m_alwaysOnTop(false)
 {
     ui.setupUi( this );
     connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotButtonClicked(QAbstractButton*)));
@@ -50,6 +51,7 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.spinNumOctaves->setValue( m_numOctaves );
         ui.chkGrabKb->setChecked( m_grabKb );
         ui.chkStyledKnobs->setChecked( m_styledKnobs );
+        ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
     }
 }
 
@@ -59,6 +61,7 @@ void Preferences::apply()
     m_keyPressedColor = QColor(ui.lblColorName->text());
     m_grabKb = ui.chkGrabKb->isChecked();
     m_styledKnobs = ui.chkStyledKnobs->isChecked();
+    m_alwaysOnTop = ui.chkAlwaysOnTop->isChecked();
 }
 
 void Preferences::accept()

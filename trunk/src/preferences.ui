@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>329</width>
-    <height>219</height>
+    <height>244</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -128,6 +128,13 @@
     </widget>
    </item>
    <item row="6" column="0" colspan="4" >
+    <widget class="QCheckBox" name="chkAlwaysOnTop" >
+     <property name="text" >
+      <string>Always On Top</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="4" >
     <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="standardButtons" >
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>

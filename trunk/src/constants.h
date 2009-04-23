@@ -63,6 +63,7 @@ const QString QSTR_PROGRAM("Program");
 const QString QSTR_CONTROLLER("Controller");
 const QString QSTR_GRABKB("GrabKeyboard");
 const QString QSTR_STYLEDKNOBS("StyledKnobs");
+const QString QSTR_ALWAYSONTOP("AlwaysOnTop");
 
 const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");

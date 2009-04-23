@@ -271,12 +271,14 @@ void VPiano::readSettings()
     QColor keyColor = settings.value(QSTR_KEYPRESSEDCOLOR, defColor).value<QColor>();
     bool grabKb = settings.value(QSTR_GRABKB, false).toBool();
     bool styledKnobs = settings.value(QSTR_STYLEDKNOBS, true).toBool();
+    bool alwaysOnTop = settings.value(QSTR_ALWAYSONTOP, false).toBool();
     settings.endGroup();
 
     dlgPreferences.setNumOctaves(num_octaves);
     dlgPreferences.setKeyPressedColor(keyColor);
     dlgPreferences.setGrabKeyboard(grabKb);
     dlgPreferences.setStyledKnobs(styledKnobs);
+    dlgPreferences.setAlwaysOnTop(alwaysOnTop);
     if (!insFileName.isEmpty()) {
         dlgPreferences.setInstrumentsFileName(insFileName);
         if (!insName.isEmpty()) {
@@ -346,6 +348,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_KEYPRESSEDCOLOR, dlgPreferences.getKeyPressedColor());
     settings.setValue(QSTR_GRABKB, dlgPreferences.getGrabKeyboard());
     settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences.getStyledKnobs());
+    settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences.getAlwaysOnTop());
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONNECTIONS);
@@ -713,7 +716,17 @@ void VPiano::applyPreferences()
         }
     }
 
+    QPoint wpos = pos();
+    Qt::WindowFlags flags = windowFlags();
+    if (dlgPreferences.getAlwaysOnTop())
+        flags |= Qt::WindowStaysOnTopHint;
+    else
+        flags &= ~Qt::WindowStaysOnTopHint;
+    setWindowFlags( flags );
+    move(wpos);
+
     updateKnobs();
+    show();
 }
 
 void VPiano::applyInitialSettings()
