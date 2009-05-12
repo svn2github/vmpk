@@ -1,3 +1,10 @@
+2009-05-12
+    * fix for bug# 2790316 - startup crash in OSX when no MIDI port present 
+
+2009-04-23
+    * implemented RFE# 2779744 - keyboard window: always on top
+    * MIDI In always enabled on Linux and Mac
+
 2009-04-05
     * release 0.2.4
     

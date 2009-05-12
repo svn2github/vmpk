@@ -134,7 +134,7 @@ public slots:
 
 private:
     void initialization();
-    void initMidi();
+    bool initMidi();
     void initControllers();
     void readSettings();
     void writeSettings();

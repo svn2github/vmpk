@@ -83,13 +83,14 @@ VPiano::~VPiano()
 
 void VPiano::initialization()
 {
-    initMidi();
-    refreshConnections();
-    readSettings();
-    initToolBars();
-    applyPreferences();
-    applyConnections();
-    applyInitialSettings();
+    if (initMidi()) {
+        refreshConnections();
+        readSettings();
+        initToolBars();
+        applyPreferences();
+        applyConnections();
+        applyInitialSettings();
+    } else close();
 }
 
 int VPiano::getInputChannel()
@@ -129,20 +130,20 @@ void midiCallback( double /*deltatime*/,
         QApplication::postEvent(instance, ev);
 }
 
-void VPiano::initMidi()
+bool VPiano::initMidi()
 {
     try {
         m_midiout = new RtMidiOut(QSTR_VMPKOUTPUT.toStdString());
+        m_midiin = new RtMidiIn(QSTR_VMPKINPUT.toStdString());
+#if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__)
         int nOutPorts = m_midiout->getPortCount();
         if (nOutPorts == 0) {
             delete m_midiout;
             m_midiout = 0;
-            QMessageBox::critical(0, tr("Error"),
+            QMessageBox::critical(this, tr("Error"),
                                   tr("No MIDI output ports available. Aborting"));
-            qApp->quit();
+            return false;
         }
-        m_midiin = new RtMidiIn(QSTR_VMPKINPUT.toStdString());
-#if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__)
         int nInPorts = m_midiin->getPortCount();
         if (nInPorts == 0) {
             delete m_midiin;
@@ -150,7 +151,8 @@ void VPiano::initMidi()
         }
 #endif
 #if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)
-        m_midiout->openVirtualPort(QSTR_VMPKOUTPUT.toStdString());
+        if (m_midiout != NULL)
+            m_midiout->openVirtualPort(QSTR_VMPKOUTPUT.toStdString());
         if (m_midiin != NULL)
             m_midiin->openVirtualPort(QSTR_VMPKINPUT.toStdString());
 #else //if defined(__WINDOWS_MM__) || defined(__IRIX_MD__)
@@ -162,10 +164,11 @@ void VPiano::initMidi()
             m_inputActive = true;
         }
     } catch (RtError& err) {
-        QMessageBox::critical( 0, tr("Error. Aborting"),
+        QMessageBox::critical( this, tr("Error. Aborting"),
                                QString::fromStdString(err.getMessage()));
-        qApp->quit();
+        return false;
     }
+    return true;
 }
 
 void VPiano::initToolBars()
