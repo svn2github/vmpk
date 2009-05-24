@@ -30,6 +30,7 @@ SET(vmpk_forms_SRCS
     kmapdialog.ui
     midisetup.ui
     preferences.ui
+    riffimportdlg.ui
     vpiano.ui
 )
 
@@ -61,6 +62,10 @@ SET(vmpk_SRCS
     pianoscene.h
     preferences.cpp
     preferences.h
+    riff.cpp
+    riff.h
+    riffimportdlg.cpp
+    riffimportdlg.h
     RtError.h
     RtMidi.cpp
     RtMidi.h
@@ -78,6 +83,8 @@ SET(vmpk_qtobject_SRCS
     pianokeybd.h
     pianoscene.h
     preferences.h
+    riff.h
+    riffimportdlg.h
     vpiano.h
 )
 

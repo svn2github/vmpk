@@ -35,6 +35,7 @@
 #include "classicstyle.h"
 #include "RtMidi.h"
 #include "constants.h"
+#include "riffimportdlg.h"
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
@@ -56,6 +57,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionEditKM, SIGNAL(triggered()), SLOT(slotEditKeyboardMap()));
     connect(ui.actionContents, SIGNAL(triggered()), SLOT(slotHelpContents()));
     connect(ui.actionWebSite, SIGNAL(triggered()), SLOT(slotOpenWebSite()));
+    connect(ui.actionImportSoundFont, SIGNAL(triggered()), SLOT(slotImportSF()));
     ui.pianokeybd->setPianoHandler(this);
     initialization();
 }
@@ -929,5 +931,16 @@ void VPiano::updateKnobs()
     QList<Knob *> allKnobs = findChildren<Knob *> ();
     foreach(Knob* knob, allKnobs) {
         knob->setStyle(dlgPreferences.getStyledKnobs() ? m_dialStyle : NULL);
+    }
+}
+
+void VPiano::slotImportSF()
+{
+    RiffImportDlg dlg;
+    if ((dlg.exec() == QDialog::Accepted) && !dlg.getOutput().isEmpty()) {
+        dlg.save();
+        dlgPreferences.setInstrumentsFileName(dlg.getOutput());
+        dlgPreferences.setInstrumentName(dlg.getName());
+        applyPreferences();
     }
 }

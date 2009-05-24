@@ -127,6 +127,7 @@ public slots:
     void slotHelpContents();
     void slotOpenWebSite();
     void setVelocity(int value) { m_velocity = value; }
+    void slotImportSF();
 
     // slots for note signals
     // void slotNoteOn(int midiNote);

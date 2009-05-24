@@ -71,7 +71,8 @@ FORMS += src/kmapdialog.ui \
     src/midisetup.ui \
     src/vpiano.ui \
     src/about.ui \
-    src/preferences.ui
+    src/preferences.ui \
+    src/riffimportdlg.ui
 HEADERS += src/kmapdialog.h \
     src/keyboardmap.h \
     src/mididefs.h \
@@ -87,6 +88,8 @@ HEADERS += src/kmapdialog.h \
     src/vpiano.h \
     src/about.h \
     src/preferences.h \
+    src/riff.h \
+    src/riffimportdlg.h \
     src/instrument.h \
     src/constants.h
 SOURCES += src/kmapdialog.cpp \
@@ -97,6 +100,8 @@ SOURCES += src/kmapdialog.cpp \
     src/pianokey.cpp \
     src/pianokeybd.cpp \
     src/pianoscene.cpp \
+    src/riff.cpp \
+    src/riffimportdlg.cpp \
     src/classicstyle.cpp \
     src/vpiano.cpp \
     src/about.cpp \
