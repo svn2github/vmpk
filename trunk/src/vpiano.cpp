@@ -602,6 +602,7 @@ void VPiano::refreshConnections()
 #if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__)
             dlgMidiSetup.setInputEnabled(m_currentIn != -1);
 #endif
+            dlgMidiSetup.addInputPortName(QString::null, -1);
             nInPorts = m_midiin->getPortCount();
             for ( i = 0; i < nInPorts; i++ ) {
                 QString name = QString::fromStdString(m_midiin->getPortName(i));
