@@ -56,7 +56,7 @@ void RiffImportDlg::openInput()
 void RiffImportDlg::openOutput()
 {
     QString fileName = QFileDialog::getSaveFileName(this,
-        tr("Output"), m_output, tr("Instrument File (*.ins)"));
+        tr("Output"), m_output, tr("Instrument definitions (*.ins)"));
     if (!fileName.isEmpty())
         setOutput(fileName);
 }

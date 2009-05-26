@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>393</width>
-    <height>217</height>
+    <width>391</width>
+    <height>215</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Import Sound Font instruments</string>
+   <string>Import SoundFont instruments</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -39,7 +39,7 @@
          <bool>true</bool>
         </property>
         <property name="whatsThis">
-         <string>This text box displays the path and name of the selected Sound Font to be  imported</string>
+         <string>This text box displays the path and name of the selected SoundFont to be  imported</string>
         </property>
         <property name="readOnly">
          <bool>true</bool>
@@ -61,7 +61,7 @@
          </size>
         </property>
         <property name="whatsThis">
-         <string>Press this button to select a Sound Font file to be imported</string>
+         <string>Press this button to select a SoundFont file to be imported</string>
         </property>
         <property name="text">
          <string>...</string>

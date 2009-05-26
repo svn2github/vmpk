@@ -972,28 +972,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/riffimportdlg.cpp" line="59"/>
-        <source>Instrument File (*.ins)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/riffimportdlg.ui" line="14"/>
-        <source>Import Sound Font instruments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/riffimportdlg.ui" line="29"/>
         <source>Input File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/riffimportdlg.ui" line="42"/>
-        <source>This text box displays the path and name of the selected Sound Font to be  imported</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/riffimportdlg.ui" line="64"/>
-        <source>Press this button to select a Sound Font file to be imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1029,6 +1009,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/riffimportdlg.ui" line="137"/>
         <source>Press this button to select a path and file name for the output file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/riffimportdlg.cpp" line="59"/>
+        <source>Instrument definitions (*.ins)</source>
+        <translation type="unfinished">Enstrüman tanımlaması (*.ins)</translation>
+    </message>
+    <message>
+        <location filename="../src/riffimportdlg.ui" line="14"/>
+        <source>Import SoundFont instruments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/riffimportdlg.ui" line="42"/>
+        <source>This text box displays the path and name of the selected SoundFont to be  imported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/riffimportdlg.ui" line="64"/>
+        <source>Press this button to select a SoundFont file to be imported</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

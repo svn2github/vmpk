@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="es">
+<defaultcodec></defaultcodec>
 <context>
     <name>About</name>
     <message>
@@ -991,12 +992,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/riffimportdlg.cpp" line="59"/>
         <source>Instrument File (*.ins)</source>
-        <translation>Definición de instrumentos (*.ins)</translation>
+        <translation type="obsolete">Definición de instrumentos (*.ins)</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="14"/>
         <source>Import Sound Font instruments</source>
-        <translation>Importar instrumentos de SoundFonts</translation>
+        <translation type="obsolete">Importar instrumentos de SoundFonts</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="29"/>
@@ -1006,12 +1007,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/riffimportdlg.ui" line="42"/>
         <source>This text box displays the path and name of the selected Sound Font to be  imported</source>
-        <translation>Esta cada muestra la ruta y el nombre del archivo SoundFont seleccionado que va a ser importado</translation>
+        <translation type="obsolete">Esta cada muestra la ruta y el nombre del archivo SoundFont seleccionado que va a ser importado</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="64"/>
         <source>Press this button to select a Sound Font file to be imported</source>
-        <translation>Pulse este botón para seleccionar un archivo SoundFont para ser importado</translation>
+        <translation type="obsolete">Pulse este botón para seleccionar un archivo SoundFont para ser importado</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="140"/>
@@ -1047,6 +1048,26 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/riffimportdlg.ui" line="137"/>
         <source>Press this button to select a path and file name for the output file</source>
         <translation>Pulse este botón para seleccionar un camino y un nombre de archivo de salida</translation>
+    </message>
+    <message>
+        <location filename="../src/riffimportdlg.cpp" line="59"/>
+        <source>Instrument definitions (*.ins)</source>
+        <translation>Definición de instrumentos (*.ins)</translation>
+    </message>
+    <message>
+        <location filename="../src/riffimportdlg.ui" line="14"/>
+        <source>Import SoundFont instruments</source>
+        <translation>Importar instrumentos de SoundFonts</translation>
+    </message>
+    <message>
+        <location filename="../src/riffimportdlg.ui" line="42"/>
+        <source>This text box displays the path and name of the selected SoundFont to be  imported</source>
+        <translation>Esta cada muestra la ruta y el nombre del archivo SoundFont seleccionado que va a ser importado</translation>
+    </message>
+    <message>
+        <location filename="../src/riffimportdlg.ui" line="64"/>
+        <source>Press this button to select a SoundFont file to be imported</source>
+        <translation>Pulse este botón para seleccionar un archivo SoundFont para ser importado</translation>
     </message>
 </context>
 <context>
