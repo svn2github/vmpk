@@ -18,11 +18,13 @@
       <li><a href="#MIDI_Connections">MIDI connections and virtual MIDI cables</a></li>
     </ul>
   </li>
+  <li><a href="#FAQ">Frequently Asked Questions</a></li>
   <li><a href="#Download">Download</a></li>
   <li><a href="#Installation">Installation from sources</a>
     <ul>
       <li><a href="#Requirements">Requirements</a></li>
       <li><a href="#windows_notes">Notes for windows users</a></li>
+      <li><a href="#mac_notes">Notes for Mac OSX users</a></li>
       <li><a href="#packager_notes">Notes for packagers and advanced users</a></li>
     </ul>
   </li>
@@ -42,9 +44,8 @@ MIDI notes, and also the mouse. You can use the Virtual MIDI Piano Keyboard
 to display the played MIDI notes from another instrument or MIDI file player.
 To do so, connect the other MIDI port to the input port of VMPK.</P>
 
-<P>VMPK has been tested in Linux and Windows, but maybe you can build it also in 
-Mac OSX and SGI Irix. If you can compile and test the program in those systems, 
-please drop a mail to the author.</P>
+<P>VMPK has been tested in Linux, Windows and Mac OSX, but maybe you can build it also in 
+other systems. If so, please drop a mail to the author.</P>
 
 <P>The Virtual Keyboard by Takashi Iway (vkeybd) has been the inspiration for this 
 one. It is a wonderful piece of software and has served us well for many years.
@@ -165,14 +166,85 @@ program is to control the Jack daemon (start, stop and monitor the state). Jack 
 audio cables to connect your sound card ports and audio programs, in a similar way to the MIDI 
 virtual cables, but for digital audio data.</p>
 
+<H2><a name="FAQ"></a>Frequently Asked Questions</H2>
+
+<H3>How to display 88 keys?</H3>
+<p>88 is an arbitrary number of keys used by (most) modern piano manufacturers, but organ and synthesizer manufacturers don't always follow this convention. VMPK can be customized to display from 1 to 10 octaves. Using 7 octaves it shows 84 keys, and for 8 octaves it shows 98 keys. There is no way to display exactly 7 and 1/4 octaves.</p>
+
+<H3>There is no sound</H3>
+<p>VMPK doesn't produce any sound by itself. You need a MIDI synthesizer, and please read the documentation again.</p>
+
+<H3>Some keys are silent</H3>
+<p>When you select channel 10 on a standard MIDI synth, it plays percussion sounds assigned to many keys but not to all of them. On melodic channels (not channel 10) you can select patches with a limited range of notes. This is known in music as  <a href="http://en.wikipedia.org/wiki/Tessitura">Tessitura</a>.</p>
+
+<H3>Patch names don't match the real sounds</H3>
+<p>You need to provide an .INS file describing exactly your synthesizer's sound set or soundfont. The included file (gmgsxg.ins) contains definitions for only standard GM, GS and XG instruments. If your MIDI synth doesn't match exactly any of them, you need to get another .INS file, or create it yourself.</p>
+
+<H3>Syntax of the Instrument Definition (.INS) files?</H3>
+<p>One  explanation of the INS format is <a href="http://tse3.sourceforge.net/doc/InsFiles.html">here.</a></p>
+
+<H3>Can I convert my Instrument Definition for vkeybd into an .INS file?</H3>
+<p>Sure. You can even use the utility sftovkb from vkeybd to create an .INS file from any SF2 soundfont.</p>
+
+<pre>
+$ sftovkb SF2NAME.sf2 | sort -n -k1,1 -k2,2 > SF2NAME.txt
+$ awk -f txt2ins.awk SF2NAME.txt > SF2NAME.ins
+</pre>
+
+<p>Here is the AWK script "txt2ins.awk":</p>
+
+<pre>
+BEGIN {
+  print ".Controller Names"
+  print "\n[Standard]"
+  print "1=1-Modulation"
+  print "2=2-Breath"
+  print "4=4-Foot controller"
+  print "5=5-Portamento time"
+  print "7=7-Volume"
+  print "8=8-Balance"
+  print "10=10-Pan"
+  print "11=11-Expression"
+  print "64=64-Pedal (sustain)"
+  print "65=65-Portamento"
+  print "66=66-Pedal (sostenuto)"
+  print "67=67-Pedal (soft)"
+  print "69=69-Hold 2"
+  print "91=91-External Effects depth"
+  print "92=92-Tremolo depth"
+  print "93=93-Chorus depth"
+  print "94=94-Celeste (detune) depth"
+  print "95=95-Phaser depth"
+  print "\n.Patch Names"
+  b=""
+}
+{
+  if (b!=$1) {
+     print "\n[Bank" $1 "]"
+     a[$1]=1
+     b=$1
+  }
+  print $2 "=" $3,$4,$5,$6
+}
+END {
+  print "\n.Instrument Definitions"
+  print "\n[" FILENAME "]"
+  print "Control=Standard"
+  for (i in a) {
+    print "Patch[" i "]=Bank" i
+  }
+}
+</pre>
+
 <H2><a name="Download"></a>Download</H2>
-<P>You can find the latest version at <A HREF="http://sourceforge.net/projects/vmpk">SourceForge project site</A>.</P>
-<p>There are ready to install packages for:
+<P>You can find the latest sources, Windows, and Mac OSX packages at <A HREF="http://sourceforge.net/projects/vmpk">SourceForge project site</A>.</P>
+<p>There are also ready to install Linux packages for:
 <ul>
   <li>openSUSE, from <a href="http://software.opensuse.org/search?baseproject=ALL&amp;p=1&amp;q=vmpk">the openSUSE Build Service</a>.</li>
-  <li>Ubuntu, by <a href="http://ubuntufromscratch.wordpress.com/2008/09/14/virtual-midi-piano-keyboard">Ubuntu From Scratch</a>.</li>
+  <li>Ubuntu: <a href="http://download.tuxfamily.org/ufs/dists/jaunty/main/binary-i386/sound/">i386</a>, <a href="http://download.tuxfamily.org/ufs/dists/jaunty/main/binary-amd64/sound/">amd64</a> by Ubuntu From Scratch.</li>
+  <li><a href="http://aur.archlinux.org/packages.php?ID=20321">Arch Linux</a></li>
+  <li><a href="http://packages.pardus.org.tr/info/contrib-2008/binary/vmpk.html">Pardus</a></li>
 </ul>
-<p>If you distribute VMPK packages for any distro, please drop me an email and I will add a link to your site here.</p>
 
 <H2><a name="Installation"></a>Installation from sources</H2>
 
@@ -209,7 +281,7 @@ $ sudo make install
 <H3><a name="Requirements"></a>Requirements</H3>
 
 <P>In order to successfully build and use VMPK, you need Qt 4.3 or newer. 
-(install the -devel package for your system, or <a href="http://trolltech.com/downloads/opensource">download the open source edition</a> from Trolltech.)</P>
+(install the -devel package for your system, or <a href="ftp://ftp.qtsoftware.com/qt/source">download the open source edition</a> from qtsoftware.com, formerly Trolltech.)</P>
 
 <P><a href="http://www.music.mcgill.ca/~gary/rtmidi/">RtMIDI</a> is included in the source package. It uses ALSA sequencer in Linux, 
 WinMM in Windows and CoreMIDI in Mac OSX, which are the native MIDI systems in each supported platform.</P>
@@ -231,6 +303,20 @@ archive and uncompress it using any utility that supports the format, like
 the PATH including the directories for Qt4 binaries, MinGW binaries, and also
 CMake binaries. The program CMakeSetup.exe is the graphic version of CMake for
 Windows.</P>
+
+<H3><a name="mac_notes"></a>Notes for Mac OSX users</H3>
+<p>You can find a precompiled universal app bundle, including Qt4 runtime libraries,  
+at the <a href="http://sourceforge.net/project/showfiles.php?group_id=236429">project 
+download area</a>. If you prefer to install from sources, CMake or Qmake
+can be used to build the application bundle linked to the installed system libraries. 
+You can use Qt4 either from qtsoftware.com or the package distributed by 
+<a href="http://www.finkproject.org/">Fink</a>.</p>
+
+<p>If you need something to produce noise, maybe you want to take a look to 
+<a href="http://notahat.com/simplesynth">SimpleSynth</a>, or 
+<a href="http://www.fluidsynth.org/">FluidSynth</a> (available from Fink). For
+MIDI routing, there is also <a href="http://notahat.com/midi_patchbay">MIDI Patchbay</a>.
+</p>
 
 <H3><a name="packager_notes"></a>Notes for packagers and advanced users</H3>
 
