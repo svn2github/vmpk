@@ -912,13 +912,21 @@ void VPiano::releaseKb() const
 void VPiano::slotHelpContents()
 {
     QUrl url;
-    QString hlp_name = QString("help_%1.html").arg(QLocale::system().name());
-    if (QFile::exists(hlp_name)) {
-        url = QUrl::fromLocalFile(VPiano::dataDirectory() + hlp_name );
-    } else {
-        url = QUrl::fromLocalFile(VPiano::dataDirectory() + "help.html");
+    QStringList hlps;
+    QLocale loc = QLocale::system();
+    QStringList lc = loc.name().split("_");
+    hlps += QString("help_%1.html").arg(loc.name());
+    if (lc.count() > 1)
+        hlps += QString("help_%1.html").arg(lc[0]);
+    hlps += "help.html";
+    foreach(QString hlp_name, hlps) {
+        QString fullName = VPiano::dataDirectory() + hlp_name;
+        if (QFile::exists(fullName)) {
+            url = QUrl::fromLocalFile(fullName);
+            QDesktopServices::openUrl(url);
+            return;
+        }
     }
-    QDesktopServices::openUrl(url);
 }
 
 void VPiano::slotOpenWebSite()
