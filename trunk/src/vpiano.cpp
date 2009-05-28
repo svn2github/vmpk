@@ -227,11 +227,13 @@ void VPiano::initToolBars()
     ui.toolBarBender->addWidget(new QLabel(tr(" Bender: "), this));
     m_bender = new QSlider(this);
     m_bender->setOrientation(Qt::Horizontal);
+    m_bender->setMaximumWidth(200);
     m_bender->setMinimum(BENDER_MIN);
     m_bender->setMaximum(BENDER_MAX);
     m_bender->setValue(0);
     ui.toolBarBender->addWidget(m_bender);
     connect( m_bender, SIGNAL(valueChanged(int)), SLOT(slotBender()) );
+    connect( m_bender, SIGNAL(sliderReleased()), SLOT(slotBenderReleased()) );
     // Programs tool bar
     ui.toolBarPrograms->addWidget(new QLabel(tr(" Bank: "), this));
     m_comboBank = new QComboBox(this);
@@ -575,6 +577,11 @@ void VPiano::slotBender()
     bender(m_bender->value());
 }
 
+void VPiano::slotBenderReleased()
+{
+    m_bender->setValue(0);
+}
+
 void VPiano::slotAbout()
 {
     releaseKb();
@@ -911,7 +918,6 @@ void VPiano::releaseKb() const
 
 void VPiano::slotHelpContents()
 {
-    QUrl url;
     QStringList hlps;
     QLocale loc = QLocale::system();
     QStringList lc = loc.name().split("_");
@@ -922,11 +928,12 @@ void VPiano::slotHelpContents()
     foreach(QString hlp_name, hlps) {
         QString fullName = VPiano::dataDirectory() + hlp_name;
         if (QFile::exists(fullName)) {
-            url = QUrl::fromLocalFile(fullName);
+            QUrl url = QUrl::fromLocalFile(fullName);
             QDesktopServices::openUrl(url);
             return;
         }
     }
+    QMessageBox::critical(this, tr("Error"), tr("No help file found"));
 }
 
 void VPiano::slotOpenWebSite()
@@ -953,3 +960,4 @@ void VPiano::slotImportSF()
         applyPreferences();
     }
 }
+

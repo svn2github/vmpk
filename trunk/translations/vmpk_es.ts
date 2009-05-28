@@ -13,7 +13,7 @@ p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;
 <context>
     <name>AboutClass</name>
     <message>
-        <location filename="../src/about.ui" line="13"/>
+        <location filename="../src/about.ui" line="14"/>
         <source>About</source>
         <translation>Acerca de</translation>
     </message>
@@ -48,7 +48,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;This program contains RtMIDI: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2007 Gary P. Scavone&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/about.ui" line="84"/>
+        <location filename="../src/about.ui" line="85"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -57,7 +57,7 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Virtual MIDI Piano Keyboard&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/about.ui" line="138"/>
+        <location filename="../src/about.ui" line="139"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -66,7 +66,7 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://vmpk.sourceforge.net&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://vmpk.sourceforge.net&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../src/about.ui" line="107"/>
+        <location filename="../src/about.ui" line="108"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1062,7 +1062,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/riffimportdlg.ui" line="42"/>
         <source>This text box displays the path and name of the selected SoundFont to be  imported</source>
-        <translation>Esta cada muestra la ruta y el nombre del archivo SoundFont seleccionado que va a ser importado</translation>
+        <translation>Esta caja muestra la ruta y el nombre del archivo SoundFont seleccionado que va a ser importado</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="64"/>
@@ -1073,7 +1073,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="145"/>
+        <location filename="../src/vpiano.cpp" line="936"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -1118,27 +1118,27 @@ p, li { white-space: pre-wrap; }
         <translation> Inflexión: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="236"/>
+        <location filename="../src/vpiano.cpp" line="238"/>
         <source> Bank: </source>
         <translation> Banco: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="240"/>
+        <location filename="../src/vpiano.cpp" line="242"/>
         <source> Program: </source>
         <translation> Programa: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="808"/>
+        <location filename="../src/vpiano.cpp" line="815"/>
         <source>Open keyboard map definition</source>
         <translation>Abrir definición de mapa de teclado</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="823"/>
+        <location filename="../src/vpiano.cpp" line="830"/>
         <source>Keyboard map (*.xml)</source>
         <translation>Mapa de teclado (*.xml)</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="821"/>
+        <location filename="../src/vpiano.cpp" line="828"/>
         <source>Save keyboard map definition</source>
         <translation>Guardar definición de mapa de teclado</translation>
     </message>
@@ -1351,6 +1351,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/vpiano.ui" line="340"/>
         <source>&amp;Import SoundFont...</source>
         <translation>&amp;Importar SoundFont</translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="936"/>
+        <source>No help file found</source>
+        <translation>No se ha encontrado un archivo de ayuda</translation>
     </message>
 </context>
 </TS>

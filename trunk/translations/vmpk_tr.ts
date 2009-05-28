@@ -13,7 +13,7 @@ p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;
 <context>
     <name>AboutClass</name>
     <message>
-        <location filename="../src/about.ui" line="13"/>
+        <location filename="../src/about.ui" line="14"/>
         <source>About</source>
         <translation>Hakkında</translation>
     </message>
@@ -29,7 +29,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Sanal MIDI Piyano Klavyesi&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/about.ui" line="84"/>
+        <location filename="../src/about.ui" line="85"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -38,7 +38,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/about.ui" line="138"/>
+        <location filename="../src/about.ui" line="139"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -47,7 +47,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../src/about.ui" line="107"/>
+        <location filename="../src/about.ui" line="108"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1035,7 +1035,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="145"/>
+        <location filename="../src/vpiano.cpp" line="936"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
@@ -1080,27 +1080,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="236"/>
+        <location filename="../src/vpiano.cpp" line="238"/>
         <source> Bank: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="240"/>
+        <location filename="../src/vpiano.cpp" line="242"/>
         <source> Program: </source>
         <translation> Program:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="808"/>
+        <location filename="../src/vpiano.cpp" line="815"/>
         <source>Open keyboard map definition</source>
         <translation>Klavye düzeni tanımlaması aç</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="823"/>
+        <location filename="../src/vpiano.cpp" line="830"/>
         <source>Keyboard map (*.xml)</source>
         <translation>Klavye düzeni (*.xml)</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="821"/>
+        <location filename="../src/vpiano.cpp" line="828"/>
         <source>Save keyboard map definition</source>
         <translation>Klavye düzeni tanımlamasını kaydet</translation>
     </message>
@@ -1312,6 +1312,11 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/vpiano.ui" line="340"/>
         <source>&amp;Import SoundFont...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="936"/>
+        <source>No help file found</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

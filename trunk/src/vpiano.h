@@ -119,6 +119,7 @@ public slots:
     void slotResetBender();
     void slotController();
     void slotBender();
+    void slotBenderReleased();
     void slotBankChanged(const int index);
     void slotProgChanged(const int index);
     void slotBaseOctave(const int octave);
