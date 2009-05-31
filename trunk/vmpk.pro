@@ -16,22 +16,21 @@
 
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.2.5cvs
+VERSION = 0.2.5
 DESTDIR = build
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
 QT += core gui xml
-#CONFIG += release
-#CONFIG += debug_and_release
-#CONFIG += debug
+CONFIG += release
+CONFIG -= debug_and_release
+CONFIG -= debug
 VERSIONH = $$sprintf(const QString PGM_VERSION(\"%1\");,$$VERSION)
 win32 {
     DEFINES += __WINDOWS_MM__
     LIBS += -lwinmm
     RC_FILE = src/vpianoico.rc
-    debug:CONFIG += console
     system(echo $$VERSIONH > $$DESTDIR/vmpk_version.h)
 }
 linux* { 
@@ -46,6 +45,8 @@ macx {
     ICON = data/vmpk.icns
     DEFINES += __MACOSX_CORE__
     BUNDLE_RES.files = data/help.html \
+	  data/help_es.html \
+	  data/help_tr.html \
         data/gmgsxg.ins \
         data/spanish.xml \
         data/german.xml \

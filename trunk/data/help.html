@@ -1,12 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<HTML>
-<HEAD>
-    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-    <TITLE>VMPK. Virtual MIDI Piano Keyboard</TITLE>
-</HEAD>
-<BODY>
+<html>
+<head>
+    <meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+    <title>VMPK. Virtual MIDI Piano Keyboard</title>
+</head>
+<body>
 
-<H1>Virtual MIDI Piano Keyboard</H1>
+<h1>Virtual MIDI Piano Keyboard</h1>
 
 <div id="navcontainer">
 <ul>
@@ -34,51 +34,51 @@
 
 <br>
 
-<H2><a name="Introduction"></a>Introduction</H2>
+<h2><a name="Introduction"></a>Introduction</h2>
 
-<P>
+<p>
 Virtual MIDI Piano Keyboard is a MIDI events generator and receiver. It doesn't produce any sound
 by itself, but can be used to drive a MIDI synthesizer (either hardware or
 software, internal or external). You can use the computer's keyboard to play
 MIDI notes, and also the mouse. You can use the Virtual MIDI Piano Keyboard
 to display the played MIDI notes from another instrument or MIDI file player.
-To do so, connect the other MIDI port to the input port of VMPK.</P>
+To do so, connect the other MIDI port to the input port of VMPK.</p>
 
-<P>VMPK has been tested in Linux, Windows and Mac OSX, but maybe you can build it also in 
-other systems. If so, please drop a mail to the author.</P>
+<p>VMPK has been tested in Linux, Windows and Mac OSX, but maybe you can build it also in 
+other systems. If so, please drop a mail to the author.</p>
 
-<P>The Virtual Keyboard by Takashi Iway (vkeybd) has been the inspiration for this 
+<p>The Virtual Keyboard by Takashi Iway (vkeybd) has been the inspiration for this 
 one. It is a wonderful piece of software and has served us well for many years.
-Thanks!</P>
+Thanks!</p>
 
-<P>VMPK uses a modern GUI framework: Qt4, that gives excellent features and 
+<p>VMPK uses a modern GUI framework: Qt4, that gives excellent features and 
 performance. <a href="http://www.music.mcgill.ca/~gary/rtmidi/">RtMIDI</a> 
 provides MIDI input/output features. Both frameworks are
-free and platform independent, available for Linux, Windows and Mac OSX.</P>
+free and platform independent, available for Linux, Windows and Mac OSX.</p>
 
-<P>The alphanumeric keyboard mapping can be configured from inside the program
+<p>The alphanumeric keyboard mapping can be configured from inside the program
 using the GUI interface, and the settings are stored in XML files. Some maps
 for Spanish, German and French keyboard layouts are provided, translated from
-the ones provided by VKeybd.</P>
+the ones provided by VKeybd.</p>
 
-<P>VMPK can send program changes and controllers to a MIDI synth. The definitions 
+<p>VMPK can send program changes and controllers to a MIDI synth. The definitions 
 for different standards and devices can be provided as .INS files, the same 
 format used by QTractor and TSE3. It was developed by Cakewalk and used also 
-in Sonar.</P>
+in Sonar.</p>
 
-<P>This software is in a very early alpha stage. See the TODO file for a list of 
+<p>This software is in a very early alpha stage. See the TODO file for a list of 
 pending features. Please feel free to contact the author to ask questions, 
 report bugs, and propose new features. You can use the tracking system at
-<A HREF="http://sourceforge.net/tracker2/?group_id=236429">SourceForge
-project site</A>.</P>
-<P>Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <B>&lt;plcl AT
-users.sourceforge.net&gt; </B></P>
-<P>Virtual MIDI Piano Keyboard is free software licensed under the terms of the
-<a href="http://www.gnu.org/copyleft/gpl.html">GPL v3 license</a>.</P>
+<a HREF="http://sourceforge.net/tracker2/?group_id=236429">SourceForge
+project site</a>.</p>
+<p>Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <b>&lt;plcl AT
+users.sourceforge.net&gt; </b></p>
+<p>Virtual MIDI Piano Keyboard is free software licensed under the terms of the
+<a href="http://www.gnu.org/copyleft/gpl.html">GPL v3 license</a>.</p>
 
-<H2><a name="Getting_started"></a>Getting started</H2>
+<h2><a name="Getting_started"></a>Getting started</h2>
 
-<H3><a name="MIDI_concepts"></a>MIDI concepts</H3>
+<h3><a name="MIDI_concepts"></a>MIDI concepts</h3>
 
 <p>MIDI is an industry standard to connect musical instruments. It is based on transmitting the actions 
 performed by a musician playing some instrument to another different instrument.  Musical 
@@ -108,7 +108,7 @@ a graphical front-end to <a href="http://www.fluidsynth.org">Fluidsynth</a>. It 
 possible to use the "Microsoft GS Wavetable SW Synth" that comes with XP. Of course, an external 
 MIDI hardware synth would be an even better approach.</p>
 
-<H3><a name="maps_instruments"></a>Keyboard maps and instrument definitions</H3>
+<h3><a name="maps_instruments"></a>Keyboard maps and instrument definitions</h3>
 
 <p>VMPK can help you to change sounds in your MIDI synthesizer, but only if you provide a 
 definition for the synthesizer sounds first. The definitions are text files with the .INS 
@@ -124,6 +124,9 @@ you can use any text editor to look, change, and create a new one. You can find 
 instruments definitions at the 
 <a href="ftp://ftp.cakewalk.com/pub/InstrumentDefinitions/">cakewalk ftp server</a>.</p>
 
+<p>Since the release 0.2.5 you can also import Sound Font files (in .SF2 or DLS formats) as 
+instruments definitions, using a dialog available at menu File->Import SoundFont.</p> 
+
 <p>Another customization that you may want to tweak is the keyboard mapping. The default 
 layout maps about two and half octaves for the QWERTY alphanumeric keyboard, but there 
 are some more definitions in the data directory, adapted for other international layouts. You 
@@ -133,7 +136,7 @@ remembered the next time you start VMPK. In fact, all your preferences, selected
 and program, and the controller values will be saved on exit, and restored when you restart 
 VMPK the next time.</p>
 
-<H3><a name="MIDI_Connections"></a>MIDI connections and virtual MIDI cables</H3>
+<h3><a name="MIDI_Connections"></a>MIDI connections and virtual MIDI cables</h3>
 
 <p>To connect hardware MIDI devices you need physical MIDI cables. To connect MIDI software 
 you need virtual cables. In Windows you can use some virtual MIDI cable software, like 
@@ -166,24 +169,27 @@ program is to control the Jack daemon (start, stop and monitor the state). Jack 
 audio cables to connect your sound card ports and audio programs, in a similar way to the MIDI 
 virtual cables, but for digital audio data.</p>
 
-<H2><a name="FAQ"></a>Frequently Asked Questions</H2>
+<h2><a name="FAQ"></a>Frequently Asked Questions</h2>
 
-<H3>How to display 88 keys?</H3>
+<h3>How to display 88 keys?</h3>
 <p>88 is an arbitrary number of keys used by (most) modern piano manufacturers, but organ and synthesizer manufacturers don't always follow this convention. VMPK can be customized to display from 1 to 10 octaves. Using 7 octaves it shows 84 keys, and for 8 octaves it shows 98 keys. There is no way to display exactly 7 and 1/4 octaves.</p>
 
-<H3>There is no sound</H3>
+<h3>There is no sound</h3>
 <p>VMPK doesn't produce any sound by itself. You need a MIDI synthesizer, and please read the documentation again.</p>
 
-<H3>Some keys are silent</H3>
+<h3>Some keys are silent</h3>
 <p>When you select channel 10 on a standard MIDI synth, it plays percussion sounds assigned to many keys but not to all of them. On melodic channels (not channel 10) you can select patches with a limited range of notes. This is known in music as  <a href="http://en.wikipedia.org/wiki/Tessitura">Tessitura</a>.</p>
 
-<H3>Patch names don't match the real sounds</H3>
+<h3>The "Grab Keyboard" option fails</h3>
+<p>It is a known issue for Linux users. This feature works well in KDE3/4 desktops using the standard kwin window manager; it also works with Enlightenment and Window Maker, but fails in Metacity and Compiz window managers, common among Gnome setups. It is also known that using this option prevents normal usage of the drop down menus on GTK2 applications. There is no known solution for this issue, except avoiding the broken scenarios if you really need this feature.</p>
+
+<h3>Patch names don't match the real sounds</h3>
 <p>You need to provide an .INS file describing exactly your synthesizer's sound set or soundfont. The included file (gmgsxg.ins) contains definitions for only standard GM, GS and XG instruments. If your MIDI synth doesn't match exactly any of them, you need to get another .INS file, or create it yourself.</p>
 
-<H3>Syntax of the Instrument Definition (.INS) files?</H3>
+<h3>Syntax of the Instrument Definition (.INS) files?</h3>
 <p>One  explanation of the INS format is <a href="http://tse3.sourceforge.net/doc/InsFiles.html">here.</a></p>
 
-<H3>Can I convert my Instrument Definition for vkeybd into an .INS file?</H3>
+<h3>Can I convert my Instrument Definition for vkeybd into an .INS file?</h3>
 <p>Sure. You can even use the utility sftovkb from vkeybd to create an .INS file from any SF2 soundfont.</p>
 
 <pre>
@@ -236,8 +242,8 @@ END {
 }
 </pre>
 
-<H2><a name="Download"></a>Download</H2>
-<P>You can find the latest sources, Windows, and Mac OSX packages at <A HREF="http://sourceforge.net/projects/vmpk">SourceForge project site</A>.</P>
+<h2><a name="Download"></a>Download</h2>
+<p>You can find the latest sources, Windows, and Mac OSX packages at <a HREF="http://sourceforge.net/projects/vmpk">SourceForge project site</a>.</p>
 <p>There are also ready to install Linux packages for:
 <ul>
   <li>openSUSE, from <a href="http://software.opensuse.org/search?baseproject=ALL&amp;p=1&amp;q=vmpk">the openSUSE Build Service</a>.</li>
@@ -246,17 +252,17 @@ END {
   <li><a href="http://packages.pardus.org.tr/info/contrib-2008/binary/vmpk.html">Pardus</a></li>
 </ul>
 
-<H2><a name="Installation"></a>Installation from sources</H2>
+<h2><a name="Installation"></a>Installation from sources</h2>
 
-<P>Download the sources from <a href="http://sourceforge.net/projects/vmpk">http://sourceforge.net/projects/vmpk</a>.
-Unpack the sources in your home directory, and change to the unpacked dir.</P>
+<p>Download the sources from <a href="http://sourceforge.net/projects/vmpk">http://sourceforge.net/projects/vmpk</a>.
+Unpack the sources in your home directory, and change to the unpacked dir.</p>
 
 <pre>
 $ cd vmpk-x.y.z
 </pre>
 
-<P>You can choose between CMake and Qmake to prepare the build system, but qmake is
-intended only for testing and development.</P>
+<p>You can choose between CMake and Qmake to prepare the build system, but qmake is
+intended only for testing and development.</p>
 
 <pre>
 $ cmake .
@@ -266,45 +272,45 @@ or
 $ qmake
 </pre>
 
-<P>After that, compile the program:</P>
+<p>After that, compile the program:</p>
 
 <pre>
 $ make
 </pre>
 
-<P>If the program has been compiled sucessfully, you can install it:</P>
+<p>If the program has been compiled sucessfully, you can install it:</p>
 
 <pre>
 $ sudo make install
 </pre>
 
-<H3><a name="Requirements"></a>Requirements</H3>
+<h3><a name="Requirements"></a>Requirements</h3>
 
-<P>In order to successfully build and use VMPK, you need Qt 4.3 or newer. 
-(install the -devel package for your system, or <a href="ftp://ftp.qtsoftware.com/qt/source">download the open source edition</a> from qtsoftware.com, formerly Trolltech.)</P>
+<p>In order to successfully build and use VMPK, you need Qt 4.3 or newer. 
+(install the -devel package for your system, or <a href="ftp://ftp.qtsoftware.com/qt/source">download the open source edition</a> from qtsoftware.com, formerly Trolltech.)</p>
 
-<P><a href="http://www.music.mcgill.ca/~gary/rtmidi/">RtMIDI</a> is included in the source package. It uses ALSA sequencer in Linux, 
-WinMM in Windows and CoreMIDI in Mac OSX, which are the native MIDI systems in each supported platform.</P>
+<p><a href="http://www.music.mcgill.ca/~gary/rtmidi/">RtMIDI</a> is included in the source package. It uses ALSA sequencer in Linux, 
+WinMM in Windows and CoreMIDI in Mac OSX, which are the native MIDI systems in each supported platform.</p>
 
-<P>The build system is based on <a href="http://www.cmake.org">CMake</a>.</P>
+<p>The build system is based on <a href="http://www.cmake.org">CMake</a>.</p>
 
-<P>You need also the <a href="http://gcc.gnu.org">GCC C++ compiler</a>. MinGW is a <a href="http://www.mingw.org">Windows port</a>.</P>
+<p>You need also the <a href="http://gcc.gnu.org">GCC C++ compiler</a>. MinGW is a <a href="http://www.mingw.org">Windows port</a>.</p>
 
-<P>Optionally, you can buid a Windows setup program using <a href="http://nsis.sourceforge.net">NSIS</a>.</P>
+<p>Optionally, you can buid a Windows setup program using <a href="http://nsis.sourceforge.net">NSIS</a>.</p>
 
 
-<H3><a name="windows_notes"></a>Notes for windows users</H3>
+<h3><a name="windows_notes"></a>Notes for windows users</h3>
 
-<P>To compile the sources in Windows, you need to download either the .bz2 or .gz 
+<p>To compile the sources in Windows, you need to download either the .bz2 or .gz 
 archive and uncompress it using any utility that supports the format, like 
-<a href="http://www.7-zip.org">7-Zip</a>.</P>
+<a href="http://www.7-zip.org">7-Zip</a>.</p>
 
-<P>To configure the sources, you need qmake (from Qt4) or CMake. You need to set
+<p>To configure the sources, you need qmake (from Qt4) or CMake. You need to set
 the PATH including the directories for Qt4 binaries, MinGW binaries, and also
 CMake binaries. The program CMakeSetup.exe is the graphic version of CMake for
-Windows.</P>
+Windows.</p>
 
-<H3><a name="mac_notes"></a>Notes for Mac OSX users</H3>
+<h3><a name="mac_notes"></a>Notes for Mac OSX users</h3>
 <p>You can find a precompiled universal app bundle, including Qt4 runtime libraries,  
 at the <a href="http://sourceforge.net/project/showfiles.php?group_id=236429">project 
 download area</a>. If you prefer to install from sources, CMake or Qmake
@@ -318,7 +324,7 @@ You can use Qt4 either from qtsoftware.com or the package distributed by
 MIDI routing, there is also <a href="http://notahat.com/midi_patchbay">MIDI Patchbay</a>.
 </p>
 
-<H3><a name="packager_notes"></a>Notes for packagers and advanced users</H3>
+<h3><a name="packager_notes"></a>Notes for packagers and advanced users</h3>
 
 <p>You can ask the compiler for some optimisation when building the program.
 There are two ways: first, using a predefined build type.</p>
@@ -347,10 +353,10 @@ $ cmake . -DCMAKE_INSTALL_PREFIX=/usr
 
 <p></p>
 
-<H2><a name="Acknowledgements"></a>Acknowledgements</H2>
+<h2><a name="Acknowledgements"></a>Acknowledgements</h2>
 
-<P>In addition to the aforementioned tools, VMPK uses work from the following
-open source projects. </P>
+<p>In addition to the aforementioned tools, VMPK uses work from the following
+open source projects. </p>
 
 <ul>
 <li>from <a href="http://qtractor.sourceforge.net">Qtractor</a>, by Rui Nuno Capela<br>
@@ -360,7 +366,7 @@ Knob widget
 <li><a href="http://openclipart.org/media/files/TheresaKnott/346">Icon and logo</a> by Theresa Knott
 </ul>
 
-<P>Thank you very much!</P>
+<p>Thank you very much!</p>
 
-</BODY>
-</HTML>
+</body>
+</html>

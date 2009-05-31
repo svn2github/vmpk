@@ -223,8 +223,8 @@ void Riff::processINSH(quint32& bank, quint32& pc, bool& perc)
 
 void Riff::processINS(int size)
 {
-    bool perc;
-    quint32 bank, pc;
+    bool perc = false;
+    quint32 bank = 0, pc = 0;
     quint32 chunkID = 0;
     int length;
     while (size > 0) {

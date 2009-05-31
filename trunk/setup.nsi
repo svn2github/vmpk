@@ -3,10 +3,10 @@ Name "Virtual MIDI Piano Keyboard"
 # Defines
 !define QTFILES "C:\Qt\2009.01\qt\bin"
 !define MINGWFILES "C:\Qt\2009.01\mingw\bin"
-!define VMPKDIR "C:\Proyectos\vmpk-0.2.4"
+!define VMPKDIR "C:\Proyectos\vmpk-0.2.5"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.2.4
+!define VERSION 0.2.5
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -49,7 +49,7 @@ InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.2.4.0
+VIProductVersion 0.2.5.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
@@ -72,6 +72,8 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\vkeybd-default.xml
     File ${VMPKDIR}\data\gmgsxg.ins
     File ${VMPKDIR}\data\help.html
+    File ${VMPKDIR}\data\help_es.html
+    File ${VMPKDIR}\data\help_tr.html
     File ${VMPKDIR}\build\translations\vmpk_es.qm
     File ${VMPKDIR}\build\translations\vmpk_tr.qm
 
@@ -79,13 +81,13 @@ Section -Main SEC0000
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
 
     # Installing library C:\Qt\4.4.1\bin\QtCore4.dll
-    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtCore4.dll $INSTDIR\QtCore4.dll $INSTDIR
+    #!insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtCore4.dll $INSTDIR\QtCore4.dll $INSTDIR
 
     # Installing library C:\Qt\4.4.1\bin\QtGui4.dll
-    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtGui4.dll $INSTDIR\QtGui4.dll $INSTDIR
+    #!insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtGui4.dll $INSTDIR\QtGui4.dll $INSTDIR
 
     # Installing library C:\Qt\4.4.1\bin\QtXml4.dll
-    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtXml4.dll $INSTDIR\QtXml4.dll $INSTDIR
+    #!insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtXml4.dll $INSTDIR\QtXml4.dll $INSTDIR
 
     WriteRegStr HKLM "${REGKEY}\Components" Main 1
 SectionEnd
@@ -135,18 +137,20 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vkeybd-default.xml
     Delete /REBOOTOK $INSTDIR\gmgsxg.ins
     Delete /REBOOTOK $INSTDIR\help.html
+    Delete /REBOOTOK $INSTDIR\help_es.html
+    Delete /REBOOTOK $INSTDIR\help_tr.html
 
     # Uninstalling library $INSTDIR\mingwm10.dll
     !insertmacro UnInstallLib DLL SHARED REBOOT_PROTECTED $INSTDIR\mingwm10.dll
 
     # Uninstalling library $INSTDIR\QtCore4.dll
-    !insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtCore4.dll
+    #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtCore4.dll
 
     # Uninstalling library $INSTDIR\QtGui4.dll
-    !insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtGui4.dll
+    #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtGui4.dll
 
     # Uninstalling library $INSTDIR\QtXml4.dll
-    !insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtXml4.dll
+    #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtXml4.dll
 
     DeleteRegValue HKLM "${REGKEY}\Components" Main
 SectionEnd

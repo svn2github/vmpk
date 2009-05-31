@@ -35,7 +35,7 @@ SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
 SET (VERSION_MAJOR "0")
 SET (VERSION_MINOR "2")
 SET (VERSION_PATCH "5")
-SET (VERSION_SUFFIX "cvs")
+SET (VERSION_SUFFIX "")
 SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX})
 
 MESSAGE(STATUS "vmpk ${VERSION} prefix: ${CMAKE_INSTALL_PREFIX}")
@@ -188,19 +188,42 @@ IF (UNIX AND NOT APPLE)
         data/german.xml
         data/gmgsxg.ins
         data/spanish.xml
+        data/txt2ins.awk
         data/help.html
+        data/help_es.html
+        data/help_tr.html
     DESTINATION 
         share/vmpk 
     )
     
-    INSTALL ( FILES 
-        data/vmpk_16x16.png 
-        data/vmpk_32x32.png 
-        data/vmpk_48x48.png 
-        data/vmpk_64x64.png 
-    DESTINATION 
-        share/pixmaps 
-    )
+    #INSTALL ( FILES 
+    #    data/vmpk_16x16.png 
+    #    data/vmpk_32x32.png 
+    #    data/vmpk_48x48.png 
+    #    data/vmpk_64x64.png 
+    #DESTINATION 
+    #    share/pixmaps 
+    #)
+
+    INSTALL(FILES data/vmpk_16x16.png 
+        DESTINATION share/icons/hicolor/16x16/apps   
+	RENAME vmpk.png)
+	
+    INSTALL(FILES data/vmpk_32x32.png 
+        DESTINATION share/icons/hicolor/32x32/apps   
+        RENAME vmpk.png)
+	
+    INSTALL(FILES data/vmpk_48x48.png 
+        DESTINATION share/icons/hicolor/48x48/apps   
+        RENAME vmpk.png)
+	
+    INSTALL(FILES data/vmpk_64x64.png 
+        DESTINATION share/icons/hicolor/64x64/apps   
+        RENAME vmpk.png)
+	
+    INSTALL(FILES data/TheresaKnott_piano.svg
+        DESTINATION share/icons/hicolor/scalable/apps   
+        RENAME vmpk.svg)
     
     INSTALL ( FILES 
         vmpk.desktop
@@ -227,6 +250,8 @@ IF (WIN32)
         data/gmgsxg.ins
         data/spanish.xml
         data/help.html
+        data/help_es.html
+        data/help_tr.html
     DESTINATION . )
 ENDIF (WIN32)
 
