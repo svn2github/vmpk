@@ -1,4 +1,11 @@
-#!/usr/bin/awk -f
+# This AWK script creates an INS (instruments definition) file from 
+# an instrument list like the file "vkeybd.list" provided with vkeybd, 
+# or a similar one created from scratch or with the help of the 
+# sftovkb utility.
+#
+# usage example:
+#     awk -f txt2ins.awk vkeybd.list > translated.ins
+
 BEGIN { 
   print ".Patch Names"
   b=""

@@ -161,7 +161,7 @@ IF (UNIX)
         COMMAND cp -r data vmpk-${VERSION}
         COMMAND cp -r src vmpk-${VERSION}
         COMMAND cp -r translations vmpk-${VERSION}
-        COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.* vmpk-${VERSION}
+        COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.desktop vmpk.pro vmpk.spec.in vmpk-${VERSION}
         COMMAND tar -cj --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
         COMMAND tar -cz --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.gz vmpk-${VERSION}
         COMMAND rm -rf vmpk-${VERSION}
@@ -170,17 +170,17 @@ IF (UNIX)
 ENDIF (UNIX)
 
 IF (UNIX AND NOT APPLE)
-    INSTALL ( FILES
-        AUTHORS
-        ChangeLog
-        COPYING
-        NEWS
-        README
-        TODO
-    DESTINATION 
-        share/doc/packages/vmpk
-    )
-    
+    #INSTALL ( FILES
+    #    AUTHORS
+    #    ChangeLog
+    #    COPYING
+    #    NEWS
+    #    README
+    #    TODO
+    #DESTINATION 
+    #    share/doc/packages/vmpk
+    #)
+
     INSTALL ( FILES
         data/azerty.xml
         data/vkeybd-default.xml

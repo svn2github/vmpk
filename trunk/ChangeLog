@@ -1,3 +1,9 @@
+2009-06-07
+    * private development files excluded from the tarball
+    * don't install documents, leave it to packagers
+    * removed shebang from the txt2ins.awk script
+    * man page, by Mehdi Dogguy. Thanks!
+
 2009-05-31
     * release 0.2.5
 

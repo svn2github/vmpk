@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" 
+"/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+  <!ENTITY debian "Debian GNU/Linux">
+  <!ENTITY dhprg  "<command>vmpk</command>">
+]>
+
+<!--**********************************************************************-->
+<!-- Vmpk manpage                                                         -->
+<!--                                                                      -->
+<!-- Copyright (C) 2009 Mehdi Dogguy <dogguy@pps.jussieu.fr>              -->
+<!--                                                                      -->
+<!-- You have permission to copy, modify, and redistribute under the terms-->
+<!-- of the GNU GPL-3.0. For full license terms, see                      -->
+<!-- `/usr/share/common-licenses/GPL-3'.                                  -->
+<!--                                                                      -->
+<!--**********************************************************************-->
+
+<refentry>
+
+  <refentryinfo>
+    <author>
+      <firstname>Mehdi</firstname>
+      <surname>Dogguy</surname>
+      <email>dogguy@pps.jussieu.fr</email>
+      <personblurb><para></para></personblurb>
+    </author>
+    <copyright>
+      <year>2009</year>
+      <holder>Mehdi Dogguy</holder>
+    </copyright>
+    <date>June 7, 2009</date>
+  </refentryinfo>
+
+  <refmeta>
+    <refentrytitle>vmpk</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class="software">vmpk</refmiscinfo>
+    <refmiscinfo class="manual">User Commands</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>&dhprg;</refname>
+    <refpurpose>Virtual MIDI Piano Keyboard</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      &dhprg; 
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para>This manual page documents briefly the &dhprg; program.</para>
+
+    <para>This program has no command-line options.</para>
+
+    <para>Virtual MIDI Piano Keyboard is a MIDI events generator and
+      receiver. It doesn't produce any sound by itself, but can be used to
+      drive a MIDI synthesizer (either hardware or software, internal or
+      external). You can use the computer's keyboard to play MIDI notes,
+      and also the mouse. You can use the Virtual MIDI Piano Keyboard to
+      display the played MIDI notes from another instrument or MIDI file
+      player.
+    </para>
+
+  </refsect1>
+
+  <refsect1>
+    <title>LICENSE</title>
+
+    <para>
+      This manual page was written by 
+      <personname>
+	<firstname>Mehdi</firstname>
+	<surname>Dogguy</surname>
+      </personname>
+      <email>dogguy@pps.jussieu.fr</email>
+      for the Debian GNU/Linux system (but may be used by others).
+      Permission is granted to copy, distribute and/or modify this document
+      under the terms of the <acronym>GNU</acronym> General Public
+      License, Version 3 or any later version published by the Free
+      Software Foundation; considering as source code all the file that
+      enable the production of this manpage.
+    </para>
+  </refsect1>
+
+</refentry>
