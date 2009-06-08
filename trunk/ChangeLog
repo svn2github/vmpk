@@ -1,4 +1,7 @@
 2009-06-07
+    * fixed release/grab keyboard and SoundFont import dialog
+
+2009-06-07
     * private development files excluded from the tarball
     * don't install documents, leave it to packagers
     * removed shebang from the txt2ins.awk script
