@@ -46,7 +46,7 @@
 
   <refsynopsisdiv>
     <cmdsynopsis>
-      <command>&dhprg;</command> 
+      &dhprg; 
       <arg choice="opt">Standard options...</arg>
     </cmdsynopsis>
   </refsynopsisdiv>

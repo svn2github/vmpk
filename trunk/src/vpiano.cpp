@@ -953,11 +953,12 @@ void VPiano::updateKnobs()
 void VPiano::slotImportSF()
 {
     RiffImportDlg dlg;
+    releaseKb();
     if ((dlg.exec() == QDialog::Accepted) && !dlg.getOutput().isEmpty()) {
         dlg.save();
         dlgPreferences.setInstrumentsFileName(dlg.getOutput());
         dlgPreferences.setInstrumentName(dlg.getName());
         applyPreferences();
     }
+    grabKb();
 }
-
