@@ -1,4 +1,4 @@
 #!/bin/bash
 cmake . -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_CXX_FLAGS="-W -Wall -fexceptions" \
-        -DCMAKE_BUILD_TYPE=Debug
+        -DCMAKE_BUILD_TYPE=debug

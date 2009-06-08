@@ -47,6 +47,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc NEWS README ChangeLog AUTHORS TODO COPYING
+%doc %{_mandir}/*
 %dir %{_datadir}/%name
 %dir %{_datadir}/icons/hicolor
 %dir %{_datadir}/icons/hicolor/16x16

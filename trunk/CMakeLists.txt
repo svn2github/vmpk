@@ -27,6 +27,8 @@ SET(CMAKE_USE_RELATIVE_PATHS OFF)
 SET(CMAKE_COLOR_MAKEFILE ON)
 SET(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 SET(CMAKE_SKIP_RULE_DEPENDENCY FALSE)
+SET(CMAKE_CXX_FLAGS_DEBUG "-g -DQT_DEBUG -DDEBUG")
+SET(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG -DNDEBUG")
 
 # Additional CMake modules for 3rd party library checks reside here
 SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
@@ -161,6 +163,7 @@ IF (UNIX)
         COMMAND cp -r data vmpk-${VERSION}
         COMMAND cp -r src vmpk-${VERSION}
         COMMAND cp -r translations vmpk-${VERSION}
+        COMMAND cp -r man vmpk-${VERSION}
         COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.desktop vmpk.pro vmpk.spec.in vmpk-${VERSION}
         COMMAND tar -cj --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
         COMMAND tar -cz --exclude CVS --exclude .cvsignore -f vmpk-${VERSION}.tar.gz vmpk-${VERSION}
@@ -229,6 +232,12 @@ IF (UNIX AND NOT APPLE)
         vmpk.desktop
     DESTINATION 
         share/applications
+    )
+    
+    INSTALL ( FILES
+        man/vmpk.1
+    DESTINATION 
+        share/man/man1
     )
 ENDIF (UNIX AND NOT APPLE)
 
