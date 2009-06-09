@@ -43,7 +43,7 @@ http://sourceforge.net/projects/vmpk
 
 REQUIREMENTS
 
-You need Qt 4.3 or newer. Install the -devel package for your system, or 
+You need Qt 4.4 or newer. Install the -devel package for your system, or 
 download the open source edition from Trolltech:
 
     http://trolltech.com/downloads/opensource

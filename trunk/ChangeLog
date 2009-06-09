@@ -1,3 +1,7 @@
+2009-06-08
+    * check for Qt version >= 4.4.0
+    * updated documentation
+
 2009-06-07
     * fixed release/grab keyboard and SoundFont import dialog
 
