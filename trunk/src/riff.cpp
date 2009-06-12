@@ -167,10 +167,10 @@ void Riff::processPHDR(int size)
         pc = read16bit();
         bank = read16bit();
         skip(14);
-	if (bank < 128)
+        if (bank < 128)
             emit signalInstrument(bank, pc, QString(name));
-	else
-    	    emit signalPercussion(bank, pc, QString(name));
+        else
+            emit signalPercussion(bank, pc, QString(name));
         //qDebug() << "Instrument: " << bank << pc << name;
     }
     skip(38);

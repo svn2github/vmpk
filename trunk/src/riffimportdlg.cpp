@@ -66,7 +66,11 @@ void RiffImportDlg::setInput(QString fileName)
     QFileInfo f(fileName);
     if (f.exists()) {
         ui->m_input->setText(m_input = fileName);
+#if QT_VERSION < 0x040400
+        QDir dir = QDir::home();
+#else
         QDir dir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+#endif
         QString fullFilespec = dir.absoluteFilePath(f.baseName() + ".ins");
         setOutput(fullFilespec);
     }
