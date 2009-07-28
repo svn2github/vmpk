@@ -35,15 +35,12 @@
 */
 /**********************************************************************/
 
-// RtMidi: Version 1.0.8
+// RtMidi: Version 1.0.10
 
 // Modifications for VMPK:
 
-// VMPK doesn't need timestamping incoming MIDI events
-// avoiding ALSA sequencer queues saves limited resources
-// #ifndef AVOID_TIMESTAMPING
-//    ALSA sequencer queue code.
-// #endif
+// ~RtMidi() destructor:
+// snd_seq_close() should be called unconditionally of AVOID_TIMESTAMPING
 
 #include "RtMidi.h"
 #include <sstream>
@@ -163,7 +160,7 @@ RtMidiOut :: RtMidiOut( const std::string clientName ) : RtMidi()
 //*********************************************************************//
 
 // API information found at:
-//   - http://developer. apple .com/audio/pdf/coreaudio.pdf
+//   - http://developer.apple.com/audio/pdf/coreaudio.pdf 
 
 #if defined(__MACOSX_CORE__)
 
@@ -365,7 +362,7 @@ void RtMidiIn :: openPort( unsigned int portNumber, const std::string portName )
 
   MIDIPortRef port;
   CoreMidiData *data = static_cast<CoreMidiData *> (apiData_);
-  OSStatus result = MIDIInputPortCreate( data->client,
+  OSStatus result = MIDIInputPortCreate( data->client, 
                                          CFStringCreateWithCString( NULL, portName.c_str(), kCFStringEncodingASCII ),
                                          midiInputCallback, (void *)&inputData_, &port );
   if ( result != noErr ) {
@@ -442,6 +439,130 @@ unsigned int RtMidiIn :: getPortCount()
   return MIDIGetNumberOfSources();
 }
 
+// This function was submitted by Douglas Casey Tucker and apparently
+// derived largely from PortMidi.
+CFStringRef EndpointName( MIDIEndpointRef endpoint, bool isExternal )
+{
+  CFMutableStringRef result = CFStringCreateMutable( NULL, 0 );
+  CFStringRef str;
+
+  // Begin with the endpoint's name.
+  str = NULL;
+  MIDIObjectGetStringProperty( endpoint, kMIDIPropertyName, &str );
+  if ( str != NULL ) {
+    CFStringAppend( result, str );
+    CFRelease( str );
+  }
+
+  MIDIEntityRef entity = NULL;
+  MIDIEndpointGetEntity( endpoint, &entity );
+  if ( entity == NULL )
+    // probably virtual
+    return result;
+
+  if ( CFStringGetLength( result ) == 0 ) {
+    // endpoint name has zero length -- try the entity
+    str = NULL;
+    MIDIObjectGetStringProperty( entity, kMIDIPropertyName, &str );
+    if ( str != NULL ) {
+      CFStringAppend( result, str );
+      CFRelease( str );
+    }
+  }
+  // now consider the device's name
+  MIDIDeviceRef device = NULL;
+  MIDIEntityGetDevice( entity, &device );
+  if ( device == NULL )
+    return result;
+
+  str = NULL;
+  MIDIObjectGetStringProperty( device, kMIDIPropertyName, &str );
+  if ( CFStringGetLength( result ) == 0 ) {
+      CFRelease( result );
+      return str;
+  }
+  if ( str != NULL ) {
+    // if an external device has only one entity, throw away
+    // the endpoint name and just use the device name
+    if ( isExternal && MIDIDeviceGetNumberOfEntities( device ) < 2 ) {
+      CFRelease( result );
+      return str;
+    } else {
+      if ( CFStringGetLength( str ) == 0 ) {
+        CFRelease( str );
+        return result;
+      }
+      // does the entity name already start with the device name?
+      // (some drivers do this though they shouldn't)
+      // if so, do not prepend
+        if ( CFStringCompareWithOptions( result, /* endpoint name */
+             str /* device name */,
+             CFRangeMake(0, CFStringGetLength( str ) ), 0 ) != kCFCompareEqualTo ) {
+        // prepend the device name to the entity name
+        if ( CFStringGetLength( result ) > 0 )
+          CFStringInsert( result, 0, CFSTR(" ") );
+        CFStringInsert( result, 0, str );
+      }
+      CFRelease( str );
+    }
+  }
+  return result;
+}
+
+// This function was submitted by Douglas Casey Tucker and apparently
+// derived largely from PortMidi.
+static CFStringRef ConnectedEndpointName( MIDIEndpointRef endpoint )
+{
+  CFMutableStringRef result = CFStringCreateMutable( NULL, 0 );
+  CFStringRef str;
+  OSStatus err;
+  int i;
+
+  // Does the endpoint have connections?
+  CFDataRef connections = NULL;
+  int nConnected = 0;
+  bool anyStrings = false;
+  err = MIDIObjectGetDataProperty( endpoint, kMIDIPropertyConnectionUniqueID, &connections );
+  if ( connections != NULL ) {
+    // It has connections, follow them
+    // Concatenate the names of all connected devices
+    nConnected = CFDataGetLength( connections ) / sizeof(MIDIUniqueID);
+    if ( nConnected ) {
+      const SInt32 *pid = (const SInt32 *)(CFDataGetBytePtr(connections));
+      for ( i=0; i<nConnected; ++i, ++pid ) {
+        MIDIUniqueID id = EndianS32_BtoN( *pid );
+        MIDIObjectRef connObject;
+        MIDIObjectType connObjectType;
+        err = MIDIObjectFindByUniqueID( id, &connObject, &connObjectType );
+        if ( err == noErr ) {
+          if ( connObjectType == kMIDIObjectType_ExternalSource  ||
+              connObjectType == kMIDIObjectType_ExternalDestination ) {
+            // Connected to an external device's endpoint (10.3 and later).
+            str = EndpointName( (MIDIEndpointRef)(connObject), true );
+          } else {
+            // Connected to an external device (10.2) (or something else, catch-
+            str = NULL;
+            MIDIObjectGetStringProperty( connObject, kMIDIPropertyName, &str );
+          }
+          if ( str != NULL ) {
+            if ( anyStrings )
+              CFStringAppend( result, CFSTR(", ") );
+            else anyStrings = true;
+            CFStringAppend( result, str );
+            CFRelease( str );
+          }
+        }
+      }
+    }
+    CFRelease( connections );
+  }
+  if ( anyStrings )
+    return result;
+
+  // Here, either the endpoint had no connections, or we failed to obtain names 
+  return EndpointName( endpoint, false );
+}
+
 std::string RtMidiIn :: getPortName( unsigned int portNumber )
 {
   CFStringRef nameRef;
@@ -456,7 +577,10 @@ std::string RtMidiIn :: getPortName( unsigned int portNumber )
   }
   portRef = MIDIGetSource( portNumber );
 
-  MIDIObjectGetStringProperty( portRef, kMIDIPropertyName, &nameRef );
+  nameRef = ConnectedEndpointName(portRef);
+  //MIDIObjectGetStringProperty( portRef, kMIDIPropertyName, &nameRef );
+  // modified by D. Casey Tucker 2009-03-10
+
   CFStringGetCString( nameRef, name, sizeof(name), 0);
   CFRelease( nameRef );
   std::string stringName = name;
@@ -487,7 +611,8 @@ std::string RtMidiOut :: getPortName( unsigned int portNumber )
   }
   portRef = MIDIGetDestination( portNumber );
 
-  MIDIObjectGetStringProperty( portRef, kMIDIPropertyName, &nameRef );
+  nameRef = ConnectedEndpointName(portRef);
+  //MIDIObjectGetStringProperty( portRef, kMIDIPropertyName, &nameRef );
   CFStringGetCString( nameRef, name, sizeof(name), 0);
   CFRelease( nameRef );
   std::string stringName = name;
@@ -534,7 +659,7 @@ void RtMidiOut :: openPort( unsigned int portNumber, const std::string portName 
 
   MIDIPortRef port;
   CoreMidiData *data = static_cast<CoreMidiData *> (apiData_);
-  OSStatus result = MIDIOutputPortCreate( data->client,
+  OSStatus result = MIDIOutputPortCreate( data->client, 
                                           CFStringCreateWithCString( NULL, portName.c_str(), kCFStringEncodingASCII ),
                                           &port );
   if ( result != noErr ) {
@@ -610,20 +735,20 @@ void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
   // send via separate lists.
   unsigned int nBytes = message->size();
   if ( nBytes == 0 ) {
-    errorString_ = "RtMidiOut::sendMessage: no data in message argument!";
+    errorString_ = "RtMidiOut::sendMessage: no data in message argument!";      
     error( RtError::WARNING );
     return;
   }
 
   if ( nBytes > 3 && ( message->at(0) != 0xF0 ) ) {
-    errorString_ = "RtMidiOut::sendMessage: message format problem ... not sysex but > 3 bytes?";
+    errorString_ = "RtMidiOut::sendMessage: message format problem ... not sysex but > 3 bytes?";      
     error( RtError::WARNING );
     return;
   }
 
   unsigned int packetBytes, bytesLeft = nBytes;
   unsigned int messageIndex = 0;
-  MIDITimeStamp timeStamp = 0;
+  MIDITimeStamp timeStamp = AudioGetCurrentHostTime();
   CoreMidiData *data = static_cast<CoreMidiData *> (apiData_);
 
   while ( bytesLeft > 0 ) {
@@ -635,7 +760,7 @@ void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
 
     curPacket = MIDIPacketListAdd( packetList, packetBytes+32, curPacket, timeStamp, packetBytes, (const Byte *) &message->at( messageIndex ) );
     if ( !curPacket ) {
-      errorString_ = "RtMidiOut::sendMessage: could not allocate packet list";
+      errorString_ = "RtMidiOut::sendMessage: could not allocate packet list";      
       error( RtError::DRIVER_ERROR );
     }
     messageIndex += packetBytes;
@@ -679,6 +804,10 @@ void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
 //
 // Thanks to Pedro Lopez-Cabanillas for help with the ALSA sequencer
 // time stamps and other assorted fixes!!!
+
+// If you don't need timestamping for incoming MIDI events, define the
+// preprocessor definition AVOID_TIMESTAMPING to save resources
+// associated with the ALSA sequencer queues.
 
 #include <pthread.h>
 #include <sys/time.h>
@@ -770,13 +899,12 @@ extern "C" void *alsaMidiHandler( void *ptr )
 		case SND_SEQ_EVENT_PORT_UNSUBSCRIBED:
 #if defined(__RTMIDI_DEBUG__)
       std::cerr << "RtMidiIn::alsaMidiHandler: port connection has closed!\n";
-      // FIXME: this is called for all unsubscribe events, even ones
-      //not related to this particular connection.  As it stands, I
-      //see no data provided in the "source" and "dest" fields so
-      //there is nothing we can do about this at this time.
-      // std::cout << "sender = " << ev->source.client << ", dest = " << ev->dest.port << std::endl;
+      std::cout << "sender = " << (int) ev->data.connect.sender.client << ":"
+                               << (int) ev->data.connect.sender.port
+                << ", dest = " << (int) ev->data.connect.dest.client << ":"
+                               << (int) ev->data.connect.dest.port
+                << std::endl;
 #endif
-      //data->doInput = false;
       break;
 
     case SND_SEQ_EVENT_QFRAME: // MIDI time code
@@ -969,12 +1097,12 @@ void RtMidiIn :: openPort( unsigned int portNumber, const std::string portName )
     snd_seq_port_info_set_midi_channels(pinfo, 16);
 #ifndef AVOID_TIMESTAMPING
     snd_seq_port_info_set_timestamping(pinfo, 1);
-    snd_seq_port_info_set_timestamp_real(pinfo, 1);
+    snd_seq_port_info_set_timestamp_real(pinfo, 1);    
     snd_seq_port_info_set_timestamp_queue(pinfo, data->queue_id);
 #endif
     snd_seq_port_info_set_name(pinfo,  portName.c_str() );
     data->vport = snd_seq_create_port(data->seq, pinfo);
-
+  
     if ( data->vport < 0 ) {
       errorString_ = "RtMidiIn::openPort: ALSA error creating input port.";
       error( RtError::DRIVER_ERROR );
@@ -1034,7 +1162,7 @@ void RtMidiIn :: openVirtualPort( std::string portName )
     snd_seq_port_info_set_midi_channels(pinfo, 16);
 #ifndef AVOID_TIMESTAMPING
     snd_seq_port_info_set_timestamping(pinfo, 1);
-    snd_seq_port_info_set_timestamp_real(pinfo, 1);
+    snd_seq_port_info_set_timestamp_real(pinfo, 1);    
     snd_seq_port_info_set_timestamp_queue(pinfo, data->queue_id);
 #endif
     snd_seq_port_info_set_name(pinfo, portName.c_str());
@@ -1792,7 +1920,7 @@ struct WinMidiData {
 //*********************************************************************//
 
 static void CALLBACK midiInputCallback( HMIDIOUT hmin,
-                                        UINT inputStatus,
+                                        UINT inputStatus, 
                                         DWORD instancePtr,
                                         DWORD midiMessage,
                                         DWORD timestamp )
@@ -1840,8 +1968,8 @@ static void CALLBACK midiInputCallback( HMIDIOUT hmin,
     for ( int i=0; i<nBytes; i++ ) apiData->message.bytes.push_back( *ptr++ );
   }
   else { // Sysex message ( MIM_LONGDATA )
-    MIDIHDR *sysex = ( MIDIHDR *) midiMessage;
-    if ( !( data->ignoreFlags & 0x01 ) ) {
+    MIDIHDR *sysex = ( MIDIHDR *) midiMessage; 
+    if ( !( data->ignoreFlags & 0x01 ) ) {  
       // Sysex message and we're not ignoring it
       for ( int i=0; i<(int)sysex->dwBytesRecorded; i++ )
         apiData->message.bytes.push_back( sysex->lpData[i] );
@@ -2168,7 +2296,7 @@ void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
     sysex.lpData = (LPSTR) buffer;
     sysex.dwBufferLength = nBytes;
     sysex.dwFlags = 0;
-    result = midiOutPrepareHeader( data->outHandle,  &sysex, sizeof(MIDIHDR) );
+    result = midiOutPrepareHeader( data->outHandle,  &sysex, sizeof(MIDIHDR) ); 
     if ( result != MMSYSERR_NOERROR ) {
       free( buffer );
       errorString_ = "RtMidiOut::sendMessage: error preparing sysex header.";

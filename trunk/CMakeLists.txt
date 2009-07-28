@@ -27,7 +27,7 @@ SET(CMAKE_USE_RELATIVE_PATHS OFF)
 SET(CMAKE_COLOR_MAKEFILE ON)
 SET(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 SET(CMAKE_SKIP_RULE_DEPENDENCY FALSE)
-SET(CMAKE_CXX_FLAGS_DEBUG "-g -DQT_DEBUG -DDEBUG")
+SET(CMAKE_CXX_FLAGS_DEBUG "-g -DQT_DEBUG -DDEBUG -D__RTMIDI_DEBUG__")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG -DNDEBUG")
 
 # Additional CMake modules for 3rd party library checks reside here
@@ -49,31 +49,13 @@ MESSAGE(STATUS "Build configuration: ${CMAKE_BUILD_TYPE}")
 SET(QT_MIN_VERSION "4.4.0")
 FIND_PACKAGE(Qt4 REQUIRED QUIET)
 IF(QT4_FOUND)
-    ADD_DEFINITIONS(${QT_DEFINITIONS})
-    ADD_DEFINITIONS("-DQT_GUI_LIB -DQT_CORE_LIB -DQT_XML_LIB")
-    IF (NOT QT_LIBRARIES)
-        SET(QT_LIBRARIES ${QT_QTCORE_LIBRARY}
-                         ${QT_QTGUI_LIBRARY}
-                         ${QT_QTXML_LIBRARY}
-                         ${QT_CORE_LIB_DEPENDENCIES}
-                         ${QT_GUI_LIB_DEPENDENCIES}
-                         ${QT_XML_LIB_DEPENDENCIES})
-    ENDIF (NOT QT_LIBRARIES)
     MESSAGE(STATUS "Found Qt4.${QT_EDITION} version = ${QTVERSION}")
-    #MESSAGE("QT_DEFINITIONS: ${QT_DEFINITIONS}")
-    #MESSAGE("QT_LIBRARIES: ${QT_LIBRARIES}")
-    #MESSAGE("QT_QTCORE_LIBRARY: ${QT_QTCORE_LIBRARY}")
-    #MESSAGE("QT_QTGUI_LIBRARY: ${QT_QTGUI_LIBRARY}")
-    #MESSAGE("QT_INCLUDES: ${QT_INCLUDES}")
-    #MESSAGE("QT_WRAP_CPP: ${QT_WRAP_CPP}")
-    #MESSAGE("QT_MOC_EXECUTABLE: ${QT_MOC_EXECUTABLE}")
-    #MESSAGE("QT_UIC_EXECUTABLE: ${QT_UIC_EXECUTABLE}")
-    #MESSAGE("QT_LIBRARY_DIR: ${QT_LIBRARY_DIR}")
-    #MESSAGE("QT_INCLUDE_DIR: ${QT_INCLUDE_DIR}")
 ELSE(QT4_FOUND)
-    MESSAGE(FATAL_ERROR "Qt4 not found")
+    MESSAGE(FATAL_ERROR "Qt4 >= 4.4 not found")
 ENDIF(QT4_FOUND)
 
+SET(QT_USE_QTXML TRUE)
+INCLUDE(${QT_USE_FILE})
 INCLUDE_DIRECTORIES(${QT_INCLUDES}) 
 LINK_DIRECTORIES(${QT_LIBRARY_DIR})
 LINK_LIBRARIES(${QT_LIBRARIES})
@@ -174,17 +156,6 @@ IF (UNIX)
 ENDIF (UNIX)
 
 IF (UNIX AND NOT APPLE)
-    #INSTALL ( FILES
-    #    AUTHORS
-    #    ChangeLog
-    #    COPYING
-    #    NEWS
-    #    README
-    #    TODO
-    #DESTINATION 
-    #    share/doc/packages/vmpk
-    #)
-
     INSTALL ( FILES
         data/azerty.xml
         data/vkeybd-default.xml
@@ -199,32 +170,23 @@ IF (UNIX AND NOT APPLE)
     DESTINATION 
         share/vmpk 
     )
-    
-    #INSTALL ( FILES 
-    #    data/vmpk_16x16.png 
-    #    data/vmpk_32x32.png 
-    #    data/vmpk_48x48.png 
-    #    data/vmpk_64x64.png 
-    #DESTINATION 
-    #    share/pixmaps 
-    #)
 
     INSTALL(FILES data/vmpk_16x16.png 
         DESTINATION share/icons/hicolor/16x16/apps   
-	RENAME vmpk.png)
-	
+       RENAME vmpk.png)
+    
     INSTALL(FILES data/vmpk_32x32.png 
         DESTINATION share/icons/hicolor/32x32/apps   
         RENAME vmpk.png)
-	
+    
     INSTALL(FILES data/vmpk_48x48.png 
         DESTINATION share/icons/hicolor/48x48/apps   
         RENAME vmpk.png)
-	
+    
     INSTALL(FILES data/vmpk_64x64.png 
         DESTINATION share/icons/hicolor/64x64/apps   
         RENAME vmpk.png)
-	
+
     INSTALL(FILES data/TheresaKnott_piano.svg
         DESTINATION share/icons/hicolor/scalable/apps   
         RENAME vmpk.svg)
@@ -234,7 +196,7 @@ IF (UNIX AND NOT APPLE)
     DESTINATION 
         share/applications
     )
-    
+
     INSTALL ( FILES
         man/vmpk.1
     DESTINATION 

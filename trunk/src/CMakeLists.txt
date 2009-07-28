@@ -116,13 +116,13 @@ IF (APPLE)
     SET(MACOSX_BUNDLE_GUI_IDENTIFIER "net.sourceforge" )
     SET(MACOSX_BUNDLE_BUNDLE_NAME "vmpk" )
     SET(vmpk_RSC ../data/vmpk.icns
-		 ../data/help.html
-		 ../data/gmgsxg.ins
-    		 ../data/spanish.xml
-    		 ../data/german.xml
-    		 ../data/azerty.xml
-    		 ../data/it-qwerty.xml
-    		 ../data/vkeybd-default.xml)
+             ../data/help.html
+             ../data/gmgsxg.ins
+             ../data/spanish.xml
+             ../data/german.xml
+             ../data/azerty.xml
+             ../data/it-qwerty.xml
+             ../data/vkeybd-default.xml)
     SET_SOURCE_FILES_PROPERTIES(${vmpk_RSC} PROPERTIES
                                 MACOSX_PACKAGE_LOCATION Resources)
     ADD_EXECUTABLE ( vmpk MACOSX_BUNDLE
