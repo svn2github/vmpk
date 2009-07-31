@@ -716,6 +716,8 @@ void VPiano::applyPreferences()
     }
     ui.pianokeybd->setKeyPressedColor(dlgPreferences.getKeyPressedColor());
 
+    ui.pianokeybd->setShowLabels(true); // TODO make it configurable
+
     m_ins = NULL;
     m_comboBank->clear();
     m_comboProg->clear();

@@ -21,6 +21,7 @@
 
 #include "keyboardmap.h"
 #include "pianokey.h"
+#include "keylabel.h"
 #include <QGraphicsScene>
 
 //#define KeyboardMap QHash<int, int>
@@ -54,6 +55,12 @@ public:
     void setMinNote(const int note);
     int getMaxNote() const { return m_maxNote; }
     void setMaxNote(const int note);
+    int getTransport() const { return m_transport; }
+    void setTransport(const int transport);
+    bool showLabels() const { return m_showLabels; }
+    void setShowLabels(const bool show);
+    bool useFlats() const { return m_useFlats; }
+    void setUseFlats(const bool use);
 
     void showNoteOn( const int note );
     void showNoteOff( const int note );
@@ -73,6 +80,7 @@ protected:
     void keyOff( PianoKey* key );
     PianoKey* getKeyForPos( const QPointF& p ) const;
     PianoKey* getPianoKey( const int key ) const;
+    QString noteName(const int note);
 
     void mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent );
@@ -82,16 +90,21 @@ protected:
 
 private:
     void hideOrShowKeys();
-
+    void refreshLabels();
+    
     int m_baseOctave;
     int m_numOctaves;
     int m_minNote;
     int m_maxNote;
+    int m_transport;
+    bool m_showLabels;
+    bool m_useFlats;
     QColor m_keyPressedColor;
     bool m_mousePressed;
     PianoHandler* m_handler;
     KeyboardMap* m_keybdMap;
     QList<PianoKey*> m_keys;
+    QList<KeyLabel*> m_labels;
 };
 
 #endif /*PIANOSCENE_H_*/

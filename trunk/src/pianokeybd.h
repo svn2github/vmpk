@@ -31,6 +31,9 @@ class PianoKeybd : public QGraphicsView
     Q_PROPERTY( int numOctaves READ numOctaves WRITE setNumOctaves )
     Q_PROPERTY( int rotation READ getRotation WRITE setRotation )
     Q_PROPERTY( QColor keyPressedColor READ getKeyPressedColor WRITE setKeyPressedColor )
+    Q_PROPERTY( bool showLabels READ showLabels WRITE setShowLabels )
+    Q_PROPERTY( bool useFlats READ useFlats WRITE setUseFlats )
+    Q_PROPERTY( int transport READ getTransport WRITE setTransport )
 
 public:
     PianoKeybd(QWidget *parent = 0);
@@ -52,6 +55,12 @@ public:
     void setMinNote(int n) { m_scene->setMinNote(n); }
     int maxNote() const { return m_scene->getMaxNote(); }
     void setMaxNote(int n) { m_scene->setMaxNote(n); }
+    int getTransport() const { return m_scene->getTransport(); }
+    void setTransport(int t) { m_scene->setTransport(t); }
+    bool showLabels() const { return m_scene->showLabels(); }
+    void setShowLabels(bool show) { m_scene->setShowLabels(show); }
+    bool useFlats() const { return m_scene->useFlats(); }
+    void setUseFlats(bool use) { m_scene->setUseFlats(use); }
 
 public slots:
     void showNoteOn( int midiNote );

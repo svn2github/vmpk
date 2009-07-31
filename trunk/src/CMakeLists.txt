@@ -46,6 +46,8 @@ SET(vmpk_SRCS
     instrument.h
     keyboardmap.cpp
     keyboardmap.h
+    keylabel.cpp
+    keylabel.h
     kmapdialog.cpp
     kmapdialog.h
     knob.cpp

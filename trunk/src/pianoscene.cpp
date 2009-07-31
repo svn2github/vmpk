@@ -18,6 +18,7 @@
 
 #include "pianoscene.h"
 #include "pianokey.h"
+#include "keylabel.h"
 
 #include <QApplication>
 #include <QPalette>
@@ -36,6 +37,9 @@ PianoScene::PianoScene ( const int baseOctave,
     m_numOctaves( numOctaves ),
     m_minNote( 0 ),
     m_maxNote( 127 ),
+    m_transport( 0 ),
+    m_showLabels( false ),
+    m_useFlats( false ),
     m_keyPressedColor( keyPressedColor ),
     m_mousePressed( false ),
     m_handler( NULL )
@@ -46,22 +50,33 @@ PianoScene::PianoScene ( const int baseOctave,
     int i, numkeys = m_numOctaves * 12;
     for(i = 0; i < numkeys; ++i)
     {
+        float x = 0;
         PianoKey* key = NULL;
+        KeyLabel* lbl = NULL;
         int octave = i / 12 * 7;
         int j = i % 12;
         if (j >= 5) j++;
         if ((j % 2) == 0) {
-            float x = (octave + j / 2) * KEYWIDTH;
+            x = (octave + j / 2) * KEYWIDTH;
             key = new PianoKey( QRectF(x, 0, KEYWIDTH, KEYHEIGHT), whiteBrush, i );
+            lbl = new KeyLabel(key);
+            lbl->setDefaultTextColor(Qt::black);
+            lbl->setPos(x, KEYHEIGHT);
         } else {
-            float x = (octave + j / 2) * KEYWIDTH + KEYWIDTH * 6/10 + 1;
+            x = (octave + j / 2) * KEYWIDTH + KEYWIDTH * 6/10 + 1;
             key = new PianoKey( QRectF( x, 0, KEYWIDTH * 8/10 - 1, KEYHEIGHT * 6/10 ), blackBrush, i );
             key->setZValue( 1 );
+            lbl = new KeyLabel(key);
+            lbl->setDefaultTextColor(Qt::white);
+            lbl->setPos(x - 3, KEYHEIGHT * 6/10);
         }
         if (m_keyPressedColor.isValid())
             key->setPressedBrush(hilightBrush);
         m_keys.insert(i, key);
         addItem( key );
+        lbl->setHtml(noteName(i));
+        lbl->setVisible(m_showLabels);
+        m_labels.insert(i, lbl);
     }
     hideOrShowKeys();
 }
@@ -83,7 +98,7 @@ void PianoScene::showKeyOff( PianoKey* key )
 
 void PianoScene::showNoteOn( const int note )
 {
-    int n = note - m_baseOctave*12;
+    int n = note - m_baseOctave*12 - m_transport;
     if ((note >= m_minNote) && (note <= m_maxNote) &&
         (n >= 0) && (n < m_keys.size()))
         showKeyOn(m_keys[n]);
@@ -91,7 +106,7 @@ void PianoScene::showNoteOn( const int note )
 
 void PianoScene::showNoteOff( const int note )
 {
-    int n = note - m_baseOctave*12;
+    int n = note - m_baseOctave*12 - m_transport;
     if ((note >= m_minNote) && (note <= m_maxNote) &&
         (n >= 0) && (n < m_keys.size()))
         showKeyOff(m_keys[n]);
@@ -99,7 +114,7 @@ void PianoScene::showNoteOff( const int note )
 
 void PianoScene::keyOn( PianoKey* key )
 {
-    int n = m_baseOctave*12 + key->getNote();
+    int n = m_baseOctave*12 + key->getNote() + m_transport;
     if ((n >= m_minNote) && (n <= m_maxNote)) {
         if (m_handler != NULL) {
             m_handler->noteOn(n);
@@ -112,7 +127,7 @@ void PianoScene::keyOn( PianoKey* key )
 
 void PianoScene::keyOff( PianoKey* key )
 {
-    int n = m_baseOctave*12 + key->getNote();
+    int n = m_baseOctave*12 + key->getNote() + m_transport;
     if ((n >= m_minNote) && (n <= m_maxNote)) {
         if (m_handler != NULL) {
             m_handler->noteOff(n);
@@ -126,6 +141,8 @@ void PianoScene::keyOff( PianoKey* key )
 PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
 {
     QGraphicsItem *itm = itemAt(p);
+    while (itm != NULL && itm->parentItem() != NULL)
+        itm = itm->parentItem();
     if (itm != NULL) {
         PianoKey* key = dynamic_cast<PianoKey*>(itm);
         return key;
@@ -141,7 +158,7 @@ void PianoScene::mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent )
         if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed()) {
             keyOff(lastkey);
         }
-        if ((key != NULL) && !key->isPressed()) {
+        if ((key != NULL) && !key->isPressed()) { 
             keyOn(key);
         }
         mouseEvent->accept();
@@ -164,7 +181,7 @@ void PianoScene::mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent )
 
 void PianoScene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
 {
-    m_mousePressed = false;
+    m_mousePressed = false; 
     PianoKey* key = getKeyForPos(mouseEvent->scenePos());
     if (key != NULL) {
         keyOff(key);
@@ -189,7 +206,7 @@ PianoKey* PianoScene::getPianoKey( const int key ) const
 
 void PianoScene::keyPressEvent ( QKeyEvent * keyEvent )
 {
-    if (!keyEvent->isAutoRepeat()) { // ignore auto-repeats
+    if (!keyEvent->isAutoRepeat()) { // ignore auto-repeats 
         PianoKey* key = getPianoKey(keyEvent->key());
         if (key != NULL) {
             keyOn(key);
@@ -233,7 +250,7 @@ void PianoScene::hideOrShowKeys()
     QListIterator<PianoKey*> it(m_keys);
     while(it.hasNext()) {
         PianoKey* key = it.next();
-        int n = m_baseOctave*12 + key->getNote();
+        int n = m_baseOctave*12 + key->getNote() + m_transport;
         bool b = !(n > m_maxNote) && !(n < m_minNote);
         key->setVisible(b);
     }
@@ -241,19 +258,77 @@ void PianoScene::hideOrShowKeys()
 
 void PianoScene::setMinNote(const int note)
 {
-    m_minNote = note;
-    hideOrShowKeys();
+    if (m_minNote != note) {
+        m_minNote = note;
+        hideOrShowKeys();
+    }
 }
 
 void PianoScene::setMaxNote(const int note)
 {
-    m_maxNote = note;
-    hideOrShowKeys();
+    if (m_maxNote != note) {
+        m_maxNote = note;
+        hideOrShowKeys();
+    }
 }
 
 void PianoScene::setBaseOctave(const int base)
-{
-    m_baseOctave = base;
-    hideOrShowKeys();
+{ 
+    if (m_baseOctave != base) {
+        m_baseOctave = base;
+        hideOrShowKeys();
+        refreshLabels();
+    }
 }
 
+QString PianoScene::noteName(const int note)
+{
+    const QString m_names_s[] = {trUtf8("C"), trUtf8("C♯"), trUtf8("D"), trUtf8("D♯"), trUtf8("E"),
+                                 trUtf8("F"), trUtf8("F♯"), trUtf8("G"), trUtf8("G♯"),
+                                 trUtf8("A"), trUtf8("A♯"), trUtf8("B")};
+    const QString m_names_f[] = {trUtf8("C"), trUtf8("D♭"), trUtf8("D"), trUtf8("E♭"), trUtf8("E"),
+                                 trUtf8("F"), trUtf8("G♭"), trUtf8("G"), trUtf8("A♭"),
+                                 trUtf8("A"), trUtf8("B♭"), trUtf8("B")};
+    int num = (note + m_transport + 12) % 12;
+    int oct = m_baseOctave + ((note + m_transport) / 12) - 1;
+    QString name = m_useFlats ? m_names_f[num] : m_names_s[num];
+    return QString("%1<span style='vertical-align:sub;'>%2</span>").arg(name).arg(oct);
+}
+
+void PianoScene::refreshLabels()
+{
+    QListIterator<KeyLabel*> it(m_labels);
+    while(it.hasNext()) {
+        KeyLabel* lbl = it.next();
+        PianoKey* key = dynamic_cast<PianoKey*>(lbl->parentItem());
+        if(key != NULL) {
+            lbl->setHtml(noteName(key->getNote()));
+            lbl->setVisible(m_showLabels);
+        }
+    }
+}
+
+void PianoScene::setShowLabels(bool show)
+{
+    if (m_showLabels != show) {
+        m_showLabels = show;
+        refreshLabels();
+    }
+}
+
+void PianoScene::setUseFlats(bool use)
+{
+    if (m_useFlats != use) {
+        m_useFlats = use;
+        refreshLabels();
+    }
+}
+
+void PianoScene::setTransport(const int transport)
+{
+    if (m_transport != transport && transport > -12 && transport < 12) {
+        m_transport = transport;
+        hideOrShowKeys();
+        refreshLabels();
+    }
+}
