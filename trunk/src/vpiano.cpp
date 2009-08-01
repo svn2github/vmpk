@@ -281,6 +281,7 @@ void VPiano::readSettings()
     bool grabKb = settings.value(QSTR_GRABKB, false).toBool();
     bool styledKnobs = settings.value(QSTR_STYLEDKNOBS, true).toBool();
     bool alwaysOnTop = settings.value(QSTR_ALWAYSONTOP, false).toBool();
+    bool showNames = settings.value(QSTR_SHOWNOTENAMES, false).toBool();
     settings.endGroup();
 
     dlgPreferences.setNumOctaves(num_octaves);
@@ -288,6 +289,7 @@ void VPiano::readSettings()
     dlgPreferences.setGrabKeyboard(grabKb);
     dlgPreferences.setStyledKnobs(styledKnobs);
     dlgPreferences.setAlwaysOnTop(alwaysOnTop);
+    dlgPreferences.setShowNames(showNames);
     if (!insFileName.isEmpty()) {
         dlgPreferences.setInstrumentsFileName(insFileName);
         if (!insName.isEmpty()) {
@@ -361,6 +363,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_GRABKB, dlgPreferences.getGrabKeyboard());
     settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences.getStyledKnobs());
     settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences.getAlwaysOnTop());
+    settings.setValue(QSTR_SHOWNOTENAMES, dlgPreferences.getShowNames());
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONNECTIONS);
@@ -715,8 +718,7 @@ void VPiano::applyPreferences()
         ui.pianokeybd->setNumOctaves(dlgPreferences.getNumOctaves());
     }
     ui.pianokeybd->setKeyPressedColor(dlgPreferences.getKeyPressedColor());
-
-    ui.pianokeybd->setShowLabels(true); // TODO make it configurable
+    ui.pianokeybd->setShowLabels(dlgPreferences.getShowNames());
 
     m_ins = NULL;
     m_comboBank->clear();

@@ -30,7 +30,8 @@ Preferences::Preferences(QWidget *parent)
     m_numOctaves(5),
     m_grabKb(false),
     m_styledKnobs(true),
-    m_alwaysOnTop(false)
+    m_alwaysOnTop(false),
+    m_showLabels(false)
 {
     ui.setupUi( this );
     connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotButtonClicked(QAbstractButton*)));
@@ -52,6 +53,7 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.chkGrabKb->setChecked( m_grabKb );
         ui.chkStyledKnobs->setChecked( m_styledKnobs );
         ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
+        ui.chkShowNames->setChecked( m_showLabels );
     }
 }
 
@@ -62,6 +64,7 @@ void Preferences::apply()
     m_grabKb = ui.chkGrabKb->isChecked();
     m_styledKnobs = ui.chkStyledKnobs->isChecked();
     m_alwaysOnTop = ui.chkAlwaysOnTop->isChecked();
+    m_showLabels = ui.chkShowNames->isChecked();
 }
 
 void Preferences::accept()

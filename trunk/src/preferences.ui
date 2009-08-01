@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>240</height>
+    <height>265</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -20,7 +20,7 @@
    <string>Preferences</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="3">
+   <item row="0" column="0">
     <widget class="QLabel" name="lblNumOctaves">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -36,7 +36,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="3">
+   <item row="0" column="2">
     <widget class="QSpinBox" name="spinNumOctaves">
      <property name="whatsThis">
       <string>The number of octaves, from 1 to 10. Each octave has 12 keys: 7 white and 5 black. The MIDI standard has 128 notes, but not all instruments can play all of them.</string>
@@ -81,7 +81,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="3">
+   <item row="1" column="2">
     <widget class="QPushButton" name="btnColor">
      <property name="whatsThis">
       <string>Press this button to change the highligh color used to paint the keys that are being activated.</string>
@@ -123,7 +123,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="3">
+   <item row="2" column="2">
     <widget class="QPushButton" name="btnInstrument">
      <property name="whatsThis">
       <string>Press this button to load an instruments definition file from disk.</string>
@@ -202,7 +202,17 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item row="7" column="0" colspan="4">
+   <item row="7" column="0" colspan="2">
+    <widget class="QCheckBox" name="chkShowNames">
+     <property name="whatsThis">
+      <string>Check this box to display the note names over the piano keys.</string>
+     </property>
+     <property name="text">
+      <string>Show Note Names</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="3">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
