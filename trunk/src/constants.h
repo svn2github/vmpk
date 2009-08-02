@@ -44,7 +44,7 @@ const QString QSTR_PREFERENCES("Preferences");
 const QString QSTR_CHANNEL("Channel");
 const QString QSTR_VELOCITY("Velocity");
 const QString QSTR_BASEOCTAVE("BaseOctave");
-const QString QSTR_TRANSPORT("Transport");
+const QString QSTR_TRANSPOSE("Transpose");
 const QString QSTR_NUMOCTAVES("NumOctaves");
 const QString QSTR_INSTRUMENTSDEFINITION("InstrumentsDefinition");
 const QString QSTR_INSTRUMENTNAME("InstrumentName");

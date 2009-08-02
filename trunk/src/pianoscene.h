@@ -55,8 +55,8 @@ public:
     void setMinNote(const int note);
     int getMaxNote() const { return m_maxNote; }
     void setMaxNote(const int note);
-    int getTransport() const { return m_transport; }
-    void setTransport(const int transport);
+    int getTranspose() const { return m_transpose; }
+    void setTranspose(const int transpose);
     bool showLabels() const { return m_showLabels; }
     void setShowLabels(const bool show);
     bool useFlats() const { return m_useFlats; }
@@ -96,7 +96,7 @@ private:
     int m_numOctaves;
     int m_minNote;
     int m_maxNote;
-    int m_transport;
+    int m_transpose;
     bool m_showLabels;
     bool m_useFlats;
     QColor m_keyPressedColor;

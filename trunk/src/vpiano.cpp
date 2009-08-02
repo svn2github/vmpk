@@ -191,11 +191,11 @@ void VPiano::initToolBars()
     m_sboxOctave->setValue(m_baseOctave);
     ui.toolBarNotes->addWidget(m_sboxOctave);
     ui.toolBarNotes->addWidget(new QLabel(tr(" Transpose: "), this));
-    m_sboxTransport = new QSpinBox(this);
-    m_sboxTransport->setMinimum(-11);
-    m_sboxTransport->setMaximum(11);
-    m_sboxTransport->setValue(m_transport);
-    ui.toolBarNotes->addWidget(m_sboxTransport);
+    m_sboxTranspose = new QSpinBox(this);
+    m_sboxTranspose->setMinimum(-11);
+    m_sboxTranspose->setMaximum(11);
+    m_sboxTranspose->setValue(m_transpose);
+    ui.toolBarNotes->addWidget(m_sboxTranspose);
     ui.toolBarNotes->addWidget(new QLabel(tr(" Velocity: "), this));
     m_Velocity = new Knob(this);
     m_Velocity->setFixedSize(32, 32);
@@ -210,8 +210,8 @@ void VPiano::initToolBars()
              this, SLOT(slotOutChannel(int)) );
     connect( m_sboxOctave, SIGNAL(valueChanged(int)),
              this, SLOT(slotBaseOctave(int)) );
-    connect( m_sboxTransport, SIGNAL(valueChanged(int)),
-             this, SLOT(slotTransport(int)) );
+    connect( m_sboxTranspose, SIGNAL(valueChanged(int)),
+             this, SLOT(slotTranspose(int)) );
     connect( m_Velocity, SIGNAL(valueChanged(int)),
              this, SLOT(setVelocity(int)) );
     // Controllers tool bar
@@ -281,7 +281,7 @@ void VPiano::readSettings()
     m_channel = settings.value(QSTR_CHANNEL, 0).toInt();
     m_velocity = settings.value(QSTR_VELOCITY, 100).toInt();
     m_baseOctave = settings.value(QSTR_BASEOCTAVE, 3).toInt();
-    m_transport = settings.value(QSTR_TRANSPORT, 0).toInt();
+    m_transpose = settings.value(QSTR_TRANSPOSE, 0).toInt();
     int num_octaves = settings.value(QSTR_NUMOCTAVES, 5).toInt();
     QString insFileName = settings.value(QSTR_INSTRUMENTSDEFINITION).toString();
     QString insName = settings.value(QSTR_INSTRUMENTNAME).toString();
@@ -363,7 +363,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_CHANNEL, m_channel);
     settings.setValue(QSTR_VELOCITY, m_velocity);
     settings.setValue(QSTR_BASEOCTAVE, m_baseOctave);
-    settings.setValue(QSTR_TRANSPORT, m_transport);
+    settings.setValue(QSTR_TRANSPOSE, m_transpose);
     settings.setValue(QSTR_NUMOCTAVES, dlgPreferences.getNumOctaves());
     settings.setValue(QSTR_INSTRUMENTSDEFINITION, dlgPreferences.getInstrumentsFileName());
     settings.setValue(QSTR_INSTRUMENTNAME, dlgPreferences.getInstrumentName());
@@ -890,11 +890,11 @@ void VPiano::slotBaseOctave(const int octave)
     }
 }
 
-void VPiano::slotTransport(const int transport)
+void VPiano::slotTranspose(const int transpose)
 {
-	if (transport != m_transport) {
-		ui.pianokeybd->setTransport(transport);
-		m_transport = transport;
+        if (transpose != m_transpose) {
+                ui.pianokeybd->setTranspose(transpose);
+                m_transpose = transpose;
 	}
 }
 

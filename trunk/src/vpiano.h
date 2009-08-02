@@ -123,7 +123,7 @@ public slots:
     void slotBankChanged(const int index);
     void slotProgChanged(const int index);
     void slotBaseOctave(const int octave);
-    void slotTransport(const int transport);
+    void slotTranspose(const int transpose);
     void slotOutChannel(const int channel);
     void slotCtlChanged(const int index);
     void slotHelpContents();
@@ -173,7 +173,7 @@ private:
 
     QSpinBox* m_sboxChannel;
     QSpinBox* m_sboxOctave;
-    QSpinBox* m_sboxTransport;
+    QSpinBox* m_sboxTranspose;
     Knob* m_Velocity;
     QComboBox* m_comboControl;
     Knob* m_Control;
@@ -189,7 +189,7 @@ private:
     int m_channel;
     int m_velocity;
     int m_baseOctave;
-    int m_transport;
+    int m_transpose;
 };
 
 #endif // VPIANO_H

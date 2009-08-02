@@ -37,7 +37,7 @@ PianoScene::PianoScene ( const int baseOctave,
     m_numOctaves( numOctaves ),
     m_minNote( 0 ),
     m_maxNote( 127 ),
-    m_transport( 0 ),
+    m_transpose( 0 ),
     m_showLabels( false ),
     m_useFlats( false ),
     m_keyPressedColor( keyPressedColor ),
@@ -98,7 +98,7 @@ void PianoScene::showKeyOff( PianoKey* key )
 
 void PianoScene::showNoteOn( const int note )
 {
-    int n = note - m_baseOctave*12 - m_transport;
+    int n = note - m_baseOctave*12 - m_transpose;
     if ((note >= m_minNote) && (note <= m_maxNote) &&
         (n >= 0) && (n < m_keys.size()))
         showKeyOn(m_keys[n]);
@@ -106,7 +106,7 @@ void PianoScene::showNoteOn( const int note )
 
 void PianoScene::showNoteOff( const int note )
 {
-    int n = note - m_baseOctave*12 - m_transport;
+    int n = note - m_baseOctave*12 - m_transpose;
     if ((note >= m_minNote) && (note <= m_maxNote) &&
         (n >= 0) && (n < m_keys.size()))
         showKeyOff(m_keys[n]);
@@ -114,7 +114,7 @@ void PianoScene::showNoteOff( const int note )
 
 void PianoScene::keyOn( PianoKey* key )
 {
-    int n = m_baseOctave*12 + key->getNote() + m_transport;
+    int n = m_baseOctave*12 + key->getNote() + m_transpose;
     if ((n >= m_minNote) && (n <= m_maxNote)) {
         if (m_handler != NULL) {
             m_handler->noteOn(n);
@@ -127,7 +127,7 @@ void PianoScene::keyOn( PianoKey* key )
 
 void PianoScene::keyOff( PianoKey* key )
 {
-    int n = m_baseOctave*12 + key->getNote() + m_transport;
+    int n = m_baseOctave*12 + key->getNote() + m_transpose;
     if ((n >= m_minNote) && (n <= m_maxNote)) {
         if (m_handler != NULL) {
             m_handler->noteOff(n);
@@ -250,7 +250,7 @@ void PianoScene::hideOrShowKeys()
     QListIterator<PianoKey*> it(m_keys);
     while(it.hasNext()) {
         PianoKey* key = it.next();
-        int n = m_baseOctave*12 + key->getNote() + m_transport;
+        int n = m_baseOctave*12 + key->getNote() + m_transpose;
         bool b = !(n > m_maxNote) && !(n < m_minNote);
         key->setVisible(b);
     }
@@ -289,8 +289,8 @@ QString PianoScene::noteName(const int note)
     const QString m_names_f[] = {trUtf8("C"), trUtf8("D♭"), trUtf8("D"), trUtf8("E♭"), trUtf8("E"),
                                  trUtf8("F"), trUtf8("G♭"), trUtf8("G"), trUtf8("A♭"),
                                  trUtf8("A"), trUtf8("B♭"), trUtf8("B")};
-    int num = (note + m_transport + 12) % 12;
-    int oct = m_baseOctave + ((note + m_transport) / 12) - 1;
+    int num = (note + m_transpose + 12) % 12;
+    int oct = m_baseOctave + ((note + m_transpose) / 12) - 1;
     QString name = m_useFlats ? m_names_f[num] : m_names_s[num];
     return QString("%1<span style='vertical-align:sub;'>%2</span>").arg(name).arg(oct);
 }
@@ -324,10 +324,10 @@ void PianoScene::setUseFlats(bool use)
     }
 }
 
-void PianoScene::setTransport(const int transport)
+void PianoScene::setTranspose(const int transpose)
 {
-    if (m_transport != transport && transport > -12 && transport < 12) {
-        m_transport = transport;
+    if (m_transpose != transpose && transpose > -12 && transpose < 12) {
+        m_transpose = transpose;
         hideOrShowKeys();
         refreshLabels();
     }
