@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=VMPK
+Exec=vmpk
+Icon=vmpk
+Terminal=false
+Type=Application
+Categories=AudioVideo;Midi
+Comment=Virtual MIDI Piano Keyboard
+Comment[es]=Teclado de piano MIDI virtual 
+Comment[tr]=Sanal MIDI Piyano Klavyesi
