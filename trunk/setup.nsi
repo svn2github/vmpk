@@ -3,7 +3,7 @@ Name "Virtual MIDI Piano Keyboard"
 # Defines
 !define QTFILES "C:\Qt\2009.01\qt\bin"
 !define MINGWFILES "C:\Qt\2009.01\mingw\bin"
-!define VMPKDIR "C:\Proyectos\vmpk-0.2.5"
+!define VMPKDIR "C:\Proyectos\vmpk-0.2.6"
 
 !define REGKEY "SOFTWARE\$(^Name)"
 !define VERSION 0.2.6
