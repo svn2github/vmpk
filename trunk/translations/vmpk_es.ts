@@ -1195,9 +1195,13 @@ p, li { white-space: pre-wrap; }
         <translation> Octava base: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="193"/>
         <source> Transport: </source>
-        <translation> Transporte: </translation>
+        <translation type="obsolete"> Transporte: </translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="193"/>
+        <source> Transpose: </source>
+        <translation> Transposición: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="199"/>

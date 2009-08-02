@@ -1,3 +1,8 @@
+2009-08-02
+    * merged vpiano 0.7 widget
+    * implemented RFE #2109421: new preferences option: show note names
+    * implemented RFE #2209692: new toolbar control: transpose in semitones
+
 2009-07-28
     * merged RtMIDI 1.0.10
 

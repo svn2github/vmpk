@@ -1164,7 +1164,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="193"/>
-        <source> Transport: </source>
+        <source> Transpose: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>

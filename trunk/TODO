@@ -9,9 +9,7 @@ http://sourceforge.net/tracker/?func=browse&group_id=236429&atid=1100310
 2445772 Arpeggiator
 2230850 Chord generation
 2209711 Support both upper & lower case letters
-2209692 Transpose
 2142327 Play MIDI files
-2109421 display key names
 2106022 better looking keys (realistic 3D, maybe SVG graphics)
 
 * Implemented features
@@ -31,3 +29,5 @@ PRESENTATION
 2779744 keyboard window: always on top
 2488065 online help
 2107732 better mouse handling
+2109421 display key names
+2209692 Transpose

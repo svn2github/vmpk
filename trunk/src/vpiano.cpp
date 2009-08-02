@@ -190,7 +190,7 @@ void VPiano::initToolBars()
     m_sboxOctave->setMaximum(9);
     m_sboxOctave->setValue(m_baseOctave);
     ui.toolBarNotes->addWidget(m_sboxOctave);
-    ui.toolBarNotes->addWidget(new QLabel(tr(" Transport: "), this));
+    ui.toolBarNotes->addWidget(new QLabel(tr(" Transpose: "), this));
     m_sboxTransport = new QSpinBox(this);
     m_sboxTransport->setMinimum(-11);
     m_sboxTransport->setMaximum(11);
