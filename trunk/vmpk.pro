@@ -16,7 +16,7 @@
 
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.2.6cvs
+VERSION = 0.2.6
 DESTDIR = build
 OBJECTS_DIR = build
 UI_DIR = build
@@ -82,6 +82,7 @@ HEADERS += src/kmapdialog.h \
     src/RtError.h \
     src/RtMidi.h \
     src/knob.h \
+    src/keylabel.h \
     src/pianokey.h \
     src/pianokeybd.h \
     src/pianoscene.h \
@@ -98,6 +99,7 @@ SOURCES += src/kmapdialog.cpp \
     src/midisetup.cpp \
     src/RtMidi.cpp \
     src/knob.cpp \
+    src/keylabel.cpp \
     src/pianokey.cpp \
     src/pianokeybd.cpp \
     src/pianoscene.cpp \
