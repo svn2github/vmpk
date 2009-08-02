@@ -6,7 +6,7 @@ Name "Virtual MIDI Piano Keyboard"
 !define VMPKDIR "C:\Proyectos\vmpk-0.2.5"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.2.5
+!define VERSION 0.2.6
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -49,7 +49,7 @@ InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.2.5.0
+VIProductVersion 0.2.6.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
