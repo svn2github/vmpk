@@ -21,8 +21,6 @@
 
 KeyLabel::KeyLabel(QGraphicsItem *parent) : QGraphicsTextItem(parent)
 {
-    static QFont f("Sans Serif", 7, 0, false);
-    setFont(f);
     setAcceptedMouseButtons(Qt::NoButton);
     rotate(270);
 }

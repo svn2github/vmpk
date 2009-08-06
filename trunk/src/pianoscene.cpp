@@ -47,7 +47,9 @@ PianoScene::PianoScene ( const int baseOctave,
     QBrush blackBrush(Qt::black);
     QBrush whiteBrush(Qt::white);
     QBrush hilightBrush(m_keyPressedColor.isValid() ? m_keyPressedColor : QApplication::palette().highlight());
+    QFont  lblFont(QApplication::font());
     int i, numkeys = m_numOctaves * 12;
+    lblFont.setPointSize(7);
     for(i = 0; i < numkeys; ++i)
     {
         float x = 0;
@@ -76,6 +78,7 @@ PianoScene::PianoScene ( const int baseOctave,
         addItem( key );
         lbl->setHtml(noteName(i));
         lbl->setVisible(m_showLabels);
+        lbl->setFont(lblFont);
         m_labels.insert(i, lbl);
     }
     hideOrShowKeys();
