@@ -49,10 +49,10 @@ void PianoKeybd::initialize()
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setCacheMode(CacheBackground);
     setViewportUpdateMode(MinimalViewportUpdate);
-    setRenderHints(QPainter::Antialiasing);
+    setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     setOptimizationFlag(DontClipPainter, true);
     setOptimizationFlag(DontSavePainterState, true);
-    setOptimizationFlag(DontAdjustForAntialiasing, true);
+    //setOptimizationFlag(DontAdjustForAntialiasing, true);
     setBackgroundBrush(QApplication::palette().background());
     initDefaultMap();
 }
