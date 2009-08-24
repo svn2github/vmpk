@@ -1,3 +1,9 @@
+2009-08-25
+    * German translation, by Andreas Steinel
+
+2009-08-03
+    * release 0.2.6
+
 2009-08-02
     * merged vpiano 0.7 widget
     * implemented RFE #2109421: new preferences option: show note names

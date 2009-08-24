@@ -3,10 +3,10 @@ Name "Virtual MIDI Piano Keyboard"
 # Defines
 !define QTFILES "C:\Qt\2009.01\qt\bin"
 !define MINGWFILES "C:\Qt\2009.01\mingw\bin"
-!define VMPKDIR "C:\Proyectos\vmpk-0.2.6"
+!define VMPKDIR "C:\Proyectos\vmpk-0.2.7"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.2.6
+!define VERSION 0.2.7
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -76,6 +76,7 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\help_tr.html
     File ${VMPKDIR}\build\translations\vmpk_es.qm
     File ${VMPKDIR}\build\translations\vmpk_tr.qm
+    File ${VMPKDIR}\build\translations\vmpk_der.qm
 
     # Installing library C:\MinGW\bin\mingwm10.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
@@ -129,6 +130,7 @@ done${UNSECTION_ID}:
 Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vmpk_es.qm
     Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_de.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
     Delete /REBOOTOK $INSTDIR\german.xml

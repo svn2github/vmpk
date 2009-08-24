@@ -1,6 +1,7 @@
 SET( TRANSLATIONS_FILES 
      vmpk_es.ts 
-     vmpk_tr.ts )
+     vmpk_tr.ts 
+     vmpk_de.ts )
 
 QT4_ADD_TRANSLATION(QM_FILES ${TRANSLATIONS_FILES})
 ADD_CUSTOM_TARGET(translations ALL DEPENDS ${QM_FILES})

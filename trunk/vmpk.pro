@@ -16,7 +16,7 @@
 
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.2.6
+VERSION = 0.2.7cvs
 DESTDIR = build
 OBJECTS_DIR = build
 UI_DIR = build
@@ -54,7 +54,8 @@ macx {
         data/it-qwerty.xml \
         data/vkeybd-default.xml \
         translations/vmpk_es.qm \
-        translations/vmpk_tr.qm
+        translations/vmpk_tr.qm \
+        translations/vmpk_de.qm
     BUNDLE_RES.path = Contents/Resources
     QMAKE_BUNDLE_DATA += BUNDLE_RES
     LIBS += -framework CoreMidi -framework CoreAudio -framework CoreFoundation
@@ -113,4 +114,5 @@ SOURCES += src/kmapdialog.cpp \
     src/main.cpp
 RESOURCES += data/vmpk.qrc
 TRANSLATIONS += translations/vmpk_es.ts \
-    translations/vmpk_tr.ts 
+    translations/vmpk_tr.ts \ 
+    translations/vmpk_de.ts 
