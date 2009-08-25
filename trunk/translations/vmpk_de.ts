@@ -948,7 +948,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="129"/>
         <source>Press this button to load an instruments definition file from disk.</source>
-        <translation>Mit diesem Knopf kann man eine Instrumentendefinitionsdatei von der Festplatte laden</translation>
+        <translation>Mit diesem Knopf kann man eine Instrumentendefinitionsdatei von der Festplatte laden.</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="132"/>
@@ -968,17 +968,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="171"/>
         <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit dieser Option kann man das Aussehen der Knöpfe verändern; entweder der eigene Stil oder das Standardaussehen.</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="174"/>
         <source>Styled Knobs</source>
-        <translation type="unfinished"></translation>
+        <translation>Stylische Knöpfe</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="184"/>
         <source>Check this box to keep the keyboard window always visible, on top of other windows.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option hebt das Tastaturfenster in den Vordergrund und behält es immer über allen anderen Fenstern.</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="187"/>
@@ -992,7 +992,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Check this box to grab the PC keyboard, even when the keyboard control has not the focus. &lt;span style=&quot; font-weight:600;&quot;&gt;Note for Linux users:&lt;/span&gt; this option works well in standard KDE desktops, but fails in window managers like metacity and compiz. It is also known that using this option breaks drop down menus on GTK applications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option fängt die Tastatur ein, sodass jeder Tastendruck unmittelbar an die Anwendung gesendet wird. (Unter Linux funktioniert dies nur unter KDE)</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="201"/>
@@ -1002,7 +1002,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="208"/>
         <source>Check this box to display the note names over the piano keys.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option stellt die Notennamen auf den Tasten dar.</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="211"/>
@@ -1063,12 +1063,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/riffimportdlg.ui" line="42"/>
         <source>This text box displays the path and name of the selected SoundFont to be  imported</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Eingabefeld gibt den Pfad und den Namen der ausgewählten Musikschriftart an, die importiert werden soll</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="64"/>
         <source>Press this button to select a SoundFont file to be imported</source>
-        <translation type="unfinished"></translation>
+        <translation>Drücken Sie hier um eine Musikschriftart zu importieren</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="67"/>
@@ -1099,12 +1099,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/riffimportdlg.ui" line="118"/>
         <source>This text box displays the name of the output file in .INS format that will be created</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Eingabefeld zeigt den Namen der Ausgabedatei im .INS Format an, die erstellt werden soll</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="137"/>
         <source>Press this button to select a path and file name for the output file</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Knopf wählt den Pfad und die Datei für die Ausgabedatei aus</translation>
     </message>
 </context>
 <context>
@@ -1158,7 +1158,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/vpiano.cpp" line="235"/>
         <source> Bender: </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="246"/>
@@ -1403,7 +1403,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/vpiano.ui" line="344"/>
         <source>&amp;Import SoundFont...</source>
-        <translation>&amp;Importieren einer Notenschriftart</translation>
+        <translation>&amp;Importieren einer Notenschriftart...</translation>
     </message>
 </context>
 </TS>
