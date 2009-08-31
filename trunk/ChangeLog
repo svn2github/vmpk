@@ -1,3 +1,6 @@
+2009-08-31
+    * Fix RtMidiOut port type flags
+
 2009-08-25
     * German translation, by Andreas Steinel
 

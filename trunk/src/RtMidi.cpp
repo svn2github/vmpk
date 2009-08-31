@@ -41,6 +41,7 @@
 
 // ~RtMidi() destructor:
 // snd_seq_close() should be called unconditionally of AVOID_TIMESTAMPING
+// RtMidiOut ports: added SND_SEQ_PORT_TYPE_APPLICATION flag
 
 #include "RtMidi.h"
 #include <sstream>
@@ -1362,7 +1363,10 @@ void RtMidiOut :: openPort( unsigned int portNumber, const std::string portName 
 	snd_seq_port_info_alloca( &pinfo );
   std::ostringstream ost;
   AlsaMidiData *data = static_cast<AlsaMidiData *> (apiData_);
-  if ( portInfo( data->seq, pinfo, SND_SEQ_PORT_CAP_WRITE|SND_SEQ_PORT_CAP_SUBS_WRITE, (int) portNumber ) == 0 ) {
+  if ( portInfo( data->seq,
+                 pinfo,
+                 SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE,
+                 (int) portNumber ) == 0 ) {
     ost << "RtMidiOut::openPort: the 'portNumber' argument (" << portNumber << ") is invalid.";
     errorString_ = ost.str();
     error( RtError::INVALID_PARAMETER );
@@ -1375,8 +1379,10 @@ void RtMidiOut :: openPort( unsigned int portNumber, const std::string portName 
 
   if ( data->vport < 0 ) {
     data->vport = snd_seq_create_simple_port( data->seq, portName.c_str(),
-                                              SND_SEQ_PORT_CAP_READ|SND_SEQ_PORT_CAP_SUBS_READ,
-                                              SND_SEQ_PORT_TYPE_MIDI_GENERIC );
+                                              SND_SEQ_PORT_CAP_READ |
+                                              SND_SEQ_PORT_CAP_SUBS_READ,
+                                              SND_SEQ_PORT_TYPE_MIDI_GENERIC |
+                                              SND_SEQ_PORT_TYPE_APPLICATION );
     if ( data->vport < 0 ) {
       errorString_ = "RtMidiOut::openPort: ALSA error creating output port.";
       error( RtError::DRIVER_ERROR );
@@ -1414,9 +1420,10 @@ void RtMidiOut :: openVirtualPort( std::string portName )
   AlsaMidiData *data = static_cast<AlsaMidiData *> (apiData_);
   if ( data->vport < 0 ) {
     data->vport = snd_seq_create_simple_port( data->seq, portName.c_str(),
-                                              SND_SEQ_PORT_CAP_READ|SND_SEQ_PORT_CAP_SUBS_READ,
-                                              SND_SEQ_PORT_TYPE_MIDI_GENERIC );
-
+                                              SND_SEQ_PORT_CAP_READ |
+                                              SND_SEQ_PORT_CAP_SUBS_READ,
+                                              SND_SEQ_PORT_TYPE_MIDI_GENERIC |
+                                              SND_SEQ_PORT_TYPE_APPLICATION );
     if ( data->vport < 0 ) {
       errorString_ = "RtMidiOut::openVirtualPort: ALSA error creating virtual port.";
       error( RtError::DRIVER_ERROR );

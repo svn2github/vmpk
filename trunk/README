@@ -8,9 +8,9 @@ MIDI notes, and also the mouse. You can use the Virtual MIDI Piano Keyboard
 to display the played MIDI notes from another instrument or MIDI file player.
 To do so, connect the other MIDI port to the input port of VMPK.
 
-VMPK has been tested in Linux and Windows, but maybe you can build it also in 
-Mac OSX and SGI Irix. If you can compile and test the program in those systems, 
-please drop a mail to the author.
+VMPK has been tested in Linux, Windows and Mac, but maybe you can build it also 
+in SGI Irix. If you can compile and test the program in this system, please drop
+a mail to the author.
 
 The Virtual Keyboard by Takashi Iway (vkeybd) has been the inspiration for this 
 one. It is a wonderful piece of software and has served us well for many years.
@@ -39,7 +39,7 @@ See http://vmpk.sourceforge.net for more details.
 DOWNLOAD
 
 Latest release is available in Sourceforge:
-http://sourceforge.net/projects/vmpk
+http://sourceforge.net/projects/vmpk/files
 
 REQUIREMENTS
 
@@ -63,13 +63,13 @@ You need also the GCC C++ compiler.
     http://gcc.gnu.org
     http://www.mingw.org
 
-Optionally, you can buid a Windows setup program using NSIS.
+Optionally, you can build a Windows setup program using NSIS.
     
     http://nsis.sourceforge.net
 
 INSTALLATION
 
-Download the sources from http://sourceforge.net/projects/vmpk
+Download the sources from http://sourceforge.net/projects/vmpk/files
 Unpack the sources in your home directory, and change to the unpacked dir.
 
 $ cd vmpk-x.x.x
@@ -87,7 +87,7 @@ After that, compile the program:
 
 $ make
 
-if the program has been compiled sucessfully, you can install it:
+if the program has been compiled successfully, you can install it:
 
 $ make install
 
@@ -158,5 +158,3 @@ open source projects.
   http://openclipart.org/media/files/TheresaKnott/346
   
 Thank you very much.
-
-

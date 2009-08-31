@@ -1,1 +1,15 @@
 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net>
+
+Translators:
+
+Serdar Soytetir - Turkish
+Andreas Steinel - German
+Pedro Lopez-Cabanillas - Spanish
+ 
+Other copyright owners:
+
+Gary P. Scavone RtMIDI
+Rui Nuno Capela Instrument definition data classes, Knob widget
+Theresa Knott   Artwork
+Enrico Scholz   FindPkgConfig.cmake
+Mehdi Dogguy    Man page, Debian packaging
