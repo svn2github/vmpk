@@ -134,26 +134,26 @@ void PianoKeybd::initDefaultMap()
     m_rawKbMap.insert(47, 27);
     m_rawKbMap.insert(61, 28);
 
-    m_rawKbMap.insert(24, 24);
-    m_rawKbMap.insert(11, 25);
-    m_rawKbMap.insert(25, 26);
-    m_rawKbMap.insert(12, 27);
-    m_rawKbMap.insert(26, 28);
-    m_rawKbMap.insert(27, 29);
-    m_rawKbMap.insert(14, 30);
-    m_rawKbMap.insert(28, 31);
-    m_rawKbMap.insert(15, 32);
-    m_rawKbMap.insert(29, 33);
-    m_rawKbMap.insert(16, 34);
-    m_rawKbMap.insert(30, 35);
-    m_rawKbMap.insert(31, 36);
-    m_rawKbMap.insert(18, 37);
-    m_rawKbMap.insert(32, 38);
-    m_rawKbMap.insert(19, 39);
-    m_rawKbMap.insert(33, 40);
-    m_rawKbMap.insert(34, 41);
-    m_rawKbMap.insert(21, 42);
-    m_rawKbMap.insert(35, 43);
+    m_rawKbMap.insert(24, 29);
+    m_rawKbMap.insert(11, 30);
+    m_rawKbMap.insert(25, 31);
+    m_rawKbMap.insert(12, 32);
+    m_rawKbMap.insert(26, 33);
+    m_rawKbMap.insert(13, 34);
+    m_rawKbMap.insert(27, 35);
+    m_rawKbMap.insert(28, 36);
+    m_rawKbMap.insert(15, 37);
+    m_rawKbMap.insert(29, 38);
+    m_rawKbMap.insert(16, 39);
+    m_rawKbMap.insert(30, 40);
+    m_rawKbMap.insert(31, 41);
+    m_rawKbMap.insert(18, 42);
+    m_rawKbMap.insert(32, 43);
+    m_rawKbMap.insert(19, 44);
+    m_rawKbMap.insert(33, 45);
+    m_rawKbMap.insert(20, 46);
+    m_rawKbMap.insert(34, 47);
+    m_rawKbMap.insert(35, 48);
 #endif
 }
 
