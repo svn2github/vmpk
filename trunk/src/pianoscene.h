@@ -68,6 +68,8 @@ public:
     void setBaseOctave( const int base );
     int numOctaves() const { return m_numOctaves; }
     void allKeysOff();
+    void keyOn( const int note );
+    void keyOff( const int note );
 
 signals:
     void noteOn(int n);

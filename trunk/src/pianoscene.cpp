@@ -141,6 +141,18 @@ void PianoScene::keyOff( PianoKey* key )
     }
 }
 
+void PianoScene::keyOn(const int note)
+{
+    if (note < m_keys.size())
+        keyOn(m_keys[note]);
+}
+
+void PianoScene::keyOff(const int note)
+{
+    if (note < m_keys.size())
+        keyOff(m_keys[note]);
+}
+
 PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
 {
     QGraphicsItem *itm = itemAt(p);

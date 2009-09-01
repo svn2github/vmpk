@@ -40,6 +40,9 @@ public:
     PianoKeybd(const int baseOctave, const int numOctaves, QWidget *parent = 0);
     void setKeyboardMap(KeyboardMap* m) { m_scene->setKeyboardMap(m); }
     KeyboardMap* getKeyboardMap() { return m_scene->getKeyboardMap(); }
+    void setRawKeyboardMap(KeyboardMap* m);
+    KeyboardMap* getRawKeyboardMap() { return &m_rawKbMap; }
+
     int baseOctave() const { return m_scene->baseOctave(); }
     int numOctaves() const { return m_scene->numOctaves(); }
     void setBaseOctave(const int baseOctave) { m_scene->setBaseOctave(baseOctave); }
@@ -61,6 +64,8 @@ public:
     void setShowLabels(bool show) { m_scene->setShowLabels(show); }
     bool useFlats() const { return m_scene->useFlats(); }
     void setUseFlats(bool use) { m_scene->setUseFlats(use); }
+    bool getRawKeyboardMode() const { return m_rawkbd; }
+    void setRawKeyboardMode(const bool b);
 
 public slots:
     void showNoteOn( int midiNote );
@@ -76,10 +81,16 @@ protected:
     void initScene(int base, int num, const QColor& c = QColor());
     void resizeEvent(QResizeEvent *event);
 
+#if defined(Q_WS_X11)
+    bool x11Event ( XEvent * event );
+#endif
+
 private:
+    bool m_rawkbd;
     int m_rotation;
     PianoScene *m_scene;
     KeyboardMap m_defaultMap;
+    KeyboardMap m_rawKbMap;
 };
 
 #endif // PIANOKEYBD_H
