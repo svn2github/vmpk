@@ -1,5 +1,5 @@
 /*
-    MIDI Virtual Piano Keyboard
+    Virtual Piano Widget for Qt4 
     Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along
+    You should have received a copy of the GNU General Public License along 
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -20,11 +20,16 @@
 #define PIANOKEYBD_H
 
 #include "pianoscene.h"
+#include "rawkeybdapp.h"
 #include <QGraphicsView>
-//#include <QtDesigner/QDesignerExportWidget>
 
-//class QDESIGNER_WIDGET_EXPORT PianoKeybd : public QGraphicsView
-class PianoKeybd : public QGraphicsView
+#if defined(VPIANO_PLUGIN)
+#include <QtDesigner/QDesignerExportWidget>
+#else
+#define QDESIGNER_WIDGET_EXPORT
+#endif
+
+class QDESIGNER_WIDGET_EXPORT PianoKeybd : public QGraphicsView, public RawKbdHandler
 {
     Q_OBJECT
     Q_PROPERTY( int baseOctave READ baseOctave WRITE setBaseOctave )
@@ -34,14 +39,19 @@ class PianoKeybd : public QGraphicsView
     Q_PROPERTY( bool showLabels READ showLabels WRITE setShowLabels )
     Q_PROPERTY( bool useFlats READ useFlats WRITE setUseFlats )
     Q_PROPERTY( int transpose READ getTranspose WRITE setTranspose )
-
+#if defined(VPIANO_PLUGIN)
+    Q_CLASSINFO("Author", "Pedro Lopez-Cabanillas <plcl@users.sf.net>")
+    Q_CLASSINFO("URL", "http://sourceforge.net/projects/vmpk")
+    Q_CLASSINFO("Version", "0.8")
+#endif
 public:
     PianoKeybd(QWidget *parent = 0);
     PianoKeybd(const int baseOctave, const int numOctaves, QWidget *parent = 0);
+    virtual ~PianoKeybd();
     void setKeyboardMap(KeyboardMap* m) { m_scene->setKeyboardMap(m); }
     KeyboardMap* getKeyboardMap() { return m_scene->getKeyboardMap(); }
-    void setRawKeyboardMap(KeyboardMap* m);
-    KeyboardMap* getRawKeyboardMap() { return &m_rawKbMap; }
+    void setRawKeyboardMap(KeyboardMap* m) { m_rawMap = m; }
+    KeyboardMap* getRawKeyboardMap() { return m_rawMap; }
 
     int baseOctave() const { return m_scene->baseOctave(); }
     int numOctaves() const { return m_scene->numOctaves(); }
@@ -67,6 +77,10 @@ public:
     bool getRawKeyboardMode() const { return m_rawkbd; }
     void setRawKeyboardMode(const bool b);
 
+// RawKbdHandler methods
+    bool handleKeyPressed(int keycode);
+    bool handleKeyReleased(int keycode);
+
 public slots:
     void showNoteOn( int midiNote );
     void showNoteOff( int midiNote );
@@ -81,16 +95,13 @@ protected:
     void initScene(int base, int num, const QColor& c = QColor());
     void resizeEvent(QResizeEvent *event);
 
-#if defined(Q_WS_X11)
-    bool x11Event ( XEvent * event );
-#endif
-
 private:
     bool m_rawkbd;
     int m_rotation;
     PianoScene *m_scene;
+    KeyboardMap *m_rawMap;
     KeyboardMap m_defaultMap;
-    KeyboardMap m_rawKbMap;
+    KeyboardMap m_defaultRawMap;
 };
 
 #endif // PIANOKEYBD_H

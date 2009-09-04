@@ -56,6 +56,7 @@ SET(vmpk_SRCS
     mididefs.h
     midisetup.cpp
     midisetup.h
+    pianodefs.h
     pianokeybd.cpp
     pianokeybd.h
     pianokey.cpp
@@ -64,6 +65,8 @@ SET(vmpk_SRCS
     pianoscene.h
     preferences.cpp
     preferences.h
+    rawkeybdapp.cpp
+    rawkeybdapp.h
     riff.cpp
     riff.h
     riffimportdlg.cpp
@@ -85,6 +88,7 @@ SET(vmpk_qtobject_SRCS
     pianokeybd.h
     pianoscene.h
     preferences.h
+    rawkeybdapp.h
     riff.h
     riffimportdlg.h
     vpiano.h

@@ -84,6 +84,7 @@ HEADERS += src/kmapdialog.h \
     src/RtMidi.h \
     src/knob.h \
     src/keylabel.h \
+    src/pianodefs.h \
     src/pianokey.h \
     src/pianokeybd.h \
     src/pianoscene.h \
@@ -91,6 +92,7 @@ HEADERS += src/kmapdialog.h \
     src/vpiano.h \
     src/about.h \
     src/preferences.h \
+    src/rawkeybdapp.h \
     src/riff.h \
     src/riffimportdlg.h \
     src/instrument.h \
@@ -104,6 +106,7 @@ SOURCES += src/kmapdialog.cpp \
     src/pianokey.cpp \
     src/pianokeybd.cpp \
     src/pianoscene.cpp \
+    src/rawkeybdapp.cpp \
     src/riff.cpp \
     src/riffimportdlg.cpp \
     src/classicstyle.cpp \

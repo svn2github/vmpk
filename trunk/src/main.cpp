@@ -18,6 +18,7 @@
 
 #include "constants.h"
 #include "vpiano.h"
+#include "rawkeybdapp.h"
 
 #include <QtGui>
 #include <QApplication>
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName(QSTR_DOMAIN);
     QCoreApplication::setOrganizationDomain(QSTR_DOMAIN);
     QCoreApplication::setApplicationName(QSTR_APPNAME);
-    QApplication a(argc, argv);
+    RawKeybdApp a(argc, argv);
 
     QString localeDirectory =
 #ifdef Q_OS_WIN32
@@ -40,7 +41,6 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_DARWIN
         QApplication::applicationDirPath() + "/../Resources/";
 #endif
-    //qDebug() << localeDirectory;
     QTranslator tr_q, tr_p;
     QString loc_q = QSTR_QTPX + QLocale::system().name();
     QString loc_p = QSTR_VMPKPX + QLocale::system().name();

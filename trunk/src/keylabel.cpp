@@ -1,5 +1,5 @@
 /*
-    MIDI Virtual Piano Keyboard
+    Virtual Piano Widget for Qt4
     Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
@@ -23,8 +23,4 @@ KeyLabel::KeyLabel(QGraphicsItem *parent) : QGraphicsTextItem(parent)
 {
     setAcceptedMouseButtons(Qt::NoButton);
     rotate(270);
-}
-
-KeyLabel::~KeyLabel()
-{
 }

@@ -16,17 +16,9 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KEYLABEL_H
-#define KEYLABEL_H
+#ifndef PIANODEFS_H
+#define PIANODEFS_H
 
-#include "pianodefs.h"
-#include <QGraphicsTextItem>
+#define VPIANO_EXPORT
 
-class VPIANO_EXPORT KeyLabel : public QGraphicsTextItem
-{
-public:
-    KeyLabel(QGraphicsItem *parent = 0);
-    virtual ~KeyLabel() {}
-};
-
-#endif // KEYLABEL_H
+#endif // PIANODEFS_H

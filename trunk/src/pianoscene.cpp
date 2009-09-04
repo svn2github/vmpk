@@ -1,5 +1,5 @@
 /*
-    MIDI Virtual Piano Keyboard
+    Virtual Piano Widget for Qt4 
     Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify
@@ -12,14 +12,11 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along
+    You should have received a copy of the GNU General Public License along 
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "pianoscene.h"
-#include "pianokey.h"
-#include "keylabel.h"
-
 #include <QApplication>
 #include <QPalette>
 #include <QGraphicsSceneMouseEvent>
@@ -28,8 +25,8 @@
 #define KEYWIDTH  18
 #define KEYHEIGHT 72
 
-PianoScene::PianoScene ( const int baseOctave,
-                         const int numOctaves,
+PianoScene::PianoScene ( const int baseOctave, 
+                         const int numOctaves, 
                          const QColor& keyPressedColor,
                          QObject * parent )
     : QGraphicsScene( QRectF(0, 0, KEYWIDTH * numOctaves * 7, KEYHEIGHT), parent ),
@@ -47,7 +44,7 @@ PianoScene::PianoScene ( const int baseOctave,
     QBrush blackBrush(Qt::black);
     QBrush whiteBrush(Qt::white);
     QBrush hilightBrush(m_keyPressedColor.isValid() ? m_keyPressedColor : QApplication::palette().highlight());
-    QFont  lblFont(QApplication::font());
+    QFont lblFont(QApplication::font());
     int i, numkeys = m_numOctaves * 12;
     lblFont.setPointSize(7);
     for(i = 0; i < numkeys; ++i)
@@ -143,13 +140,13 @@ void PianoScene::keyOff( PianoKey* key )
 
 void PianoScene::keyOn(const int note)
 {
-    if (note < m_keys.size())
+    if (note >=0 && note < m_keys.size())
         keyOn(m_keys[note]);
 }
 
 void PianoScene::keyOff(const int note)
 {
-    if (note < m_keys.size())
+    if (note >=0 && note < m_keys.size())
         keyOff(m_keys[note]);
 }
 
@@ -237,13 +234,13 @@ void PianoScene::keyReleaseEvent ( QKeyEvent * keyEvent )
         if (key != NULL) {
             keyOff(key);
         }
-    }
+    }   
     keyEvent->accept();
 }
 
 void PianoScene::allKeysOff()
 {
-    QList<PianoKey*>::ConstIterator it;
+    QList<PianoKey*>::ConstIterator it; 
     for(it = m_keys.begin(); it != m_keys.end(); ++it) {
         (*it)->setPressed(false);
     }
