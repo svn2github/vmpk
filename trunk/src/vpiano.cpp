@@ -328,6 +328,7 @@ void VPiano::readSettings()
     settings.beginGroup(QSTR_KEYBOARD);
     bool rawKeyboard = settings.value(QSTR_RAWKEYBOARDMODE, false).toBool();
     QString mapFile = settings.value(QSTR_MAPFILE, QSTR_DEFAULT).toString();
+    QString rawMapFile = settings.value(QSTR_RAWMAPFILE, QSTR_DEFAULT).toString();
     settings.endGroup();
     dlgPreferences.setRawKeyboard(rawKeyboard);
 
@@ -347,8 +348,13 @@ void VPiano::readSettings()
     }
     settings.endGroup();
 
+    ui.pianokeybd->getKeyboardMap()->setRawMode(false);
+    ui.pianokeybd->getRawKeyboardMap()->setRawMode(true);
     if (!mapFile.isEmpty() && (mapFile != QSTR_DEFAULT)) {
         ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(mapFile);
+    }
+    if (!rawMapFile.isEmpty() && (rawMapFile != QSTR_DEFAULT)) {
+        ui.pianokeybd->getRawKeyboardMap()->loadFromXMLFile(rawMapFile);
     }
 }
 
@@ -386,6 +392,7 @@ void VPiano::writeSettings()
     settings.beginGroup(QSTR_KEYBOARD);
     settings.setValue(QSTR_RAWKEYBOARDMODE, dlgPreferences.getRawKeyboard());
     settings.setValue(QSTR_MAPFILE, ui.pianokeybd->getKeyboardMap()->getFileName());
+    settings.setValue(QSTR_RAWMAPFILE, ui.pianokeybd->getRawKeyboardMap()->getFileName());
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONTROLLERS);
@@ -427,6 +434,7 @@ void VPiano::customEvent ( QEvent *event )
 
 void VPiano::showEvent ( QShowEvent *event )
 {
+    qDebug() << Q_FUNC_INFO;
     QMainWindow::showEvent(event);
     ui.pianokeybd->setFocus();
     grabKb();
@@ -832,7 +840,12 @@ void VPiano::slotLoadKeyboardMap()
                                 VPiano::dataDirectory(),
                                 tr("Keyboard map (*.xml)"));
     if (!fileName.isEmpty()) {
-        ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(fileName);
+        KeyboardMap* map;
+        if (dlgPreferences.getRawKeyboard())
+            map = ui.pianokeybd->getRawKeyboardMap();
+        else
+            map = ui.pianokeybd->getKeyboardMap();
+        map->loadFromXMLFile(fileName);
     }
     grabKb();
 }
@@ -845,7 +858,12 @@ void VPiano::slotSaveKeyboardMap()
                                 VPiano::dataDirectory(),
                                 tr("Keyboard map (*.xml)"));
     if (!fileName.isEmpty()) {
-        ui.pianokeybd->getKeyboardMap()->saveToXMLFile(fileName);
+        KeyboardMap* map;
+        if (dlgPreferences.getRawKeyboard())
+            map = ui.pianokeybd->getRawKeyboardMap();
+        else
+            map = ui.pianokeybd->getKeyboardMap();
+        map->saveToXMLFile(fileName);
     }
     grabKb();
 }
@@ -855,7 +873,11 @@ void VPiano::slotEditKeyboardMap()
     dlgKeyMap.displayMap(ui.pianokeybd->getKeyboardMap());
     releaseKb();
     if (dlgKeyMap.exec() == QDialog::Accepted) {
-        ui.pianokeybd->setKeyboardMap(dlgKeyMap.getMap());
+        KeyboardMap* map = dlgKeyMap.getMap();
+        if (dlgPreferences.getRawKeyboard())
+            ui.pianokeybd->setRawKeyboardMap(map);
+        else
+            ui.pianokeybd->setKeyboardMap(map);
     }
     grabKb();
 }

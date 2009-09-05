@@ -23,6 +23,7 @@
 #include <QXmlStreamWriter>
 #include <QKeySequence>
 #include <QMessageBox>
+#include <QDebug>
 
 void KeyboardMap::loadFromXMLFile(const QString fileName)
 {
@@ -31,6 +32,7 @@ void KeyboardMap::loadFromXMLFile(const QString fileName)
         initializeFromXML(&f);
         f.close();
         m_fileName = fileName;
+        qDebug() << "Loaded Map: " << fileName;
     }
     if (f.error() != QFile::NoError) {
         reportError(fileName, tr("Error loading a file"), f.errorString());
@@ -44,6 +46,7 @@ void KeyboardMap::saveToXMLFile(const QString fileName)
         serializeToXML(&f);
         f.close();
         m_fileName = fileName;
+        qDebug() << "Saved Map: " << fileName;
     }
     if (f.error() != QFile::NoError) {
         reportError(fileName, tr("Error saving a file"), f.errorString());
@@ -57,19 +60,24 @@ void KeyboardMap::initializeFromXML(QIODevice *dev)
     while (!reader.atEnd()) {
         reader.readNext();
         if (reader.isStartElement()) {
-            if (reader.name() == "keyboardmap") {
+            if (reader.name() == (m_rawMode?"rawkeymap":"keyboardmap")) {
                 reader.readNext();
                 while (reader.isWhitespace())
                     reader.readNext();
                 while (reader.isStartElement()) {
                     if (reader.name() == "mapping") {
-                        QString key = reader.attributes().value("key").toString();
+                        QString key = reader.attributes().value(m_rawMode?"keycode":"key").toString();
                         QString sn = reader.attributes().value("note").toString();
                         bool ok = false;
                         int note = sn.toInt(&ok);
                         if (ok) {
-                            QKeySequence ks(key);
-                            insert(ks[0], note);
+                            if (m_rawMode) {
+                                int keycode = key.toInt(&ok);
+                                if (ok) insert(keycode, note);
+                            } else {
+                                QKeySequence ks(key);
+                                insert(ks[0], note);
+                            }
                         }
                     }
                     reader.readNext();
@@ -92,13 +100,17 @@ void KeyboardMap::serializeToXML(QIODevice *dev)
     writer.setAutoFormatting(true);
     //writer.setCodec("UTF-8");
     writer.writeStartDocument();
-    writer.writeDTD("<!DOCTYPE keyboardmap>");
-    writer.writeStartElement("keyboardmap");
+    writer.writeDTD(m_rawMode?"<!DOCTYPE rawkeyboardmap>":"<!DOCTYPE keyboardmap>");
+    writer.writeStartElement(m_rawMode ? "rawkeymap" : "keyboardmap");
     writer.writeAttribute("version", "1.0");
     foreach(int key, keys()) {
-        QKeySequence ks(key);
         writer.writeEmptyElement("mapping");
-        writer.writeAttribute("key", ks.toString(QKeySequence::PortableText));
+        if (m_rawMode)
+            writer.writeAttribute("keycode", QString::number(key));
+        else {
+            QKeySequence ks(key);
+            writer.writeAttribute("key", ks.toString(QKeySequence::PortableText));
+        }
         writer.writeAttribute("note", QString::number(value(key)));
     }
     writer.writeEndElement();

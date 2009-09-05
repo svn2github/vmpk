@@ -56,6 +56,7 @@ const QString QSTR_INPORT("InPort");
 const QString QSTR_OUTPORT("OutPort");
 const QString QSTR_KEYBOARD("Keyboard");
 const QString QSTR_MAPFILE("MapFile");
+const QString QSTR_RAWMAPFILE("RawMapFile");
 const QString QSTR_DEFAULT("default");
 const QString QSTR_CONTROLLERS("Controllers");
 const QString QSTR_INSTRUMENT("Instrument");

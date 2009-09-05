@@ -27,16 +27,19 @@ class KeyboardMap : public QHash<int, int>
 {
     Q_DECLARE_TR_FUNCTIONS(KeyboardMap)
 public:
-    KeyboardMap() : QHash<int, int>(), m_fileName(QSTR_DEFAULT) {}
+    KeyboardMap() : QHash<int, int>(), m_fileName(QSTR_DEFAULT), m_rawMode(false) {}
     void loadFromXMLFile(const QString fileName);
     void saveToXMLFile(const QString fileName);
     void initializeFromXML(QIODevice *dev);
 	void serializeToXML(QIODevice *dev);
 	const QString& getFileName() const { return m_fileName; }
+	void setRawMode(bool b) { m_rawMode = b; }
+	bool getRawMode() const { return m_rawMode; }
 
 private:
     void reportError( const QString filename, const QString title, const QString err );
     QString m_fileName;
+    bool m_rawMode;
 };
 
 #endif /* KEYBOARDMAP_H */
