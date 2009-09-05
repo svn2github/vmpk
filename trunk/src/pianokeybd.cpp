@@ -19,16 +19,14 @@
 #include "pianokeybd.h"
 
 PianoKeybd::PianoKeybd(QWidget *parent) 
-    : QGraphicsView(parent),
-    m_rawkbd(true), m_rotation(0), m_scene(NULL), m_rawMap(NULL)
+    : QGraphicsView(parent), m_rotation(0), m_scene(NULL), m_rawMap(NULL)
 {
     initialize();
     initScene(3, 5);
 }
 
 PianoKeybd::PianoKeybd(const int baseOctave, const int numOctaves, QWidget *parent) 
-    : QGraphicsView(parent),
-    m_rawkbd(true), m_rotation(0), m_scene(NULL), m_rawMap(NULL)
+    : QGraphicsView(parent), m_rotation(0), m_scene(NULL), m_rawMap(NULL)
 {
     initialize();
     initScene(baseOctave, numOctaves);
@@ -64,7 +62,6 @@ void PianoKeybd::initialize()
     RawKeybdApp* rapp = dynamic_cast<RawKeybdApp*>(qApp);
     if (rapp != NULL) {
         rapp->setRawKbdHandler(this);
-        rapp->setRawKbdEnable(m_rawkbd);
     }
 }
 
@@ -274,15 +271,6 @@ void PianoKeybd::setRotation(int r)
 QSize PianoKeybd::sizeHint() const 
 { 
     return mapFromScene(sceneRect()).boundingRect().size();
-}
-
-void PianoKeybd::setRawKeyboardMode(bool b)
-{
-    if (m_rawkbd != b) {
-        m_rawkbd = b;
-        RawKeybdApp* rapp = dynamic_cast<RawKeybdApp*>(qApp);
-        if (rapp != NULL) rapp->setRawKbdEnable(m_rawkbd);
-    }
 }
 
 bool PianoKeybd::handleKeyPressed(int keycode)

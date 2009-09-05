@@ -33,8 +33,8 @@ class VPIANO_EXPORT RawKeybdApp : public QApplication
 {
 public:
     RawKeybdApp( int & argc, char ** argv ) : QApplication(argc, argv),
-        m_enabled(true), m_handler(NULL) {}
-    virtual ~RawKeybdApp() { m_enabled = false; m_handler = NULL; }
+        m_enabled(false), m_handler(NULL) {}
+    virtual ~RawKeybdApp() {}
 
     RawKbdHandler *getRawKbdHandler() { return m_handler; }
     void setRawKbdHandler(RawKbdHandler* h) { m_handler = h; }

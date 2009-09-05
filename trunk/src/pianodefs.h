@@ -1,5 +1,5 @@
 /*
-    Virtual Piano Widget for Qt4
+    MIDI Virtual Piano Keyboard
     Copyright (C) 2008-2009, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     This program is free software; you can redistribute it and/or modify

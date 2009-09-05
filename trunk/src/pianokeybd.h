@@ -74,8 +74,8 @@ public:
     void setShowLabels(bool show) { m_scene->setShowLabels(show); }
     bool useFlats() const { return m_scene->useFlats(); }
     void setUseFlats(bool use) { m_scene->setUseFlats(use); }
-    bool getRawKeyboardMode() const { return m_rawkbd; }
-    void setRawKeyboardMode(const bool b);
+    bool getRawKeyboardMode() const { return m_scene->getRawKeyboardMode(); }
+    void setRawKeyboardMode(const bool b) { m_scene->setRawKeyboardMode(b); }
 
 // RawKbdHandler methods
     bool handleKeyPressed(int keycode);
@@ -96,7 +96,6 @@ protected:
     void resizeEvent(QResizeEvent *event);
 
 private:
-    bool m_rawkbd;
     int m_rotation;
     PianoScene *m_scene;
     KeyboardMap *m_rawMap;

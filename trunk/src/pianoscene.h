@@ -69,6 +69,8 @@ public:
     void allKeysOff();
     void keyOn( const int note );
     void keyOff( const int note );
+    bool getRawKeyboardMode() const { return m_rawkbd; }
+    void setRawKeyboardMode(const bool b);
 
 signals:
     void noteOn(int n);
@@ -100,6 +102,7 @@ private:
     int m_transpose;
     bool m_showLabels;
     bool m_useFlats;
+    bool m_rawkbd;
     QColor m_keyPressedColor;
     bool m_mousePressed;
     PianoHandler* m_handler;

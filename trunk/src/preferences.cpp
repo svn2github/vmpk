@@ -31,7 +31,8 @@ Preferences::Preferences(QWidget *parent)
     m_grabKb(false),
     m_styledKnobs(true),
     m_alwaysOnTop(false),
-    m_showLabels(false)
+    m_showLabels(false),
+    m_rawKeyboard(false)
 {
     ui.setupUi( this );
     connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotButtonClicked(QAbstractButton*)));
@@ -54,6 +55,7 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.chkStyledKnobs->setChecked( m_styledKnobs );
         ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
         ui.chkShowNames->setChecked( m_showLabels );
+        ui.chkRawKeyboard->setChecked( m_rawKeyboard );
     }
 }
 
@@ -65,6 +67,7 @@ void Preferences::apply()
     m_styledKnobs = ui.chkStyledKnobs->isChecked();
     m_alwaysOnTop = ui.chkAlwaysOnTop->isChecked();
     m_showLabels = ui.chkShowNames->isChecked();
+    m_rawKeyboard = ui.chkRawKeyboard->isChecked();
 }
 
 void Preferences::accept()

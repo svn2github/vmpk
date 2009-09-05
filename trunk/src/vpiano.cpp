@@ -326,8 +326,10 @@ void VPiano::readSettings()
     dlgMidiSetup.setCurrentOutput(out_port);
 
     settings.beginGroup(QSTR_KEYBOARD);
+    bool rawKeyboard = settings.value(QSTR_RAWKEYBOARDMODE, false).toBool();
     QString mapFile = settings.value(QSTR_MAPFILE, QSTR_DEFAULT).toString();
     settings.endGroup();
+    dlgPreferences.setRawKeyboard(rawKeyboard);
 
     settings.beginGroup(QSTR_INSTRUMENT);
     m_lastBank = settings.value(QSTR_BANK, -1).toInt();
@@ -382,6 +384,7 @@ void VPiano::writeSettings()
     settings.endGroup();
 
     settings.beginGroup(QSTR_KEYBOARD);
+    settings.setValue(QSTR_RAWKEYBOARDMODE, dlgPreferences.getRawKeyboard());
     settings.setValue(QSTR_MAPFILE, ui.pianokeybd->getKeyboardMap()->getFileName());
     settings.endGroup();
 
@@ -727,6 +730,7 @@ void VPiano::applyPreferences()
     }
     ui.pianokeybd->setKeyPressedColor(dlgPreferences.getKeyPressedColor());
     ui.pianokeybd->setShowLabels(dlgPreferences.getShowNames());
+    ui.pianokeybd->setRawKeyboardMode(dlgPreferences.getRawKeyboard());
 
     m_ins = NULL;
     m_comboBank->clear();
@@ -927,6 +931,7 @@ void VPiano::grabKb() const
     if (dlgPreferences.getGrabKeyboard()) {
         ui.pianokeybd->grabKeyboard();
     }
+    ui.pianokeybd->setRawKeyboardMode(dlgPreferences.getRawKeyboard());
 }
 
 void VPiano::releaseKb() const
@@ -934,6 +939,7 @@ void VPiano::releaseKb() const
     if (dlgPreferences.getGrabKeyboard()) {
         ui.pianokeybd->releaseKeyboard();
     }
+    ui.pianokeybd->setRawKeyboardMode(false);
 }
 
 void VPiano::slotHelpContents()
