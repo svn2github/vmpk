@@ -56,11 +56,11 @@ public slots:
     void setShowNames(bool value) { m_showLabels = value; }
     void setRawKeyboard(bool value) { m_rawKeyboard = value; }
     void setKeyPressedColor(QColor value);
-    void slotButtonClicked(QAbstractButton *button);
     void slotOpenInstrumentFile();
     void slotSelectColor();
     void slotOpenKeymapFile();
     void slotOpenRawKeymapFile();
+    void slotRestoreDefaults();
     void accept();
 
 protected:

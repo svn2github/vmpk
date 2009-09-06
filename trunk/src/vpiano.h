@@ -111,8 +111,6 @@ public slots:
     void slotAboutQt();
     void slotConnections();
     void slotPreferences();
-    //void slotLoadKeyboardMap();
-    //void slotSaveKeyboardMap();
     void slotEditKeyboardMap();
     void slotPanic();
     void slotResetAllControllers();
@@ -130,10 +128,6 @@ public slots:
     void slotOpenWebSite();
     void setVelocity(int value) { m_velocity = value; }
     void slotImportSF();
-
-    // slots for note signals
-    // void slotNoteOn(int midiNote);
-    // void slotNoteOff(int midiNote);
 
 private:
     void initialization();

@@ -49,9 +49,11 @@ public:
     PianoKeybd(const int baseOctave, const int numOctaves, QWidget *parent = 0);
     virtual ~PianoKeybd();
     void setKeyboardMap(KeyboardMap* m) { m_scene->setKeyboardMap(m); }
+    void resetKeyboardMap() { m_scene->setKeyboardMap(&m_defaultMap); }
     KeyboardMap* getKeyboardMap() { return m_scene->getKeyboardMap(); }
     void setRawKeyboardMap(KeyboardMap* m) { m_rawMap = m; }
     KeyboardMap* getRawKeyboardMap() { return m_rawMap; }
+    void resetRawKeyboardMap() { m_rawMap = &m_defaultRawMap; }
 
     int baseOctave() const { return m_scene->baseOctave(); }
     int numOctaves() const { return m_scene->numOctaves(); }

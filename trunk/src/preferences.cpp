@@ -40,18 +40,12 @@ Preferences::Preferences(QWidget *parent)
     ui.txtFileRawKmap->setText(QSTR_DEFAULT);
     m_keymap.setRawMode(false);
     m_rawmap.setRawMode(true);
-    connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotButtonClicked(QAbstractButton*)));
     connect(ui.btnInstrument, SIGNAL(clicked()), SLOT(slotOpenInstrumentFile()));
     connect(ui.btnColor, SIGNAL(clicked()), SLOT(slotSelectColor()));
     connect(ui.btnKmap, SIGNAL(clicked()), SLOT(slotOpenKeymapFile()));
     connect(ui.btnRawKmap, SIGNAL(clicked()), SLOT(slotOpenRawKeymapFile()));
-}
-
-void Preferences::slotButtonClicked(QAbstractButton *button)
-{
-    if (dynamic_cast<QPushButton *>(button) == ui.buttonBox->button(QDialogButtonBox::Apply)) {
-        apply();
-    }
+    QPushButton *btnDefaults = ui.buttonBox->button(QDialogButtonBox::RestoreDefaults);
+    connect(btnDefaults, SIGNAL(clicked()), SLOT(slotRestoreDefaults()));
 }
 
 void Preferences::showEvent ( QShowEvent *event )
@@ -75,6 +69,15 @@ void Preferences::apply()
     m_alwaysOnTop = ui.chkAlwaysOnTop->isChecked();
     m_showLabels = ui.chkShowNames->isChecked();
     m_rawKeyboard = ui.chkRawKeyboard->isChecked();
+    if ( ui.txtFileRawKmap->text().isEmpty() ||
+         ui.txtFileRawKmap->text() == QSTR_DEFAULT)
+        m_rawmap.setFileName(QSTR_DEFAULT);
+    if ( ui.txtFileKmap->text().isEmpty() ||
+         ui.txtFileKmap->text() == QSTR_DEFAULT)
+        m_keymap.setFileName(QSTR_DEFAULT);
+    if ( ui.txtFileInstrument->text().isEmpty() ||
+         ui.txtFileInstrument->text() == QSTR_DEFAULT )
+        m_insFileName = QSTR_DEFAULT;
 }
 
 void Preferences::accept()
@@ -185,8 +188,11 @@ void Preferences::setRawKeyMapFileName( const QString fileName )
 {
     QFileInfo f(fileName);
     if (f.isReadable()) {
-        m_keymap.loadFromXMLFile(fileName);
+        m_rawmap.loadFromXMLFile(fileName);
         ui.txtFileRawKmap->setText(f.fileName());
+    } else {
+        m_rawmap.clear();
+        m_rawmap.setFileName(QSTR_DEFAULT);
     }
 }
 
@@ -194,7 +200,25 @@ void Preferences::setKeyMapFileName( const QString fileName )
 {
     QFileInfo f(fileName);
     if (f.isReadable()) {
-        m_rawmap.loadFromXMLFile(fileName);
+        m_keymap.loadFromXMLFile(fileName);
         ui.txtFileKmap->setText(f.fileName());
+    } else {
+        m_keymap.clear();
+        m_keymap.setFileName(QSTR_DEFAULT);
     }
+}
+
+void Preferences::slotRestoreDefaults()
+{
+    ui.chkAlwaysOnTop->setChecked(false);
+    ui.chkGrabKb->setChecked(false);
+    ui.chkRawKeyboard->setChecked(false);
+    ui.chkShowNames->setChecked(false);
+    ui.chkStyledKnobs->setChecked(true);
+    ui.spinNumOctaves->setValue(5);
+    ui.txtFileInstrument->setText(QSTR_DEFAULT);
+    ui.txtFileKmap->setText(QSTR_DEFAULT);
+    ui.txtFileRawKmap->setText(QSTR_DEFAULT);
+    ui.cboInstrument->setCurrentIndex(-1);
+    setKeyPressedColor(QApplication::palette().highlight().color());
 }

@@ -350,11 +350,11 @@ void VPiano::readSettings()
 
     ui.pianokeybd->getKeyboardMap()->setRawMode(false);
     ui.pianokeybd->getRawKeyboardMap()->setRawMode(true);
-    if (!mapFile.isEmpty() && (mapFile != QSTR_DEFAULT)) {
+    if (!mapFile.isEmpty() && mapFile != QSTR_DEFAULT) {
         dlgPreferences.setKeyMapFileName(mapFile);
         ui.pianokeybd->setKeyboardMap(dlgPreferences.getKeyboardMap());
     }
-    if (!rawMapFile.isEmpty() && (rawMapFile != QSTR_DEFAULT)) {
+    if (!rawMapFile.isEmpty() && rawMapFile != QSTR_DEFAULT) {
         dlgPreferences.setRawKeyMapFileName(rawMapFile);
         ui.pianokeybd->setRawKeyboardMap(dlgPreferences.getKeyboardMap());
     }
@@ -742,25 +742,25 @@ void VPiano::applyPreferences()
     ui.pianokeybd->setShowLabels(dlgPreferences.getShowNames());
     ui.pianokeybd->setRawKeyboardMode(dlgPreferences.getRawKeyboard());
 
-    KeyboardMap* map;
-    map = dlgPreferences.getKeyboardMap();
+    KeyboardMap* map = dlgPreferences.getKeyboardMap();
     if (!map->getFileName().isEmpty() && map->getFileName() != QSTR_DEFAULT )
-    {
         ui.pianokeybd->setKeyboardMap(map);
-    }
+    else
+        ui.pianokeybd->resetKeyboardMap();
 
     map = dlgPreferences.getRawKeyboardMap();
     if (!map->getFileName().isEmpty() && map->getFileName() != QSTR_DEFAULT )
-    {
         ui.pianokeybd->setRawKeyboardMap(map);
-    }
+    else
+        ui.pianokeybd->resetRawKeyboardMap();
 
     m_ins = NULL;
     m_comboBank->clear();
     m_comboProg->clear();
 
     if (!dlgPreferences.getInstrumentsFileName().isEmpty() &&
-        ((m_ins = dlgPreferences.getInstrument()) != NULL)) {
+         dlgPreferences.getInstrumentsFileName() != QSTR_DEFAULT &&
+         (m_ins = dlgPreferences.getInstrument()) != NULL) {
         //qDebug() << "Instrument Name:" << m_ins->instrumentName();
         //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
         m_ctlState.clear();
@@ -845,43 +845,6 @@ QString VPiano::dataDirectory()
 #endif
     return QString();
 }
-
-/*void VPiano::slotLoadKeyboardMap()
-{
-
-    releaseKb();
-    QString fileName = QFileDialog::getOpenFileName(0,
-                                tr("Open keyboard map definition"),
-                                VPiano::dataDirectory(),
-                                tr("Keyboard map (*.xml)"));
-    if (!fileName.isEmpty()) {
-        KeyboardMap* map;
-        if (dlgPreferences.getRawKeyboard())
-            map = ui.pianokeybd->getRawKeyboardMap();
-        else
-            map = ui.pianokeybd->getKeyboardMap();
-        map->loadFromXMLFile(fileName);
-    }
-    grabKb();
-}*/
-
-/*void VPiano::slotSaveKeyboardMap()
-{
-    releaseKb();
-    QString fileName = QFileDialog::getSaveFileName(this,
-                                tr("Save keyboard map definition"),
-                                VPiano::dataDirectory(),
-                                tr("Keyboard map (*.xml)"));
-    if (!fileName.isEmpty()) {
-        KeyboardMap* map;
-        if (dlgPreferences.getRawKeyboard())
-            map = ui.pianokeybd->getRawKeyboardMap();
-        else
-            map = ui.pianokeybd->getKeyboardMap();
-        map->saveToXMLFile(fileName);
-    }
-    grabKb();
-}*/
 
 void VPiano::slotEditKeyboardMap()
 {

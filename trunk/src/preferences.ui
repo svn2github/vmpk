@@ -266,7 +266,7 @@ p, li { white-space: pre-wrap; }
    <item row="11" column="0" colspan="3">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
      </property>
     </widget>
    </item>
