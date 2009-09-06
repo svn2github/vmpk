@@ -309,7 +309,7 @@
   </action>
   <action name="actionEditKM">
    <property name="text">
-    <string>Edit Keyboard Map...</string>
+    <string>&amp;Keyboard Map</string>
    </property>
    <property name="statusTip">
     <string>Edit the current keyboard layout</string>

@@ -78,6 +78,55 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>KMapDialog</name>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="31"/>
+        <source>Open...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="32"/>
+        <source>Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="43"/>
+        <source>Raw Key Map Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="43"/>
+        <source>Key Map Editor</source>
+        <translation type="unfinished">Editor de mapa de teclado</translation>
+    </message>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="44"/>
+        <source>Key Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="44"/>
+        <source>Key</source>
+        <translation type="unfinished">Tecla</translation>
+    </message>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="87"/>
+        <source>Open keyboard map definition</source>
+        <translation type="unfinished">Abrir definición de mapa de teclado</translation>
+    </message>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="89"/>
+        <location filename="../src/kmapdialog.cpp" line="102"/>
+        <source>Keyboard map (*.xml)</source>
+        <translation type="unfinished">Mapa de teclado (*.xml)</translation>
+    </message>
+    <message>
+        <location filename="../src/kmapdialog.cpp" line="100"/>
+        <source>Save keyboard map definition</source>
+        <translation type="unfinished">Guardar definición de mapa de teclado</translation>
+    </message>
+</context>
+<context>
     <name>KMapDialogClass</name>
     <message>
         <location filename="../src/kmapdialog.ui" line="17"/>
@@ -743,23 +792,23 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>KeyboardMap</name>
     <message>
-        <location filename="../src/keyboardmap.cpp" line="112"/>
+        <location filename="../src/keyboardmap.cpp" line="134"/>
         <source>File: %1
 %2</source>
         <translation>Archivo: %1\n%2</translation>
     </message>
     <message>
-        <location filename="../src/keyboardmap.cpp" line="36"/>
+        <location filename="../src/keyboardmap.cpp" line="38"/>
         <source>Error loading a file</source>
         <translation>Error abriendo un archivo</translation>
     </message>
     <message>
-        <location filename="../src/keyboardmap.cpp" line="49"/>
+        <location filename="../src/keyboardmap.cpp" line="52"/>
         <source>Error saving a file</source>
         <translation>Error guardando un archivo</translation>
     </message>
     <message>
-        <location filename="../src/keyboardmap.cpp" line="85"/>
+        <location filename="../src/keyboardmap.cpp" line="93"/>
         <source>Error reading XML</source>
         <translation>Error leyendo XML</translation>
     </message>
@@ -815,94 +864,94 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PianoScene</name>
     <message>
-        <location filename="../src/pianoscene.cpp" line="286"/>
-        <location filename="../src/pianoscene.cpp" line="289"/>
+        <location filename="../src/pianoscene.cpp" line="300"/>
+        <location filename="../src/pianoscene.cpp" line="303"/>
         <source>C</source>
         <translation>Do</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="286"/>
+        <location filename="../src/pianoscene.cpp" line="300"/>
         <source>C♯</source>
         <translation>Do♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="286"/>
-        <location filename="../src/pianoscene.cpp" line="289"/>
+        <location filename="../src/pianoscene.cpp" line="300"/>
+        <location filename="../src/pianoscene.cpp" line="303"/>
         <source>D</source>
         <translation>Re</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="286"/>
+        <location filename="../src/pianoscene.cpp" line="300"/>
         <source>D♯</source>
         <translation>Re♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="286"/>
-        <location filename="../src/pianoscene.cpp" line="289"/>
+        <location filename="../src/pianoscene.cpp" line="300"/>
+        <location filename="../src/pianoscene.cpp" line="303"/>
         <source>E</source>
         <translation>Mi</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="287"/>
-        <location filename="../src/pianoscene.cpp" line="290"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
+        <location filename="../src/pianoscene.cpp" line="304"/>
         <source>F</source>
         <translation>Fa</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="287"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
         <source>F♯</source>
         <translation>Fa♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="287"/>
-        <location filename="../src/pianoscene.cpp" line="290"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
+        <location filename="../src/pianoscene.cpp" line="304"/>
         <source>G</source>
         <translation>Sol</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="287"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
         <source>G♯</source>
         <translation>Sol♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="288"/>
-        <location filename="../src/pianoscene.cpp" line="291"/>
+        <location filename="../src/pianoscene.cpp" line="302"/>
+        <location filename="../src/pianoscene.cpp" line="305"/>
         <source>A</source>
         <translation>La</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="288"/>
+        <location filename="../src/pianoscene.cpp" line="302"/>
         <source>A♯</source>
         <translation>La♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="288"/>
-        <location filename="../src/pianoscene.cpp" line="291"/>
+        <location filename="../src/pianoscene.cpp" line="302"/>
+        <location filename="../src/pianoscene.cpp" line="305"/>
         <source>B</source>
         <translation>Si</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="289"/>
+        <location filename="../src/pianoscene.cpp" line="303"/>
         <source>D♭</source>
         <translation>Re♭</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="289"/>
+        <location filename="../src/pianoscene.cpp" line="303"/>
         <source>E♭</source>
         <translation>Mi♭</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="290"/>
+        <location filename="../src/pianoscene.cpp" line="304"/>
         <source>G♭</source>
         <translation>Sol♭</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="290"/>
+        <location filename="../src/pianoscene.cpp" line="304"/>
         <source>A♭</source>
         <translation>La♭</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="291"/>
+        <location filename="../src/pianoscene.cpp" line="305"/>
         <source>B♭</source>
         <translation>Si♭</translation>
     </message>
@@ -910,14 +959,26 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../src/preferences.cpp" line="79"/>
+        <location filename="../src/preferences.cpp" line="89"/>
         <source>Open instruments definition</source>
         <translation>Abrir definición de instrumentos</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="81"/>
+        <location filename="../src/preferences.cpp" line="91"/>
         <source>Instrument definitions (*.ins)</source>
         <translation>Definición de instrumentos (*.ins)</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.cpp" line="165"/>
+        <location filename="../src/preferences.cpp" line="176"/>
+        <source>Open keyboard map definition</source>
+        <translation type="unfinished">Abrir definición de mapa de teclado</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.cpp" line="167"/>
+        <location filename="../src/preferences.cpp" line="178"/>
+        <source>Keyboard map (*.xml)</source>
+        <translation type="unfinished">Mapa de teclado (*.xml)</translation>
     </message>
 </context>
 <context>
@@ -979,12 +1040,11 @@ p, li { white-space: pre-wrap; }
         <translation>Instrumento</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="201"/>
         <source>Grab keyboard</source>
-        <translation>Capturar teclado</translation>
+        <translation type="obsolete">Capturar teclado</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="174"/>
+        <location filename="../src/preferences.ui" line="208"/>
         <source>Styled Knobs</source>
         <translation>Aplicar estilos</translation>
     </message>
@@ -1020,21 +1080,37 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/preferences.ui" line="171"/>
+        <source>Keyboard Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="181"/>
+        <location filename="../src/preferences.ui" line="198"/>
+        <source>Load...</source>
+        <translation type="unfinished">Abrir...</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="188"/>
+        <source>Raw Keyboard Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="205"/>
         <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
         <translation>Cambie el estilo de los botones rotativos, o bién usando el aspecto personalizado o volviendo al estilo seleccionado en qtconfig</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="184"/>
+        <location filename="../src/preferences.ui" line="218"/>
         <source>Check this box to keep the keyboard window always visible, on top of other windows.</source>
         <translation>Marque esta casilla para que la ventana del teclado permanezca siempre visible, sobre las otras ventanas.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="187"/>
+        <location filename="../src/preferences.ui" line="221"/>
         <source>Always On Top</source>
         <translation>Siempre visible</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="194"/>
+        <location filename="../src/preferences.ui" line="228"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1043,12 +1119,34 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Marque esta casilla para capturar el teclado de PC, aun cuando el control de teclado no tenga el foco. &lt;span style=&quot; font-weight:600;&quot;&gt;Nota para usuarios de Linux:&lt;/span&gt; esta opción funciona correctamente en escritorios KDE, pero falla en gestores de ventanas como metacity y compiz. También se sabe que esta opción interfiere con los menús desplegables de las aplicaciones basadas en GTK.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="208"/>
+        <location filename="../src/preferences.ui" line="235"/>
+        <source>Grab Computer Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="242"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Check this box to use low level PC keyboard events. This system has several advantages:&lt;/p&gt;
+&lt;ul style=&quot;-qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It is possible to use &quot;dead keys&quot; (accent marks, diacritics)&lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mapping definitions are independent of the language (but hardware and OS specific)&lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Faster process&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="252"/>
+        <source>Raw Computer Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="259"/>
         <source>Check this box to display the note names over the piano keys.</source>
         <translation>Marque esta casilla para mostrar los nombres de las notas sobre las teclas del piano</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="211"/>
+        <location filename="../src/preferences.ui" line="262"/>
         <source>Show Note Names</source>
         <translation>Mostrar nombres de notas</translation>
     </message>
@@ -1170,7 +1268,7 @@ p, li { white-space: pre-wrap; }
     <name>VPiano</name>
     <message>
         <location filename="../src/vpiano.cpp" line="145"/>
-        <location filename="../src/vpiano.cpp" line="956"/>
+        <location filename="../src/vpiano.cpp" line="1004"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -1230,20 +1328,16 @@ p, li { white-space: pre-wrap; }
         <translation> Programa: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="827"/>
         <source>Open keyboard map definition</source>
-        <translation>Abrir definición de mapa de teclado</translation>
+        <translation type="obsolete">Abrir definición de mapa de teclado</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="829"/>
-        <location filename="../src/vpiano.cpp" line="842"/>
         <source>Keyboard map (*.xml)</source>
-        <translation>Mapa de teclado (*.xml)</translation>
+        <translation type="obsolete">Mapa de teclado (*.xml)</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="840"/>
         <source>Save keyboard map definition</source>
-        <translation>Guardar definición de mapa de teclado</translation>
+        <translation type="obsolete">Guardar definición de mapa de teclado</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="14"/>
@@ -1261,206 +1355,209 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Edición</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="56"/>
         <source>Keyboard map</source>
-        <translation>Mapa de teclado</translation>
+        <translation type="obsolete">Mapa de teclado</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="68"/>
+        <location filename="../src/vpiano.ui" line="60"/>
         <source>&amp;Help</source>
         <translation>A&amp;yuda</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="78"/>
+        <location filename="../src/vpiano.ui" line="70"/>
         <source>&amp;View</source>
         <translation>&amp;Ver</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="105"/>
-        <location filename="../src/vpiano.ui" line="228"/>
+        <location filename="../src/vpiano.ui" line="97"/>
+        <location filename="../src/vpiano.ui" line="220"/>
         <source>&amp;Notes</source>
         <translation>&amp;Notas</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="127"/>
-        <location filename="../src/vpiano.ui" line="239"/>
+        <location filename="../src/vpiano.ui" line="119"/>
+        <location filename="../src/vpiano.ui" line="231"/>
         <source>&amp;Controllers</source>
         <translation>&amp;Controladores</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="149"/>
-        <location filename="../src/vpiano.ui" line="250"/>
+        <location filename="../src/vpiano.ui" line="141"/>
+        <location filename="../src/vpiano.ui" line="242"/>
         <source>Pitch &amp;Bender</source>
         <translation>&amp;Inflexión de tono</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="171"/>
-        <location filename="../src/vpiano.ui" line="261"/>
+        <location filename="../src/vpiano.ui" line="163"/>
+        <location filename="../src/vpiano.ui" line="253"/>
         <source>&amp;Programs</source>
         <translation>&amp;Programas</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="185"/>
+        <location filename="../src/vpiano.ui" line="177"/>
         <source>&amp;Quit</source>
         <translation>&amp;Terminar</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="188"/>
+        <location filename="../src/vpiano.ui" line="180"/>
         <source>Exit the program</source>
         <translation>Terminar el programa</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="193"/>
+        <location filename="../src/vpiano.ui" line="185"/>
         <source>&amp;Preferences</source>
         <translation>&amp;Preferencias</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="196"/>
+        <location filename="../src/vpiano.ui" line="188"/>
         <source>Edit the program settings</source>
         <translation>Editar los ajustes del programa</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="201"/>
+        <location filename="../src/vpiano.ui" line="193"/>
         <source>&amp;Connections</source>
         <translation>&amp;Conexiones</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="204"/>
+        <location filename="../src/vpiano.ui" line="196"/>
         <source>Edit the MIDI connections</source>
         <translation>Editar las conexiones MIDI</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="209"/>
+        <location filename="../src/vpiano.ui" line="201"/>
         <source>&amp;About</source>
         <translation>&amp;Acerca de</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="212"/>
+        <location filename="../src/vpiano.ui" line="204"/>
         <source>Show the About box</source>
         <translation>Mostrar el cuadro Acerca De</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="217"/>
+        <location filename="../src/vpiano.ui" line="209"/>
         <source>About Q&amp;t</source>
         <translation>Acerca de Q&amp;t</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="220"/>
+        <location filename="../src/vpiano.ui" line="212"/>
         <source>Show the Qt about box</source>
         <translation>Mostrar el cuadro Acerca de Qt</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="231"/>
+        <location filename="../src/vpiano.ui" line="223"/>
         <source>Show or hide the Notes toolbar</source>
         <translation>Mostraru ocultar la barra de herramientas de Notas</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="242"/>
+        <location filename="../src/vpiano.ui" line="234"/>
         <source>Show or hide the Controller toolbar</source>
         <translation>Mostrar u ocultar la barra de herramientas de Controladores</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="253"/>
+        <location filename="../src/vpiano.ui" line="245"/>
         <source>Show or hide the Pitch Bender toolbar</source>
         <translation>Mostrar u ocultar la barra de herramientas de Inflexión de Tono</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="264"/>
+        <location filename="../src/vpiano.ui" line="256"/>
         <source>Show or hide the Programs toolbar</source>
         <translation>Mostrar u ocultar la barra de herramientas de Programas</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="275"/>
+        <location filename="../src/vpiano.ui" line="267"/>
         <source>&amp;Status Bar</source>
         <translation>Barra de &amp;Estado</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="280"/>
+        <location filename="../src/vpiano.ui" line="272"/>
         <source>Panic</source>
         <translation>Pánico</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="283"/>
+        <location filename="../src/vpiano.ui" line="275"/>
         <source>Stops all active notes</source>
         <translation>Detiene todas las notas activas</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="288"/>
+        <location filename="../src/vpiano.ui" line="280"/>
         <source>Reset All</source>
         <translation>Restablecer</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="291"/>
+        <location filename="../src/vpiano.ui" line="283"/>
         <source>Resets all the controllers</source>
         <translation>Restablece el valor de todos los controladores</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="296"/>
+        <location filename="../src/vpiano.ui" line="288"/>
         <source>Reset</source>
         <translation>Restablecer</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="299"/>
+        <location filename="../src/vpiano.ui" line="291"/>
         <source>Resets the Bender value</source>
         <translation>Restablece el valor de la Inflexión</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="304"/>
+        <location filename="../src/vpiano.ui" line="296"/>
         <source>Load...</source>
         <translation>Abrir...</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="307"/>
+        <location filename="../src/vpiano.ui" line="299"/>
         <source>Load another keyboard layout</source>
         <translation>Abrir otra disposición de teclado</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="312"/>
+        <location filename="../src/vpiano.ui" line="304"/>
         <source>Save...</source>
         <translation>Guardar...</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="315"/>
+        <location filename="../src/vpiano.ui" line="307"/>
         <source>Save the current keyboard layout</source>
         <translation>Guardar la disposición de teclado actual</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="320"/>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
+        <location filename="../src/vpiano.ui" line="312"/>
+        <source>&amp;Keyboard Map</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="323"/>
+        <source>Edit...</source>
+        <translation type="obsolete">Editar...</translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.ui" line="315"/>
         <source>Edit the current keyboard layout</source>
         <translation>Edita la disposición de teclado actual</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="328"/>
+        <location filename="../src/vpiano.ui" line="320"/>
         <source>&amp;Contents</source>
         <translation>&amp;Contenido</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="331"/>
+        <location filename="../src/vpiano.ui" line="323"/>
         <source>Open the index of the help document</source>
         <translation>Abrir el índice del documento de ayuda</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="336"/>
+        <location filename="../src/vpiano.ui" line="328"/>
         <source>VMPK &amp;Web site</source>
         <translation>Sitio &amp;Web de VMPK</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="339"/>
+        <location filename="../src/vpiano.ui" line="331"/>
         <source>Open the VMPK web site address using a web browser</source>
         <translation>Abrir la direción del sitio web de VMPK usando un navegador</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="344"/>
+        <location filename="../src/vpiano.ui" line="336"/>
         <source>&amp;Import SoundFont...</source>
         <translation>&amp;Importar SoundFont</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="956"/>
+        <location filename="../src/vpiano.cpp" line="1004"/>
         <source>No help file found</source>
         <translation>No se ha encontrado un archivo de ayuda</translation>
     </message>
