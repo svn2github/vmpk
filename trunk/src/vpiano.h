@@ -111,8 +111,8 @@ public slots:
     void slotAboutQt();
     void slotConnections();
     void slotPreferences();
-    void slotLoadKeyboardMap();
-    void slotSaveKeyboardMap();
+    //void slotLoadKeyboardMap();
+    //void slotSaveKeyboardMap();
     void slotEditKeyboardMap();
     void slotPanic();
     void slotResetAllControllers();

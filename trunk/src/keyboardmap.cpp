@@ -117,6 +117,16 @@ void KeyboardMap::serializeToXML(QIODevice *dev)
     writer.writeEndDocument();
 }
 
+void KeyboardMap::copyFrom(const KeyboardMap* other)
+{
+    m_fileName = other->getFileName();
+    m_rawMode = other->getRawMode();
+    clear();
+    KeyboardMap::ConstIterator it;
+    for(it = other->begin(); it != other->end(); ++it)
+        insert(it.key(), it.value());
+}
+
 void KeyboardMap::reportError( const QString filename,
                                const QString title,
                                const QString err )

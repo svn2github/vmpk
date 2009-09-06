@@ -52,8 +52,8 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionAbout_Qt, SIGNAL(triggered()), SLOT(slotAboutQt()));
     connect(ui.actionConnections, SIGNAL(triggered()), SLOT(slotConnections()));
     connect(ui.actionPreferences, SIGNAL(triggered()), SLOT(slotPreferences()));
-    connect(ui.actionLoadKM, SIGNAL(triggered()), SLOT(slotLoadKeyboardMap()));
-    connect(ui.actionSaveKM, SIGNAL(triggered()), SLOT(slotSaveKeyboardMap()));
+    //connect(ui.actionLoadKM, SIGNAL(triggered()), SLOT(slotLoadKeyboardMap()));
+    //connect(ui.actionSaveKM, SIGNAL(triggered()), SLOT(slotSaveKeyboardMap()));
     connect(ui.actionEditKM, SIGNAL(triggered()), SLOT(slotEditKeyboardMap()));
     connect(ui.actionContents, SIGNAL(triggered()), SLOT(slotHelpContents()));
     connect(ui.actionWebSite, SIGNAL(triggered()), SLOT(slotOpenWebSite()));
@@ -831,7 +831,7 @@ QString VPiano::dataDirectory()
     return QString();
 }
 
-void VPiano::slotLoadKeyboardMap()
+/*void VPiano::slotLoadKeyboardMap()
 {
 
     releaseKb();
@@ -848,9 +848,9 @@ void VPiano::slotLoadKeyboardMap()
         map->loadFromXMLFile(fileName);
     }
     grabKb();
-}
+}*/
 
-void VPiano::slotSaveKeyboardMap()
+/*void VPiano::slotSaveKeyboardMap()
 {
     releaseKb();
     QString fileName = QFileDialog::getSaveFileName(this,
@@ -866,14 +866,19 @@ void VPiano::slotSaveKeyboardMap()
         map->saveToXMLFile(fileName);
     }
     grabKb();
-}
+}*/
 
 void VPiano::slotEditKeyboardMap()
 {
-    dlgKeyMap.displayMap(ui.pianokeybd->getKeyboardMap());
+    KeyboardMap* map;
     releaseKb();
+    if (dlgPreferences.getRawKeyboard())
+        map = ui.pianokeybd->getRawKeyboardMap();
+    else
+        map = ui.pianokeybd->getKeyboardMap();
+    dlgKeyMap.displayMap(map);
     if (dlgKeyMap.exec() == QDialog::Accepted) {
-        KeyboardMap* map = dlgKeyMap.getMap();
+        dlgKeyMap.getMap(map);
         if (dlgPreferences.getRawKeyboard())
             ui.pianokeybd->setRawKeyboardMap(map);
         else

@@ -32,12 +32,17 @@ public:
     void load(const QString fileName);
     void save(const QString fileName);
     void displayMap(const KeyboardMap* map);
-    KeyboardMap* getMap();
+    void getMap(KeyboardMap* map);
+
+public slots:
+    void slotOpen();
+    void slotSave();
 
 private:
-    Ui::KMapDialogClass ui;
-    QString m_fileName;
+    void updateMap();
+
     KeyboardMap m_map;
+    Ui::KMapDialogClass ui;
 };
 
 #endif // KMAPDIALOG_H

@@ -51,17 +51,9 @@
     <property name="title">
      <string>&amp;Edit</string>
     </property>
-    <widget class="QMenu" name="menuKeyboard_map">
-     <property name="title">
-      <string>Keyboard map</string>
-     </property>
-     <addaction name="actionLoadKM"/>
-     <addaction name="actionSaveKM"/>
-     <addaction name="actionEditKM"/>
-    </widget>
     <addaction name="actionConnections"/>
     <addaction name="actionPreferences"/>
-    <addaction name="menuKeyboard_map"/>
+    <addaction name="actionEditKM"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -317,7 +309,7 @@
   </action>
   <action name="actionEditKM">
    <property name="text">
-    <string>Edit...</string>
+    <string>Edit Keyboard Map...</string>
    </property>
    <property name="statusTip">
     <string>Edit the current keyboard layout</string>

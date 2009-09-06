@@ -32,6 +32,9 @@ public:
     void saveToXMLFile(const QString fileName);
     void initializeFromXML(QIODevice *dev);
 	void serializeToXML(QIODevice *dev);
+	void copyFrom(const KeyboardMap* other);
+
+	void setFileName(const QString fileName) { m_fileName = fileName; }
 	const QString& getFileName() const { return m_fileName; }
 	void setRawMode(bool b) { m_rawMode = b; }
 	bool getRawMode() const { return m_rawMode; }
