@@ -22,6 +22,7 @@
 #include <QDialog>
 #include "ui_preferences.h"
 #include "instrument.h"
+#include "keyboardmap.h"
 
 class Preferences : public QDialog
 {
@@ -42,6 +43,10 @@ public:
     QString getInstrumentName();
     void apply();
     Instrument* getInstrument();
+    void setRawKeyMapFileName( const QString fileName );
+    void setKeyMapFileName( const QString fileName );
+    KeyboardMap* getKeyboardMap() { return &m_keymap; }
+    KeyboardMap* getRawKeyboardMap() { return &m_rawmap; }
 
 public slots:
     void setNumOctaves(int value) { m_numOctaves = value; }
@@ -54,6 +59,8 @@ public slots:
     void slotButtonClicked(QAbstractButton *button);
     void slotOpenInstrumentFile();
     void slotSelectColor();
+    void slotOpenKeymapFile();
+    void slotOpenRawKeymapFile();
     void accept();
 
 protected:
@@ -70,6 +77,8 @@ private:
     bool m_showLabels;
     bool m_rawKeyboard;
     QColor m_keyPressedColor;
+    KeyboardMap m_keymap;
+    KeyboardMap m_rawmap;
 };
 
 #endif // PREFERENCES_H

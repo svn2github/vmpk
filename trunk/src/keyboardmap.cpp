@@ -23,7 +23,7 @@
 #include <QXmlStreamWriter>
 #include <QKeySequence>
 #include <QMessageBox>
-#include <QDebug>
+//#include <QDebug>
 
 void KeyboardMap::loadFromXMLFile(const QString fileName)
 {
@@ -32,7 +32,7 @@ void KeyboardMap::loadFromXMLFile(const QString fileName)
         initializeFromXML(&f);
         f.close();
         m_fileName = fileName;
-        qDebug() << "Loaded Map: " << fileName;
+        //qDebug() << "Loaded Map: " << fileName;
     }
     if (f.error() != QFile::NoError) {
         reportError(fileName, tr("Error loading a file"), f.errorString());
@@ -46,7 +46,7 @@ void KeyboardMap::saveToXMLFile(const QString fileName)
         serializeToXML(&f);
         f.close();
         m_fileName = fileName;
-        qDebug() << "Saved Map: " << fileName;
+        //qDebug() << "Saved Map: " << fileName;
     }
     if (f.error() != QFile::NoError) {
         reportError(fileName, tr("Error saving a file"), f.errorString());

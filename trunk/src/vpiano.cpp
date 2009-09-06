@@ -351,10 +351,12 @@ void VPiano::readSettings()
     ui.pianokeybd->getKeyboardMap()->setRawMode(false);
     ui.pianokeybd->getRawKeyboardMap()->setRawMode(true);
     if (!mapFile.isEmpty() && (mapFile != QSTR_DEFAULT)) {
-        ui.pianokeybd->getKeyboardMap()->loadFromXMLFile(mapFile);
+        dlgPreferences.setKeyMapFileName(mapFile);
+        ui.pianokeybd->setKeyboardMap(dlgPreferences.getKeyboardMap());
     }
     if (!rawMapFile.isEmpty() && (rawMapFile != QSTR_DEFAULT)) {
-        ui.pianokeybd->getRawKeyboardMap()->loadFromXMLFile(rawMapFile);
+        dlgPreferences.setRawKeyMapFileName(rawMapFile);
+        ui.pianokeybd->setRawKeyboardMap(dlgPreferences.getKeyboardMap());
     }
 }
 
@@ -434,7 +436,7 @@ void VPiano::customEvent ( QEvent *event )
 
 void VPiano::showEvent ( QShowEvent *event )
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     QMainWindow::showEvent(event);
     ui.pianokeybd->setFocus();
     grabKb();
@@ -739,6 +741,19 @@ void VPiano::applyPreferences()
     ui.pianokeybd->setKeyPressedColor(dlgPreferences.getKeyPressedColor());
     ui.pianokeybd->setShowLabels(dlgPreferences.getShowNames());
     ui.pianokeybd->setRawKeyboardMode(dlgPreferences.getRawKeyboard());
+
+    KeyboardMap* map;
+    map = dlgPreferences.getKeyboardMap();
+    if (!map->getFileName().isEmpty() && map->getFileName() != QSTR_DEFAULT )
+    {
+        ui.pianokeybd->setKeyboardMap(map);
+    }
+
+    map = dlgPreferences.getRawKeyboardMap();
+    if (!map->getFileName().isEmpty() && map->getFileName() != QSTR_DEFAULT )
+    {
+        ui.pianokeybd->setRawKeyboardMap(map);
+    }
 
     m_ins = NULL;
     m_comboBank->clear();

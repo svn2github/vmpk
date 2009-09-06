@@ -35,9 +35,16 @@ Preferences::Preferences(QWidget *parent)
     m_rawKeyboard(false)
 {
     ui.setupUi( this );
+    ui.txtFileInstrument->setText(QSTR_DEFAULT);
+    ui.txtFileKmap->setText(QSTR_DEFAULT);
+    ui.txtFileRawKmap->setText(QSTR_DEFAULT);
+    m_keymap.setRawMode(false);
+    m_rawmap.setRawMode(true);
     connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotButtonClicked(QAbstractButton*)));
     connect(ui.btnInstrument, SIGNAL(clicked()), SLOT(slotOpenInstrumentFile()));
     connect(ui.btnColor, SIGNAL(clicked()), SLOT(slotSelectColor()));
+    connect(ui.btnKmap, SIGNAL(clicked()), SLOT(slotOpenKeymapFile()));
+    connect(ui.btnRawKmap, SIGNAL(clicked()), SLOT(slotOpenRawKeymapFile()));
 }
 
 void Preferences::slotButtonClicked(QAbstractButton *button)
@@ -149,5 +156,45 @@ void Preferences::setKeyPressedColor(QColor value)
         ui.lblColorName->setText(value.name());
         ui.lblColorName->setPalette(QPalette(value));
         ui.lblColorName->setAutoFillBackground(true);
+    }
+}
+
+void Preferences::slotOpenKeymapFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(0,
+                                tr("Open keyboard map definition"),
+                                VPiano::dataDirectory(),
+                                tr("Keyboard map (*.xml)"));
+    if (!fileName.isEmpty()) {
+        setKeyMapFileName(fileName);
+    }
+}
+
+void Preferences::slotOpenRawKeymapFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(0,
+                                tr("Open keyboard map definition"),
+                                VPiano::dataDirectory(),
+                                tr("Keyboard map (*.xml)"));
+    if (!fileName.isEmpty()) {
+        setRawKeyMapFileName(fileName);
+    }
+}
+
+void Preferences::setRawKeyMapFileName( const QString fileName )
+{
+    QFileInfo f(fileName);
+    if (f.isReadable()) {
+        m_keymap.loadFromXMLFile(fileName);
+        ui.txtFileRawKmap->setText(f.fileName());
+    }
+}
+
+void Preferences::setKeyMapFileName( const QString fileName )
+{
+    QFileInfo f(fileName);
+    if (f.isReadable()) {
+        m_rawmap.loadFromXMLFile(fileName);
+        ui.txtFileKmap->setText(f.fileName());
     }
 }
