@@ -52,8 +52,6 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionAbout_Qt, SIGNAL(triggered()), SLOT(slotAboutQt()));
     connect(ui.actionConnections, SIGNAL(triggered()), SLOT(slotConnections()));
     connect(ui.actionPreferences, SIGNAL(triggered()), SLOT(slotPreferences()));
-    //connect(ui.actionLoadKM, SIGNAL(triggered()), SLOT(slotLoadKeyboardMap()));
-    //connect(ui.actionSaveKM, SIGNAL(triggered()), SLOT(slotSaveKeyboardMap()));
     connect(ui.actionEditKM, SIGNAL(triggered()), SLOT(slotEditKeyboardMap()));
     connect(ui.actionContents, SIGNAL(triggered()), SLOT(slotHelpContents()));
     connect(ui.actionWebSite, SIGNAL(triggered()), SLOT(slotOpenWebSite()));
@@ -262,10 +260,14 @@ void VPiano::initToolBars()
             ui.actionBender, SLOT(setChecked(bool)));
     connect(ui.toolBarPrograms->toggleViewAction(), SIGNAL(toggled(bool)),
             ui.actionPrograms, SLOT(setChecked(bool)));
+    connect(ui.toolBarExtra->toggleViewAction(), SIGNAL(toggled(bool)),
+            ui.actionExtraControls, SLOT(setChecked(bool)));
     // Toolbars actions: buttons
     connect(ui.actionPanic, SIGNAL(triggered()), SLOT(slotPanic()));
     connect(ui.actionResetAll, SIGNAL(triggered()), SLOT(slotResetAllControllers()));
     connect(ui.actionReset, SIGNAL(triggered()), SLOT(slotResetBender()));
+    connect(ui.actionEditExtra, SIGNAL(triggered()), SLOT(slotEditExtraControls()));
+    connect(ui.actionEditPrograms, SIGNAL(triggered()), SLOT(slotEditPrograms()));
 }
 
 void VPiano::readSettings()
@@ -285,8 +287,7 @@ void VPiano::readSettings()
     int num_octaves = settings.value(QSTR_NUMOCTAVES, 5).toInt();
     QString insFileName = settings.value(QSTR_INSTRUMENTSDEFINITION).toString();
     QString insName = settings.value(QSTR_INSTRUMENTNAME).toString();
-    QColor defColor = QApplication::palette().highlight().color();
-    QColor keyColor = settings.value(QSTR_KEYPRESSEDCOLOR, defColor).value<QColor>();
+    QColor keyColor = settings.value(QSTR_KEYPRESSEDCOLOR, QColor()).value<QColor>();
     bool grabKb = settings.value(QSTR_GRABKB, false).toBool();
     bool styledKnobs = settings.value(QSTR_STYLEDKNOBS, true).toBool();
     bool alwaysOnTop = settings.value(QSTR_ALWAYSONTOP, false).toBool();
@@ -992,4 +993,14 @@ void VPiano::slotImportSF()
         applyPreferences();
     }
     grabKb();
+}
+
+void VPiano::slotEditExtraControls()
+{
+
+}
+
+void VPiano::slotEditPrograms()
+{
+
 }

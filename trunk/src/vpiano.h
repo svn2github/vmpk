@@ -128,6 +128,8 @@ public slots:
     void slotOpenWebSite();
     void setVelocity(int value) { m_velocity = value; }
     void slotImportSF();
+    void slotEditExtraControls();
+    void slotEditPrograms();
 
 private:
     void initialization();

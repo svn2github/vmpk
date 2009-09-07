@@ -21,10 +21,22 @@
 #include <QPainter>
 #include <QPalette>
 
+static const QBrush blackBrush = QBrush(Qt::black);
+static const QBrush whiteBrush = QBrush(Qt::white);
+
 PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note) 
     : QGraphicsRectItem(rect),
     m_pressed(false),
     m_brush(brush), 
+    m_note(note)
+{
+    setAcceptedMouseButtons(Qt::NoButton);
+}
+
+PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
+    : QGraphicsRectItem(rect),
+    m_pressed(false),
+    m_brush( black ? blackBrush : whiteBrush ),
     m_note(note)
 {
     setAcceptedMouseButtons(Qt::NoButton);
@@ -53,4 +65,3 @@ void PianoKey::setPressed(bool p)
         update();
     }
 }
-

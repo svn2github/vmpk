@@ -43,8 +43,8 @@ PianoScene::PianoScene ( const int baseOctave,
     m_mousePressed( false ),
     m_handler( NULL )
 {
-    QBrush blackBrush(Qt::black);
-    QBrush whiteBrush(Qt::white);
+    //QBrush blackBrush(Qt::black);
+    //QBrush whiteBrush(Qt::white);
     QBrush hilightBrush(m_keyPressedColor.isValid() ? m_keyPressedColor : QApplication::palette().highlight());
     QFont lblFont(QApplication::font());
     int i, numkeys = m_numOctaves * 12;
@@ -59,13 +59,13 @@ PianoScene::PianoScene ( const int baseOctave,
         if (j >= 5) j++;
         if ((j % 2) == 0) {
             x = (octave + j / 2) * KEYWIDTH;
-            key = new PianoKey( QRectF(x, 0, KEYWIDTH, KEYHEIGHT), whiteBrush, i );
+            key = new PianoKey( QRectF(x, 0, KEYWIDTH, KEYHEIGHT), false, i );
             lbl = new KeyLabel(key);
             lbl->setDefaultTextColor(Qt::black);
             lbl->setPos(x, KEYHEIGHT);
         } else {
             x = (octave + j / 2) * KEYWIDTH + KEYWIDTH * 6/10 + 1;
-            key = new PianoKey( QRectF( x, 0, KEYWIDTH * 8/10 - 1, KEYHEIGHT * 6/10 ), blackBrush, i );
+            key = new PianoKey( QRectF( x, 0, KEYWIDTH * 8/10 - 1, KEYHEIGHT * 6/10 ), true, i );
             key->setZValue( 1 );
             lbl = new KeyLabel(key);
             lbl->setDefaultTextColor(Qt::white);

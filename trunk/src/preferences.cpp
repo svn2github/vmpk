@@ -57,6 +57,8 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
         ui.chkShowNames->setChecked( m_showLabels );
         ui.chkRawKeyboard->setChecked( m_rawKeyboard );
+        if (!m_keyPressedColor.isValid())
+            setKeyPressedColor(QApplication::palette().highlight().color());
     }
 }
 
@@ -100,11 +102,7 @@ void Preferences::slotOpenInstrumentFile()
 void Preferences::slotSelectColor()
 {
     QColor color = QColorDialog::getColor(m_keyPressedColor, this);
-    if (color.isValid()) {
-        ui.lblColorName->setText(color.name());
-        ui.lblColorName->setPalette(QPalette(color));
-        ui.lblColorName->setAutoFillBackground(true);
-    }
+    setKeyPressedColor(color);
 }
 
 Instrument* Preferences::getInstrument()
@@ -154,7 +152,7 @@ QString Preferences::getInstrumentName()
 
 void Preferences::setKeyPressedColor(QColor value)
 {
-    if (m_keyPressedColor != value) {
+    if (m_keyPressedColor != value && value.isValid()) {
         m_keyPressedColor = value;
         ui.lblColorName->setText(value.name());
         ui.lblColorName->setPalette(QPalette(value));
