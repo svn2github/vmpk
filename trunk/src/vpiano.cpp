@@ -36,6 +36,7 @@
 #include "RtMidi.h"
 #include "constants.h"
 #include "riffimportdlg.h"
+#include "extracontrols.h"
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
@@ -104,6 +105,7 @@ void midiCallback( double /*deltatime*/,
 {
     QEvent* ev = NULL;
     VPiano* instance = static_cast<VPiano*>(userData);
+    instance->midiThru(message);
     unsigned char status = message->at(0) & MASK_STATUS;
     if ((status == STATUS_NOTEON) || (status == STATUS_NOTEOFF)) {
         unsigned char channel = message->at(0) & MASK_CHANNEL;
@@ -125,7 +127,6 @@ void midiCallback( double /*deltatime*/,
             ev = new ControllerEvent(ctl, val);
         }
     }
-    instance->midiThru(message);
     if (ev != NULL)
         QApplication::postEvent(instance, ev);
 }
@@ -997,7 +998,10 @@ void VPiano::slotImportSF()
 
 void VPiano::slotEditExtraControls()
 {
-
+    DialogExtraControls dlg;
+    releaseKb();
+    dlg.exec();
+    grabKb();
 }
 
 void VPiano::slotEditPrograms()

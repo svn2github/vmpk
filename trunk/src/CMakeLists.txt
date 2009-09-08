@@ -27,6 +27,7 @@ FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h
 
 SET(vmpk_forms_SRCS
     about.ui
+    extracontrols.ui
     kmapdialog.ui
     midisetup.ui
     preferences.ui
@@ -42,6 +43,8 @@ SET(vmpk_SRCS
     classicstyle.cpp
     classicstyle.h
     constants.h
+    extracontrols.cpp
+    extracontrols.h
     instrument.cpp
     instrument.h
     keyboardmap.cpp
@@ -82,6 +85,7 @@ QT4_ADD_RESOURCES(vmpk_SRCS ../data/vmpk.qrc)
 
 SET(vmpk_qtobject_SRCS
     about.h
+    extracontrols.h
     kmapdialog.h
     knob.h
     midisetup.h

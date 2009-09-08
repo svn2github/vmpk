@@ -38,9 +38,9 @@ class Instrument;
 class RtMidiIn;
 class RtMidiOut;
 
-const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::User + STATUS_NOTEON );
-const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::User + STATUS_NOTEOFF );
-const QEvent::Type ControllerEventType = QEvent::Type( QEvent::User + STATUS_CONTROLLER );
+const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEON ));
+const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEOFF ));
+const QEvent::Type ControllerEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_CONTROLLER ));
 
 class NoteEvent : public QEvent
 {
