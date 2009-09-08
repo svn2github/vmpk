@@ -69,7 +69,7 @@ PianoScene::PianoScene ( const int baseOctave,
             key->setZValue( 1 );
             lbl = new KeyLabel(key);
             lbl->setDefaultTextColor(Qt::white);
-            lbl->setPos(x - 3, KEYHEIGHT * 6/10);
+            lbl->setPos(x - 3, KEYHEIGHT * 6/10 - 3);
         }
         if (m_keyPressedColor.isValid())
             key->setPressedBrush(hilightBrush);

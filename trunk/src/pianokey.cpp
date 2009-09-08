@@ -20,15 +20,18 @@
 #include <QApplication>
 #include <QPainter>
 #include <QPalette>
+#include <QSvgRenderer>
 
 static const QBrush blackBrush = QBrush(Qt::black);
 static const QBrush whiteBrush = QBrush(Qt::white);
+static QSvgRenderer keyRenderer(QString(":/blkey.svg"));
 
-PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note) 
+PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note)
     : QGraphicsRectItem(rect),
     m_pressed(false),
     m_brush(brush), 
-    m_note(note)
+    m_note(note),
+    m_black(brush == blackBrush)
 {
     setAcceptedMouseButtons(Qt::NoButton);
 }
@@ -37,7 +40,8 @@ PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
     : QGraphicsRectItem(rect),
     m_pressed(false),
     m_brush( black ? blackBrush : whiteBrush ),
-    m_note(note)
+    m_note(note),
+    m_black(black)
 {
     setAcceptedMouseButtons(Qt::NoButton);
 }
@@ -56,6 +60,7 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
     }
     painter->setPen(blackPen);
     painter->drawRoundRect(rect(), 15, 15);
+    if (m_black) keyRenderer.render(painter, rect());
 }
 
 void PianoKey::setPressed(bool p)

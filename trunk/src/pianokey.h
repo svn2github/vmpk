@@ -40,6 +40,7 @@ private:
     QBrush m_selectedBrush;
     QBrush m_brush;
     int m_note;
+    bool m_black;
 };
 
 #endif /*PIANOKEY_H_*/

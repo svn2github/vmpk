@@ -35,7 +35,7 @@
       </size>
      </property>
      <property name="pixmap">
-      <pixmap resource="../data/vmpk.qrc">:/TheresaKnott_piano.png</pixmap>
+      <pixmap resource="../data/vmpk.qrc">:/TheresaKnott_piano.svg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>

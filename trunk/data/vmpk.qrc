@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/" >
-        <file>TheresaKnott_piano.png</file>
+        <file>TheresaKnott_piano.svg</file>
+        <file>blkey.svg</file>
     </qresource>
 </RCC>
