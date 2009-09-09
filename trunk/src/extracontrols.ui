@@ -6,16 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>496</width>
-    <height>273</height>
+    <width>383</width>
+    <height>303</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_6">
-   <item row="0" column="0" rowspan="2">
-    <widget class="QListWidget" name="extraList"/>
+   <item row="0" column="0" rowspan="3">
+    <widget class="QListWidget" name="extraList">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
    <item row="0" column="1">
     <widget class="QFrame" name="commonFrame">
@@ -53,12 +60,16 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QSpinBox" name="spinController"/>
+       <widget class="QSpinBox" name="spinController">
+        <property name="maximum">
+         <number>127</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="0" column="2" rowspan="2">
+   <item row="0" column="2" rowspan="3">
     <widget class="QFrame" name="frameButtons">
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -118,6 +129,33 @@
     </widget>
    </item>
    <item row="1" column="1">
+    <widget class="QComboBox" name="cboControlType">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>Switch</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Knob</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Spin box</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Slider</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="1">
     <widget class="QStackedWidget" name="stackedPanel">
      <property name="enabled">
       <bool>false</bool>
@@ -127,9 +165,6 @@
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
-     </property>
-     <property name="currentIndex">
-      <number>3</number>
      </property>
      <widget class="QWidget" name="pageSwitch">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -166,7 +201,11 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QSpinBox" name="spinValueOn"/>
+        <widget class="QSpinBox" name="spinValueOn">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="lblValueOff">
@@ -179,7 +218,11 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QSpinBox" name="spinValueOff"/>
+        <widget class="QSpinBox" name="spinValueOff">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -211,7 +254,11 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QSpinBox" name="spinKnobMin"/>
+        <widget class="QSpinBox" name="spinKnobMin">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="lblKnobMax">
@@ -224,7 +271,11 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QSpinBox" name="spinKnobMax"/>
+        <widget class="QSpinBox" name="spinKnobMax">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="labelKnobDef">
@@ -237,7 +288,11 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QSpinBox" name="spinKnobDef"/>
+        <widget class="QSpinBox" name="spinKnobDef">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -269,7 +324,11 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QSpinBox" name="spinSpinMin"/>
+        <widget class="QSpinBox" name="spinSpinMin">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="lblSpinMax">
@@ -282,7 +341,11 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QSpinBox" name="spinSpinMax"/>
+        <widget class="QSpinBox" name="spinSpinMax">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="lblSpinDef">
@@ -295,7 +358,11 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QSpinBox" name="spinSpinDef"/>
+        <widget class="QSpinBox" name="spinSpinDef">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -327,7 +394,11 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QSpinBox" name="spinSliderSize"/>
+        <widget class="QSpinBox" name="spinSliderSize">
+         <property name="maximum">
+          <number>9999</number>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="lblSliderMin">
@@ -340,7 +411,11 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QSpinBox" name="spinSliderMin"/>
+        <widget class="QSpinBox" name="spinSliderMin">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="lblSliderMax">
@@ -353,7 +428,11 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QSpinBox" name="spinSliderMax"/>
+        <widget class="QSpinBox" name="spinSliderMax">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="lblSliderDef">
@@ -366,13 +445,17 @@
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QSpinBox" name="spinSliderDef"/>
+        <widget class="QSpinBox" name="spinSliderDef">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
     </widget>
    </item>
-   <item row="2" column="0" colspan="3">
+   <item row="3" column="0" colspan="3">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -416,8 +499,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>254</x>
+     <y>298</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -432,12 +515,44 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>322</x>
+     <y>298</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cboControlType</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedPanel</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stackedPanel</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>cboControlType</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>134</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>164</x>
+     <y>89</y>
     </hint>
    </hints>
   </connection>

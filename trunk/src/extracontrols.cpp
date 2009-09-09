@@ -27,11 +27,157 @@ DialogExtraControls::DialogExtraControls(QWidget *parent) :
     m_ui->setupUi(this);
     m_ui->btnUp->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_ArrowUp)));
     m_ui->btnDown->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_ArrowDown)));
+    connect( m_ui->btnAdd, SIGNAL(clicked()), SLOT(addControl()) );
+    connect( m_ui->btnRemove, SIGNAL(clicked()), SLOT(removeControl()) );
+    connect( m_ui->btnUp, SIGNAL(clicked()), SLOT(controlUp()) );
+    connect( m_ui->btnDown, SIGNAL(clicked()), SLOT(controlDown()) );
+    connect( m_ui->extraList,
+             SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
+             SLOT(itemSelected(QListWidgetItem *, QListWidgetItem*)) );
+    connect( m_ui->txtLabel, SIGNAL(textEdited(QString)), SLOT(labelEdited(QString)) );
+    connect( m_ui->spinController, SIGNAL(valueChanged(int)), SLOT(controlChanged(int)) );
+    connect( m_ui->cboControlType, SIGNAL(currentIndexChanged(int)), SLOT(typeChanged(int)) );
+    connect( m_ui->chkSwitchDefOn, SIGNAL(toggled(bool)), SLOT(defOnChanged(bool)) );
+    connect( m_ui->spinKnobDef, SIGNAL(valueChanged(int)), SLOT(defaultChanged(int)) );
+    connect( m_ui->spinSpinDef, SIGNAL(valueChanged(int)), SLOT(defaultChanged(int)) );
+    connect( m_ui->spinSliderDef, SIGNAL(valueChanged(int)), SLOT(defaultChanged(int)) );
+    connect( m_ui->spinKnobMax, SIGNAL(valueChanged(int)), SLOT(maximumChanged(int)) );
+    connect( m_ui->spinSpinMax, SIGNAL(valueChanged(int)), SLOT(maximumChanged(int)) );
+    connect( m_ui->spinSliderMax, SIGNAL(valueChanged(int)), SLOT(maximumChanged(int)) );
+    connect( m_ui->spinKnobMin, SIGNAL(valueChanged(int)), SLOT(minimumChanged(int)) );
+    connect( m_ui->spinSpinMin, SIGNAL(valueChanged(int)), SLOT(minimumChanged(int)) );
+    connect( m_ui->spinSliderMin, SIGNAL(valueChanged(int)), SLOT(minimumChanged(int)) );
+    connect( m_ui->spinValueOff, SIGNAL(valueChanged(int)), SLOT(minimumChanged(int)) );
+    connect( m_ui->spinValueOn, SIGNAL(valueChanged(int)), SLOT(maximumChanged(int)) );
+    connect( m_ui->spinSliderSize, SIGNAL(valueChanged(int)), SLOT(sizeChanged(int)) );
 }
 
 DialogExtraControls::~DialogExtraControls()
 {
     delete m_ui;
+}
+
+void DialogExtraControls::addControl()
+{
+    ExtraControl *itm = new ExtraControl(m_ui->extraList);
+    itm->setText(tr("New Control"));
+    m_ui->extraList->setCurrentItem(itm);
+}
+
+void DialogExtraControls::removeControl()
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    m_ui->extraList->removeItemWidget(e);
+    delete e;
+}
+
+void DialogExtraControls::controlUp()
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    int row = m_ui->extraList->currentRow();
+    m_ui->extraList->takeItem(row);
+    m_ui->extraList->insertItem(row - 1, e);
+    m_ui->extraList->setCurrentItem(e);
+}
+
+void DialogExtraControls::controlDown()
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    int row = m_ui->extraList->currentRow();
+    m_ui->extraList->takeItem(row);
+    m_ui->extraList->insertItem(row + 1, e);
+    m_ui->extraList->setCurrentItem(e);
+}
+
+void DialogExtraControls::itemSelected( QListWidgetItem *current, QListWidgetItem * )
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(current);
+    m_ui->commonFrame->setEnabled( e != NULL );
+    m_ui->cboControlType->setEnabled( e != NULL );
+    m_ui->stackedPanel->setEnabled( e != NULL );
+    m_ui->btnRemove->setEnabled(e != NULL );
+    m_ui->btnUp->setEnabled(e != NULL && m_ui->extraList->currentRow() > 0);
+    m_ui->btnDown->setEnabled(e != NULL && m_ui->extraList->currentRow() < (m_ui->extraList->count()-1));
+    if (e != NULL) {
+        m_ui->txtLabel->setText(e->text());
+        m_ui->spinController->setValue(e->getControl());
+        m_ui->cboControlType->setCurrentIndex(e->getType());
+        m_ui->spinKnobDef->setValue(e->getDefault());
+        m_ui->spinSpinDef->setValue(e->getDefault());
+        m_ui->spinSliderDef->setValue(e->getDefault());
+        m_ui->spinKnobMin->setValue(e->getMinimum());
+        m_ui->spinSpinMin->setValue(e->getMinimum());
+        m_ui->spinSliderMin->setValue(e->getMinimum());
+        m_ui->spinKnobMax->setValue(e->getMaximum());
+        m_ui->spinSpinMax->setValue(e->getMaximum());
+        m_ui->spinSliderMax->setValue(e->getMaximum());
+        m_ui->spinValueOff->setValue(e->getOffValue());
+        m_ui->spinValueOn->setValue(e->getOnValue());
+        m_ui->chkSwitchDefOn->setChecked(e->getOnDefault());
+        m_ui->spinSliderSize->setValue(e->getSize());
+    }
+}
+
+void DialogExtraControls::labelEdited(QString newLabel)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL)
+        e->setText(newLabel);
+
+}
+
+void DialogExtraControls::controlChanged(int control)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setControl(control);
+}
+
+void DialogExtraControls::typeChanged(int type)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setType(type);
+}
+
+void DialogExtraControls::minimumChanged(int minimum)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setMinimum(minimum);
+}
+
+void DialogExtraControls::maximumChanged(int maximum)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setMaximum(maximum);
+}
+
+void DialogExtraControls::onvalueChanged(int onvalue)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setOnValue(onvalue);
+}
+
+void DialogExtraControls::offvalueChanged(int offvalue)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setOffValue(offvalue);
+}
+
+void DialogExtraControls::defaultChanged(int defvalue)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setDefault(defvalue);
+}
+
+void DialogExtraControls::defOnChanged(bool defOn)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setOnDefault(defOn);
+}
+
+void DialogExtraControls::sizeChanged(int size)
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) e->setSize(size);
 }
 
 void DialogExtraControls::changeEvent(QEvent *e)
@@ -44,4 +190,45 @@ void DialogExtraControls::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+QString ExtraControl::toString()
+{
+    QStringList lst;
+    lst << text();
+    lst << QString::number(m_control);
+    lst << QString::number(m_type);
+    lst << QString::number(m_minValue);
+    lst << QString::number(m_maxValue);
+    lst << QString::number(m_defValue);
+    if (m_type == 3)
+        lst << QString::number(m_size);
+    return lst.join(",");
+}
+
+int ExtraControl::mbrFromString(const QString sTmp, int def)
+{
+    bool ok;
+    int iTmp = sTmp.toInt(&ok);
+    if (ok) return iTmp;
+    return def;
+}
+
+void ExtraControl::initFromString(const QString s)
+{
+    QStringList lst = s.split(",");
+    if (!lst.isEmpty())
+        setText(lst.takeFirst());
+    if (!lst.isEmpty())
+        m_control = mbrFromString(lst.takeFirst(), 0);
+    if (!lst.isEmpty())
+        m_type = mbrFromString(lst.takeFirst(), 0);
+    if (!lst.isEmpty())
+        m_minValue = mbrFromString(lst.takeFirst(), 0);
+    if (!lst.isEmpty())
+        m_maxValue = mbrFromString(lst.takeFirst(), 127);
+    if (!lst.isEmpty())
+        m_defValue = mbrFromString(lst.takeFirst(), 0);
+    if (!lst.isEmpty())
+        m_size = mbrFromString(lst.takeFirst(), 0);
 }

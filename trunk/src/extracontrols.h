@@ -19,17 +19,76 @@
 #ifndef EXTRACONTROLS_H
 #define EXTRACONTROLS_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
+#include <QListWidgetItem>
 
 namespace Ui {
     class DialogExtraControls;
 }
+
+const QListWidgetItem::ItemType extraControlType = QListWidgetItem::ItemType(QListWidgetItem::UserType + 1);
+
+class ExtraControl : public QListWidgetItem {
+public:
+    ExtraControl( QListWidget *parent = 0, int type = extraControlType ):
+            QListWidgetItem( parent, type ),
+            m_type(0), m_minValue(0), m_maxValue(127), m_defValue(0), m_size(0) {}
+    virtual ~ExtraControl() {}
+    void setControl(int ctl) { m_control = ctl; }
+    void setType(int type) { m_type = type; }
+    void setMinimum(int v) { m_minValue = v; }
+    void setMaximum(int v) { m_maxValue = v; }
+    void setDefault(int v) { m_defValue = v; }
+    void setSize(int s) { m_size = s; }
+    void setOnValue(int v) { m_maxValue = v; }
+    void setOffValue(int v) { m_minValue = v; }
+    void setOnDefault(bool b) { m_defValue = int(b); }
+    int getControl() { return m_control; }
+    int getType() { return m_type; }
+    int getMinimum() { return m_minValue; }
+    int getMaximum() { return m_maxValue; }
+    int getDefault() { return m_defValue; }
+    int getSize() { return m_size; }
+    int getOnValue() { return m_maxValue; }
+    int getOffValue() { return m_minValue; }
+    bool getOnDefault() { return bool(m_defValue); }
+
+    QString toString();
+    void initFromString(const QString s);
+
+private:
+    int mbrFromString(const QString s, int def);
+
+    int m_control;
+    int m_type;
+    int m_minValue;
+    int m_maxValue;
+    int m_defValue;
+    int m_size;
+};
 
 class DialogExtraControls : public QDialog {
     Q_OBJECT
 public:
     DialogExtraControls(QWidget *parent = 0);
     ~DialogExtraControls();
+
+public slots:
+    void addControl();
+    void removeControl();
+    void controlUp();
+    void controlDown();
+    void itemSelected(QListWidgetItem *current, QListWidgetItem *previous);
+    void labelEdited(QString newlabel);
+    void controlChanged(int control);
+    void typeChanged(int type);
+    void minimumChanged(int minimum);
+    void maximumChanged(int maximum);
+    void onvalueChanged(int onvalue);
+    void offvalueChanged(int offvalue);
+    void defaultChanged(int defvalue);
+    void defOnChanged(bool defOn);
+    void sizeChanged(int size);
 
 protected:
     void changeEvent(QEvent *e);
