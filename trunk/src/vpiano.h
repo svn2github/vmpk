@@ -179,6 +179,7 @@ private:
     QStyle* m_dialStyle;
     Instrument* m_ins;
     QMap<int,int> m_ctlState, m_ctlSettings;
+    QStringList m_extraControls;
     int m_lastBank;
     int m_lastProg;
     int m_lastCtl;

@@ -350,6 +350,16 @@ void VPiano::readSettings()
     }
     settings.endGroup();
 
+    settings.beginGroup(QSTR_EXTRACONTROLLERS);
+    m_extraControls.clear();
+    keys = settings.allKeys();
+    for(it = keys.constBegin(); it != keys.constEnd(); ++it) {
+        QString key = (*it);
+        QString val = settings.value(key, QString()).toString();
+        m_extraControls << val;
+    }
+    settings.endGroup();
+
     ui.pianokeybd->getKeyboardMap()->setRawMode(false);
     ui.pianokeybd->getRawKeyboardMap()->setRawMode(true);
     if (!mapFile.isEmpty() && mapFile != QSTR_DEFAULT) {
@@ -403,6 +413,14 @@ void VPiano::writeSettings()
     QMap<int,int>::const_iterator it;
     for(it = m_ctlState.constBegin(); it != m_ctlState.constEnd(); ++it) {
         settings.setValue(QString::number(it.key()), it.value());
+    }
+    settings.endGroup();
+
+    settings.beginGroup(QSTR_EXTRACONTROLLERS);
+    QStringList::const_iterator itx;
+    int i = 0;
+    for(itx = m_extraControls.constBegin(); itx != m_extraControls.constEnd(); ++itx) {
+        settings.setValue(QString::number(i++), *itx);
     }
     settings.endGroup();
 
@@ -1000,7 +1018,11 @@ void VPiano::slotEditExtraControls()
 {
     DialogExtraControls dlg;
     releaseKb();
-    dlg.exec();
+    dlg.setControls(m_extraControls);
+    if (dlg.exec() == QDialog::Accepted) {
+        m_extraControls = dlg.getControls();
+        qDebug() << m_extraControls;
+    }
     grabKb();
 }
 

@@ -59,34 +59,36 @@ DialogExtraControls::~DialogExtraControls()
 
 void DialogExtraControls::addControl()
 {
-    ExtraControl *itm = new ExtraControl(m_ui->extraList);
-    itm->setText(tr("New Control"));
-    m_ui->extraList->setCurrentItem(itm);
+    ExtraControl *e = new ExtraControl(m_ui->extraList);
+    e->setText(tr("New Control"));
+    m_ui->extraList->setCurrentItem(e);
 }
 
 void DialogExtraControls::removeControl()
 {
-    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
-    m_ui->extraList->removeItemWidget(e);
+    int row = m_ui->extraList->currentRow();
+    QListWidgetItem *e = m_ui->extraList->takeItem(row);
     delete e;
 }
 
 void DialogExtraControls::controlUp()
 {
-    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
     int row = m_ui->extraList->currentRow();
-    m_ui->extraList->takeItem(row);
-    m_ui->extraList->insertItem(row - 1, e);
-    m_ui->extraList->setCurrentItem(e);
+    QListWidgetItem *e = m_ui->extraList->takeItem(row);
+    if (e != NULL) {
+        m_ui->extraList->insertItem(row - 1, e);
+        m_ui->extraList->setCurrentItem(e);
+    }
 }
 
 void DialogExtraControls::controlDown()
 {
-    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
     int row = m_ui->extraList->currentRow();
-    m_ui->extraList->takeItem(row);
-    m_ui->extraList->insertItem(row + 1, e);
-    m_ui->extraList->setCurrentItem(e);
+    QListWidgetItem *e = m_ui->extraList->takeItem(row);
+    if (e != NULL) {
+        m_ui->extraList->insertItem(row + 1, e);
+        m_ui->extraList->setCurrentItem(e);
+    }
 }
 
 void DialogExtraControls::itemSelected( QListWidgetItem *current, QListWidgetItem * )
@@ -121,8 +123,7 @@ void DialogExtraControls::itemSelected( QListWidgetItem *current, QListWidgetIte
 void DialogExtraControls::labelEdited(QString newLabel)
 {
     ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
-    if (e != NULL)
-        e->setText(newLabel);
+    if (e != NULL) e->setText(newLabel);
 
 }
 
@@ -178,6 +179,24 @@ void DialogExtraControls::sizeChanged(int size)
 {
     ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
     if (e != NULL) e->setSize(size);
+}
+
+void DialogExtraControls::setControls(const QStringList& ctls)
+{
+    foreach(QString s, ctls) {
+        ExtraControl *item = new ExtraControl(m_ui->extraList);
+        item->initFromString(s);
+    }
+}
+
+QStringList DialogExtraControls::getControls()
+{
+    QStringList lst;
+    for(int row = 0; row < m_ui->extraList->count(); ++row) {
+        ExtraControl *item = static_cast<ExtraControl *>(m_ui->extraList->item(row));
+        lst << item->toString();
+    }
+    return lst;
 }
 
 void DialogExtraControls::changeEvent(QEvent *e)

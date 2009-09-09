@@ -68,6 +68,7 @@ const QString QSTR_STYLEDKNOBS("StyledKnobs");
 const QString QSTR_ALWAYSONTOP("AlwaysOnTop");
 const QString QSTR_SHOWNOTENAMES("ShowNoteNames");
 const QString QSTR_RAWKEYBOARDMODE("RawKeyboardMode");
+const QString QSTR_EXTRACONTROLLERS("ExtraControllers");
 
 const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");

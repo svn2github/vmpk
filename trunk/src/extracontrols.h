@@ -72,6 +72,8 @@ class DialogExtraControls : public QDialog {
 public:
     DialogExtraControls(QWidget *parent = 0);
     ~DialogExtraControls();
+    void setControls(const QStringList& ctls);
+    QStringList getControls();
 
 public slots:
     void addControl();
