@@ -17,6 +17,7 @@
 */
 
 #include <QPushButton>
+#include "qticonloader.h"
 #include "extracontrols.h"
 #include "ui_extracontrols.h"
 
@@ -27,6 +28,10 @@ DialogExtraControls::DialogExtraControls(QWidget *parent) :
     m_ui->setupUi(this);
     m_ui->btnUp->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_ArrowUp)));
     m_ui->btnDown->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_ArrowDown)));
+    //m_ui->btnAdd->setIcon(QtIconLoader::icon("list-add", QIcon(":/list-add.svg")));
+    //m_ui->btnRemove->setIcon(QtIconLoader::icon("list-remove", QIcon(":/list-remove.svg")));
+    m_ui->btnAdd->setIcon(QtIconLoader::icon("list-add", QIcon(":/led_circle_green.svg")));
+    m_ui->btnRemove->setIcon(QtIconLoader::icon("list-remove", QIcon(":/led_circle_red.svg")));
     connect( m_ui->btnAdd, SIGNAL(clicked()), SLOT(addControl()) );
     connect( m_ui->btnRemove, SIGNAL(clicked()), SLOT(removeControl()) );
     connect( m_ui->btnUp, SIGNAL(clicked()), SLOT(controlUp()) );
@@ -233,21 +238,36 @@ int ExtraControl::mbrFromString(const QString sTmp, int def)
     return def;
 }
 
-void ExtraControl::initFromString(const QString s)
+void ExtraControl::decodeString( const QString s,
+                          QString& label,
+                          int& control,
+                          int& type,
+                          int& minValue,
+                          int& maxValue,
+                          int& defValue,
+                          int& size )
 {
     QStringList lst = s.split(",");
     if (!lst.isEmpty())
-        setText(lst.takeFirst());
+        label = lst.takeFirst();
     if (!lst.isEmpty())
-        m_control = mbrFromString(lst.takeFirst(), 0);
+        control = ExtraControl::mbrFromString(lst.takeFirst(), 0);
     if (!lst.isEmpty())
-        m_type = mbrFromString(lst.takeFirst(), 0);
+        type = ExtraControl::mbrFromString(lst.takeFirst(), 0);
     if (!lst.isEmpty())
-        m_minValue = mbrFromString(lst.takeFirst(), 0);
+        minValue = ExtraControl::mbrFromString(lst.takeFirst(), 0);
     if (!lst.isEmpty())
-        m_maxValue = mbrFromString(lst.takeFirst(), 127);
+        maxValue = ExtraControl::mbrFromString(lst.takeFirst(), 127);
     if (!lst.isEmpty())
-        m_defValue = mbrFromString(lst.takeFirst(), 0);
+        defValue = ExtraControl::mbrFromString(lst.takeFirst(), 0);
     if (!lst.isEmpty())
-        m_size = mbrFromString(lst.takeFirst(), 0);
+        size = ExtraControl::mbrFromString(lst.takeFirst(), 0);
+}
+
+void ExtraControl::initFromString(const QString s)
+{
+    QString lbl;
+    ExtraControl::decodeString( s, lbl, m_control, m_type,
+                                m_minValue, m_maxValue, m_defValue, m_size );
+    setText(lbl);
 }

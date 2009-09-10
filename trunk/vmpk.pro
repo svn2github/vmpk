@@ -105,7 +105,8 @@ HEADERS += src/kmapdialog.h \
     src/riffimportdlg.h \
     src/instrument.h \
     src/constants.h \
-    src/extracontrols.h
+    src/extracontrols.h \
+    src/qticonloader.h
 SOURCES += src/kmapdialog.cpp \
     src/keyboardmap.cpp \
     src/midisetup.cpp \
@@ -124,7 +125,8 @@ SOURCES += src/kmapdialog.cpp \
     src/preferences.cpp \
     src/instrument.cpp \
     src/main.cpp \
-    src/extracontrols.cpp
+    src/extracontrols.cpp \
+    src/qticonloader.cpp
 RESOURCES += data/vmpk.qrc
 TRANSLATIONS += translations/vmpk_es.ts \
     translations/vmpk_tr.ts \

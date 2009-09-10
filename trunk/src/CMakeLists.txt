@@ -68,6 +68,8 @@ SET(vmpk_SRCS
     pianoscene.h
     preferences.cpp
     preferences.h
+    qticonloader.cpp
+    qticonloader.h
     rawkeybdapp.cpp
     rawkeybdapp.h
     riff.cpp

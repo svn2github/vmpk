@@ -56,9 +56,16 @@ public:
     QString toString();
     void initFromString(const QString s);
 
-private:
-    int mbrFromString(const QString s, int def);
+    static int mbrFromString( const QString s, int def );
+    static void decodeString( const QString s, QString& label,
+                              int& control,
+                              int& type,
+                              int& minValue,
+                              int& maxValue,
+                              int& defValue,
+                              int& size );
 
+private:
     int m_control;
     int m_type;
     int m_minValue;

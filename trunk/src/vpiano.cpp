@@ -174,28 +174,33 @@ bool VPiano::initMidi()
 
 void VPiano::initToolBars()
 {
+    QLabel *lbl;
     m_dialStyle = new ClassicStyle();
     m_dialStyle->setParent(this);
     // Notes tool bar
-    ui.toolBarNotes->addWidget(new QLabel(tr(" Channel: "), this));
+    ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Channel:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_sboxChannel = new QSpinBox(this);
     m_sboxChannel->setMinimum(1);
     m_sboxChannel->setMaximum(16);
     m_sboxChannel->setValue(m_channel + 1);
     ui.toolBarNotes->addWidget(m_sboxChannel);
-    ui.toolBarNotes->addWidget(new QLabel(tr(" Base Octave: "), this));
+    ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Base Octave:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_sboxOctave = new QSpinBox(this);
     m_sboxOctave->setMinimum(0);
     m_sboxOctave->setMaximum(9);
     m_sboxOctave->setValue(m_baseOctave);
     ui.toolBarNotes->addWidget(m_sboxOctave);
-    ui.toolBarNotes->addWidget(new QLabel(tr(" Transpose: "), this));
+    ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Transpose:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_sboxTranspose = new QSpinBox(this);
     m_sboxTranspose->setMinimum(-11);
     m_sboxTranspose->setMaximum(11);
     m_sboxTranspose->setValue(m_transpose);
     ui.toolBarNotes->addWidget(m_sboxTranspose);
-    ui.toolBarNotes->addWidget(new QLabel(tr(" Velocity: "), this));
+    ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Velocity:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_Velocity = new Knob(this);
     m_Velocity->setFixedSize(32, 32);
     m_Velocity->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
@@ -214,11 +219,13 @@ void VPiano::initToolBars()
     connect( m_Velocity, SIGNAL(valueChanged(int)),
              this, SLOT(setVelocity(int)) );
     // Controllers tool bar
-    ui.toolBarControllers->addWidget(new QLabel(tr(" Control: "), this));
+    ui.toolBarControllers->addWidget(lbl = new QLabel(tr("Control:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_comboControl = new QComboBox(this);
     m_comboControl->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     ui.toolBarControllers->addWidget(m_comboControl);
-    ui.toolBarControllers->addWidget(new QLabel(tr(" Value: "), this));
+    ui.toolBarControllers->addWidget(lbl = new QLabel(tr("Value:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_Control= new Knob(this);
     m_Control->setFixedSize(32, 32);
     m_Control->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
@@ -231,7 +238,8 @@ void VPiano::initToolBars()
     connect( m_comboControl, SIGNAL(currentIndexChanged(int)), SLOT(slotCtlChanged(int)) );
     connect( m_Control, SIGNAL(valueChanged(int)), SLOT(slotController()) );
     // Pitch bender tool bar
-    ui.toolBarBender->addWidget(new QLabel(tr(" Bender: "), this));
+    ui.toolBarBender->addWidget(lbl = new QLabel(tr("Bender:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_bender = new QSlider(this);
     m_bender->setOrientation(Qt::Horizontal);
     m_bender->setMaximumWidth(200);
@@ -242,11 +250,13 @@ void VPiano::initToolBars()
     connect( m_bender, SIGNAL(valueChanged(int)), SLOT(slotBender()) );
     connect( m_bender, SIGNAL(sliderReleased()), SLOT(slotBenderReleased()) );
     // Programs tool bar
-    ui.toolBarPrograms->addWidget(new QLabel(tr(" Bank: "), this));
+    ui.toolBarPrograms->addWidget(lbl = new QLabel(tr("Bank:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_comboBank = new QComboBox(this);
     m_comboBank->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     ui.toolBarPrograms->addWidget(m_comboBank);
-    ui.toolBarPrograms->addWidget(new QLabel(tr(" Program: "), this));
+    ui.toolBarPrograms->addWidget(lbl = new QLabel(tr("Program:"), this));
+    lbl->setMargin(TOOLBARLABELMARGIN);
     m_comboProg = new QComboBox(this);
     m_comboProg->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     ui.toolBarPrograms->addWidget(m_comboProg);
@@ -272,21 +282,24 @@ void VPiano::initToolBars()
     initExtraControllers();
 }
 
-static int intFromString(const QString sTmp, int def)
-{
-    bool ok;
-    int iTmp = sTmp.toInt(&ok);
-    if (ok) return iTmp;
-    return def;
-}
+//void VPiano::slotDebugDestroyed(QObject *obj)
+//{
+//    qDebug() << Q_FUNC_INFO << obj->metaObject()->className();
+//}
 
 void VPiano::clearExtraControllers()
 {
+    //qDebug() << Q_FUNC_INFO;
+    QList<QAction*> allActs = ui.toolBarExtra->actions();
+    foreach(QAction* a, allActs) {
+        if (a != ui.actionEditExtra) {
+            ui.toolBarExtra->removeAction(a);
+            delete a;
+        }
+    }
     ui.toolBarExtra->clear();
-    QToolButton *btn = new QToolButton(this);
-    btn->setText(tr("Edit"));
-    connect(btn, SIGNAL(clicked()), SLOT(slotEditExtraControls()));
-    ui.toolBarExtra->addWidget(btn);
+    ui.toolBarExtra->addAction(ui.actionEditExtra);
+    ui.toolBarExtra->addSeparator();
 }
 
 void VPiano::initExtraControllers()
@@ -296,6 +309,7 @@ void VPiano::initExtraControllers()
     Knob *knob = NULL;
     QSpinBox *spin = NULL;
     QSlider *slider = NULL;
+    //qDebug() << Q_FUNC_INFO;
     foreach(QString s, m_extraControls) {
         QString lbl;
         int control = 0;
@@ -304,30 +318,17 @@ void VPiano::initExtraControllers()
         int maxValue = 127;
         int defValue = 0;
         int size = 0;
-        QStringList lst = s.split(",");
-        if (!lst.isEmpty())
-            lbl = lst.takeFirst();
-        if (!lst.isEmpty())
-            control = intFromString(lst.takeFirst(), 0);
-        if (!lst.isEmpty())
-            type = intFromString(lst.takeFirst(), 0);
-        if (!lst.isEmpty())
-            minValue = intFromString(lst.takeFirst(), 0);
-        if (!lst.isEmpty())
-            maxValue = intFromString(lst.takeFirst(), 127);
-        if (!lst.isEmpty())
-            defValue = intFromString(lst.takeFirst(), 0);
-        if (!lst.isEmpty())
-            size = intFromString(lst.takeFirst(), 0);
+        ExtraControl::decodeString( s, lbl, control, type,
+                                    minValue, maxValue, defValue, size );
         switch(type) {
         case 0:
             chkbox = new QCheckBox(this);
-            chkbox->setText(lbl);
+            if (dlgPreferences.getStyledKnobs())
+                chkbox->setStyle(m_dialStyle);
             chkbox->setProperty(MIDICTLONVALUE, maxValue);
             chkbox->setProperty(MIDICTLOFFVALUE, minValue);
             chkbox->setChecked(bool(defValue));
             connect(chkbox, SIGNAL(toggled(bool)), SLOT(slotControlToggled(bool)));
-            lbl.truncate(0);
             w = chkbox;
             break;
         case 1:
@@ -365,15 +366,15 @@ void VPiano::initExtraControllers()
             w = NULL;
         }
         if (w != NULL) {
-            QString name;
             if (!lbl.isEmpty()) {
-                lbl.prepend(" ");
-                lbl.append(" ");
                 QLabel *qlbl = new QLabel(lbl, this);
+                qlbl->setMargin(TOOLBARLABELMARGIN);
                 ui.toolBarExtra->addWidget(qlbl);
+                //connect(qlbl, SIGNAL(destroyed(QObject*)), SLOT(slotDebugDestroyed(QObject*)));
             }
             w->setProperty(MIDICTLNUMBER, control);
             ui.toolBarExtra->addWidget(w);
+            //connect(w, SIGNAL(destroyed(QObject*)), SLOT(slotDebugDestroyed(QObject*)));
         }
     }
 }
@@ -482,6 +483,7 @@ void VPiano::readSettings()
 void VPiano::writeSettings()
 {
     QSettings settings;
+    settings.clear();
 
     settings.beginGroup(QSTR_WINDOW);
     settings.setValue(QSTR_GEOMETRY, saveGeometry());
@@ -536,6 +538,8 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_PROGRAM, m_comboProg->itemData(m_comboProg->currentIndex()).toInt());
     settings.setValue(QSTR_CONTROLLER, m_comboControl->itemData(m_comboControl->currentIndex()).toInt());
     settings.endGroup();
+
+    settings.sync();
 }
 
 void VPiano::closeEvent( QCloseEvent *event )

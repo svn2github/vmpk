@@ -132,6 +132,7 @@ public slots:
     void slotImportSF();
     void slotEditExtraControls();
     void slotEditPrograms();
+    //void slotDebugDestroyed(QObject *obj);
 
 private:
     void initialization();

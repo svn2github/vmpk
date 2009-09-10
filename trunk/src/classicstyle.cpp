@@ -30,6 +30,7 @@
 */
 
 #include <QtGui>
+#include <QSvgRenderer>
 #include <iostream>
 #include <cmath>
 #include "classicstyle.h"
@@ -59,18 +60,18 @@ static void drawTick(QPainter *p, float angle, int size, bool internal)
 void
 ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *opt, QPainter *p, const QWidget *widget) const
 {
-	if (cc != QStyle::CC_Dial) {
-		QCommonStyle::drawComplexControl(cc, opt, p, widget);
-		return;
-	}
+    if (cc != QStyle::CC_Dial) {
+        QCommonStyle::drawComplexControl(cc, opt, p, widget);
+        return;
+    }
 
-	const QStyleOptionSlider *dial = qstyleoption_cast<const QStyleOptionSlider *>(opt);
-	if (dial == NULL)
-		return;
+    const QStyleOptionSlider *dial = qstyleoption_cast<const QStyleOptionSlider *>(opt);
+    if (dial == NULL)
+        return;
 
     float angle = DIAL_MIN + (DIAL_RANGE * (float(dial->sliderValue - dial->minimum) /
                    (float(dial->maximum - dial->minimum))));
-	int degrees = int(angle * 180.0 / M_PI);
+    int degrees = int(angle * 180.0 / M_PI);
     int ns = dial->tickInterval;
     int numTicks = 1 + (dial->maximum + ns - dial->minimum) / ns;
     int size = dial->rect.width() < dial->rect.height() ? dial->rect.width() : dial->rect.height();
@@ -78,7 +79,7 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     int width = size * scale;
     int indent = (int)(width * 0.15 + 1);
 
-	QPalette pal = opt->palette;
+    QPalette pal = opt->palette;
     QColor knobColor = pal.mid().color(); //pal.background().color();
     QColor meterColor = (dial->state & State_Enabled) ? pal.highlight().color() : pal.mid().color();
     QPen pen;
@@ -96,9 +97,9 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     p->setPen(pen);
 
     QRadialGradient gradient(size/2, size/2, size-indent, size/2-indent, size/2-indent);
-	gradient.setColorAt(0, knobColor.light());
-	gradient.setColorAt(1, knobColor.dark());
-	p->setBrush(gradient);
+    gradient.setColorAt(0, knobColor.light());
+    gradient.setColorAt(1, knobColor.dark());
+    p->setBrush(gradient);
     p->drawEllipse(indent, indent, width-2*indent, width-2*indent);
 
     // The bright metering bit...
@@ -121,9 +122,9 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     	pen.setWidth(scale);
     	p->setPen(pen);
     	for (int i = 0; i < numTicks; ++i) {
-    		int div = numTicks;
-    		if (div > 1) --div;
-    		drawTick(p, DIAL_MIN + (DIAL_MAX - DIAL_MIN) * i / div, width, true);
+            int div = numTicks;
+            if (div > 1) --div;
+            drawTick(p, DIAL_MIN + (DIAL_MAX - DIAL_MIN) * i / div, width, true);
     	}
     }
 
@@ -137,15 +138,15 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     int shadowAngle = -720;
     c = knobColor.dark();
     for (int arc = 120; arc < 2880; arc += 240)
-	{
-		pen.setColor(c);
-		p->setPen(pen);
-		p->drawArc(indent, indent, width-2*indent, width-2*indent, shadowAngle
-				+ arc, 240);
-		p->drawArc(indent, indent, width-2*indent, width-2*indent, shadowAngle
-				- arc, 240);
-		c = c.light(110);
-	}
+    {
+        pen.setColor(c);
+        p->setPen(pen);
+        p->drawArc(indent, indent, width-2*indent, width-2*indent, shadowAngle
+                        + arc, 240);
+        p->drawArc(indent, indent, width-2*indent, width-2*indent, shadowAngle
+                        - arc, 240);
+        c = c.light(110);
+    }
 
     // Scale shadow...
 
@@ -187,6 +188,20 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     p->setPen(pen);
     p->drawLine(int(x0), int(y0), int(x), int(y));
 
-	// done
-	p->restore();
+    // done
+    p->restore();
+}
+
+void ClassicStyle::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const
+{
+    static QSvgRenderer onRenderer(QString(":/led_circle_green.svg"));
+    static QSvgRenderer offRenderer(QString(":/led_circle_grey.svg"));
+    if (pe == PE_IndicatorCheckBox) {
+        if (opt->state & State_On)
+            onRenderer.render(p, opt->rect);
+        else if (opt->state & State_Off)
+            offRenderer.render(p, opt->rect);
+        return;
+    }
+    QCommonStyle::drawPrimitive(pe, opt, p, w);
 }
