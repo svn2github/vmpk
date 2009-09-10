@@ -269,6 +269,113 @@ void VPiano::initToolBars()
     connect(ui.actionReset, SIGNAL(triggered()), SLOT(slotResetBender()));
     connect(ui.actionEditExtra, SIGNAL(triggered()), SLOT(slotEditExtraControls()));
     connect(ui.actionEditPrograms, SIGNAL(triggered()), SLOT(slotEditPrograms()));
+    initExtraControllers();
+}
+
+static int intFromString(const QString sTmp, int def)
+{
+    bool ok;
+    int iTmp = sTmp.toInt(&ok);
+    if (ok) return iTmp;
+    return def;
+}
+
+void VPiano::clearExtraControllers()
+{
+    ui.toolBarExtra->clear();
+    QToolButton *btn = new QToolButton(this);
+    btn->setText(tr("Edit"));
+    connect(btn, SIGNAL(clicked()), SLOT(slotEditExtraControls()));
+    ui.toolBarExtra->addWidget(btn);
+}
+
+void VPiano::initExtraControllers()
+{
+    QWidget *w = NULL;
+    QCheckBox *chkbox = NULL;
+    Knob *knob = NULL;
+    QSpinBox *spin = NULL;
+    QSlider *slider = NULL;
+    foreach(QString s, m_extraControls) {
+        QString lbl;
+        int control = 0;
+        int type = 0;
+        int minValue = 0;
+        int maxValue = 127;
+        int defValue = 0;
+        int size = 0;
+        QStringList lst = s.split(",");
+        if (!lst.isEmpty())
+            lbl = lst.takeFirst();
+        if (!lst.isEmpty())
+            control = intFromString(lst.takeFirst(), 0);
+        if (!lst.isEmpty())
+            type = intFromString(lst.takeFirst(), 0);
+        if (!lst.isEmpty())
+            minValue = intFromString(lst.takeFirst(), 0);
+        if (!lst.isEmpty())
+            maxValue = intFromString(lst.takeFirst(), 127);
+        if (!lst.isEmpty())
+            defValue = intFromString(lst.takeFirst(), 0);
+        if (!lst.isEmpty())
+            size = intFromString(lst.takeFirst(), 0);
+        switch(type) {
+        case 0:
+            chkbox = new QCheckBox(this);
+            chkbox->setText(lbl);
+            chkbox->setProperty(MIDICTLONVALUE, maxValue);
+            chkbox->setProperty(MIDICTLOFFVALUE, minValue);
+            chkbox->setChecked(bool(defValue));
+            connect(chkbox, SIGNAL(toggled(bool)), SLOT(slotControlToggled(bool)));
+            lbl.truncate(0);
+            w = chkbox;
+            break;
+        case 1:
+            knob = new Knob(this);
+            knob->setFixedSize(32, 32);
+            knob->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
+            knob->setMinimum(minValue);
+            knob->setMaximum(maxValue);
+            knob->setValue(defValue);
+            knob->setDefaultValue(defValue);
+            knob->setDialMode(Knob::LinearMode);
+            connect(knob, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
+            w = knob;
+            break;
+        case 2:
+            spin = new QSpinBox(this);
+            spin->setMinimum(minValue);
+            spin->setMaximum(maxValue);
+            spin->setValue(defValue);
+            connect(spin, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
+            w = spin;
+            break;
+        case 3:
+            slider = new QSlider(this);
+            slider->setOrientation(Qt::Horizontal);
+            slider->setMinimumWidth(size);
+            slider->setMaximumWidth(size);
+            slider->setMinimum(minValue);
+            slider->setMaximum(maxValue);
+            slider->setValue(defValue);
+            connect(slider, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
+            w = slider;
+            break;
+        default:
+            w = NULL;
+        }
+        if (w != NULL) {
+            QString name;
+            if (!lbl.isEmpty()) {
+                lbl.prepend(" ");
+                lbl.append(" ");
+                QLabel *qlbl = new QLabel(lbl, this);
+                ui.toolBarExtra->addWidget(qlbl);
+            }
+            w->setProperty(MIDICTLNUMBER, control);
+            ui.toolBarExtra->addWidget(w);
+        }
+    }
 }
 
 void VPiano::readSettings()
@@ -605,6 +712,31 @@ void VPiano::slotResetAllControllers()
 void VPiano::slotResetBender()
 {
     m_bender->setValue(0);
+}
+
+void VPiano::slotControlToggled(const bool boolValue)
+{
+    QObject *s = sender();
+    QVariant p = s->property(MIDICTLNUMBER);
+    if (p.isValid()) {
+        QVariant on = s->property(MIDICTLONVALUE);
+        QVariant off = s->property(MIDICTLOFFVALUE);
+        int value = boolValue ? on.toInt() : off.toInt();
+        int controller = p.toInt();
+        sendController( controller, value );
+        m_ctlState[ controller ] = value;
+    }
+}
+
+void VPiano::slotController(const int value)
+{
+    QObject *s = sender();
+    QVariant p = s->property(MIDICTLNUMBER);
+    if (p.isValid()) {
+        int controller = p.toInt();
+        sendController( controller, value );
+        m_ctlState[ controller ] = value;
+    }
 }
 
 void VPiano::slotController()
@@ -1017,11 +1149,12 @@ void VPiano::slotImportSF()
 void VPiano::slotEditExtraControls()
 {
     DialogExtraControls dlg;
-    releaseKb();
     dlg.setControls(m_extraControls);
+    releaseKb();
     if (dlg.exec() == QDialog::Accepted) {
         m_extraControls = dlg.getControls();
-        qDebug() << m_extraControls;
+        clearExtraControllers();
+        initExtraControllers();
     }
     grabKb();
 }

@@ -116,6 +116,8 @@ public slots:
     void slotResetAllControllers();
     void slotResetBender();
     void slotController();
+    void slotController(const int value);
+    void slotControlToggled(const bool value);
     void slotBender();
     void slotBenderReleased();
     void slotBankChanged(const int index);
@@ -142,6 +144,8 @@ private:
     void applyInitialSettings();
     void refreshConnections();
     void initToolBars();
+    void clearExtraControllers();
+    void initExtraControllers();
     void sendController(const int controller, const int value);
     void resetAllControllers();
     void allNotesOff();

@@ -69,11 +69,15 @@ const QString QSTR_ALWAYSONTOP("AlwaysOnTop");
 const QString QSTR_SHOWNOTENAMES("ShowNoteNames");
 const QString QSTR_RAWKEYBOARDMODE("RawKeyboardMode");
 const QString QSTR_EXTRACONTROLLERS("ExtraControllers");
-
+const QString QSTR_EXTRACTLPREFIX("ExtraCtl_");
 const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");
 const QString QSTR_VMPKOUTPUT("VMPK Output");
 
 const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
+
+const char MIDICTLNUMBER[] = "MIDICTLNUMBER";
+const char MIDICTLONVALUE[] = "MIDICTLONVAL";
+const char MIDICTLOFFVALUE[] = "MIDICTLOFFVAL";
 
 #endif /*CONSTANTS_H_*/
