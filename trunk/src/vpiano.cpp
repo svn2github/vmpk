@@ -91,6 +91,7 @@ void VPiano::initialization()
         applyPreferences();
         applyConnections();
         applyInitialSettings();
+        initExtraControllers();
     } else close();
 }
 
@@ -279,7 +280,6 @@ void VPiano::initToolBars()
     connect(ui.actionReset, SIGNAL(triggered()), SLOT(slotResetBender()));
     connect(ui.actionEditExtra, SIGNAL(triggered()), SLOT(slotEditExtraControls()));
     connect(ui.actionEditPrograms, SIGNAL(triggered()), SLOT(slotEditPrograms()));
-    initExtraControllers();
 }
 
 //void VPiano::slotDebugDestroyed(QObject *obj)
@@ -317,17 +317,23 @@ void VPiano::initExtraControllers()
         int minValue = 0;
         int maxValue = 127;
         int defValue = 0;
+        int value = 0;
         int size = 0;
         ExtraControl::decodeString( s, lbl, control, type,
                                     minValue, maxValue, defValue, size );
+        if (m_ctlState.contains(control))
+            value = m_ctlState[control];
+        else
+            value = defValue;
         switch(type) {
         case 0:
             chkbox = new QCheckBox(this);
-            if (dlgPreferences.getStyledKnobs())
+            if (dlgPreferences.getStyledKnobs()) {
                 chkbox->setStyle(m_dialStyle);
+            }
             chkbox->setProperty(MIDICTLONVALUE, maxValue);
             chkbox->setProperty(MIDICTLOFFVALUE, minValue);
-            chkbox->setChecked(bool(defValue));
+            chkbox->setChecked(bool(value));
             connect(chkbox, SIGNAL(toggled(bool)), SLOT(slotControlToggled(bool)));
             w = chkbox;
             break;
@@ -337,7 +343,7 @@ void VPiano::initExtraControllers()
             knob->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
             knob->setMinimum(minValue);
             knob->setMaximum(maxValue);
-            knob->setValue(defValue);
+            knob->setValue(value);
             knob->setDefaultValue(defValue);
             knob->setDialMode(Knob::LinearMode);
             connect(knob, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
@@ -347,7 +353,7 @@ void VPiano::initExtraControllers()
             spin = new QSpinBox(this);
             spin->setMinimum(minValue);
             spin->setMaximum(maxValue);
-            spin->setValue(defValue);
+            spin->setValue(value);
             connect(spin, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
             w = spin;
             break;
@@ -358,7 +364,7 @@ void VPiano::initExtraControllers()
             slider->setMaximumWidth(size);
             slider->setMinimum(minValue);
             slider->setMaximum(maxValue);
-            slider->setValue(defValue);
+            slider->setValue(value);
             connect(slider, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
             w = slider;
             break;
@@ -462,9 +468,7 @@ void VPiano::readSettings()
     m_extraControls.clear();
     keys = settings.allKeys();
     for(it = keys.constBegin(); it != keys.constEnd(); ++it) {
-        QString key = (*it);
-        QString val = settings.value(key, QString()).toString();
-        m_extraControls << val;
+        m_extraControls << settings.value(*it, QString()).toString();
     }
     settings.endGroup();
 
@@ -648,6 +652,28 @@ void VPiano::resetAllControllers()
     initControllers();
     m_comboControl->setCurrentIndex(index);
     m_Control->setValue(m_ctlState[ctl]);
+    // extra controllers
+    QList<QAction*> allActs = ui.toolBarExtra->actions();
+    foreach(QAction *a, allActs) {
+        QWidgetAction *wa = dynamic_cast<QWidgetAction*>(a);
+        if (wa != NULL) {
+            QWidget *w = wa->defaultWidget();
+            QVariant c = w->property(MIDICTLNUMBER);
+            if (c.isValid()) {
+                int control = c.toInt();
+                if (m_ctlState.contains(control)) {
+                    QVariant p = w->property("value");
+                    if (p.isValid()) {
+                        w->setProperty("value", m_ctlState[control]);
+                        continue;
+                    }
+                    p = w->property("checked");
+                    if (p.isValid())
+                        w->setProperty("checked", bool(m_ctlState[control]));
+                }
+            }
+        }
+    }
 }
 
 void VPiano::allNotesOff()

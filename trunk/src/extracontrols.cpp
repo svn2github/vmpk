@@ -28,10 +28,8 @@ DialogExtraControls::DialogExtraControls(QWidget *parent) :
     m_ui->setupUi(this);
     m_ui->btnUp->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_ArrowUp)));
     m_ui->btnDown->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_ArrowDown)));
-    //m_ui->btnAdd->setIcon(QtIconLoader::icon("list-add", QIcon(":/list-add.svg")));
-    //m_ui->btnRemove->setIcon(QtIconLoader::icon("list-remove", QIcon(":/list-remove.svg")));
-    m_ui->btnAdd->setIcon(QtIconLoader::icon("list-add", QIcon(":/led_circle_green.svg")));
-    m_ui->btnRemove->setIcon(QtIconLoader::icon("list-remove", QIcon(":/led_circle_red.svg")));
+    m_ui->btnAdd->setIcon(QtIconLoader::icon("list-add", QIcon(":/list-add.svg")));
+    m_ui->btnRemove->setIcon(QtIconLoader::icon("list-remove", QIcon(":/list-remove.svg")));
     connect( m_ui->btnAdd, SIGNAL(clicked()), SLOT(addControl()) );
     connect( m_ui->btnRemove, SIGNAL(clicked()), SLOT(removeControl()) );
     connect( m_ui->btnUp, SIGNAL(clicked()), SLOT(controlUp()) );

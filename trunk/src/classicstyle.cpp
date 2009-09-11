@@ -194,13 +194,19 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
 
 void ClassicStyle::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const
 {
-    static QSvgRenderer onRenderer(QString(":/led_circle_green.svg"));
-    static QSvgRenderer offRenderer(QString(":/led_circle_grey.svg"));
+    static QSvgRenderer onRenderer(QString(":/led_square_green.svg"));
+    static QSvgRenderer offRenderer(QString(":/led_square_grey.svg"));
     if (pe == PE_IndicatorCheckBox) {
         if (opt->state & State_On)
             onRenderer.render(p, opt->rect);
         else if (opt->state & State_Off)
             offRenderer.render(p, opt->rect);
+        return;
+    } else if (pe == PE_FrameFocusRect) {
+        /*QPoint ce = opt->rect.center();
+        int rx = opt->rect.width() / 2;
+        int ry = opt->rect.height() / 2;
+        p->drawEllipse(ce, rx, ry);*/
         return;
     }
     QCommonStyle::drawPrimitive(pe, opt, p, w);

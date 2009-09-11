@@ -6,5 +6,12 @@
         <file>list-add.svg</file>
         <file>led_circle_green.svg</file>
         <file>led_circle_grey.svg</file>
+        <file>led_circle_red.svg</file>
+        <file>led_circle_yellow.svg</file>
+        <file>led_square_blue.svg</file>
+        <file>led_square_green.svg</file>
+        <file>led_square_grey.svg</file>
+        <file>led_square_red.svg</file>
+        <file>led_square_yellow.svg</file>
     </qresource>
 </RCC>
