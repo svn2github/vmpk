@@ -24,7 +24,6 @@
 
 static const QBrush blackBrush = QBrush(Qt::black);
 static const QBrush whiteBrush = QBrush(Qt::white);
-static QSvgRenderer keyRenderer(QString(":/blkey.svg"));
 
 PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note)
     : QGraphicsRectItem(rect),
@@ -48,7 +47,9 @@ PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
 
 void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    static const QPen blackPen(QPen(Qt::black, 1));
+    static QSvgRenderer keyRenderer(QString(":/blkey.svg"));
+    static const QPen blackPen(Qt::black, 1);
+    static const QPen grayPen(QBrush(Qt::gray), 1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
     if (m_pressed) {
         if (m_selectedBrush.style() != Qt::NoBrush) {
             painter->setBrush(m_selectedBrush);
@@ -60,7 +61,17 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
     }
     painter->setPen(blackPen);
     painter->drawRoundRect(rect(), 15, 15);
-    if (m_black) keyRenderer.render(painter, rect());
+    if (m_black)
+        keyRenderer.render(painter, rect());
+    else {
+        QPointF points[3] = {
+             QPointF(rect().left()+1.5, rect().bottom()-1),
+             QPointF(rect().right()-1, rect().bottom()-1),
+             QPointF(rect().right()-1, rect().top()+1),
+        };
+        painter->setPen(grayPen);
+        painter->drawPolyline(points, 3);
+    }
 }
 
 void PianoKey::setPressed(bool p)

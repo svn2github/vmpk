@@ -50,6 +50,9 @@ int main(int argc, char *argv[])
     a.installTranslator(&tr_p);
 
     VPiano w;
-    w.show();
-    return a.exec();
+    if (w.isInitialized()) {
+        w.show();
+        return a.exec();
+    }
+    return 1;
 }

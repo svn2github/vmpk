@@ -94,7 +94,6 @@ SET(vmpk_qtobject_SRCS
     pianokeybd.h
     pianoscene.h
     preferences.h
-    rawkeybdapp.h
     riff.h
     riffimportdlg.h
     vpiano.h

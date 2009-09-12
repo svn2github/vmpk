@@ -92,6 +92,7 @@ public:
     virtual ~VPiano();
     int getInputChannel();
     void midiThru(std::vector<unsigned char> *message) const;
+    bool isInitialized() const { return m_initialized; }
 
     // PianoHandler methods
     void noteOn(const int midiNote);
@@ -165,6 +166,7 @@ private:
     int m_currentIn;
     bool m_inputActive;
     bool m_midiThru;
+    bool m_initialized;
 
     Ui::VPiano ui;
     About dlgAbout;

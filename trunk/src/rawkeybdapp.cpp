@@ -17,7 +17,7 @@
 */
 
 #include "rawkeybdapp.h"
-#include <QDebug>
+//#include <QDebug>
 
 #if defined(Q_WS_X11)
 #include <QX11Info>

@@ -45,7 +45,8 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     m_currentOut(-1),
     m_currentIn(-1),
     m_inputActive(false),
-    m_midiThru(false)
+    m_midiThru(false),
+    m_initialized(false)
 {
     ui.setupUi(this);
     ui.actionStatusBar->setChecked(false);
@@ -84,7 +85,7 @@ VPiano::~VPiano()
 
 void VPiano::initialization()
 {
-    if (initMidi()) {
+    if (m_initialized = initMidi()) {
         refreshConnections();
         readSettings();
         initToolBars();
@@ -92,7 +93,7 @@ void VPiano::initialization()
         applyConnections();
         applyInitialSettings();
         initExtraControllers();
-    } else close();
+    }
 }
 
 int VPiano::getInputChannel()
@@ -185,6 +186,7 @@ void VPiano::initToolBars()
     m_sboxChannel->setMinimum(1);
     m_sboxChannel->setMaximum(16);
     m_sboxChannel->setValue(m_channel + 1);
+    m_sboxChannel->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxChannel);
     ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Base Octave:"), this));
     lbl->setMargin(TOOLBARLABELMARGIN);
@@ -192,6 +194,7 @@ void VPiano::initToolBars()
     m_sboxOctave->setMinimum(0);
     m_sboxOctave->setMaximum(9);
     m_sboxOctave->setValue(m_baseOctave);
+    m_sboxOctave->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxOctave);
     ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Transpose:"), this));
     lbl->setMargin(TOOLBARLABELMARGIN);
@@ -199,6 +202,7 @@ void VPiano::initToolBars()
     m_sboxTranspose->setMinimum(-11);
     m_sboxTranspose->setMaximum(11);
     m_sboxTranspose->setValue(m_transpose);
+    m_sboxTranspose->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxTranspose);
     ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Velocity:"), this));
     lbl->setMargin(TOOLBARLABELMARGIN);
@@ -210,6 +214,7 @@ void VPiano::initToolBars()
     m_Velocity->setDefaultValue(100);
     m_Velocity->setDialMode(Knob::LinearMode);
     m_Velocity->setValue(m_velocity);
+    m_Velocity->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_Velocity);
     connect( m_sboxChannel, SIGNAL(valueChanged(int)),
              this, SLOT(slotOutChannel(int)) );
@@ -224,6 +229,7 @@ void VPiano::initToolBars()
     lbl->setMargin(TOOLBARLABELMARGIN);
     m_comboControl = new QComboBox(this);
     m_comboControl->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    m_comboControl->setFocusPolicy(Qt::NoFocus);
     ui.toolBarControllers->addWidget(m_comboControl);
     ui.toolBarControllers->addWidget(lbl = new QLabel(tr("Value:"), this));
     lbl->setMargin(TOOLBARLABELMARGIN);
@@ -235,6 +241,7 @@ void VPiano::initToolBars()
     m_Control->setValue(0);
     m_Control->setDefaultValue(0);
     m_Control->setDialMode(Knob::LinearMode);
+    m_Control->setFocusPolicy(Qt::NoFocus);
     ui.toolBarControllers->addWidget(m_Control);
     connect( m_comboControl, SIGNAL(currentIndexChanged(int)), SLOT(slotCtlChanged(int)) );
     connect( m_Control, SIGNAL(valueChanged(int)), SLOT(slotController()) );
@@ -247,6 +254,7 @@ void VPiano::initToolBars()
     m_bender->setMinimum(BENDER_MIN);
     m_bender->setMaximum(BENDER_MAX);
     m_bender->setValue(0);
+    m_bender->setFocusPolicy(Qt::NoFocus);
     ui.toolBarBender->addWidget(m_bender);
     connect( m_bender, SIGNAL(valueChanged(int)), SLOT(slotBender()) );
     connect( m_bender, SIGNAL(sliderReleased()), SLOT(slotBenderReleased()) );
@@ -255,11 +263,13 @@ void VPiano::initToolBars()
     lbl->setMargin(TOOLBARLABELMARGIN);
     m_comboBank = new QComboBox(this);
     m_comboBank->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    m_comboBank->setFocusPolicy(Qt::NoFocus);
     ui.toolBarPrograms->addWidget(m_comboBank);
     ui.toolBarPrograms->addWidget(lbl = new QLabel(tr("Program:"), this));
     lbl->setMargin(TOOLBARLABELMARGIN);
     m_comboProg = new QComboBox(this);
     m_comboProg->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    m_comboProg->setFocusPolicy(Qt::NoFocus);
     ui.toolBarPrograms->addWidget(m_comboProg);
     connect( m_comboBank, SIGNAL(currentIndexChanged(int)), SLOT(slotBankChanged(int)) );
     connect( m_comboProg, SIGNAL(currentIndexChanged(int)), SLOT(slotProgChanged(int)) );
@@ -289,7 +299,6 @@ void VPiano::initToolBars()
 
 void VPiano::clearExtraControllers()
 {
-    //qDebug() << Q_FUNC_INFO;
     QList<QAction*> allActs = ui.toolBarExtra->actions();
     foreach(QAction* a, allActs) {
         if (a != ui.actionEditExtra) {
@@ -309,7 +318,6 @@ void VPiano::initExtraControllers()
     Knob *knob = NULL;
     QSpinBox *spin = NULL;
     QSlider *slider = NULL;
-    //qDebug() << Q_FUNC_INFO;
     foreach(QString s, m_extraControls) {
         QString lbl;
         int control = 0;
@@ -379,6 +387,7 @@ void VPiano::initExtraControllers()
                 //connect(qlbl, SIGNAL(destroyed(QObject*)), SLOT(slotDebugDestroyed(QObject*)));
             }
             w->setProperty(MIDICTLNUMBER, control);
+            w->setFocusPolicy(Qt::NoFocus);
             ui.toolBarExtra->addWidget(w);
             //connect(w, SIGNAL(destroyed(QObject*)), SLOT(slotDebugDestroyed(QObject*)));
         }
@@ -548,7 +557,7 @@ void VPiano::writeSettings()
 
 void VPiano::closeEvent( QCloseEvent *event )
 {
-    writeSettings();
+    if (m_initialized) writeSettings();
     event->accept();
 }
 
@@ -571,10 +580,11 @@ void VPiano::customEvent ( QEvent *event )
 
 void VPiano::showEvent ( QShowEvent *event )
 {
-    //qDebug() << Q_FUNC_INFO;
-    QMainWindow::showEvent(event);
-    ui.pianokeybd->setFocus();
-    grabKb();
+    if (m_initialized) {
+        QMainWindow::showEvent(event);
+        ui.pianokeybd->setFocus();
+        grabKb();
+    }
 }
 
 void VPiano::hideEvent( QHideEvent *event )
