@@ -2,14 +2,52 @@ Pedro Lopez-Cabanillas <plcl@users.sourceforge.net>
 
 Translators:
 
-Serdar Soytetir - Turkish
-Andreas Steinel - German
-Pedro Lopez-Cabanillas - Spanish
- 
+    Serdar Soytetir - Turkish translation
+        translations/vmpk_tr.ts
+        
+    Andreas Steinel - German translation
+        translations/vmpk_de.ts
+    
+    Pedro Lopez-Cabanillas - Spanish translation
+        translations/vmpk_es.ts
+
 Other copyright owners:
 
-Gary P. Scavone RtMIDI
-Rui Nuno Capela Instrument definition data classes, Knob widget
-Theresa Knott   Artwork
-Enrico Scholz   FindPkgConfig.cmake
-Mehdi Dogguy    Man page, Debian packaging
+    Gary P. Scavone     RtMIDI classes
+        src/RtError.h
+        src/RtMidi.h
+        src/RtMidi.cpp
+
+    Rui Nuno Capela     Instrument definition data classes, Knob widget
+        src/instrument.h
+        src/instrument.cpp
+        src/knob.h
+        src/knob.cpp
+
+    Chris Cannam, Pedro Lopez-Cabanillas, Queen Mary University of London
+        src/classicstyle.h
+        src/classicstyle.cpp
+
+    Theresa Knott       Artwork (www.openclipart.org)
+        data/TheresaKnott_piano.svg
+        data/vmpk_16x16.png
+        data/vmpk_32x32.png
+        data/vmpk_48x48.png
+        data/vmpk_64x64.png
+
+    Enrico Scholz       
+        cmake_admin/FindPkgConfig.cmake
+
+    Mehdi Dogguy        Man page, Debian packaging
+        man/vmpk.xml
+        man/vmpk.1
+
+    Jean-Victor Balin   Artwork (www.openclipart.org)
+        data/led_circle_green.svg
+        data/led_circle_grey.svg
+
+    David Vignoni       Oxygen Icons. See: http://www.oxygen-icons.org
+    Nuno Pinheiro       licensed under the GNU LGPLv3
+    Kenneth Wimer       http://www.gnu.org/copyleft/lesser.html
+        data/list-add.svg
+        data/list-remove.svg

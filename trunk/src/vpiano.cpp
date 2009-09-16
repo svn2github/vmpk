@@ -58,6 +58,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionContents, SIGNAL(triggered()), SLOT(slotHelpContents()));
     connect(ui.actionWebSite, SIGNAL(triggered()), SLOT(slotOpenWebSite()));
     connect(ui.actionImportSoundFont, SIGNAL(triggered()), SLOT(slotImportSF()));
+    connect(ui.actionEditExtraControls, SIGNAL(triggered()), SLOT(slotEditExtraControls()));
     ui.pianokeybd->setPianoHandler(this);
     initialization();
 }
@@ -289,7 +290,7 @@ void VPiano::initToolBars()
     connect(ui.actionResetAll, SIGNAL(triggered()), SLOT(slotResetAllControllers()));
     connect(ui.actionReset, SIGNAL(triggered()), SLOT(slotResetBender()));
     connect(ui.actionEditExtra, SIGNAL(triggered()), SLOT(slotEditExtraControls()));
-    connect(ui.actionEditPrograms, SIGNAL(triggered()), SLOT(slotEditPrograms()));
+    //connect(ui.actionEditPrograms, SIGNAL(triggered()), SLOT(slotEditPrograms()));
 }
 
 //void VPiano::slotDebugDestroyed(QObject *obj)
@@ -1199,7 +1200,5 @@ void VPiano::slotEditExtraControls()
     grabKb();
 }
 
-void VPiano::slotEditPrograms()
-{
-
-}
+//void VPiano::slotEditPrograms()
+//{ }

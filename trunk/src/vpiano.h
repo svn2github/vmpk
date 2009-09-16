@@ -132,7 +132,7 @@ public slots:
     void setVelocity(int value) { m_velocity = value; }
     void slotImportSF();
     void slotEditExtraControls();
-    void slotEditPrograms();
+    //void slotEditPrograms();
     //void slotDebugDestroyed(QObject *obj);
 
 private:

@@ -47,7 +47,7 @@ PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
 
 void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    static QSvgRenderer keyRenderer(QString(":/blkey.svg"));
+    static QSvgRenderer keyRenderer(QString(":/vpiano/blkey.svg"));
     static const QPen blackPen(Qt::black, 1);
     static const QPen grayPen(QBrush(Qt::gray), 1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
     if (m_pressed) {

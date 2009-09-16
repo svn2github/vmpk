@@ -53,9 +53,11 @@ macx {
         data/azerty.xml \
         data/it-qwerty.xml \
         data/vkeybd-default.xml \
+        data/pc102mac.xml \
         translations/vmpk_es.qm \
         translations/vmpk_tr.qm \
-        translations/vmpk_de.qm
+        translations/vmpk_de.qm \
+        translations/vmpk_ca.qm
     BUNDLE_RES.path = Contents/Resources
     QMAKE_BUNDLE_DATA += BUNDLE_RES
     LIBS += -framework \

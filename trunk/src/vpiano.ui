@@ -47,7 +47,7 @@
     <addaction name="actionConnections"/>
     <addaction name="actionPreferences"/>
     <addaction name="actionEditKM"/>
-    <addaction name="separator"/>
+    <addaction name="actionEditExtraControls"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -167,7 +167,6 @@
     <bool>true</bool>
    </attribute>
    <addaction name="actionEditPrograms"/>
-   <addaction name="separator"/>
   </widget>
   <widget class="QToolBar" name="toolBarExtra">
    <property name="sizePolicy">
@@ -356,11 +355,28 @@
    </property>
   </action>
   <action name="actionEditPrograms">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Edit</string>
    </property>
    <property name="toolTip">
     <string>Open the Banks/Programs editor</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionEditExtraControls">
+   <property name="text">
+    <string>&amp;Extra Controllers</string>
+   </property>
+   <property name="toolTip">
+    <string>Open the Extra Controls editor</string>
    </property>
   </action>
  </widget>
@@ -417,7 +433,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>120</x>
-     <y>38</y>
+     <y>78</y>
     </hint>
    </hints>
   </connection>
@@ -433,7 +449,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>205</x>
-     <y>38</y>
+     <y>106</y>
     </hint>
    </hints>
   </connection>
@@ -449,7 +465,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>457</x>
-     <y>38</y>
+     <y>120</y>
     </hint>
    </hints>
   </connection>
@@ -465,7 +481,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
-     <y>178</y>
+     <y>266</y>
     </hint>
    </hints>
   </connection>
@@ -481,7 +497,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>338</x>
-     <y>113</y>
+     <y>148</y>
     </hint>
    </hints>
   </connection>

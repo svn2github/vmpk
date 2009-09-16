@@ -164,6 +164,7 @@ IF (UNIX AND NOT APPLE)
         data/german.xml
         data/gmgsxg.ins
         data/spanish.xml
+        data/pc102x11.xml
         data/txt2ins.awk
         data/help.html
         data/help_es.html
@@ -222,6 +223,7 @@ IF (WIN32)
         data/german.xml
         data/gmgsxg.ins
         data/spanish.xml
+        data/pc102win.xml
         data/help.html
         data/help_es.html
         data/help_tr.html

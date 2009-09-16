@@ -1,12 +1,12 @@
 Name "Virtual MIDI Piano Keyboard"
 
 # Defines
-!define QTFILES "C:\Qt\2009.01\qt\bin"
-!define MINGWFILES "C:\Qt\2009.01\mingw\bin"
-!define VMPKDIR "C:\Proyectos\vmpk-0.2.7"
+!define QTFILES "C:\Qt\2009.03\qt\bin"
+!define MINGWFILES "C:\Qt\2009.03\mingw\bin"
+!define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.3.0"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.2.7
+!define VERSION 0.3.0
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -42,6 +42,8 @@ Var StartMenuGroup
 # Installer languages
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "Spanish"
+!insertmacro MUI_LANGUAGE "German"
+!insertmacro MUI_LANGUAGE "Catalan"
 
 # Installer attributes
 OutFile vmpk-${VERSION}-setup.exe
@@ -49,7 +51,7 @@ InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.2.6.0
+VIProductVersion 0.3.0.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
@@ -70,25 +72,30 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\azerty.xml
     File ${VMPKDIR}\data\it-qwerty.xml
     File ${VMPKDIR}\data\vkeybd-default.xml
+    File ${VMPKDIR}\data\pc102win.xml
     File ${VMPKDIR}\data\gmgsxg.ins
     File ${VMPKDIR}\data\help.html
     File ${VMPKDIR}\data\help_es.html
     File ${VMPKDIR}\data\help_tr.html
     File ${VMPKDIR}\build\translations\vmpk_es.qm
     File ${VMPKDIR}\build\translations\vmpk_tr.qm
-    File ${VMPKDIR}\build\translations\vmpk_der.qm
+    File ${VMPKDIR}\build\translations\vmpk_de.qm
+    File ${VMPKDIR}\build\translations\vmpk_ca.qm
 
     # Installing library C:\MinGW\bin\mingwm10.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
 
     # Installing library C:\Qt\4.4.1\bin\QtCore4.dll
-    #!insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtCore4.dll $INSTDIR\QtCore4.dll $INSTDIR
+    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtCore4.dll $INSTDIR\QtCore4.dll $INSTDIR
 
     # Installing library C:\Qt\4.4.1\bin\QtGui4.dll
-    #!insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtGui4.dll $INSTDIR\QtGui4.dll $INSTDIR
+    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtGui4.dll $INSTDIR\QtGui4.dll $INSTDIR
 
     # Installing library C:\Qt\4.4.1\bin\QtXml4.dll
-    #!insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtXml4.dll $INSTDIR\QtXml4.dll $INSTDIR
+    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtXml4.dll $INSTDIR\QtXml4.dll $INSTDIR
+
+    # Installing library C:\Qt\4.4.1\bin\QtSvg4.dll
+    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtSvg4.dll $INSTDIR\QtSvg4.dll $INSTDIR
 
     WriteRegStr HKLM "${REGKEY}\Components" Main 1
 SectionEnd
@@ -131,12 +138,14 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vmpk_es.qm
     Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_de.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_ca.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
     Delete /REBOOTOK $INSTDIR\german.xml
     Delete /REBOOTOK $INSTDIR\azerty.xml
     Delete /REBOOTOK $INSTDIR\it-qwerty.xml
     Delete /REBOOTOK $INSTDIR\vkeybd-default.xml
+    Delete /REBOOTOK $INSTDIR\pc102win.xml
     Delete /REBOOTOK $INSTDIR\gmgsxg.ins
     Delete /REBOOTOK $INSTDIR\help.html
     Delete /REBOOTOK $INSTDIR\help_es.html
@@ -153,6 +162,9 @@ Section /o -un.Main UNSEC0000
 
     # Uninstalling library $INSTDIR\QtXml4.dll
     #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtXml4.dll
+
+    # Uninstalling library $INSTDIR\QtSvg4.dll
+    #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtSvg4.dll
 
     DeleteRegValue HKLM "${REGKEY}\Components" Main
 SectionEnd

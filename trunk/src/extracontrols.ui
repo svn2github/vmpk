@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Extra Controls Editor</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_6">
    <item row="0" column="0" rowspan="3">
@@ -80,6 +80,10 @@
         <property name="text">
          <string>Add</string>
         </property>
+        <property name="icon">
+         <iconset resource="../data/vmpk.qrc">
+          <normaloff>:/vpiano/list-add.svg</normaloff>:/vpiano/list-add.svg</iconset>
+        </property>
        </widget>
       </item>
       <item>
@@ -89,6 +93,10 @@
         </property>
         <property name="text">
          <string>Remove</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../data/vmpk.qrc">
+          <normaloff>:/vpiano/list-remove.svg</normaloff>:/vpiano/list-remove.svg</iconset>
         </property>
        </widget>
       </item>
@@ -433,7 +441,9 @@
   <tabstop>btnDown</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../data/vmpk.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

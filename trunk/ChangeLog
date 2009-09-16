@@ -1,3 +1,11 @@
+2009-09-16
+    * merged vpiano 0.8 widget
+    * implemented RFE #2848623: Raw keyboard support, raw Keyboard Map editor
+    * implemented RFE #2790324 extra controls tool bar: new extra controllers 
+      (knobs and on/off buttons with customizable labels) which can be assigned 
+      to arbitrary MIDI controllers.
+    * implemented RFE #2106022 better looking keys using SVG graphics.
+
 2009-08-31
     * Fix RtMidiOut port type flags
 

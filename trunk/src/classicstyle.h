@@ -39,10 +39,9 @@ class ClassicStyle : public QCommonStyle
 public:
 	ClassicStyle() {};
 	virtual ~ClassicStyle() {};
-        virtual void drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const;
+    virtual void drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const;
 	virtual void drawComplexControl(ComplexControl cc, const QStyleOptionComplex *opt, QPainter *p,
                             		const QWidget *widget = 0) const;
-
 };
 
 #endif /*CLASSICTYLE_H_*/

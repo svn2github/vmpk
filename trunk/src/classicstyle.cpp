@@ -192,10 +192,11 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     p->restore();
 }
 
-void ClassicStyle::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const
+void ClassicStyle::drawPrimitive( PrimitiveElement pe, const QStyleOption *opt,
+                                  QPainter *p, const QWidget *w ) const
 {
-    static QSvgRenderer onRenderer(QString(":/led_square_green.svg"));
-    static QSvgRenderer offRenderer(QString(":/led_square_grey.svg"));
+    static QSvgRenderer onRenderer(QString(":/vpiano/led_circle_green.svg"));
+    static QSvgRenderer offRenderer(QString(":/vpiano/led_circle_grey.svg"));
     if (pe == PE_IndicatorCheckBox) {
         if (opt->state & State_On)
             onRenderer.render(p, opt->rect);
