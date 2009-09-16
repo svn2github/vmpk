@@ -61,6 +61,110 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>DialogExtraControls</name>
+    <message>
+        <location filename="../src/extracontrols.cpp" line="66"/>
+        <source>New Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="14"/>
+        <source>Extra Controls Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="42"/>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="55"/>
+        <source>MIDI Controller:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="81"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="95"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="109"/>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="119"/>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="146"/>
+        <source>Switch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="151"/>
+        <source>Knob</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="156"/>
+        <source>Spin box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="161"/>
+        <source>Slider</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="185"/>
+        <source>Default ON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="192"/>
+        <source>value ON:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="209"/>
+        <source>value OFF:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="230"/>
+        <location filename="../src/extracontrols.ui" line="285"/>
+        <location filename="../src/extracontrols.ui" line="357"/>
+        <source>Min. value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="247"/>
+        <location filename="../src/extracontrols.ui" line="302"/>
+        <location filename="../src/extracontrols.ui" line="374"/>
+        <source>Max. value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="264"/>
+        <location filename="../src/extracontrols.ui" line="319"/>
+        <location filename="../src/extracontrols.ui" line="391"/>
+        <source>Default value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="340"/>
+        <source>Display size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>KMapDialog</name>
     <message>
         <location filename="../src/kmapdialog.cpp" line="31"/>
@@ -943,24 +1047,24 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../src/preferences.cpp" line="92"/>
+        <location filename="../src/preferences.cpp" line="94"/>
         <source>Open instruments definition</source>
         <translation>Enstrüman tanımlamalarını aç</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="94"/>
+        <location filename="../src/preferences.cpp" line="96"/>
         <source>Instrument definitions (*.ins)</source>
         <translation>Enstrüman tanımlaması (*.ins)</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="168"/>
-        <location filename="../src/preferences.cpp" line="179"/>
+        <location filename="../src/preferences.cpp" line="166"/>
+        <location filename="../src/preferences.cpp" line="177"/>
         <source>Open keyboard map definition</source>
         <translation type="unfinished">Klavye düzeni tanımlaması aç</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="170"/>
-        <location filename="../src/preferences.cpp" line="181"/>
+        <location filename="../src/preferences.cpp" line="168"/>
+        <location filename="../src/preferences.cpp" line="179"/>
         <source>Keyboard map (*.xml)</source>
         <translation type="unfinished">Klavye düzeni (*.xml)</translation>
     </message>
@@ -1235,65 +1339,89 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="143"/>
-        <location filename="../src/vpiano.cpp" line="969"/>
+        <location filename="../src/vpiano.cpp" line="147"/>
+        <location filename="../src/vpiano.cpp" line="1160"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="144"/>
+        <location filename="../src/vpiano.cpp" line="148"/>
         <source>No MIDI output ports available. Aborting</source>
         <translation>Hiç MIDI çıktı portu yok. Çıkılıyor</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="167"/>
+        <location filename="../src/vpiano.cpp" line="171"/>
         <source>Error. Aborting</source>
         <translation>Hata. Çıkılıyor</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="179"/>
+        <location filename="../src/vpiano.cpp" line="184"/>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="192"/>
+        <source>Base Octave:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="200"/>
+        <source>Transpose:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="208"/>
+        <source>Velocity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="229"/>
+        <source>Control:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="235"/>
+        <source>Value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="250"/>
+        <source>Bender:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="263"/>
+        <source>Bank:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="269"/>
+        <source>Program:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source> Channel: </source>
-        <translation>Kanal:</translation>
+        <translation type="obsolete">Kanal:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="185"/>
         <source> Base Octave: </source>
-        <translation>Temel Oktav:</translation>
+        <translation type="obsolete">Temel Oktav:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="191"/>
-        <source> Transpose: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.cpp" line="197"/>
         <source> Velocity: </source>
-        <translation>Hız:</translation>
+        <translation type="obsolete">Hız:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="216"/>
         <source> Control: </source>
-        <translation>Denetle: </translation>
+        <translation type="obsolete">Denetle: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="220"/>
         <source> Value: </source>
-        <translation>Değer:</translation>
+        <translation type="obsolete">Değer:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="233"/>
-        <source> Bender: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.cpp" line="244"/>
-        <source> Bank: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.cpp" line="248"/>
         <source> Program: </source>
-        <translation> Program:</translation>
+        <translation type="obsolete"> Program:</translation>
     </message>
     <message>
         <source>Open keyboard map definition</source>
@@ -1338,153 +1466,159 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="92"/>
-        <location filename="../src/vpiano.ui" line="239"/>
+        <location filename="../src/vpiano.ui" line="238"/>
         <source>&amp;Notes</source>
         <translation>&amp;Notalar</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="114"/>
-        <location filename="../src/vpiano.ui" line="250"/>
+        <location filename="../src/vpiano.ui" line="249"/>
         <source>&amp;Controllers</source>
         <translation>&amp;Denetleyiciler</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="136"/>
-        <location filename="../src/vpiano.ui" line="261"/>
+        <location filename="../src/vpiano.ui" line="260"/>
         <source>Pitch &amp;Bender</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="158"/>
-        <location filename="../src/vpiano.ui" line="272"/>
+        <location filename="../src/vpiano.ui" line="271"/>
         <source>&amp;Programs</source>
         <translation>&amp;Programlar</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="180"/>
-        <location filename="../src/vpiano.ui" line="347"/>
+        <location filename="../src/vpiano.ui" line="179"/>
+        <location filename="../src/vpiano.ui" line="346"/>
         <source>&amp;Extra Controls</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="196"/>
+        <location filename="../src/vpiano.ui" line="195"/>
         <source>&amp;Quit</source>
         <translation>&amp;Çık</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="199"/>
+        <location filename="../src/vpiano.ui" line="198"/>
         <source>Exit the program</source>
         <translation>Uygulamadan çık</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="204"/>
+        <location filename="../src/vpiano.ui" line="203"/>
         <source>&amp;Preferences</source>
         <translation>&amp;Tercihler</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="207"/>
+        <location filename="../src/vpiano.ui" line="206"/>
         <source>Edit the program settings</source>
         <translation>Uygulamala ayarlarını düzenle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="212"/>
+        <location filename="../src/vpiano.ui" line="211"/>
         <source>&amp;Connections</source>
         <translation>&amp;Bağlantılar</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="215"/>
+        <location filename="../src/vpiano.ui" line="214"/>
         <source>Edit the MIDI connections</source>
         <translation>MIDI bağlantılarını düzenle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="220"/>
+        <location filename="../src/vpiano.ui" line="219"/>
         <source>&amp;About</source>
         <translation>&amp;Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="223"/>
+        <location filename="../src/vpiano.ui" line="222"/>
         <source>Show the About box</source>
         <translation>Hakkında Penceresini Göster</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="228"/>
+        <location filename="../src/vpiano.ui" line="227"/>
         <source>About Q&amp;t</source>
         <translation>Q&amp;t Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="231"/>
+        <location filename="../src/vpiano.ui" line="230"/>
         <source>Show the Qt about box</source>
         <translation>Qt Hakkında Penceresini Göster</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="242"/>
+        <location filename="../src/vpiano.ui" line="241"/>
         <source>Show or hide the Notes toolbar</source>
         <translation>Nota araç çubuğunu göster veya gizle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="253"/>
+        <location filename="../src/vpiano.ui" line="252"/>
         <source>Show or hide the Controller toolbar</source>
         <translation>Denetleyici araç çubuğunu göster veya gizle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="264"/>
+        <location filename="../src/vpiano.ui" line="263"/>
         <source>Show or hide the Pitch Bender toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="275"/>
+        <location filename="../src/vpiano.ui" line="274"/>
         <source>Show or hide the Programs toolbar</source>
         <translation>Programlar araç çubuğunu göster veya gizle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="286"/>
+        <location filename="../src/vpiano.ui" line="285"/>
         <source>&amp;Status Bar</source>
         <translation>&amp;Durum Çubuğu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="291"/>
+        <location filename="../src/vpiano.ui" line="290"/>
         <source>Panic</source>
         <translation>Panik</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="294"/>
+        <location filename="../src/vpiano.ui" line="293"/>
         <source>Stops all active notes</source>
         <translation>Tüm etkin notaları durdur</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="299"/>
+        <location filename="../src/vpiano.ui" line="298"/>
         <source>Reset All</source>
         <translation>Tümünü Sıfırla</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="302"/>
+        <location filename="../src/vpiano.ui" line="301"/>
         <source>Resets all the controllers</source>
         <translation>Tüm denetleyicileri sıfırla</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="307"/>
+        <location filename="../src/vpiano.ui" line="306"/>
         <source>Reset</source>
         <translation>Sıfırla</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="310"/>
+        <location filename="../src/vpiano.ui" line="309"/>
         <source>Resets the Bender value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="352"/>
-        <location filename="../src/vpiano.ui" line="360"/>
+        <location filename="../src/vpiano.ui" line="351"/>
+        <location filename="../src/vpiano.ui" line="362"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="355"/>
+        <location filename="../src/vpiano.ui" line="354"/>
+        <location filename="../src/vpiano.ui" line="379"/>
         <source>Open the Extra Controls editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="363"/>
+        <location filename="../src/vpiano.ui" line="365"/>
         <source>Open the Banks/Programs editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.ui" line="376"/>
+        <source>&amp;Extra Controllers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1504,7 +1638,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Geçerli klavye düzenini kaydet</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="315"/>
+        <location filename="../src/vpiano.ui" line="314"/>
         <source>&amp;Keyboard Map</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1513,37 +1647,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Düzenle...</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="318"/>
+        <location filename="../src/vpiano.ui" line="317"/>
         <source>Edit the current keyboard layout</source>
         <translation>Geçerli klavye düzenini düzenle</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="323"/>
+        <location filename="../src/vpiano.ui" line="322"/>
         <source>&amp;Contents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="326"/>
+        <location filename="../src/vpiano.ui" line="325"/>
         <source>Open the index of the help document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="331"/>
+        <location filename="../src/vpiano.ui" line="330"/>
         <source>VMPK &amp;Web site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="334"/>
+        <location filename="../src/vpiano.ui" line="333"/>
         <source>Open the VMPK web site address using a web browser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="339"/>
+        <location filename="../src/vpiano.ui" line="338"/>
         <source>&amp;Import SoundFont...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="969"/>
+        <location filename="../src/vpiano.cpp" line="1160"/>
         <source>No help file found</source>
         <translation type="unfinished"></translation>
     </message>
