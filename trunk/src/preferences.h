@@ -65,6 +65,7 @@ public slots:
 
 protected:
     void showEvent ( QShowEvent *event );
+    void restoreDefaults();
 
 private:
     Ui::PreferencesClass ui;

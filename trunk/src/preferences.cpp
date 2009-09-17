@@ -40,6 +40,7 @@ Preferences::Preferences(QWidget *parent)
     ui.txtFileRawKmap->setText(QSTR_DEFAULT);
     m_keymap.setRawMode(false);
     m_rawmap.setRawMode(true);
+    restoreDefaults();
     connect(ui.btnInstrument, SIGNAL(clicked()), SLOT(slotOpenInstrumentFile()));
     connect(ui.btnColor, SIGNAL(clicked()), SLOT(slotSelectColor()));
     connect(ui.btnKmap, SIGNAL(clicked()), SLOT(slotOpenKeymapFile()));
@@ -57,8 +58,9 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
         ui.chkShowNames->setChecked( m_showLabels );
         ui.chkRawKeyboard->setChecked( m_rawKeyboard );
-        if (!m_keyPressedColor.isValid())
+        if (!m_keyPressedColor.isValid()) {
             setKeyPressedColor(QApplication::palette().highlight().color());
+        }
     }
 }
 
@@ -206,7 +208,7 @@ void Preferences::setKeyMapFileName( const QString fileName )
     }
 }
 
-void Preferences::slotRestoreDefaults()
+void Preferences::restoreDefaults()
 {
     ui.chkAlwaysOnTop->setChecked(false);
     ui.chkGrabKb->setChecked(false);
@@ -214,9 +216,14 @@ void Preferences::slotRestoreDefaults()
     ui.chkShowNames->setChecked(false);
     ui.chkStyledKnobs->setChecked(true);
     ui.spinNumOctaves->setValue(5);
-    ui.txtFileInstrument->setText(QSTR_DEFAULT);
     ui.txtFileKmap->setText(QSTR_DEFAULT);
     ui.txtFileRawKmap->setText(QSTR_DEFAULT);
-    ui.cboInstrument->setCurrentIndex(-1);
+    setInstrumentsFileName(VPiano::dataDirectory() + QSTR_DEFAULTINS);
+    ui.cboInstrument->setCurrentIndex(0);
+}
+
+void Preferences::slotRestoreDefaults()
+{
+    restoreDefaults();
     setKeyPressedColor(QApplication::palette().highlight().color());
 }

@@ -27,21 +27,21 @@ class MidiSetup : public QDialog
     Q_OBJECT
 
 public:
-	MidiSetup();
-	void inputNotAvailable();
-	bool inputIsEnabled() const;
-	bool thruIsEnabled() const;
-	void setInputEnabled(const bool state);
-	void setThruEnabled(const bool state);
-	void clearCombos();
-	void addInputPortName(const QString& name, int index);
+    MidiSetup(QWidget *parent = 0);
+    void inputNotAvailable();
+    bool inputIsEnabled() const;
+    bool thruIsEnabled() const;
+    void setInputEnabled(const bool state);
+    void setThruEnabled(const bool state);
+    void clearCombos();
+    void addInputPortName(const QString& name, int index);
     void addOutputPortName(const QString& output, int index);
     void setCurrentInput(int index);
     void setCurrentInput(const QString name);
     void setCurrentOutput(int index);
     void setCurrentOutput(const QString name);
-	int  selectedInput();
-	int  selectedOutput();
+    int  selectedInput();
+    int  selectedOutput();
     QString selectedInputName() const;
     QString selectedOutputName() const;
 

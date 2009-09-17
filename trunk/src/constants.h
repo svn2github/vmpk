@@ -73,6 +73,7 @@ const QString QSTR_EXTRACTLPREFIX("ExtraCtl_");
 const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");
 const QString QSTR_VMPKOUTPUT("VMPK Output");
+const QString QSTR_DEFAULTINS("gmgsxg.ins");
 
 const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
 

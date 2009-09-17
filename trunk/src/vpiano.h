@@ -23,10 +23,6 @@
 #include <QEvent>
 
 #include "ui_vpiano.h"
-#include "about.h"
-#include "preferences.h"
-#include "midisetup.h"
-#include "kmapdialog.h"
 #include "mididefs.h"
 
 class QComboBox;
@@ -37,6 +33,10 @@ class Knob;
 class Instrument;
 class RtMidiIn;
 class RtMidiOut;
+class About;
+class Preferences;
+class MidiSetup;
+class KMapDialog;
 
 const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEON ));
 const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEOFF ));
@@ -156,9 +156,13 @@ private:
     void bender(const int value);
     void messageWrapper(std::vector<unsigned char> *message) const;
     void updateController(int ctl, int val);
-    void grabKb() const;
-    void releaseKb() const;
+    void grabKb();
+    void releaseKb();
     void updateKnobs();
+    About *dlgAbout();
+    Preferences *dlgPreferences();
+    MidiSetup *dlgMidiSetup();
+    KMapDialog *dlgKeyMap();
 
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;
@@ -168,11 +172,12 @@ private:
     bool m_midiThru;
     bool m_initialized;
 
+    About *m_dlgAbout;
+    Preferences *m_dlgPreferences;
+    MidiSetup *m_dlgMidiSetup;
+    KMapDialog *m_dlgKeyMap;
+
     Ui::VPiano ui;
-    About dlgAbout;
-    Preferences dlgPreferences;
-    MidiSetup dlgMidiSetup;
-    KMapDialog dlgKeyMap;
 
     QSpinBox* m_sboxChannel;
     QSpinBox* m_sboxOctave;

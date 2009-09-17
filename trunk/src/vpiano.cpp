@@ -37,6 +37,10 @@
 #include "constants.h"
 #include "riffimportdlg.h"
 #include "extracontrols.h"
+#include "about.h"
+#include "preferences.h"
+#include "midisetup.h"
+#include "kmapdialog.h"
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
@@ -46,7 +50,11 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     m_currentIn(-1),
     m_inputActive(false),
     m_midiThru(false),
-    m_initialized(false)
+    m_initialized(false),
+    m_dlgAbout(NULL),
+    m_dlgPreferences(NULL),
+    m_dlgMidiSetup(NULL),
+    m_dlgKeyMap(NULL)
 {
     ui.setupUi(this);
     ui.actionStatusBar->setChecked(false);
@@ -209,7 +217,7 @@ void VPiano::initToolBars()
     lbl->setMargin(TOOLBARLABELMARGIN);
     m_Velocity = new Knob(this);
     m_Velocity->setFixedSize(32, 32);
-    m_Velocity->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
+    m_Velocity->setStyle(dlgPreferences()->getStyledKnobs()? m_dialStyle : NULL);
     m_Velocity->setMinimum(0);
     m_Velocity->setMaximum(127);
     m_Velocity->setDefaultValue(100);
@@ -236,7 +244,7 @@ void VPiano::initToolBars()
     lbl->setMargin(TOOLBARLABELMARGIN);
     m_Control= new Knob(this);
     m_Control->setFixedSize(32, 32);
-    m_Control->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
+    m_Control->setStyle(dlgPreferences()->getStyledKnobs()? m_dialStyle : NULL);
     m_Control->setMinimum(0);
     m_Control->setMaximum(127);
     m_Control->setValue(0);
@@ -337,7 +345,7 @@ void VPiano::initExtraControllers()
         switch(type) {
         case 0:
             chkbox = new QCheckBox(this);
-            if (dlgPreferences.getStyledKnobs()) {
+            if (dlgPreferences()->getStyledKnobs()) {
                 chkbox->setStyle(m_dialStyle);
             }
             chkbox->setProperty(MIDICTLONVALUE, maxValue);
@@ -349,7 +357,7 @@ void VPiano::initExtraControllers()
         case 1:
             knob = new Knob(this);
             knob->setFixedSize(32, 32);
-            knob->setStyle(dlgPreferences.getStyledKnobs()? m_dialStyle : NULL);
+            knob->setStyle(dlgPreferences()->getStyledKnobs()? m_dialStyle : NULL);
             knob->setMinimum(minValue);
             knob->setMaximum(maxValue);
             knob->setValue(value);
@@ -419,16 +427,16 @@ void VPiano::readSettings()
     bool showNames = settings.value(QSTR_SHOWNOTENAMES, false).toBool();
     settings.endGroup();
 
-    dlgPreferences.setNumOctaves(num_octaves);
-    dlgPreferences.setKeyPressedColor(keyColor);
-    dlgPreferences.setGrabKeyboard(grabKb);
-    dlgPreferences.setStyledKnobs(styledKnobs);
-    dlgPreferences.setAlwaysOnTop(alwaysOnTop);
-    dlgPreferences.setShowNames(showNames);
+    dlgPreferences()->setNumOctaves(num_octaves);
+    dlgPreferences()->setKeyPressedColor(keyColor);
+    dlgPreferences()->setGrabKeyboard(grabKb);
+    dlgPreferences()->setStyledKnobs(styledKnobs);
+    dlgPreferences()->setAlwaysOnTop(alwaysOnTop);
+    dlgPreferences()->setShowNames(showNames);
     if (!insFileName.isEmpty()) {
-        dlgPreferences.setInstrumentsFileName(insFileName);
+        dlgPreferences()->setInstrumentsFileName(insFileName);
         if (!insName.isEmpty()) {
-            dlgPreferences.setInstrumentName(insName);
+            dlgPreferences()->setInstrumentName(insName);
         }
     }
 
@@ -443,20 +451,20 @@ void VPiano::readSettings()
 #endif
 
     if (m_midiin == NULL) {
-        dlgMidiSetup.inputNotAvailable();
+        dlgMidiSetup()->inputNotAvailable();
     } else {
-        dlgMidiSetup.setInputEnabled(inEnabled);
-        dlgMidiSetup.setThruEnabled(thruEnabled);
-        dlgMidiSetup.setCurrentInput(in_port);
+        dlgMidiSetup()->setInputEnabled(inEnabled);
+        dlgMidiSetup()->setThruEnabled(thruEnabled);
+        dlgMidiSetup()->setCurrentInput(in_port);
     }
-    dlgMidiSetup.setCurrentOutput(out_port);
+    dlgMidiSetup()->setCurrentOutput(out_port);
 
     settings.beginGroup(QSTR_KEYBOARD);
     bool rawKeyboard = settings.value(QSTR_RAWKEYBOARDMODE, false).toBool();
     QString mapFile = settings.value(QSTR_MAPFILE, QSTR_DEFAULT).toString();
     QString rawMapFile = settings.value(QSTR_RAWMAPFILE, QSTR_DEFAULT).toString();
     settings.endGroup();
-    dlgPreferences.setRawKeyboard(rawKeyboard);
+    dlgPreferences()->setRawKeyboard(rawKeyboard);
 
     settings.beginGroup(QSTR_INSTRUMENT);
     m_lastBank = settings.value(QSTR_BANK, -1).toInt();
@@ -485,12 +493,12 @@ void VPiano::readSettings()
     ui.pianokeybd->getKeyboardMap()->setRawMode(false);
     ui.pianokeybd->getRawKeyboardMap()->setRawMode(true);
     if (!mapFile.isEmpty() && mapFile != QSTR_DEFAULT) {
-        dlgPreferences.setKeyMapFileName(mapFile);
-        ui.pianokeybd->setKeyboardMap(dlgPreferences.getKeyboardMap());
+        dlgPreferences()->setKeyMapFileName(mapFile);
+        ui.pianokeybd->setKeyboardMap(dlgPreferences()->getKeyboardMap());
     }
     if (!rawMapFile.isEmpty() && rawMapFile != QSTR_DEFAULT) {
-        dlgPreferences.setRawKeyMapFileName(rawMapFile);
-        ui.pianokeybd->setRawKeyboardMap(dlgPreferences.getKeyboardMap());
+        dlgPreferences()->setRawKeyMapFileName(rawMapFile);
+        ui.pianokeybd->setRawKeyboardMap(dlgPreferences()->getKeyboardMap());
     }
 }
 
@@ -509,25 +517,25 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_VELOCITY, m_velocity);
     settings.setValue(QSTR_BASEOCTAVE, m_baseOctave);
     settings.setValue(QSTR_TRANSPOSE, m_transpose);
-    settings.setValue(QSTR_NUMOCTAVES, dlgPreferences.getNumOctaves());
-    settings.setValue(QSTR_INSTRUMENTSDEFINITION, dlgPreferences.getInstrumentsFileName());
-    settings.setValue(QSTR_INSTRUMENTNAME, dlgPreferences.getInstrumentName());
-    settings.setValue(QSTR_KEYPRESSEDCOLOR, dlgPreferences.getKeyPressedColor());
-    settings.setValue(QSTR_GRABKB, dlgPreferences.getGrabKeyboard());
-    settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences.getStyledKnobs());
-    settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences.getAlwaysOnTop());
-    settings.setValue(QSTR_SHOWNOTENAMES, dlgPreferences.getShowNames());
+    settings.setValue(QSTR_NUMOCTAVES, dlgPreferences()->getNumOctaves());
+    settings.setValue(QSTR_INSTRUMENTSDEFINITION, dlgPreferences()->getInstrumentsFileName());
+    settings.setValue(QSTR_INSTRUMENTNAME, dlgPreferences()->getInstrumentName());
+    settings.setValue(QSTR_KEYPRESSEDCOLOR, dlgPreferences()->getKeyPressedColor());
+    settings.setValue(QSTR_GRABKB, dlgPreferences()->getGrabKeyboard());
+    settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences()->getStyledKnobs());
+    settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences()->getAlwaysOnTop());
+    settings.setValue(QSTR_SHOWNOTENAMES, dlgPreferences()->getShowNames());
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONNECTIONS);
-    settings.setValue(QSTR_INENABLED, dlgMidiSetup.inputIsEnabled());
-    settings.setValue(QSTR_THRUENABLED, dlgMidiSetup.thruIsEnabled());
-    settings.setValue(QSTR_INPORT,  dlgMidiSetup.selectedInputName());
-    settings.setValue(QSTR_OUTPORT, dlgMidiSetup.selectedOutputName());
+    settings.setValue(QSTR_INENABLED, dlgMidiSetup()->inputIsEnabled());
+    settings.setValue(QSTR_THRUENABLED, dlgMidiSetup()->thruIsEnabled());
+    settings.setValue(QSTR_INPORT,  dlgMidiSetup()->selectedInputName());
+    settings.setValue(QSTR_OUTPORT, dlgMidiSetup()->selectedOutputName());
     settings.endGroup();
 
     settings.beginGroup(QSTR_KEYBOARD);
-    settings.setValue(QSTR_RAWKEYBOARDMODE, dlgPreferences.getRawKeyboard());
+    settings.setValue(QSTR_RAWKEYBOARDMODE, dlgPreferences()->getRawKeyboard());
     settings.setValue(QSTR_MAPFILE, ui.pianokeybd->getKeyboardMap()->getFileName());
     settings.setValue(QSTR_RAWMAPFILE, ui.pianokeybd->getRawKeyboardMap()->getFileName());
     settings.endGroup();
@@ -802,7 +810,7 @@ void VPiano::slotBenderReleased()
 void VPiano::slotAbout()
 {
     releaseKb();
-    dlgAbout.exec();
+    dlgAbout()->exec();
     grabKb();
 }
 
@@ -817,21 +825,21 @@ void VPiano::refreshConnections()
 {
     int i = 0, nInPorts = 0, nOutPorts = 0;
     try {
-        dlgMidiSetup.clearCombos();
+        dlgMidiSetup()->clearCombos();
         // inputs
         if (m_midiin == NULL) {
-            dlgMidiSetup.inputNotAvailable();
-            dlgMidiSetup.setInputEnabled(false);
+            dlgMidiSetup()->inputNotAvailable();
+            dlgMidiSetup()->setInputEnabled(false);
         } else {
 #if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__)
-            dlgMidiSetup.setInputEnabled(m_currentIn != -1);
+            dlgMidiSetup()->setInputEnabled(m_currentIn != -1);
 #endif
-            dlgMidiSetup.addInputPortName(QString::null, -1);
+            dlgMidiSetup()->addInputPortName(QString::null, -1);
             nInPorts = m_midiin->getPortCount();
             for ( i = 0; i < nInPorts; i++ ) {
                 QString name = QString::fromStdString(m_midiin->getPortName(i));
                 if (!name.startsWith(QSTR_VMPK))
-                    dlgMidiSetup.addInputPortName(name, i);
+                    dlgMidiSetup()->addInputPortName(name, i);
             }
         }
         // outputs
@@ -839,7 +847,7 @@ void VPiano::refreshConnections()
         for ( i = 0; i < nOutPorts; i++ ) {
             QString name = QString::fromStdString(m_midiout->getPortName(i));
             if (!name.startsWith(QSTR_VMPK))
-                dlgMidiSetup.addOutputPortName(name, i);
+                dlgMidiSetup()->addOutputPortName(name, i);
         }
     } catch (RtError& err) {
         ui.statusBar->showMessage(QString::fromStdString(err.getMessage()));
@@ -849,10 +857,10 @@ void VPiano::refreshConnections()
 void VPiano::slotConnections()
 {
     refreshConnections();
-    dlgMidiSetup.setCurrentInput(m_currentIn);
-    dlgMidiSetup.setCurrentOutput(m_currentOut);
+    dlgMidiSetup()->setCurrentInput(m_currentIn);
+    dlgMidiSetup()->setCurrentOutput(m_currentOut);
     releaseKb();
-    if (dlgMidiSetup.exec() == QDialog::Accepted) {
+    if (dlgMidiSetup()->exec() == QDialog::Accepted) {
         applyConnections();
     }
     grabKb();
@@ -863,7 +871,7 @@ void VPiano::applyConnections()
     int i, nInPorts = 0, nOutPorts = 0;
     try {
         nOutPorts = m_midiout->getPortCount();
-        i = dlgMidiSetup.selectedOutput();
+        i = dlgMidiSetup()->selectedOutput();
         if ((i >= 0) && (i < nOutPorts) && (i != m_currentOut)) {
             m_midiout->closePort();
             m_midiout->openPort(i);
@@ -871,7 +879,7 @@ void VPiano::applyConnections()
         m_currentOut = i;
         if (m_midiin != NULL) {
             nInPorts = m_midiin->getPortCount();
-            i = dlgMidiSetup.selectedInput();
+            i = dlgMidiSetup()->selectedInput();
             if (m_inputActive && (i != m_currentIn)) {
                 m_midiin->cancelCallback();
                 m_inputActive = false;
@@ -879,13 +887,13 @@ void VPiano::applyConnections()
                     m_midiin->closePort();
             }
             if ((i >= 0) && (i < nInPorts) && (i != m_currentIn) &&
-                dlgMidiSetup.inputIsEnabled()) {
+                dlgMidiSetup()->inputIsEnabled()) {
                 m_midiin->openPort(i);
                 m_midiin->setCallback( &midiCallback, this );
                 m_inputActive = true;
             }
             m_currentIn = i;
-            m_midiThru = dlgMidiSetup.thruIsEnabled();
+            m_midiThru = dlgMidiSetup()->thruIsEnabled();
         }
     } catch (RtError& err) {
         ui.statusBar->showMessage(QString::fromStdString(err.getMessage()));
@@ -928,20 +936,20 @@ void VPiano::applyPreferences()
     if (ui.pianokeybd->baseOctave() != m_baseOctave) {
         ui.pianokeybd->setBaseOctave(m_baseOctave);
     }
-    if (ui.pianokeybd->numOctaves() != dlgPreferences.getNumOctaves()) {
-        ui.pianokeybd->setNumOctaves(dlgPreferences.getNumOctaves());
+    if (ui.pianokeybd->numOctaves() != dlgPreferences()->getNumOctaves()) {
+        ui.pianokeybd->setNumOctaves(dlgPreferences()->getNumOctaves());
     }
-    ui.pianokeybd->setKeyPressedColor(dlgPreferences.getKeyPressedColor());
-    ui.pianokeybd->setShowLabels(dlgPreferences.getShowNames());
-    ui.pianokeybd->setRawKeyboardMode(dlgPreferences.getRawKeyboard());
+    ui.pianokeybd->setKeyPressedColor(dlgPreferences()->getKeyPressedColor());
+    ui.pianokeybd->setShowLabels(dlgPreferences()->getShowNames());
+    ui.pianokeybd->setRawKeyboardMode(dlgPreferences()->getRawKeyboard());
 
-    KeyboardMap* map = dlgPreferences.getKeyboardMap();
+    KeyboardMap* map = dlgPreferences()->getKeyboardMap();
     if (!map->getFileName().isEmpty() && map->getFileName() != QSTR_DEFAULT )
         ui.pianokeybd->setKeyboardMap(map);
     else
         ui.pianokeybd->resetKeyboardMap();
 
-    map = dlgPreferences.getRawKeyboardMap();
+    map = dlgPreferences()->getRawKeyboardMap();
     if (!map->getFileName().isEmpty() && map->getFileName() != QSTR_DEFAULT )
         ui.pianokeybd->setRawKeyboardMap(map);
     else
@@ -951,9 +959,9 @@ void VPiano::applyPreferences()
     m_comboBank->clear();
     m_comboProg->clear();
 
-    if (!dlgPreferences.getInstrumentsFileName().isEmpty() &&
-         dlgPreferences.getInstrumentsFileName() != QSTR_DEFAULT &&
-         (m_ins = dlgPreferences.getInstrument()) != NULL) {
+    if (!dlgPreferences()->getInstrumentsFileName().isEmpty() &&
+         dlgPreferences()->getInstrumentsFileName() != QSTR_DEFAULT &&
+         (m_ins = dlgPreferences()->getInstrument()) != NULL) {
         //qDebug() << "Instrument Name:" << m_ins->instrumentName();
         //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
         m_ctlState.clear();
@@ -970,7 +978,7 @@ void VPiano::applyPreferences()
 
     QPoint wpos = pos();
     Qt::WindowFlags flags = windowFlags();
-    if (dlgPreferences.getAlwaysOnTop())
+    if (dlgPreferences()->getAlwaysOnTop())
         flags |= Qt::WindowStaysOnTopHint;
     else
         flags &= ~Qt::WindowStaysOnTopHint;
@@ -1019,7 +1027,7 @@ void VPiano::applyInitialSettings()
 void VPiano::slotPreferences()
 {
     releaseKb();
-    if (dlgPreferences.exec() == QDialog::Accepted) {
+    if (dlgPreferences()->exec() == QDialog::Accepted) {
         applyPreferences();
     }
     grabKb();
@@ -1043,14 +1051,14 @@ void VPiano::slotEditKeyboardMap()
 {
     KeyboardMap* map;
     releaseKb();
-    if (dlgPreferences.getRawKeyboard())
+    if (dlgPreferences()->getRawKeyboard())
         map = ui.pianokeybd->getRawKeyboardMap();
     else
         map = ui.pianokeybd->getKeyboardMap();
-    dlgKeyMap.displayMap(map);
-    if (dlgKeyMap.exec() == QDialog::Accepted) {
-        dlgKeyMap.getMap(map);
-        if (dlgPreferences.getRawKeyboard())
+    dlgKeyMap()->displayMap(map);
+    if (dlgKeyMap()->exec() == QDialog::Accepted) {
+        dlgKeyMap()->getMap(map);
+        if (dlgPreferences()->getRawKeyboard())
             ui.pianokeybd->setRawKeyboardMap(map);
         else
             ui.pianokeybd->setKeyboardMap(map);
@@ -1124,17 +1132,17 @@ void VPiano::slotCtlChanged(const int index)
     m_Control->setValue(m_ctlState[ctl]);
 }
 
-void VPiano::grabKb() const
+void VPiano::grabKb()
 {
-    if (dlgPreferences.getGrabKeyboard()) {
+    if (dlgPreferences()->getGrabKeyboard()) {
         ui.pianokeybd->grabKeyboard();
     }
-    ui.pianokeybd->setRawKeyboardMode(dlgPreferences.getRawKeyboard());
+    ui.pianokeybd->setRawKeyboardMode(dlgPreferences()->getRawKeyboard());
 }
 
-void VPiano::releaseKb() const
+void VPiano::releaseKb()
 {
-    if (dlgPreferences.getGrabKeyboard()) {
+    if (dlgPreferences()->getGrabKeyboard()) {
         ui.pianokeybd->releaseKeyboard();
     }
     ui.pianokeybd->setRawKeyboardMode(false);
@@ -1170,7 +1178,7 @@ void VPiano::updateKnobs()
 {
     QList<Knob *> allKnobs = findChildren<Knob *> ();
     foreach(Knob* knob, allKnobs) {
-        knob->setStyle(dlgPreferences.getStyledKnobs() ? m_dialStyle : NULL);
+        knob->setStyle(dlgPreferences()->getStyledKnobs() ? m_dialStyle : NULL);
     }
 }
 
@@ -1180,8 +1188,8 @@ void VPiano::slotImportSF()
     releaseKb();
     if ((dlg.exec() == QDialog::Accepted) && !dlg.getOutput().isEmpty()) {
         dlg.save();
-        dlgPreferences.setInstrumentsFileName(dlg.getOutput());
-        dlgPreferences.setInstrumentName(dlg.getName());
+        dlgPreferences()->setInstrumentsFileName(dlg.getOutput());
+        dlgPreferences()->setInstrumentName(dlg.getName());
         applyPreferences();
     }
     grabKb();
@@ -1198,6 +1206,38 @@ void VPiano::slotEditExtraControls()
         initExtraControllers();
     }
     grabKb();
+}
+
+About* VPiano::dlgAbout()
+{
+    if (m_dlgAbout == NULL) {
+        m_dlgAbout = new About(this);
+    }
+    return m_dlgAbout;
+}
+
+Preferences* VPiano::dlgPreferences()
+{
+    if (m_dlgPreferences == NULL) {
+        m_dlgPreferences = new Preferences(this);
+    }
+    return m_dlgPreferences;
+}
+
+MidiSetup* VPiano::dlgMidiSetup()
+{
+    if (m_dlgMidiSetup == NULL) {
+        m_dlgMidiSetup = new MidiSetup(this);
+    }
+    return m_dlgMidiSetup;
+}
+
+KMapDialog* VPiano::dlgKeyMap()
+{
+    if (m_dlgKeyMap == NULL) {
+        m_dlgKeyMap = new KMapDialog(this);
+    }
+    return m_dlgKeyMap;
 }
 
 //void VPiano::slotEditPrograms()

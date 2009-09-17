@@ -43,8 +43,6 @@ PianoScene::PianoScene ( const int baseOctave,
     m_mousePressed( false ),
     m_handler( NULL )
 {
-    //QBrush blackBrush(Qt::black);
-    //QBrush whiteBrush(Qt::white);
     QBrush hilightBrush(m_keyPressedColor.isValid() ? m_keyPressedColor : QApplication::palette().highlight());
     QFont lblFont(QApplication::font());
     int i, numkeys = m_numOctaves * 12;

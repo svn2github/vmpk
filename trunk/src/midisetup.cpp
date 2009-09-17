@@ -16,10 +16,9 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "midisetup.h"
 
-MidiSetup::MidiSetup()
+MidiSetup::MidiSetup(QWidget *parent) : QDialog(parent)
 {
     ui.setupUi(this);
     connect(ui.chkEnableInput, SIGNAL(toggled(bool)), SLOT(toggledInput(bool)));
