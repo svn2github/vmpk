@@ -158,7 +158,7 @@ private:
     void updateController(int ctl, int val);
     void grabKb();
     void releaseKb();
-    void updateKnobs();
+    void updateStyles();
     About *dlgAbout();
     Preferences *dlgPreferences();
     MidiSetup *dlgMidiSetup();

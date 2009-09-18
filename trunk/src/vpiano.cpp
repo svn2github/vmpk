@@ -985,7 +985,7 @@ void VPiano::applyPreferences()
     setWindowFlags( flags );
     move(wpos);
 
-    updateKnobs();
+    updateStyles();
     show();
 }
 
@@ -1174,11 +1174,15 @@ void VPiano::slotOpenWebSite()
     QDesktopServices::openUrl(url);
 }
 
-void VPiano::updateKnobs()
+void VPiano::updateStyles()
 {
     QList<Knob *> allKnobs = findChildren<Knob *> ();
     foreach(Knob* knob, allKnobs) {
         knob->setStyle(dlgPreferences()->getStyledKnobs() ? m_dialStyle : NULL);
+    }
+    QList<QCheckBox *> allChkbox = ui.toolBarExtra->findChildren<QCheckBox *> ();
+    foreach(QCheckBox* chkbox, allChkbox) {
+        chkbox->setStyle(dlgPreferences()->getStyledKnobs() ? m_dialStyle : NULL);
     }
 }
 
