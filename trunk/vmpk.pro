@@ -76,7 +76,6 @@ irix* {
 }
 debug:DEFINES += __RTMIDI_DEBUG__
 INCLUDEPATH += src
-
 # Input
 FORMS += src/kmapdialog.ui \
     src/midisetup.ui \
@@ -134,3 +133,4 @@ TRANSLATIONS += translations/vmpk_es.ts \
     translations/vmpk_tr.ts \
     translations/vmpk_de.ts \
     translations/vmpk_ca.ts
+include(updateqm.pri)
