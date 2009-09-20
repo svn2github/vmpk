@@ -118,24 +118,31 @@ void midiCallback( double /*deltatime*/,
     VPiano* instance = static_cast<VPiano*>(userData);
     instance->midiThru(message);
     unsigned char status = message->at(0) & MASK_STATUS;
-    if ((status == STATUS_NOTEON) || (status == STATUS_NOTEOFF)) {
-        unsigned char channel = message->at(0) & MASK_CHANNEL;
-        unsigned char channelFilter = instance->getInputChannel();
-        if (channel == channelFilter) {
-            unsigned char midi_note = message->at(1);
-            unsigned char vel = message->at(2);
-            if ((status == STATUS_NOTEOFF) || (vel == 0))
-                ev = new NoteOffEvent(midi_note);
-            else
-                ev = new NoteOnEvent(midi_note);
-        }
-    } else if (status == STATUS_CONTROLLER) {
-        unsigned char channel = message->at(0) & MASK_CHANNEL;
-        unsigned char channelFilter = instance->getInputChannel();
-        if (channel == channelFilter) {
-            unsigned char ctl = message->at(1);
-            unsigned char val = message->at(2);
-            ev = new ControllerEvent(ctl, val);
+    unsigned char channel = message->at(0) & MASK_CHANNEL;
+    unsigned char channelFilter = instance->getInputChannel();
+    if (channel == channelFilter) {
+        switch( status ) {
+        case STATUS_NOTEON:
+        case STATUS_NOTEOFF: {
+                unsigned char midi_note = message->at(1);
+                unsigned char vel = message->at(2);
+                if ((status == STATUS_NOTEOFF) || (vel == 0))
+                    ev = new NoteOffEvent(midi_note);
+                else
+                    ev = new NoteOnEvent(midi_note);
+            }
+            break;
+        case STATUS_CONTROLLER: {
+                unsigned char ctl = message->at(1);
+                unsigned char val = message->at(2);
+                ev = new ControllerEvent(ctl, val);
+            }
+            break;
+        case STATUS_BENDER: {
+                int value = (message->at(1) + 0x80 * message->at(2)) - BENDER_MID;
+                ev = new BenderEvent(value);
+            }
+            break;
         }
     }
     if (ev != NULL)
@@ -253,7 +260,7 @@ void VPiano::initToolBars()
     m_Control->setFocusPolicy(Qt::NoFocus);
     ui.toolBarControllers->addWidget(m_Control);
     connect( m_comboControl, SIGNAL(currentIndexChanged(int)), SLOT(slotCtlChanged(int)) );
-    connect( m_Control, SIGNAL(valueChanged(int)), SLOT(slotController()) );
+    connect( m_Control, SIGNAL(sliderMoved(int)), SLOT(slotController(int)) );
     // Pitch bender tool bar
     ui.toolBarBender->addWidget(lbl = new QLabel(tr("Bender:"), this));
     lbl->setMargin(TOOLBARLABELMARGIN);
@@ -265,7 +272,7 @@ void VPiano::initToolBars()
     m_bender->setValue(0);
     m_bender->setFocusPolicy(Qt::NoFocus);
     ui.toolBarBender->addWidget(m_bender);
-    connect( m_bender, SIGNAL(valueChanged(int)), SLOT(slotBender()) );
+    connect( m_bender, SIGNAL(sliderMoved(int)), SLOT(slotBender(int)) );
     connect( m_bender, SIGNAL(sliderReleased()), SLOT(slotBenderReleased()) );
     // Programs tool bar
     ui.toolBarPrograms->addWidget(lbl = new QLabel(tr("Bank:"), this));
@@ -363,7 +370,7 @@ void VPiano::initExtraControllers()
             knob->setValue(value);
             knob->setDefaultValue(defValue);
             knob->setDialMode(Knob::LinearMode);
-            connect(knob, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
+            connect(knob, SIGNAL(sliderMoved(int)), SLOT(slotExtraController(int)));
             w = knob;
             break;
         case 2:
@@ -371,7 +378,7 @@ void VPiano::initExtraControllers()
             spin->setMinimum(minValue);
             spin->setMaximum(maxValue);
             spin->setValue(value);
-            connect(spin, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
+            connect(spin, SIGNAL(valueChanged(int)), SLOT(slotExtraController(int)));
             w = spin;
             break;
         case 3:
@@ -382,7 +389,7 @@ void VPiano::initExtraControllers()
             slider->setMinimum(minValue);
             slider->setMaximum(maxValue);
             slider->setValue(value);
-            connect(slider, SIGNAL(valueChanged(int)), SLOT(slotController(int)));
+            connect(slider, SIGNAL(sliderMoved(int)), SLOT(slotExtraController(int)));
             w = slider;
             break;
         default:
@@ -572,19 +579,28 @@ void VPiano::closeEvent( QCloseEvent *event )
 
 void VPiano::customEvent ( QEvent *event )
 {
-    if (event->type() == NoteOnEventType ) {
+    if ( event->type() == NoteOnEventType ) {
         NoteOnEvent *ev = static_cast<NoteOnEvent*>(event);
         ui.pianokeybd->showNoteOn(ev->getNote());
-        event->accept();
-    } else if (event->type() == NoteOffEventType ) {
+    }
+    else if ( event->type() == NoteOffEventType ) {
         NoteOffEvent *ev = static_cast<NoteOffEvent*>(event);
         ui.pianokeybd->showNoteOff(ev->getNote());
-        event->accept();
-    } else if (event->type() == ControllerEventType ) {
-        ControllerEvent *ev = static_cast<ControllerEvent*>(event);
-        updateController(ev->getController(), ev->getValue());
-        event->accept();
     }
+    else if ( event->type() ==  ControllerEventType ) {
+        ControllerEvent *ev = static_cast<ControllerEvent*>(event);
+        int ctl = ev->getController();
+        int val = ev->getValue();
+        updateController(ctl, val);
+        updateExtraController(ctl, val);
+        m_ctlState[ctl] = val;
+    }
+    else if ( event->type() ==  BenderEventType ) {
+        BenderEvent *ev = static_cast<BenderEvent*>(event);
+        m_bender->setSliderPosition(ev->getValue());
+        m_bender->setToolTip(QString::number(ev->getValue()));
+    }
+    event->accept();
 }
 
 void VPiano::showEvent ( QShowEvent *event )
@@ -761,6 +777,7 @@ void VPiano::slotResetAllControllers()
 void VPiano::slotResetBender()
 {
     m_bender->setValue(0);
+    bender(0);
 }
 
 void VPiano::slotControlToggled(const bool boolValue)
@@ -777,34 +794,46 @@ void VPiano::slotControlToggled(const bool boolValue)
     }
 }
 
-void VPiano::slotController(const int value)
+void VPiano::setVelocity(int value)
 {
-    QObject *s = sender();
-    QVariant p = s->property(MIDICTLNUMBER);
+    m_velocity = value;
+    setWidgetTip(m_Velocity, value);
+}
+
+void VPiano::slotExtraController(const int value)
+{
+    QWidget *w = static_cast<QWidget *>(sender());
+    QVariant p = w->property(MIDICTLNUMBER);
     if (p.isValid()) {
         int controller = p.toInt();
         sendController( controller, value );
+        updateController( controller, value );
         m_ctlState[ controller ] = value;
+        setWidgetTip(w, value);
     }
 }
 
-void VPiano::slotController()
+void VPiano::slotController(const int value)
 {
     int index = m_comboControl->currentIndex();
     int controller = m_comboControl->itemData(index).toInt();
-    int value = m_Control->value();
     sendController( controller, value );
+    updateExtraController( controller, value );
     m_ctlState[ controller ] = value;
+    setWidgetTip(m_Control, value);
 }
 
-void VPiano::slotBender()
+void VPiano::slotBender(const int pos)
 {
-    bender(m_bender->value());
+    bender(pos);
+    setWidgetTip(m_bender, pos);
 }
 
 void VPiano::slotBenderReleased()
 {
     m_bender->setValue(0);
+    bender(0);
+    setWidgetTip(m_bender, 0);
 }
 
 void VPiano::slotAbout()
@@ -1122,14 +1151,34 @@ void VPiano::updateController(int ctl, int val)
     int controller = m_comboControl->itemData(index).toInt();
     if (controller == ctl) {
         m_Control->setValue(val);
+        m_Control->setToolTip(QString::number(val));
     }
-    m_ctlState[ctl] = val;
+}
+
+void VPiano::updateExtraController(int ctl, int val)
+{
+    QList<QWidget *> allWidgets = ui.toolBarExtra->findChildren<QWidget *>();
+    foreach(QWidget *w, allWidgets) {
+        QVariant p = w->property(MIDICTLNUMBER);
+        if (p.isValid() && p.toInt() == ctl) {
+            QVariant v = w->property("value");
+            if (v.isValid() && v.toInt() != val) {
+                w->setProperty("value", val);
+                w->setToolTip(QString::number(val));
+                continue;
+            }
+            v = w->property("checked");
+            if (v.isValid())
+                w->setProperty("checked", bool(val));
+        }
+    }
 }
 
 void VPiano::slotCtlChanged(const int index)
 {
     int ctl = m_comboControl->itemData(index).toInt();
     m_Control->setValue(m_ctlState[ctl]);
+    setWidgetTip(m_Control, m_ctlState[ctl]);
 }
 
 void VPiano::grabKb()
@@ -1242,6 +1291,13 @@ KMapDialog* VPiano::dlgKeyMap()
         m_dlgKeyMap = new KMapDialog(this);
     }
     return m_dlgKeyMap;
+}
+
+void VPiano::setWidgetTip(QWidget* w, int val)
+{
+    QString tip = QString::number(val);
+    w->setToolTip(tip);
+    QToolTip::showText(QCursor::pos(), tip, this);
 }
 
 //void VPiano::slotEditPrograms()

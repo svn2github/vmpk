@@ -49,7 +49,7 @@ public:
 	// Knob dial mode behavior:
 	// QDialMode   - Old QDial BEHAVIOUR.
 	// AngularMode - Angularly relative to widget center.
-	// LinearMode  - Proportionally to distance in one ortogonal axis.
+	// LinearMode  - Proportionally to distance in one orthogonal axis.
 
 	enum DialMode {	QDialMode, AngularMode, LinearMode };
 
@@ -63,8 +63,6 @@ public slots:
 	// Set knob dial mode behavior.
 	void setDialMode(DialMode dialMode);
 
-	void setValue(int val);
-
 protected:
 
 	// Mouse angle determination.
@@ -77,6 +75,7 @@ protected:
 	virtual void wheelEvent(QWheelEvent *pWheelEvent);
 
 private:
+    void updatePosition(int val);
 
 	// Default (mid) value.
 	int m_iDefaultValue;
@@ -88,7 +87,7 @@ private:
 	bool   m_bMousePressed;
 	QPoint m_posMouse;
 
-	// Just for more precission on the movement
+	// Just for more precision on the movement
 	double m_lastDragValue;
 };
 

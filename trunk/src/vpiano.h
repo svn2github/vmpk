@@ -41,6 +41,7 @@ class KMapDialog;
 const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEON ));
 const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEOFF ));
 const QEvent::Type ControllerEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_CONTROLLER ));
+const QEvent::Type BenderEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_BENDER));
 
 class NoteEvent : public QEvent
 {
@@ -84,6 +85,16 @@ private:
     unsigned char m_value;
 };
 
+class BenderEvent : public QEvent
+{
+public:
+    BenderEvent(int value) : QEvent(BenderEventType), m_value(value)
+    { }
+    int getValue() const { return m_value; }
+private:
+    int m_value;
+};
+
 class VPiano : public QMainWindow, public PianoHandler
 {
     Q_OBJECT
@@ -116,10 +127,10 @@ public slots:
     void slotPanic();
     void slotResetAllControllers();
     void slotResetBender();
-    void slotController();
     void slotController(const int value);
+    void slotExtraController(const int value);
     void slotControlToggled(const bool value);
-    void slotBender();
+    void slotBender(const int pos);
     void slotBenderReleased();
     void slotBankChanged(const int index);
     void slotProgChanged(const int index);
@@ -129,7 +140,7 @@ public slots:
     void slotCtlChanged(const int index);
     void slotHelpContents();
     void slotOpenWebSite();
-    void setVelocity(int value) { m_velocity = value; }
+    void setVelocity(int value);
     void slotImportSF();
     void slotEditExtraControls();
     //void slotEditPrograms();
@@ -156,9 +167,11 @@ private:
     void bender(const int value);
     void messageWrapper(std::vector<unsigned char> *message) const;
     void updateController(int ctl, int val);
+    void updateExtraController(int ctl, int val);
     void grabKb();
     void releaseKb();
     void updateStyles();
+    void setWidgetTip(QWidget* w, int val);
     About *dlgAbout();
     Preferences *dlgPreferences();
     MidiSetup *dlgMidiSetup();

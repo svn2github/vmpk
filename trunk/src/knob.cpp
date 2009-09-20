@@ -54,122 +54,121 @@ Knob::~Knob (void)
 
 void Knob::setDefaultValue ( int iDefaultValue )
 {
-	m_iDefaultValue = iDefaultValue;
+    m_iDefaultValue = iDefaultValue;
 }
 
 
 void Knob::setDialMode ( Knob::DialMode dialMode )
 {
-	m_dialMode = dialMode;
+    m_dialMode = dialMode;
 }
 
 
 // Mouse angle determination.
 double Knob::mouseAngle ( const QPoint& pos )
 {
-	double dx = pos.x() - (width() / 2);
-	double dy = (height() / 2) - pos.y();
-	return 180.0 * atan2(dx, dy) / M_PI;
+    double dx = pos.x() - (width() / 2);
+    double dy = (height() / 2) - pos.y();
+    return 180.0 * atan2(dx, dy) / M_PI;
 }
-
 
 // Alternate mouse behavior event handlers.
 void Knob::mousePressEvent ( QMouseEvent *pMouseEvent )
 {
-	if (m_dialMode == QDialMode) {
-		QDial::mousePressEvent(pMouseEvent);
-	} else if (pMouseEvent->button() == Qt::LeftButton) {
-		m_bMousePressed = true;
-		m_posMouse = pMouseEvent->pos();
-		m_lastDragValue = double(value());
-		emit sliderPressed();
-	} else if (pMouseEvent->button() == Qt::MidButton) {
-		// Reset to default value...
-		if (m_iDefaultValue < minimum() || m_iDefaultValue > maximum())
-			m_iDefaultValue = (maximum() + minimum()) / 2;
-		setValue(m_iDefaultValue);
-	}
+    if (m_dialMode == QDialMode) {
+        QDial::mousePressEvent(pMouseEvent);
+    } else if (pMouseEvent->button() == Qt::LeftButton) {
+        m_bMousePressed = true;
+        m_posMouse = pMouseEvent->pos();
+        m_lastDragValue = double(sliderPosition());
+        emit sliderPressed();
+    } else if (pMouseEvent->button() == Qt::MidButton) {
+        // Reset to default value...
+        if (m_iDefaultValue < minimum() || m_iDefaultValue > maximum())
+            m_iDefaultValue = (maximum() + minimum()) / 2;
+        updatePosition(m_iDefaultValue);
+    }
 }
-
 
 void Knob::mouseMoveEvent ( QMouseEvent *pMouseEvent )
 {
-	if (m_dialMode == QDialMode) {
-		QDial::mouseMoveEvent(pMouseEvent);
-		return;
-	}
+    if (m_dialMode == QDialMode) {
+        QDial::mouseMoveEvent(pMouseEvent);
+        return;
+    }
 
-	if (!m_bMousePressed)
-		return;
+    if (!m_bMousePressed)
+        return;
 
-	const QPoint& posMouse = pMouseEvent->pos();
-	int xdelta = posMouse.x() - m_posMouse.x();
-	int ydelta = posMouse.y() - m_posMouse.y();
-	double angleDelta =  mouseAngle(posMouse) - mouseAngle(m_posMouse);
+    const QPoint& posMouse = pMouseEvent->pos();
+    int xdelta = posMouse.x() - m_posMouse.x();
+    int ydelta = posMouse.y() - m_posMouse.y();
+    double angleDelta =  mouseAngle(posMouse) - mouseAngle(m_posMouse);
 
-	int iNewValue = value();
+    int iNewValue = sliderPosition();
 
-	switch (m_dialMode)	{
-	case LinearMode:
-		iNewValue = int(m_lastDragValue + xdelta - ydelta);
-		break;
-	case AngularMode:
-	default:
-		// Forget about the drag origin to be robust on full rotations
-		if (angleDelta > +180.0) angleDelta = angleDelta - 360.0;
-		if (angleDelta < -180.0) angleDelta = angleDelta + 360.0;
-		m_lastDragValue += double(maximum() - minimum()) * angleDelta / 270.0;
-		if (m_lastDragValue > double(maximum()))
-			m_lastDragValue = double(maximum());
-		if (m_lastDragValue < double(minimum()))
-			m_lastDragValue = double(minimum());
-		m_posMouse = posMouse;
-		iNewValue = int(m_lastDragValue + 0.5);
-		break;
-	}
-
-	setValue(iNewValue);
-	update();
-
-	emit sliderMoved(value());
+    switch (m_dialMode)	{
+    case LinearMode:
+        iNewValue = int(m_lastDragValue + xdelta - ydelta);
+        if (iNewValue > maximum())
+            iNewValue = maximum();
+        else
+            if (iNewValue < minimum())
+                iNewValue = minimum();
+        break;
+    case AngularMode:
+    default:
+        // Forget about the drag origin to be robust on full rotations
+        if (angleDelta > +180.0) angleDelta = angleDelta - 360.0;
+        if (angleDelta < -180.0) angleDelta = angleDelta + 360.0;
+        m_lastDragValue += double(maximum() - minimum()) * angleDelta / 270.0;
+        if (m_lastDragValue > double(maximum()))
+            m_lastDragValue = double(maximum());
+        if (m_lastDragValue < double(minimum()))
+            m_lastDragValue = double(minimum());
+        m_posMouse = posMouse;
+        iNewValue = int(m_lastDragValue + 0.5);
+        break;
+    }
+    updatePosition(iNewValue);
 }
 
 
 void Knob::mouseReleaseEvent ( QMouseEvent *pMouseEvent )
 {
-	if (m_dialMode == QDialMode) {
-		QDial::mouseReleaseEvent(pMouseEvent);
-	} else if (m_bMousePressed) {
-		m_bMousePressed = false;
-	}
+    if (m_dialMode == QDialMode) {
+        QDial::mouseReleaseEvent(pMouseEvent);
+    } else if (m_bMousePressed) {
+        m_bMousePressed = false;
+    }
 }
 
 
 void Knob::wheelEvent ( QWheelEvent *pWheelEvent )
 {
-	if (m_dialMode == QDialMode) {
-		QDial::wheelEvent(pWheelEvent);
-	} else {
-		int iValue = value();
-		if (pWheelEvent->delta() > 0)
-			iValue -= pageStep();
-		else
-			iValue += pageStep();
-		if (iValue > maximum())
-			iValue = maximum();
-		else
-		if (iValue < minimum())
-			iValue = minimum();
-		setValue(iValue);
-	}
+    if (m_dialMode == QDialMode) {
+        QDial::wheelEvent(pWheelEvent);
+    } else {
+        int iValue = sliderPosition();
+        if (pWheelEvent->delta() > 0)
+            iValue -= pageStep();
+        else
+            iValue += pageStep();
+        if (iValue > maximum())
+            iValue = maximum();
+        else
+            if (iValue < minimum())
+                iValue = minimum();
+        updatePosition(iValue);
+    }
 }
 
-void Knob::setValue(int val)
+void Knob::updatePosition(int val)
 {
-    QDial::setValue(val);
-    QString tip = QString::number(value());
-    setToolTip(tip);
-    QToolTip::showText(QCursor::pos(), tip, this);
+    setSliderPosition(val);
+    setToolTip(QString::number(val));
+    update();
+    emit sliderMoved(val);
 }
 
 // end of knob.cpp
