@@ -54,4 +54,5 @@ Other copyright owners:
         data/led_green.svg
         data/led_grey.svg
 
-        
+    Alexander Neundorf
+        cmake_admin/FindLibXslt.cmake

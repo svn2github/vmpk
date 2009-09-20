@@ -1,7 +1,7 @@
 Virtual MIDI Piano Keyboard
 ===========================
 
-This program is a MIDI event generator/receiver. It doesn't produce any sound
+This program is a MIDI events generator/receiver. It doesn't produce any sound
 by itself, but can be used to drive a MIDI synthesizer (either hardware or
 software, internal or external). You can use the computer's keyboard to play
 MIDI notes, and also the mouse. You can use the Virtual MIDI Piano Keyboard
@@ -23,7 +23,8 @@ free and platform independent, available for Linux, Windows and Mac OSX.
 The alphanumeric keyboard mapping can be configured from inside the program
 using the GUI interface, and the settings are stored in XML files. Some maps
 for Spanish, German and French keyboard layouts are provided, translated from
-the ones provided by VKeybd.
+the ones provided by VKeybd. Raw keyboard mappings can also be defined,  
+translating X11, Windows or Mac keycodes to MIDI notes.
 
 VMPK can send program changes and controllers to a MIDI synth. The definitions 
 for different standards and devices can be provided as .INS files, the same 
@@ -44,9 +45,9 @@ http://sourceforge.net/projects/vmpk/files
 REQUIREMENTS
 
 You need Qt 4.4 or newer. Install the -devel package for your system, or 
-download the open source edition from Trolltech:
+download the open source edition from Nokia:
 
-    http://trolltech.com/downloads/opensource
+    http://qt.nokia.com/downloads/
 
 RtMIDI is included in the source package. It uses ALSA sequencer in Linux, 
 WinMM in Windows and CoreMIDI in Mac OSX, which are the native MIDI systems in 

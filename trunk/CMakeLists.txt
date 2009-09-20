@@ -157,6 +157,9 @@ IF (UNIX)
 ENDIF (UNIX)
 
 IF (UNIX AND NOT APPLE)
+
+    ADD_SUBDIRECTORY(man build/man)
+
     INSTALL ( FILES
         data/azerty.xml
         data/vkeybd-default.xml
@@ -199,11 +202,6 @@ IF (UNIX AND NOT APPLE)
         share/applications
     )
 
-    INSTALL ( FILES
-        man/vmpk.1
-    DESTINATION 
-        share/man/man1
-    )
 ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
