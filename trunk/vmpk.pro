@@ -26,6 +26,7 @@ CONFIG += release
 CONFIG -= debug_and_release
 CONFIG -= debug
 VERSIONH = $$sprintf(const QString PGM_VERSION(\"%1\");,$$VERSION)
+system($$QMAKE_MKDIR $$DESTDIR)
 win32 { 
     DEFINES += __WINDOWS_MM__
     LIBS += -lwinmm
