@@ -43,7 +43,7 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro MUI_LANGUAGE "German"
-!insertmacro MUI_LANGUAGE "Catalan"
+#!insertmacro MUI_LANGUAGE "Catalan"
 
 # Installer attributes
 OutFile vmpk-${VERSION}-setup.exe
@@ -80,7 +80,7 @@ Section -Main SEC0000
     File ${VMPKDIR}\build\translations\vmpk_es.qm
     File ${VMPKDIR}\build\translations\vmpk_tr.qm
     File ${VMPKDIR}\build\translations\vmpk_de.qm
-    File ${VMPKDIR}\build\translations\vmpk_ca.qm
+    #File ${VMPKDIR}\build\translations\vmpk_ca.qm
 
     # Installing library C:\MinGW\bin\mingwm10.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
@@ -138,7 +138,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vmpk_es.qm
     Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_de.qm
-    Delete /REBOOTOK $INSTDIR\vmpk_ca.qm
+    #Delete /REBOOTOK $INSTDIR\vmpk_ca.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
     Delete /REBOOTOK $INSTDIR\german.xml

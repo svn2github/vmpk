@@ -941,94 +941,94 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PianoScene</name>
     <message>
-        <location filename="../src/pianoscene.cpp" line="300"/>
-        <location filename="../src/pianoscene.cpp" line="303"/>
+        <location filename="../src/pianoscene.cpp" line="298"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
         <source>C</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="300"/>
+        <location filename="../src/pianoscene.cpp" line="298"/>
         <source>C♯</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="300"/>
-        <location filename="../src/pianoscene.cpp" line="303"/>
+        <location filename="../src/pianoscene.cpp" line="298"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
         <source>D</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="300"/>
+        <location filename="../src/pianoscene.cpp" line="298"/>
         <source>D♯</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="300"/>
-        <location filename="../src/pianoscene.cpp" line="303"/>
+        <location filename="../src/pianoscene.cpp" line="298"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
         <source>E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="301"/>
-        <location filename="../src/pianoscene.cpp" line="304"/>
+        <location filename="../src/pianoscene.cpp" line="299"/>
+        <location filename="../src/pianoscene.cpp" line="302"/>
         <source>F</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="301"/>
+        <location filename="../src/pianoscene.cpp" line="299"/>
         <source>F♯</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="301"/>
-        <location filename="../src/pianoscene.cpp" line="304"/>
+        <location filename="../src/pianoscene.cpp" line="299"/>
+        <location filename="../src/pianoscene.cpp" line="302"/>
         <source>G</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="301"/>
+        <location filename="../src/pianoscene.cpp" line="299"/>
         <source>G♯</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="302"/>
-        <location filename="../src/pianoscene.cpp" line="305"/>
+        <location filename="../src/pianoscene.cpp" line="300"/>
+        <location filename="../src/pianoscene.cpp" line="303"/>
         <source>A</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="302"/>
+        <location filename="../src/pianoscene.cpp" line="300"/>
         <source>A♯</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="302"/>
-        <location filename="../src/pianoscene.cpp" line="305"/>
+        <location filename="../src/pianoscene.cpp" line="300"/>
+        <location filename="../src/pianoscene.cpp" line="303"/>
         <source>B</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="303"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
         <source>D♭</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="303"/>
+        <location filename="../src/pianoscene.cpp" line="301"/>
         <source>E♭</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="304"/>
+        <location filename="../src/pianoscene.cpp" line="302"/>
         <source>G♭</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="304"/>
+        <location filename="../src/pianoscene.cpp" line="302"/>
         <source>A♭</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="305"/>
+        <location filename="../src/pianoscene.cpp" line="303"/>
         <source>B♭</source>
         <translation></translation>
     </message>
@@ -1036,24 +1036,24 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../src/preferences.cpp" line="94"/>
+        <location filename="../src/preferences.cpp" line="96"/>
         <source>Open instruments definition</source>
         <translation>Instrumentendefinitionsdatei öffnen</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="96"/>
+        <location filename="../src/preferences.cpp" line="98"/>
         <source>Instrument definitions (*.ins)</source>
         <translation>Instrumentendefinitionen (*.ins)</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="166"/>
-        <location filename="../src/preferences.cpp" line="177"/>
+        <location filename="../src/preferences.cpp" line="168"/>
+        <location filename="../src/preferences.cpp" line="179"/>
         <source>Open keyboard map definition</source>
         <translation>Öffne Tastaturbelegungsdatei</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="168"/>
-        <location filename="../src/preferences.cpp" line="179"/>
+        <location filename="../src/preferences.cpp" line="170"/>
+        <location filename="../src/preferences.cpp" line="181"/>
         <source>Keyboard map (*.xml)</source>
         <translation>Tastaturbelegungsdatei (*.xml)</translation>
     </message>
@@ -1149,13 +1149,33 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/preferences.ui" line="205"/>
-        <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
-        <translation>Mit dieser Option kann man das Aussehen der Knöpfe verändern; entweder der eigene Stil oder das Standardaussehen.</translation>
+        <source>Change the widget (knobs, switches) style, either using the custom look or reverting to the style selected in qtconfig.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="208"/>
+        <source>Styled Widgets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="242"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Check this box to use low level PC keyboard events. This system has several advantages:&lt;/p&gt;
+&lt;ul style=&quot;-qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It is possible to use &quot;dead keys&quot; (accent marks, diacritics)&lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mapping definitions are independent of the language (but hardware and OS specific)&lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Faster processing&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
+        <translation type="obsolete">Mit dieser Option kann man das Aussehen der Knöpfe verändern; entweder der eigene Stil oder das Standardaussehen.</translation>
+    </message>
+    <message>
         <source>Styled Knobs</source>
-        <translation>Stylische Knöpfe</translation>
+        <translation type="obsolete">Stylische Knöpfe</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="218"/>
@@ -1180,18 +1200,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/preferences.ui" line="235"/>
         <source>Grab Computer Keyboard</source>
         <translation>Computertastatur einfangen</translation>
-    </message>
-    <message>
-        <location filename="../src/preferences.ui" line="242"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Check this box to use low level PC keyboard events. This system has several advantages:&lt;/p&gt;
-&lt;ul style=&quot;-qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It is possible to use &quot;dead keys&quot; (accent marks, diacritics)&lt;/li&gt;
-&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mapping definitions are independent of the language (but hardware and OS specific)&lt;/li&gt;
-&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Faster process&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="252"/>
@@ -1313,63 +1321,63 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="147"/>
-        <location filename="../src/vpiano.cpp" line="1160"/>
+        <location filename="../src/vpiano.cpp" line="162"/>
+        <location filename="../src/vpiano.cpp" line="1228"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="148"/>
+        <location filename="../src/vpiano.cpp" line="163"/>
         <source>No MIDI output ports available. Aborting</source>
         <translation>Keine MIDI Ausgabeleitungen verfügbar. Abbrechen</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="171"/>
+        <location filename="../src/vpiano.cpp" line="186"/>
         <source>Error. Aborting</source>
         <translation>Fehler. Abbrechen</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="184"/>
+        <location filename="../src/vpiano.cpp" line="199"/>
         <source>Channel:</source>
         <translation>Kanal:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="192"/>
+        <location filename="../src/vpiano.cpp" line="207"/>
         <source>Base Octave:</source>
         <translation>Basisoktave:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="200"/>
+        <location filename="../src/vpiano.cpp" line="215"/>
         <source>Transpose:</source>
         <translation>Transponieren:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="208"/>
+        <location filename="../src/vpiano.cpp" line="223"/>
         <source>Velocity:</source>
         <translation>Geschwindigkeit:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="229"/>
+        <location filename="../src/vpiano.cpp" line="245"/>
         <source>Control:</source>
         <translation>Kontrolle:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="235"/>
+        <location filename="../src/vpiano.cpp" line="251"/>
         <source>Value:</source>
         <translation>Wert:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="250"/>
+        <location filename="../src/vpiano.cpp" line="267"/>
         <source>Bender:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="263"/>
+        <location filename="../src/vpiano.cpp" line="281"/>
         <source>Bank:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="269"/>
+        <location filename="../src/vpiano.cpp" line="287"/>
         <source>Program:</source>
         <translation>Programm:</translation>
     </message>
@@ -1414,7 +1422,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Speichere Tastaturbelegung</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1160"/>
+        <location filename="../src/vpiano.cpp" line="1228"/>
         <source>No help file found</source>
         <translation>Es konnte keine Hilfe-Datei gefunden werden</translation>
     </message>

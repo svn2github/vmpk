@@ -12,7 +12,7 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.2.7cvs
+VERSION = 0.3.0rc1
 DESTDIR = build
 OBJECTS_DIR = build
 UI_DIR = build
@@ -55,9 +55,9 @@ macx {
         data/vkeybd-default.xml \
         data/pc102mac.xml \
         $$DESTDIR/translations/vmpk_es.qm \
+#       $$DESTDIR/translations/vmpk_ca.qm \
         $$DESTDIR/translations/vmpk_tr.qm \
-        $$DESTDIR/translations/vmpk_de.qm \
-        $$DESTDIR/translations/vmpk_ca.qm
+        $$DESTDIR/translations/vmpk_de.qm 
     BUNDLE_RES.path = Contents/Resources
     QMAKE_BUNDLE_DATA += BUNDLE_RES
     LIBS += -framework \
@@ -130,7 +130,7 @@ SOURCES += src/kmapdialog.cpp \
     src/qticonloader.cpp
 RESOURCES += data/vmpk.qrc
 TRANSLATIONS += translations/vmpk_es.ts \
+#   translations/vmpk_ca.ts \
     translations/vmpk_tr.ts \
-    translations/vmpk_de.ts \
-    translations/vmpk_ca.ts
+    translations/vmpk_de.ts
 include(updateqm.pri)
