@@ -32,7 +32,7 @@ class ExtraControl : public QListWidgetItem {
 public:
     ExtraControl( QListWidget *parent = 0, int type = extraControlType ):
             QListWidgetItem( parent, type ),
-            m_type(0), m_minValue(0), m_maxValue(127), m_defValue(0), m_size(0) {}
+            m_type(0), m_minValue(0), m_maxValue(127), m_defValue(0), m_size(100) {}
     virtual ~ExtraControl() {}
     void setControl(int ctl) { m_control = ctl; }
     void setType(int type) { m_type = type; }

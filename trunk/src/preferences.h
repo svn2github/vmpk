@@ -33,7 +33,7 @@ public:
     int getNumOctaves() const { return m_numOctaves; }
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
     bool getGrabKeyboard() const { return m_grabKb; }
-    bool getStyledKnobs() const { return m_styledKnobs; }
+    bool getStyledWidgets() const { return m_styledKnobs; }
     bool getAlwaysOnTop() const { return m_alwaysOnTop; }
     bool getShowNames() const { return m_showLabels; }
     bool getRawKeyboard() const { return m_rawKeyboard; }
@@ -51,7 +51,7 @@ public:
 public slots:
     void setNumOctaves(int value) { m_numOctaves = value; }
     void setGrabKeyboard(bool value) { m_grabKb = value; }
-    void setStyledKnobs(bool value) { m_styledKnobs = value; }
+    void setStyledWidgets(bool value) { m_styledKnobs = value; }
     void setAlwaysOnTop(bool value) { m_alwaysOnTop = value; }
     void setShowNames(bool value) { m_showLabels = value; }
     void setRawKeyboard(bool value) { m_rawKeyboard = value; }

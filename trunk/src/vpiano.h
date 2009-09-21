@@ -129,7 +129,7 @@ public slots:
     void slotResetBender();
     void slotController(const int value);
     void slotExtraController(const int value);
-    void slotControlToggled(const bool value);
+    void slotControlClicked(const bool value);
     void slotBender(const int pos);
     void slotBenderReleased();
     void slotBankChanged(const int index);

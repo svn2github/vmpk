@@ -224,12 +224,13 @@ void VPiano::initToolBars()
     lbl->setMargin(TOOLBARLABELMARGIN);
     m_Velocity = new Knob(this);
     m_Velocity->setFixedSize(32, 32);
-    m_Velocity->setStyle(dlgPreferences()->getStyledKnobs()? m_dialStyle : NULL);
+    m_Velocity->setStyle(dlgPreferences()->getStyledWidgets()? m_dialStyle : NULL);
     m_Velocity->setMinimum(0);
     m_Velocity->setMaximum(127);
     m_Velocity->setDefaultValue(100);
     m_Velocity->setDialMode(Knob::LinearMode);
     m_Velocity->setValue(m_velocity);
+    m_Velocity->setToolTip("0");
     m_Velocity->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_Velocity);
     connect( m_sboxChannel, SIGNAL(valueChanged(int)),
@@ -251,10 +252,11 @@ void VPiano::initToolBars()
     lbl->setMargin(TOOLBARLABELMARGIN);
     m_Control= new Knob(this);
     m_Control->setFixedSize(32, 32);
-    m_Control->setStyle(dlgPreferences()->getStyledKnobs()? m_dialStyle : NULL);
+    m_Control->setStyle(dlgPreferences()->getStyledWidgets()? m_dialStyle : NULL);
     m_Control->setMinimum(0);
     m_Control->setMaximum(127);
     m_Control->setValue(0);
+    m_Control->setToolTip("0");
     m_Control->setDefaultValue(0);
     m_Control->setDialMode(Knob::LinearMode);
     m_Control->setFocusPolicy(Qt::NoFocus);
@@ -270,6 +272,7 @@ void VPiano::initToolBars()
     m_bender->setMinimum(BENDER_MIN);
     m_bender->setMaximum(BENDER_MAX);
     m_bender->setValue(0);
+    m_bender->setToolTip("0");
     m_bender->setFocusPolicy(Qt::NoFocus);
     ui.toolBarBender->addWidget(m_bender);
     connect( m_bender, SIGNAL(sliderMoved(int)), SLOT(slotBender(int)) );
@@ -342,7 +345,7 @@ void VPiano::initExtraControllers()
         int maxValue = 127;
         int defValue = 0;
         int value = 0;
-        int size = 0;
+        int size = 100;
         ExtraControl::decodeString( s, lbl, control, type,
                                     minValue, maxValue, defValue, size );
         if (m_ctlState.contains(control))
@@ -352,22 +355,23 @@ void VPiano::initExtraControllers()
         switch(type) {
         case 0:
             chkbox = new QCheckBox(this);
-            if (dlgPreferences()->getStyledKnobs()) {
+            if (dlgPreferences()->getStyledWidgets()) {
                 chkbox->setStyle(m_dialStyle);
             }
             chkbox->setProperty(MIDICTLONVALUE, maxValue);
             chkbox->setProperty(MIDICTLOFFVALUE, minValue);
             chkbox->setChecked(bool(value));
-            connect(chkbox, SIGNAL(toggled(bool)), SLOT(slotControlToggled(bool)));
+            connect(chkbox, SIGNAL(clicked(bool)), SLOT(slotControlClicked(bool)));
             w = chkbox;
             break;
         case 1:
             knob = new Knob(this);
             knob->setFixedSize(32, 32);
-            knob->setStyle(dlgPreferences()->getStyledKnobs()? m_dialStyle : NULL);
+            knob->setStyle(dlgPreferences()->getStyledWidgets()? m_dialStyle : NULL);
             knob->setMinimum(minValue);
             knob->setMaximum(maxValue);
             knob->setValue(value);
+            knob->setToolTip(QString::number(value));
             knob->setDefaultValue(defValue);
             knob->setDialMode(Knob::LinearMode);
             connect(knob, SIGNAL(sliderMoved(int)), SLOT(slotExtraController(int)));
@@ -384,10 +388,10 @@ void VPiano::initExtraControllers()
         case 3:
             slider = new QSlider(this);
             slider->setOrientation(Qt::Horizontal);
-            slider->setMinimumWidth(size);
-            slider->setMaximumWidth(size);
+            slider->setFixedWidth(size);
             slider->setMinimum(minValue);
             slider->setMaximum(maxValue);
+            slider->setToolTip(QString::number(value));
             slider->setValue(value);
             connect(slider, SIGNAL(sliderMoved(int)), SLOT(slotExtraController(int)));
             w = slider;
@@ -437,7 +441,7 @@ void VPiano::readSettings()
     dlgPreferences()->setNumOctaves(num_octaves);
     dlgPreferences()->setKeyPressedColor(keyColor);
     dlgPreferences()->setGrabKeyboard(grabKb);
-    dlgPreferences()->setStyledKnobs(styledKnobs);
+    dlgPreferences()->setStyledWidgets(styledKnobs);
     dlgPreferences()->setAlwaysOnTop(alwaysOnTop);
     dlgPreferences()->setShowNames(showNames);
     if (!insFileName.isEmpty()) {
@@ -529,7 +533,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_INSTRUMENTNAME, dlgPreferences()->getInstrumentName());
     settings.setValue(QSTR_KEYPRESSEDCOLOR, dlgPreferences()->getKeyPressedColor());
     settings.setValue(QSTR_GRABKB, dlgPreferences()->getGrabKeyboard());
-    settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences()->getStyledKnobs());
+    settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences()->getStyledWidgets());
     settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences()->getAlwaysOnTop());
     settings.setValue(QSTR_SHOWNOTENAMES, dlgPreferences()->getShowNames());
     settings.endGroup();
@@ -597,8 +601,9 @@ void VPiano::customEvent ( QEvent *event )
     }
     else if ( event->type() ==  BenderEventType ) {
         BenderEvent *ev = static_cast<BenderEvent*>(event);
-        m_bender->setSliderPosition(ev->getValue());
-        m_bender->setToolTip(QString::number(ev->getValue()));
+        int val = ev->getValue();
+        m_bender->setValue(val);
+        m_bender->setToolTip(QString::number(val));
     }
     event->accept();
 }
@@ -688,23 +693,23 @@ void VPiano::resetAllControllers()
     m_comboControl->setCurrentIndex(index);
     m_Control->setValue(m_ctlState[ctl]);
     // extra controllers
-    QList<QAction*> allActs = ui.toolBarExtra->actions();
-    foreach(QAction *a, allActs) {
-        QWidgetAction *wa = dynamic_cast<QWidgetAction*>(a);
-        if (wa != NULL) {
-            QWidget *w = wa->defaultWidget();
-            QVariant c = w->property(MIDICTLNUMBER);
-            if (c.isValid()) {
-                int control = c.toInt();
-                if (m_ctlState.contains(control)) {
-                    QVariant p = w->property("value");
-                    if (p.isValid()) {
-                        w->setProperty("value", m_ctlState[control]);
-                        continue;
-                    }
-                    p = w->property("checked");
-                    if (p.isValid())
-                        w->setProperty("checked", bool(m_ctlState[control]));
+    QList<QWidget *> allWidgets = ui.toolBarExtra->findChildren<QWidget *>();
+    foreach(QWidget *w, allWidgets) {
+        QVariant c = w->property(MIDICTLNUMBER);
+        if (c.isValid()) {
+            int control = c.toInt();
+            if (m_ctlState.contains(control)) {
+                int val = m_ctlState[control];
+                QVariant p = w->property("value");
+                if (p.isValid()) {
+                    w->setProperty("value", val);
+                    w->setToolTip(QString::number(val));
+                    continue;
+                }
+                p = w->property("checked");
+                if (p.isValid()) {
+                    QVariant on = w->property(MIDICTLONVALUE);
+                    w->setProperty("checked", (val >= on.toInt()));
                 }
             }
         }
@@ -780,7 +785,7 @@ void VPiano::slotResetBender()
     bender(0);
 }
 
-void VPiano::slotControlToggled(const bool boolValue)
+void VPiano::slotControlClicked(const bool boolValue)
 {
     QObject *s = sender();
     QVariant p = s->property(MIDICTLNUMBER);
@@ -790,6 +795,7 @@ void VPiano::slotControlToggled(const bool boolValue)
         int value = boolValue ? on.toInt() : off.toInt();
         int controller = p.toInt();
         sendController( controller, value );
+        updateController( controller, value );
         m_ctlState[ controller ] = value;
     }
 }
@@ -1168,8 +1174,10 @@ void VPiano::updateExtraController(int ctl, int val)
                 continue;
             }
             v = w->property("checked");
-            if (v.isValid())
-                w->setProperty("checked", bool(val));
+            if (v.isValid()) {
+                QVariant on = w->property(MIDICTLONVALUE);
+                w->setProperty("checked", (val >= on.toInt()));
+            }
         }
     }
 }
@@ -1177,8 +1185,9 @@ void VPiano::updateExtraController(int ctl, int val)
 void VPiano::slotCtlChanged(const int index)
 {
     int ctl = m_comboControl->itemData(index).toInt();
-    m_Control->setValue(m_ctlState[ctl]);
-    setWidgetTip(m_Control, m_ctlState[ctl]);
+    int val = m_ctlState[ctl];
+    m_Control->setValue(val);
+    m_Control->setToolTip(QString::number(val));
 }
 
 void VPiano::grabKb()
@@ -1227,11 +1236,11 @@ void VPiano::updateStyles()
 {
     QList<Knob *> allKnobs = findChildren<Knob *> ();
     foreach(Knob* knob, allKnobs) {
-        knob->setStyle(dlgPreferences()->getStyledKnobs() ? m_dialStyle : NULL);
+        knob->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : NULL);
     }
     QList<QCheckBox *> allChkbox = ui.toolBarExtra->findChildren<QCheckBox *> ();
     foreach(QCheckBox* chkbox, allChkbox) {
-        chkbox->setStyle(dlgPreferences()->getStyledKnobs() ? m_dialStyle : NULL);
+        chkbox->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : NULL);
     }
 }
 

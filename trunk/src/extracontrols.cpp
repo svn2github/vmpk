@@ -259,7 +259,7 @@ void ExtraControl::decodeString( const QString s,
     if (!lst.isEmpty())
         defValue = ExtraControl::mbrFromString(lst.takeFirst(), 0);
     if (!lst.isEmpty())
-        size = ExtraControl::mbrFromString(lst.takeFirst(), 0);
+        size = ExtraControl::mbrFromString(lst.takeFirst(), 100);
 }
 
 void ExtraControl::initFromString(const QString s)

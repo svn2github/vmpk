@@ -24,11 +24,9 @@
 #define KNOB_H
 
 #include <QDial>
-#include <QMap>
-
 
 //-------------------------------------------------------------------------
-// Knob - A better QDial for QSynth.
+// Knob - A better QDial
 
 class Knob : public QDial
 {
@@ -42,12 +40,12 @@ public:
 	// Constructor.
 	Knob(QWidget *pParent = 0);
 	// Destructor.
-	~Knob();
+	~Knob() {}
 
 	int getDefaultValue() const { return m_iDefaultValue; }
 
 	// Knob dial mode behavior:
-	// QDialMode   - Old QDial BEHAVIOUR.
+	// QDialMode   - Old QDial behavior.
 	// AngularMode - Angularly relative to widget center.
 	// LinearMode  - Proportionally to distance in one orthogonal axis.
 
@@ -66,7 +64,7 @@ public slots:
 protected:
 
 	// Mouse angle determination.
-	double mouseAngle(const QPoint& pos);
+	float mouseAngle(const QPoint& pos);
 
 	// Alternate mouse behavior event handlers.
 	virtual void mousePressEvent(QMouseEvent *pMouseEvent);
@@ -88,8 +86,7 @@ private:
 	QPoint m_posMouse;
 
 	// Just for more precision on the movement
-	double m_lastDragValue;
+	float m_lastDragValue;
 };
-
 
 #endif  // KNOB_H
