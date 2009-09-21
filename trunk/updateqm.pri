@@ -6,9 +6,9 @@ isEmpty(QMAKE_LRELEASE) {
     !exists($$QMAKE_LRELEASE) { QMAKE_LRELEASE = lrelease-qt4 }
 }
 
+system($$QMAKE_MKDIR $$DESTDIR/${QMAKE_FILE_PATH})
 updateqm.input = TRANSLATIONS
 updateqm.output = $$DESTDIR/${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
-updateqm.commands = $$QMAKE_MKDIR $$DESTDIR/${QMAKE_FILE_PATH};
-updateqm.commands += $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm $$DESTDIR/${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
+updateqm.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm $$DESTDIR/${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
 updateqm.CONFIG += no_link target_predeps
 QMAKE_EXTRA_COMPILERS += updateqm

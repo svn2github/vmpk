@@ -155,16 +155,16 @@ Section /o -un.Main UNSEC0000
     !insertmacro UnInstallLib DLL SHARED REBOOT_PROTECTED $INSTDIR\mingwm10.dll
 
     # Uninstalling library $INSTDIR\QtCore4.dll
-    #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtCore4.dll
+    !insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtCore4.dll
 
     # Uninstalling library $INSTDIR\QtGui4.dll
-    #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtGui4.dll
+    !insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtGui4.dll
 
     # Uninstalling library $INSTDIR\QtXml4.dll
-    #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtXml4.dll
+    !insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtXml4.dll
 
     # Uninstalling library $INSTDIR\QtSvg4.dll
-    #!insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtSvg4.dll
+    !insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtSvg4.dll
 
     DeleteRegValue HKLM "${REGKEY}\Components" Main
 SectionEnd
