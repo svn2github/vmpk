@@ -1,3 +1,8 @@
+2009-09-21
+    * Release candidate 1
+    * build system updates
+    * fixed interaction for extra controllers
+
 2009-09-16
     * merged vpiano 0.8 widget
     * implemented RFE #2848623: Raw keyboard support, raw Keyboard Map editor
