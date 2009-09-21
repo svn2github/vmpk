@@ -230,7 +230,7 @@ void VPiano::initToolBars()
     m_Velocity->setDefaultValue(100);
     m_Velocity->setDialMode(Knob::LinearMode);
     m_Velocity->setValue(m_velocity);
-    m_Velocity->setToolTip("0");
+    m_Velocity->setToolTip(QString::number(m_velocity));
     m_Velocity->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_Velocity);
     connect( m_sboxChannel, SIGNAL(valueChanged(int)),
@@ -689,17 +689,19 @@ void VPiano::resetAllControllers()
     sendController(CTL_RESET_ALL_CTL, 0);
     int index = m_comboControl->currentIndex();
     int ctl = m_comboControl->itemData(index).toInt();
+    int val = m_ctlState[ctl];
     initControllers();
     m_comboControl->setCurrentIndex(index);
-    m_Control->setValue(m_ctlState[ctl]);
+    m_Control->setValue(val);
+    m_Control->setToolTip(QString::number(val));
     // extra controllers
     QList<QWidget *> allWidgets = ui.toolBarExtra->findChildren<QWidget *>();
     foreach(QWidget *w, allWidgets) {
         QVariant c = w->property(MIDICTLNUMBER);
         if (c.isValid()) {
-            int control = c.toInt();
-            if (m_ctlState.contains(control)) {
-                int val = m_ctlState[control];
+            ctl = c.toInt();
+            if (m_ctlState.contains(ctl)) {
+                val = m_ctlState[ctl];
                 QVariant p = w->property("value");
                 if (p.isValid()) {
                     w->setProperty("value", val);
