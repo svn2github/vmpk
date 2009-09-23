@@ -39,7 +39,7 @@
 <p>El teclado de piano MIDI virtual (VMPK) es un generador y receptor de eventos MIDI. 
 No produce ningún sonido por si mismo, pero puede ser usado para dirigir un
 sintetizador MIDI (ya sea hardware o software, interno o externo). 
-Puedes usar el teclado de del ordenador para tocar notas MIDI, y también el ratón.
+Puedes usar el teclado del ordenador para tocar notas MIDI, y también el ratón.
 Puedes usar el teclado de piano MIDI virtual para mostrar las notas tocadas desde
 otro instrumento o reproductor de archivos MIDI. Para ello, conecta el otro puerto
 MIDI al puerto de entrada de VMPK.</p>
@@ -172,7 +172,7 @@ una forma similar a los cables MIDI virtuales, pero para datos de audio digital.
 <p>88 es un número arbitrario de teclas usado por la mayor parte de los fabricantes de pianos, pero los fabricantes
 de órganos y sintetizadores no siempre siguen esta convención. VMPK puede ser personalizado para mostrar entre 1 y 
 10 octavas. Usando 7 octavas muestra 84 teclas, y para 8 octavas muestra 98 teclas. No hay forma de mostrar 
-exactamente 7 octavas y cuarto.</p>
+exactamente 7 octavas y media.</p>
 
 <h3>No hay sonido</h3>
 <p>VMPK no produce ningún sonido por si mismo. Necesitas un sintetizador MIDI, y por favor, vuelve a leer la documentación.</p>
@@ -200,73 +200,33 @@ archivo .INS, o crearlo tu mismo.</p>
 <p>Una explicación del formato .INS está <a href="http://tse3.sourceforge.net/doc/InsFiles.html">aquí.</a></p>
 
 <h3>¿Cómo puedo convertir una definición de instrumentos de vkeybd en un archivo .INS?</h3>
-<p>Puedes usar la utilidad sftovkb de vkeybd para crear un archivo .INS desde cualquier soundfont SF2.</p>
+<p>Usa el guión de AWK "txt2ins.awk". Puedes usar la utilidad sftovkb de vkeybd para crear un archivo .INS a partir de  cualquier soundfont SF2, pero hay una función para importar los nombres de los instrumentos de archivos SF2 y DLS directamente desde VMPK.</p>
 
 <pre>
 $ sftovkb SF2NAME.sf2 | sort -n -k1,1 -k2,2 > SF2NAME.txt
 $ awk -f txt2ins.awk SF2NAME.txt > SF2NAME.ins
 </pre>
 
-<p>Aquí está el guión de AWK "txt2ins.awk":</p>
-
-<pre>
-BEGIN {
-  print ".Controller Names"
-  print "\n[Standard]"
-  print "1=1-Modulation"
-  print "2=2-Breath"
-  print "4=4-Foot controller"
-  print "5=5-Portamento time"
-  print "7=7-Volume"
-  print "8=8-Balance"
-  print "10=10-Pan"
-  print "11=11-Expression"
-  print "64=64-Pedal (sustain)"
-  print "65=65-Portamento"
-  print "66=66-Pedal (sostenuto)"
-  print "67=67-Pedal (soft)"
-  print "69=69-Hold 2"
-  print "91=91-External Effects depth"
-  print "92=92-Tremolo depth"
-  print "93=93-Chorus depth"
-  print "94=94-Celeste (detune) depth"
-  print "95=95-Phaser depth"
-  print "\n.Patch Names"
-  b=""
-}
-{
-  if (b!=$1) {
-     print "\n[Bank" $1 "]"
-     a[$1]=1
-     b=$1
-  }
-  print $2 "=" $3,$4,$5,$6
-}
-END {
-  print "\n.Instrument Definitions"
-  print "\n[" FILENAME "]"
-  print "Control=Standard"
-  for (i in a) {
-    print "Patch[" i "]=Bank" i
-  }
-}
-</pre>
+<p>Puedes encontrar el guión de AWK "txt2ins.awk" en el directorio de datos de VMPK.</p>
 
 <h2><a name="Download"></a>Descargar</h2>
 <p>Puedes encontrar los últimos fuentes, y paquetes para Windows y Mac OSX en el <a
-HREF="http://sourceforge.net/projects/vmpk">sitio del proyecto en SourceForge</a>.</p>
+HREF="http://sourceforge.net/projects/vmpk/files">sitio del proyecto en SourceForge</a>.</p>
 <p>También hay paquetes Linux listos para instalar en:
 <ul>
-  <li>openSUSE, del <a href="http://software.opensuse.org/search?baseproject=ALL&amp;p=1&amp;q=vmpk">openSUSE Build Service</a>.</li>
-  <li>Ubuntu: <a href="http://download.tuxfamily.org/ufs/dists/jaunty/main/binary-i386/sound/">i386</a>, <a href="http://download.tuxfamily.org/ufs/dists/jaunty/main/binary-amd64/sound/">amd64</a> por Ubuntu From Scratch.</li>
-  <li><a href="http://aur.archlinux.org/packages.php?ID=20321">Arch Linux</a></li>
-  <li><a href="http://packages.pardus.org.tr/info/contrib-2008/binary/vmpk.html">Pardus</a></li>
+    <li><a href="http://software.opensuse.org/search?baseproject=ALL&amp;p=1&amp;q=vmpk">openSUSE</a> Build Service</li>
+    <li><a href="http://packages.debian.org/vmpk">Debian</a>, repositorios oficiales</li>
+    <li><a href="http://ubuntufromscratch.tuxfamily.org/index.php?searchword=vmpk&amp;option=com_search">Ubuntu From Scratch</a></li>
+    <li><a href="http://aur.archlinux.org/packages.php?ID=20321">Arch Linux</a></li>
+    <li><a href="http://packages.pardus.org.tr/info/contrib-2008/binary/vmpk.html">Pardus</a></li>
+    <li><a href="http://packages.gentoo.org/package/media-sound/vmpk">Gentoo</a></li>
+    <li><a href="http://packages.zenwalk.org/?q=vmpk&amp;zversion=all">Zenwalk</a></li>
 </ul>
 </p>
 
 <h2><a name="Installation"></a>Instalación desde fuentes</h2>
 
-<p>Descarga los fuentes desde <a href="http://sourceforge.net/projects/vmpk">http://sourceforge.net/projects/vmpk</a>.
+<p>Descarga los fuentes desde <a href="http://sourceforge.net/projects/vmpk/files">http://sourceforge.net/projects/vmpk/files</a>.
 Descomprime los fuentes en el directorio personal, y cambia al directorio descomprimido.</p>
 
 <pre>
@@ -326,11 +286,38 @@ CMake para Windows.</p>
 <h3><a name="mac_notes"></a>Notas para usuarios de Mac OSX</h3>
 
 <p>Puedes encontrar un paquete precompilado universal, incluyendo las bibliotecas Qt4 de
-tiempo de ejecución en el <a href="http://sourceforge.net/project/showfiles.php?group_id=236429">
+tiempo de ejecución en el <a href="http://sourceforge.net/projects/vmpk/files/">
 área de descargas del proyecto</a>. Si prefieres la instalación desde fuentes, puedes usar
 CMake o Qmake para construir la aplicación enlazada a las bibliotecas del sistema instaladas.
 Puedes usar Qt4 obtenido desde qtsoftware.com o bien el paquete distribuido por 
 <a href="http://www.finkproject.org/">Fink</a>.</p>
+
+<p>El sistema de construcción está preparado para producir un binario universal (x86+ppc) en un
+paquete de aplicación. Necesitas las herramientas de desarrollo de Apple, así como el kit de 
+desarrollo <a href="http://qt.nokia.com/downloads">Qt4 SDK de Nokia</a>.</p>
+
+<p>Para compilar VMPK utilizando Makefiles, generados por qmake:</p>
+
+<pre>
+$ qmake vmpk.pro -spec macx-g++
+$ make
+opcionalmente:
+$ macdeployqt build/vmpk.app
+</pre>
+
+<p>para compilar utilizando Makefiles, generados por CMake:</p>
+
+<pre>
+$ cmake -G "Unix Makefiles" .
+$ make
+</pre>
+
+<p>Para crear archivos de proyecto de Xcode:</p>
+<pre>
+$ qmake vmpk.pro -spec macx-xcode
+o bién
+$ cmake -G Xcode .
+</pre>
 
 <p>Si necesitas algo que produzca sonido, puede que quieras echar un vistazo a 
 <a href="http://notahat.com/simplesynth">SimpleSynth</a>, o a 
