@@ -131,7 +131,7 @@ bool RawKeybdApp::winEventFilter ( MSG * msg, long * result )
 
 #if defined(Q_WS_MAC)
 #include <Carbon/Carbon.h>
-bool RawKeybdApp::macEventFilter( EventHandlerCallRef caller, EventRef event )
+bool RawKeybdApp::macEventFilter( EventHandlerCallRef /*caller*/, EventRef event )
 {
     if (m_enabled && m_handler != NULL && GetEventClass(event) == kEventClassKeyboard) {
         UInt32 ekind = GetEventKind(event);

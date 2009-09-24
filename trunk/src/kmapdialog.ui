@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>KMapDialogClass</class>
  <widget class="QDialog" name="KMapDialogClass">
-  <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,9 +12,6 @@
   </property>
   <property name="windowTitle">
    <string>Key Map Editor</string>
-  </property>
-  <property name="modal">
-   <bool>true</bool>
   </property>
   <layout class="QGridLayout">
    <item row="0" column="0" colspan="2">
@@ -42,6 +36,12 @@
    </item>
    <item row="1" column="0">
     <widget class="QTableWidget" name="tableWidget">
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="whatsThis">
       <string>This is the list of the PC keyboard mappings. Each row has a number corresponding to the MIDI note number, and you can type an alphanumeric Key name that will be translated to the given note</string>
      </property>

@@ -54,7 +54,9 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     m_dlgAbout(NULL),
     m_dlgPreferences(NULL),
     m_dlgMidiSetup(NULL),
-    m_dlgKeyMap(NULL)
+    m_dlgKeyMap(NULL),
+    m_dlgExtra(NULL),
+    m_dlgRiffImport(NULL)
 {
     ui.setupUi(this);
     ui.actionStatusBar->setChecked(false);
@@ -1248,12 +1250,12 @@ void VPiano::updateStyles()
 
 void VPiano::slotImportSF()
 {
-    RiffImportDlg dlg;
     releaseKb();
-    if ((dlg.exec() == QDialog::Accepted) && !dlg.getOutput().isEmpty()) {
-        dlg.save();
-        dlgPreferences()->setInstrumentsFileName(dlg.getOutput());
-        dlgPreferences()->setInstrumentName(dlg.getName());
+    if ((dlgRiffImport()->exec() == QDialog::Accepted) &&
+        !dlgRiffImport()->getOutput().isEmpty()) {
+        dlgRiffImport()->save();
+        dlgPreferences()->setInstrumentsFileName(dlgRiffImport()->getOutput());
+        dlgPreferences()->setInstrumentName(dlgRiffImport()->getName());
         applyPreferences();
     }
     grabKb();
@@ -1261,11 +1263,10 @@ void VPiano::slotImportSF()
 
 void VPiano::slotEditExtraControls()
 {
-    DialogExtraControls dlg;
-    dlg.setControls(m_extraControls);
+    dlgExtra()->setControls(m_extraControls);
     releaseKb();
-    if (dlg.exec() == QDialog::Accepted) {
-        m_extraControls = dlg.getControls();
+    if (dlgExtra()->exec() == QDialog::Accepted) {
+        m_extraControls = dlgExtra()->getControls();
         clearExtraControllers();
         initExtraControllers();
     }
@@ -1303,6 +1304,23 @@ KMapDialog* VPiano::dlgKeyMap()
     }
     return m_dlgKeyMap;
 }
+
+DialogExtraControls* VPiano::dlgExtra()
+{
+    if (m_dlgExtra == NULL) {
+        m_dlgExtra = new DialogExtraControls(this);
+    }
+    return m_dlgExtra;
+}
+
+RiffImportDlg* VPiano::dlgRiffImport()
+{
+    if (m_dlgRiffImport == NULL) {
+        m_dlgRiffImport = new RiffImportDlg(this);
+    }
+    return m_dlgRiffImport;
+}
+
 
 void VPiano::setWidgetTip(QWidget* w, int val)
 {

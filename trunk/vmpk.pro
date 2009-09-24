@@ -12,12 +12,12 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.3.0rc1
+VERSION = 0.3.0rc2
 DESTDIR = build
-OBJECTS_DIR = build
-UI_DIR = build
-MOC_DIR = build
-RCC_DIR = build
+OBJECTS_DIR = $$DESTDIR
+UI_DIR = $$DESTDIR
+MOC_DIR = $$DESTDIR
+RCC_DIR = $$DESTDIR
 QT += core \
     gui \
     xml \

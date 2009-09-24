@@ -83,4 +83,8 @@ const char MIDICTLOFFVALUE[] = "MIDICTLOFFVAL";
 
 const int TOOLBARLABELMARGIN = 5;
 
+#if defined(Q_WS_MAC) && defined(QT_MAC_USE_COCOA)
+#error "This program requires Qt built with the Carbon framework. Sorry."
+#endif
+
 #endif /*CONSTANTS_H_*/

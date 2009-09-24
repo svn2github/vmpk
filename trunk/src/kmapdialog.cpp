@@ -41,6 +41,7 @@ void KMapDialog::displayMap(const KeyboardMap* map)
     int row;
     if (map != NULL) m_map.copyFrom(map);
     setWindowTitle(m_map.getRawMode() ? tr("Raw Key Map Editor") : tr("Key Map Editor"));
+    ui.tableWidget->clearContents();
     ui.tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem(m_map.getRawMode() ? tr("Key Code") : tr("Key")));
     QFileInfo f(m_map.getFileName());
     ui.labelMapName->setText(f.fileName());

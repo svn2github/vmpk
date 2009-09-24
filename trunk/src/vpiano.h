@@ -37,6 +37,8 @@ class About;
 class Preferences;
 class MidiSetup;
 class KMapDialog;
+class DialogExtraControls;
+class RiffImportDlg;
 
 const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEON ));
 const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEOFF ));
@@ -176,6 +178,8 @@ private:
     Preferences *dlgPreferences();
     MidiSetup *dlgMidiSetup();
     KMapDialog *dlgKeyMap();
+    DialogExtraControls *dlgExtra();
+   RiffImportDlg *dlgRiffImport();
 
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;
@@ -189,6 +193,8 @@ private:
     Preferences *m_dlgPreferences;
     MidiSetup *m_dlgMidiSetup;
     KMapDialog *m_dlgKeyMap;
+    DialogExtraControls *m_dlgExtra;
+    RiffImportDlg *m_dlgRiffImport;
 
     Ui::VPiano ui;
 
