@@ -856,7 +856,7 @@ void VPiano::slotAbout()
 void VPiano::slotAboutQt()
 {
     releaseKb();
-    qApp->aboutQt();
+    QApplication::aboutQt();
     grabKb();
 }
 
