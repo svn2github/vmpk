@@ -54,9 +54,10 @@ void PianoKeybd::initialize()
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setCacheMode(CacheBackground);
     setViewportUpdateMode(MinimalViewportUpdate);
-    setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
+    setRenderHints(QPainter::Antialiasing|QPainter::TextAntialiasing|QPainter::SmoothPixmapTransform);
     setOptimizationFlag(DontClipPainter, true);
     setOptimizationFlag(DontSavePainterState, true);
+    setOptimizationFlag(DontAdjustForAntialiasing, true);
     setBackgroundBrush(QApplication::palette().background());
     initDefaultMap();
     RawKeybdApp* rapp = dynamic_cast<RawKeybdApp*>(qApp);
