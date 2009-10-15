@@ -22,7 +22,7 @@ MACRO(CREATE_MANPAGES)
         SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfile}.1)
         SET(outfiles ${outfiles} ${outfile})
         ADD_CUSTOM_COMMAND( OUTPUT ${outfile}
-            COMMAND ${LIBXSLT_XSLTPROC_EXECUTABLE}
+            COMMAND ${XSLTPROC_EXECUTABLE}
                 --nonet --xinclude --xincludestyle  
                 --output ${outfile} 
                 http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl

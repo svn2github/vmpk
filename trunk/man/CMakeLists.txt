@@ -14,11 +14,12 @@
 # You should have received a copy of the GNU General Public License along 
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 
-FIND_PACKAGE(LibXslt)
-IF(LIBXSLT_FOUND)
+FIND_PROGRAM(XSLTPROC_EXECUTABLE xsltproc)
+IF(XSLTPROC_EXECUTABLE)
+    MESSAGE(STATUS "XSLTPROC Found: ${XSLTPROC_EXECUTABLE}")
     INCLUDE(CreateManpages)
     CREATE_MANPAGES(vmpk.xml)
-ELSE(LIBXSLT_FOUND)
-    INSTALL( FILES vmpk.1
-             DESTINATION share/man/man1 )
-ENDIF(LIBXSLT_FOUND)
+ELSE(XSLTPROC_EXECUTABLE)
+    MESSAGE(STATUS "XSLTPROC NOT Found")
+    INSTALL( FILES vmpk.1 DESTINATION share/man/man1 )
+ENDIF(XSLTPROC_EXECUTABLE)
