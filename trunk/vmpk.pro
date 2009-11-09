@@ -131,7 +131,7 @@ SOURCES += src/kmapdialog.cpp \
     src/qticonloader.cpp
 RESOURCES += data/vmpk.qrc
 TRANSLATIONS += translations/vmpk_es.ts \
-#   translations/vmpk_ca.ts \
     translations/vmpk_tr.ts \
-    translations/vmpk_de.ts
+    translations/vmpk_de.ts \
+    translations/vmpk_ru.ts
 include(updateqm.pri)
