@@ -162,7 +162,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/extracontrols.ui" line="319"/>
         <location filename="../src/extracontrols.ui" line="391"/>
         <source>Default value:</source>
-        <translation>Значение по умолчанию:</translation>
+        <translation>По умолчанию:</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="340"/>
@@ -185,17 +185,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/kmapdialog.cpp" line="43"/>
         <source>Raw Key Map Editor</source>
-        <translation>Редактор Привязок Системной Клавиатуры</translation>
+        <translation>Редактор привязок системной клавиатуры</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.cpp" line="43"/>
         <source>Key Map Editor</source>
-        <translation>Редактор Привязок Клавиш</translation>
+        <translation>Редактор привязок клавиш</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.cpp" line="45"/>
         <source>Key Code</source>
-        <translation>Код Клавиши</translation>
+        <translation>Код клавиши</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.cpp" line="45"/>
@@ -205,7 +205,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/kmapdialog.cpp" line="88"/>
         <source>Open keyboard map definition</source>
-        <translation>Открыть определение привязок клавиш</translation>
+        <translation>Открыть описание привязок клавиш</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.cpp" line="90"/>
@@ -216,7 +216,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/kmapdialog.cpp" line="101"/>
         <source>Save keyboard map definition</source>
-        <translation>Сохранить определение привязок клавиш</translation>
+        <translation>Сохранить описание привязок клавиш</translation>
     </message>
 </context>
 <context>
@@ -224,7 +224,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/kmapdialog.ui" line="14"/>
         <source>Key Map Editor</source>
-        <translation>Редактор Привязок Клавиш</translation>
+        <translation>Редактор привязок клавиш</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="27"/>
@@ -917,7 +917,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/midisetup.ui" line="26"/>
         <source>Check this box to enable MIDI input for the program. In Linux and Mac OSX the input port is always enabled and can&apos;t be un-ckecked</source>
-        <translation>Установите этот флажок, чтобы разрешить ввод MIDI для программы. В Linux и Mac OSX порт ввода всегда установлен и не может быть снят</translation>
+        <translation>Установите этот флажок, чтобы разрешить ввод MIDI для программы. В Linux и Mac OSX порт ввода всегда установлен, и флажок не может быть снят</translation>
     </message>
     <message>
         <location filename="../src/midisetup.ui" line="29"/>
@@ -961,93 +961,93 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/pianoscene.cpp" line="298"/>
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>C</source>
-        <translation></translation>
+        <translation>До</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="298"/>
         <source>C♯</source>
-        <translation></translation>
+        <translation>До♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="298"/>
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>D</source>
-        <translation></translation>
+        <translation>Ре</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="298"/>
         <source>D♯</source>
-        <translation></translation>
+        <translation>Ре♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="298"/>
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>E</source>
-        <translation></translation>
+        <translation>Ми</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="299"/>
         <location filename="../src/pianoscene.cpp" line="302"/>
         <source>F</source>
-        <translation></translation>
+        <translation>Фа</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="299"/>
         <source>F♯</source>
-        <translation></translation>
+        <translation>Фа♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="299"/>
         <location filename="../src/pianoscene.cpp" line="302"/>
         <source>G</source>
-        <translation></translation>
+        <translation>Соль</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="299"/>
         <source>G♯</source>
-        <translation></translation>
+        <translation>Соль♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="300"/>
         <location filename="../src/pianoscene.cpp" line="303"/>
         <source>A</source>
-        <translation></translation>
+        <translation>Ля</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="300"/>
         <source>A♯</source>
-        <translation></translation>
+        <translation>Ля♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="300"/>
         <location filename="../src/pianoscene.cpp" line="303"/>
         <source>B</source>
-        <translation></translation>
+        <translation>Си</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>D♭</source>
-        <translation></translation>
+        <translation>Ре♭</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>E♭</source>
-        <translation></translation>
+        <translation>Ми♭</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="302"/>
         <source>G♭</source>
-        <translation></translation>
+        <translation>Соль♭</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="302"/>
         <source>A♭</source>
-        <translation></translation>
+        <translation>Ля♭</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="303"/>
         <source>B♭</source>
-        <translation></translation>
+        <translation>Си♭</translation>
     </message>
 </context>
 <context>
@@ -1055,18 +1055,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.cpp" line="96"/>
         <source>Open instruments definition</source>
-        <translation>Открыть определения инструментов</translation>
+        <translation>Открыть описание инструментов</translation>
     </message>
     <message>
         <location filename="../src/preferences.cpp" line="98"/>
         <source>Instrument definitions (*.ins)</source>
-        <translation>Определения инструментов (*.ins)</translation>
+        <translation>Описания инструментов (*.ins)</translation>
     </message>
     <message>
         <location filename="../src/preferences.cpp" line="168"/>
         <location filename="../src/preferences.cpp" line="179"/>
         <source>Open keyboard map definition</source>
-        <translation>Открыть определения привязок клавиш</translation>
+        <translation>Открыть описание привязок клавиш</translation>
     </message>
     <message>
         <location filename="../src/preferences.cpp" line="170"/>
@@ -1120,7 +1120,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="116"/>
         <source>The instruments definition file currently loaded</source>
-        <translation>Файл определений инструментов, загруженный в данный момент</translation>
+        <translation>Файл описания инструментов, загруженный в данный момент</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="119"/>
@@ -1130,7 +1130,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="129"/>
         <source>Press this button to load an instruments definition file from disk.</source>
-        <translation>Нажмите эту кнопку, чтобы загрузить файл определений инструментов с диска.</translation>
+        <translation>Нажмите эту кнопку, чтобы загрузить файл описания инструментов с диска.</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="132"/>
@@ -1145,7 +1145,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="164"/>
         <source>Change the instrument definition being currently used. Each instruments definition file may hold several instruments on it.</source>
-        <translation>Изменить определение инструмента, используемого в данный момент. Каждый файл определения инструментов может содержать несколько инструментов.</translation>
+        <translation>Изменить описание инструмента, используемое в данный момент. Каждый файл описания инструментов может содержать несколько инструментов.</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="171"/>
@@ -1166,7 +1166,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="205"/>
         <source>Change the widget (knobs, switches) style, either using the custom look or reverting to the style selected in qtconfig.</source>
-        <translation>Изменить стиль виджетов (ручек, переключателей), используя либо собственный стиль, либо определённый в qtconfig.</translation>
+        <translation>Изменить отображение виджетов (ручек, переключателей), используя либо собственный стиль, либо определённый в qtconfig.</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="208"/>
@@ -1194,7 +1194,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Установите этот флажок, чтобы захватывать клавиатуру ПК, даже если элемент управления клавиатурой не в фокусе. &lt;span style=&quot; font-weight:600;&quot;&gt;Замечание для пользователей Linux:&lt;/span&gt; эта опция хорошо работает в стандартном окружении KDE, но не работает в оконных менеджерах, как metacity и compiz. Также известно, что использование эой опции ломает контекстные меню в приложениях GTK.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Установите этот флажок, чтобы захватывать клавиатуру ПК, даже если элемент управления клавиатурой не в фокусе. &lt;span style=&quot; font-weight:600;&quot;&gt;Замечание для пользователей Linux:&lt;/span&gt; эта опция хорошо работает в стандартном окружении KDE, но не работает в таких оконных менеджерах, как metacity и compiz. Также известно, что использование этой опции ломает контекстные меню в приложениях GTK.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="235"/>
@@ -1217,13 +1217,13 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Установите этот флажок, чтобы использовать низкоуровневые события клавиатуры ПК. Эта система имеет несколько преимуществ:&lt;/p&gt;
 &lt;ul style=&quot;-qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Возможность использовать &quot;мёртвые клавиши&quot; (знаки ударения, диакритические символы)&lt;/li&gt;
-&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Определения привязок независимы от языка (но зависят от аппаратуры и ОС)&lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Описания привязок не зависят от языка (но зависят от аппаратуры и ОС)&lt;/li&gt;
 &lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Более быстрая обработка&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="252"/>
         <source>Raw Computer Keyboard</source>
-        <translation>Системная Клавиатура Компьютера</translation>
+        <translation>Системная клавиатура компьютера</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="259"/>
@@ -1274,7 +1274,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/riffimportdlg.cpp" line="59"/>
         <source>Instrument definitions (*.ins)</source>
-        <translation>Определения инструментов (*.ins)</translation>
+        <translation>Описания инструментов (*.ins)</translation>
     </message>
     <message>
         <location filename="../src/riffimportdlg.ui" line="14"/>
@@ -1509,7 +1509,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/vpiano.ui" line="252"/>
         <source>Show or hide the Controller toolbar</source>
-        <translation>Показать или скрыть панель Регулятор</translation>
+        <translation>Показать или скрыть панель Регуляторы</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="263"/>
@@ -1584,7 +1584,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/vpiano.ui" line="333"/>
         <source>Open the VMPK web site address using a web browser</source>
-        <translation>Открыть веб-сайт VMPK, используя веб-браузер</translation>
+        <translation>Открыть веб-сайт VMPK используя веб-браузер</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="338"/>

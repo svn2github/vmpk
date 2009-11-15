@@ -171,6 +171,7 @@ IF (UNIX AND NOT APPLE)
         data/txt2ins.awk
         data/help.html
         data/help_es.html
+        data/help_ru.html
         data/help_tr.html
     DESTINATION 
         share/vmpk 
