@@ -13,6 +13,10 @@ Translators:
 
     Serguey G Basalaev - Russian translation
         translations/vmpk_ru.ts
+	
+    Frank Kober - French and German translations
+        translations/vmpk_fr.ts
+        translations/vmpk_de.ts
 
 Other copyright owners:
 
@@ -40,9 +44,6 @@ Other copyright owners:
         data/vmpk.icns
         src/vmpk.ico
 
-    Enrico Scholz       
-        cmake_admin/FindPkgConfig.cmake
-
     Mehdi Dogguy        Man page, Debian packaging
         man/vmpk.xml
         man/vmpk.1
@@ -57,5 +58,3 @@ Other copyright owners:
         data/led_green.svg
         data/led_grey.svg
 
-    Alexander Neundorf
-        cmake_admin/FindLibXslt.cmake
