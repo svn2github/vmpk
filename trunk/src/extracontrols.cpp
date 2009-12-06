@@ -187,7 +187,7 @@ void DialogExtraControls::sizeChanged(int size)
 void DialogExtraControls::setControls(const QStringList& ctls)
 {
     m_ui->extraList->clear();
-    foreach(QString s, ctls) {
+    foreach(const QString& s, ctls) {
         ExtraControl *item = new ExtraControl(m_ui->extraList);
         item->initFromString(s);
     }

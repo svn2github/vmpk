@@ -69,6 +69,7 @@
     <addaction name="actionPrograms"/>
     <addaction name="actionExtraControls"/>
     <addaction name="separator"/>
+    <addaction name="actionNoteNames"/>
     <addaction name="actionStatusBar"/>
    </widget>
    <addaction name="menuFile"/>
@@ -377,6 +378,14 @@
    </property>
    <property name="toolTip">
     <string>Open the Extra Controls editor</string>
+   </property>
+  </action>
+  <action name="actionNoteNames">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>N&amp;ote Names</string>
    </property>
   </action>
  </widget>

@@ -69,6 +69,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionWebSite, SIGNAL(triggered()), SLOT(slotOpenWebSite()));
     connect(ui.actionImportSoundFont, SIGNAL(triggered()), SLOT(slotImportSF()));
     connect(ui.actionEditExtraControls, SIGNAL(triggered()), SLOT(slotEditExtraControls()));
+    connect(ui.actionNoteNames, SIGNAL(triggered()), SLOT(slotShowNoteNames()));
     ui.pianokeybd->setPianoHandler(this);
     initialization();
 }
@@ -339,7 +340,7 @@ void VPiano::initExtraControllers()
     Knob *knob = NULL;
     QSpinBox *spin = NULL;
     QSlider *slider = NULL;
-    foreach(QString s, m_extraControls) {
+    foreach(const QString& s, m_extraControls) {
         QString lbl;
         int control = 0;
         int type = 0;
@@ -445,7 +446,8 @@ void VPiano::readSettings()
     dlgPreferences()->setGrabKeyboard(grabKb);
     dlgPreferences()->setStyledWidgets(styledKnobs);
     dlgPreferences()->setAlwaysOnTop(alwaysOnTop);
-    dlgPreferences()->setShowNames(showNames);
+    ui.actionNoteNames->setChecked(showNames);
+    slotShowNoteNames();
     if (!insFileName.isEmpty()) {
         dlgPreferences()->setInstrumentsFileName(insFileName);
         if (!insName.isEmpty()) {
@@ -537,7 +539,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_GRABKB, dlgPreferences()->getGrabKeyboard());
     settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences()->getStyledWidgets());
     settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences()->getAlwaysOnTop());
-    settings.setValue(QSTR_SHOWNOTENAMES, dlgPreferences()->getShowNames());
+    settings.setValue(QSTR_SHOWNOTENAMES, ui.actionNoteNames->isChecked());
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONNECTIONS);
@@ -979,7 +981,6 @@ void VPiano::applyPreferences()
         ui.pianokeybd->setNumOctaves(dlgPreferences()->getNumOctaves());
     }
     ui.pianokeybd->setKeyPressedColor(dlgPreferences()->getKeyPressedColor());
-    ui.pianokeybd->setShowLabels(dlgPreferences()->getShowNames());
     ui.pianokeybd->setRawKeyboardMode(dlgPreferences()->getRawKeyboard());
 
     KeyboardMap* map = dlgPreferences()->getKeyboardMap();
@@ -1219,7 +1220,7 @@ void VPiano::slotHelpContents()
     if (lc.count() > 1)
         hlps += QString("help_%1.html").arg(lc[0]);
     hlps += "help.html";
-    foreach(QString hlp_name, hlps) {
+    foreach(const QString& hlp_name, hlps) {
         QString fullName = VPiano::dataDirectory() + hlp_name;
         if (QFile::exists(fullName)) {
             QUrl url = QUrl::fromLocalFile(fullName);
@@ -1327,6 +1328,11 @@ void VPiano::setWidgetTip(QWidget* w, int val)
     QString tip = QString::number(val);
     w->setToolTip(tip);
     QToolTip::showText(QCursor::pos(), tip, this);
+}
+
+void VPiano::slotShowNoteNames()
+{
+    ui.pianokeybd->setShowLabels(ui.actionNoteNames->isChecked());
 }
 
 //void VPiano::slotEditPrograms()

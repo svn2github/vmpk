@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>353</height>
+    <height>327</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -254,16 +254,6 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item row="10" column="0" colspan="3">
-    <widget class="QCheckBox" name="chkShowNames">
-     <property name="whatsThis">
-      <string>Check this box to display the note names over the piano keys.</string>
-     </property>
-     <property name="text">
-      <string>Show Note Names</string>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="0" colspan="3">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>

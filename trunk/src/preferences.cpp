@@ -31,7 +31,6 @@ Preferences::Preferences(QWidget *parent)
     m_grabKb(false),
     m_styledKnobs(true),
     m_alwaysOnTop(false),
-    m_showLabels(false),
     m_rawKeyboard(false)
 {
     ui.setupUi( this );
@@ -56,7 +55,6 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.chkGrabKb->setChecked( m_grabKb );
         ui.chkStyledKnobs->setChecked( m_styledKnobs );
         ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
-        ui.chkShowNames->setChecked( m_showLabels );
         ui.chkRawKeyboard->setChecked( m_rawKeyboard );
         if (!m_keyPressedColor.isValid()) {
             setKeyPressedColor(QApplication::palette().highlight().color());
@@ -71,7 +69,6 @@ void Preferences::apply()
     m_grabKb = ui.chkGrabKb->isChecked();
     m_styledKnobs = ui.chkStyledKnobs->isChecked();
     m_alwaysOnTop = ui.chkAlwaysOnTop->isChecked();
-    m_showLabels = ui.chkShowNames->isChecked();
     m_rawKeyboard = ui.chkRawKeyboard->isChecked();
     if ( ui.txtFileRawKmap->text().isEmpty() ||
          ui.txtFileRawKmap->text() == QSTR_DEFAULT)
@@ -213,7 +210,6 @@ void Preferences::restoreDefaults()
     ui.chkAlwaysOnTop->setChecked(false);
     ui.chkGrabKb->setChecked(false);
     ui.chkRawKeyboard->setChecked(false);
-    ui.chkShowNames->setChecked(false);
     ui.chkStyledKnobs->setChecked(true);
     ui.spinNumOctaves->setValue(5);
     ui.txtFileKmap->setText(QSTR_DEFAULT);

@@ -145,6 +145,7 @@ public slots:
     void setVelocity(int value);
     void slotImportSF();
     void slotEditExtraControls();
+    void slotShowNoteNames();
     //void slotEditPrograms();
     //void slotDebugDestroyed(QObject *obj);
 
