@@ -333,6 +333,15 @@ void VPiano::clearExtraControllers()
     ui.toolBarExtra->addSeparator();
 }
 
+QByteArray VPiano::readSysexDataFile(const QString& fileName)
+{
+    QFile file(fileName);
+    file.open(QIODevice::ReadOnly);
+    QByteArray res = file.readAll();
+    file.close();
+    return res;
+}
+
 void VPiano::initExtraControllers()
 {
     QWidget *w = NULL;
@@ -340,6 +349,7 @@ void VPiano::initExtraControllers()
     Knob *knob = NULL;
     QSpinBox *spin = NULL;
     QSlider *slider = NULL;
+    QToolButton *button = NULL;
     foreach(const QString& s, m_extraControls) {
         QString lbl;
         int control = 0;
@@ -349,8 +359,10 @@ void VPiano::initExtraControllers()
         int defValue = 0;
         int value = 0;
         int size = 100;
+        QString fileName;
         ExtraControl::decodeString( s, lbl, control, type,
-                                    minValue, maxValue, defValue, size );
+                                    minValue, maxValue, defValue,
+                                    size, fileName );
         if (m_ctlState.contains(control))
             value = m_ctlState[control];
         else
@@ -399,11 +411,28 @@ void VPiano::initExtraControllers()
             connect(slider, SIGNAL(sliderMoved(int)), SLOT(slotExtraController(int)));
             w = slider;
             break;
+        case 4:
+            button = new QToolButton(this);
+            button->setText(lbl);
+            button->setProperty(MIDICTLONVALUE, maxValue);
+            button->setProperty(MIDICTLOFFVALUE, minValue);
+            connect(button, SIGNAL(clicked(bool)), SLOT(slotControlClicked(bool)));
+            w = button;
+            break;
+        case 5:
+            control = 255;
+            button = new QToolButton(this);
+            button->setText(lbl);
+            button->setProperty(SYSEXFILENAME, fileName);
+            button->setProperty(SYSEXFILEDATA, readSysexDataFile(fileName));
+            connect(button, SIGNAL(clicked(bool)), SLOT(slotControlClicked(bool)));
+            w = button;
+            break;
         default:
             w = NULL;
         }
         if (w != NULL) {
-            if (!lbl.isEmpty()) {
+            if (!lbl.isEmpty() && type < 4) {
                 QLabel *qlbl = new QLabel(lbl, this);
                 qlbl->setMargin(TOOLBARLABELMARGIN);
                 ui.toolBarExtra->addWidget(qlbl);
@@ -488,20 +517,19 @@ void VPiano::readSettings()
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONTROLLERS);
-    QStringList keys = settings.allKeys();
-    QStringList::const_iterator it;
-    for(it = keys.constBegin(); it != keys.constEnd(); ++it) {
-        int ctl = (*it).toInt();
-        int val = settings.value(*it, 0).toInt();
+    foreach(const QString& key, settings.allKeys()) {
+        int ctl = key.toInt();
+        int val = settings.value(key, 0).toInt();
         m_ctlSettings[ctl] = val;
     }
     settings.endGroup();
 
     settings.beginGroup(QSTR_EXTRACONTROLLERS);
     m_extraControls.clear();
-    keys = settings.allKeys();
-    for(it = keys.constBegin(); it != keys.constEnd(); ++it) {
-        m_extraControls << settings.value(*it, QString()).toString();
+    QStringList keys = settings.allKeys();
+    keys.sort();
+    foreach(const QString& key, keys) {
+        m_extraControls << settings.value(key, QString()).toString();
     }
     settings.endGroup();
 
@@ -563,10 +591,10 @@ void VPiano::writeSettings()
     settings.endGroup();
 
     settings.beginGroup(QSTR_EXTRACONTROLLERS);
-    QStringList::const_iterator itx;
     int i = 0;
-    for(itx = m_extraControls.constBegin(); itx != m_extraControls.constEnd(); ++itx) {
-        settings.setValue(QString::number(i++), *itx);
+    foreach(const QString& ctl, m_extraControls)  {
+        QString key = QString("%1").arg(i++, 2, 10, QChar('0'));
+        settings.setValue(key, ctl);
     }
     settings.endGroup();
 
@@ -791,18 +819,32 @@ void VPiano::slotResetBender()
     bender(0);
 }
 
+void VPiano::sendSysex(const QByteArray& data)
+{
+    std::vector<unsigned char> message;
+    foreach(const char byte, data) {
+        message.push_back(byte);
+    }
+    messageWrapper( &message );
+}
+
 void VPiano::slotControlClicked(const bool boolValue)
 {
     QObject *s = sender();
     QVariant p = s->property(MIDICTLNUMBER);
     if (p.isValid()) {
-        QVariant on = s->property(MIDICTLONVALUE);
-        QVariant off = s->property(MIDICTLOFFVALUE);
-        int value = boolValue ? on.toInt() : off.toInt();
         int controller = p.toInt();
-        sendController( controller, value );
-        updateController( controller, value );
-        m_ctlState[ controller ] = value;
+        if (controller < 128) {
+            QVariant on = s->property(MIDICTLONVALUE);
+            QVariant off = s->property(MIDICTLOFFVALUE);
+            int value = boolValue ? on.toInt() : off.toInt();
+            sendController( controller, value );
+            updateController( controller, value );
+            m_ctlState[ controller ] = value;
+        } else {
+            QVariant data = s->property(SYSEXFILEDATA);
+            sendSysex(data.toByteArray());
+        }
     }
 }
 

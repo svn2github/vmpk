@@ -175,12 +175,15 @@ private:
     void releaseKb();
     void updateStyles();
     void setWidgetTip(QWidget* w, int val);
+    void sendSysex(const QByteArray& data);
+    QByteArray readSysexDataFile(const QString& fileName);
+
     About *dlgAbout();
     Preferences *dlgPreferences();
     MidiSetup *dlgMidiSetup();
     KMapDialog *dlgKeyMap();
     DialogExtraControls *dlgExtra();
-   RiffImportDlg *dlgRiffImport();
+    RiffImportDlg *dlgRiffImport();
 
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;

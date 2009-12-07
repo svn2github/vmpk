@@ -43,6 +43,7 @@ public:
     void setOnValue(int v) { m_maxValue = v; }
     void setOffValue(int v) { m_minValue = v; }
     void setOnDefault(bool b) { m_defValue = int(b); }
+    void setFileName(QString s) { m_fileName = s; }
     int getControl() { return m_control; }
     int getType() { return m_type; }
     int getMinimum() { return m_minValue; }
@@ -52,6 +53,7 @@ public:
     int getOnValue() { return m_maxValue; }
     int getOffValue() { return m_minValue; }
     bool getOnDefault() { return bool(m_defValue); }
+    QString getFileName() { return m_fileName; }
 
     QString toString();
     void initFromString(const QString s);
@@ -63,7 +65,8 @@ public:
                               int& minValue,
                               int& maxValue,
                               int& defValue,
-                              int& size );
+                              int& size,
+                              QString& fileName);
 
 private:
     int m_control;
@@ -72,6 +75,7 @@ private:
     int m_maxValue;
     int m_defValue;
     int m_size;
+    QString m_fileName;
 };
 
 class DialogExtraControls : public QDialog {
@@ -98,6 +102,7 @@ public slots:
     void defaultChanged(int defvalue);
     void defOnChanged(bool defOn);
     void sizeChanged(int size);
+    void openFile();
 
 protected:
     void changeEvent(QEvent *e);

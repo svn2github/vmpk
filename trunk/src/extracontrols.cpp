@@ -16,10 +16,11 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QPushButton>
-#include "qticonloader.h"
 #include "extracontrols.h"
+#include "qticonloader.h"
 #include "ui_extracontrols.h"
+#include <QFileDialog>
+#include <QPushButton>
 
 DialogExtraControls::DialogExtraControls(QWidget *parent) :
     QDialog(parent),
@@ -53,6 +54,8 @@ DialogExtraControls::DialogExtraControls(QWidget *parent) :
     connect( m_ui->spinValueOff, SIGNAL(valueChanged(int)), SLOT(minimumChanged(int)) );
     connect( m_ui->spinValueOn, SIGNAL(valueChanged(int)), SLOT(maximumChanged(int)) );
     connect( m_ui->spinSliderSize, SIGNAL(valueChanged(int)), SLOT(sizeChanged(int)) );
+    connect( m_ui->spinValue, SIGNAL(valueChanged(int)), SLOT(minimumChanged(int)) );
+    connect( m_ui->btnFileSyx, SIGNAL(clicked()), SLOT(openFile()) );
 }
 
 DialogExtraControls::~DialogExtraControls()
@@ -120,6 +123,8 @@ void DialogExtraControls::itemSelected( QListWidgetItem *current, QListWidgetIte
         m_ui->spinValueOn->setValue(e->getOnValue());
         m_ui->chkSwitchDefOn->setChecked(e->getOnDefault());
         m_ui->spinSliderSize->setValue(e->getSize());
+        m_ui->spinValue->setValue(e->getMinimum());
+        m_ui->edtFileSyx->setText(e->getFileName());
     }
 }
 
@@ -127,7 +132,6 @@ void DialogExtraControls::labelEdited(QString newLabel)
 {
     ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
     if (e != NULL) e->setText(newLabel);
-
 }
 
 void DialogExtraControls::controlChanged(int control)
@@ -139,7 +143,14 @@ void DialogExtraControls::controlChanged(int control)
 void DialogExtraControls::typeChanged(int type)
 {
     ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
-    if (e != NULL) e->setType(type);
+    if (e != NULL)  {
+        e->setType(type);
+        if (type == 5) {
+            e->setControl(255);
+            m_ui->spinController->setEnabled(false);
+        } else
+            m_ui->spinController->setEnabled(true);
+    }
 }
 
 void DialogExtraControls::minimumChanged(int minimum)
@@ -215,6 +226,19 @@ void DialogExtraControls::changeEvent(QEvent *e)
     }
 }
 
+void DialogExtraControls::openFile()
+{
+    ExtraControl *e = dynamic_cast<ExtraControl*>(m_ui->extraList->currentItem());
+    if (e != NULL) {
+        QString fileName = QFileDialog::getOpenFileName(this,
+            tr("System Exclusive File"), QString::null, tr("System Exclusive (*.syx)"));
+        if (!fileName.isEmpty()) {
+            m_ui->edtFileSyx->setText(fileName);
+            e->setFileName(fileName);
+        }
+    }
+}
+
 QString ExtraControl::toString()
 {
     QStringList lst;
@@ -226,6 +250,8 @@ QString ExtraControl::toString()
     lst << QString::number(m_defValue);
     if (m_type == 3)
         lst << QString::number(m_size);
+    if (m_type == 5)
+        lst << m_fileName;
     return lst.join(",");
 }
 
@@ -244,7 +270,8 @@ void ExtraControl::decodeString( const QString s,
                           int& minValue,
                           int& maxValue,
                           int& defValue,
-                          int& size )
+                          int& size,
+                          QString& fileName)
 {
     QStringList lst = s.split(",");
     if (!lst.isEmpty())
@@ -259,14 +286,17 @@ void ExtraControl::decodeString( const QString s,
         maxValue = ExtraControl::mbrFromString(lst.takeFirst(), 127);
     if (!lst.isEmpty())
         defValue = ExtraControl::mbrFromString(lst.takeFirst(), 0);
-    if (!lst.isEmpty())
+    if (!lst.isEmpty() && type == 3)
         size = ExtraControl::mbrFromString(lst.takeFirst(), 100);
+    if (!lst.isEmpty() && type == 5)
+        fileName = lst.takeFirst();
 }
 
 void ExtraControl::initFromString(const QString s)
 {
     QString lbl;
     ExtraControl::decodeString( s, lbl, m_control, m_type,
-                                m_minValue, m_maxValue, m_defValue, m_size );
+                                m_minValue, m_maxValue, m_defValue,
+                                m_size, m_fileName );
     setText(lbl);
 }

@@ -77,9 +77,11 @@ const QString QSTR_DEFAULTINS("gmgsxg.ins");
 
 const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
 
-const char MIDICTLNUMBER[] = "MIDICTLNUMBER";
-const char MIDICTLONVALUE[] = "MIDICTLONVAL";
-const char MIDICTLOFFVALUE[] = "MIDICTLOFFVAL";
+const char MIDICTLNUMBER[] = "MIDICTLNUMBER\0";
+const char MIDICTLONVALUE[] = "MIDICTLONVAL\0";
+const char MIDICTLOFFVALUE[] = "MIDICTLOFFVAL\0";
+const char SYSEXFILENAME[] = "SYSEXFILENAME\0";
+const char SYSEXFILEDATA[] = "SYSEXFILEDATA\0";
 
 const int TOOLBARLABELMARGIN = 5;
 
