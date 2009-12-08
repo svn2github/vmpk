@@ -28,6 +28,7 @@
 Preferences::Preferences(QWidget *parent)
     : QDialog(parent),
     m_numOctaves(5),
+    m_drumsChannel(MIDIGMDRUMSCHANNEL),
     m_grabKb(false),
     m_styledKnobs(true),
     m_alwaysOnTop(false),
@@ -52,6 +53,7 @@ void Preferences::showEvent ( QShowEvent *event )
 {
     if (event->type() == QEvent::Show) {
         ui.spinNumOctaves->setValue( m_numOctaves );
+        ui.cboDrumsChannel->setCurrentIndex(m_drumsChannel+1);
         ui.chkGrabKb->setChecked( m_grabKb );
         ui.chkStyledKnobs->setChecked( m_styledKnobs );
         ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
@@ -79,6 +81,7 @@ void Preferences::apply()
     if ( ui.txtFileInstrument->text().isEmpty() ||
          ui.txtFileInstrument->text() == QSTR_DEFAULT )
         m_insFileName = QSTR_DEFAULT;
+    m_drumsChannel = ui.cboDrumsChannel->currentIndex() - 1;
 }
 
 void Preferences::accept()
@@ -109,6 +112,19 @@ Instrument* Preferences::getInstrument()
     QString key = ui.cboInstrument->currentText();
     if (key.isEmpty())
         return NULL;
+    if (!m_ins.contains(key))
+        return NULL;
+    return &m_ins[key];
+}
+
+Instrument* Preferences::getDrumsInstrument()
+{
+    QString key = ui.cboInstrument->currentText();
+    if (key.isEmpty())
+        return NULL;
+    key.append(" Drums");
+    if (!m_ins.contains(key))
+        return NULL;
     return &m_ins[key];
 }
 
@@ -122,7 +138,8 @@ void Preferences::setInstrumentsFileName( const QString fileName )
             ui.txtFileInstrument->setText(f.fileName());
             InstrumentList::ConstIterator it;
             for(it = m_ins.begin(); it != m_ins.end(); ++it) {
-                ui.cboInstrument->addItem(it.key());
+                if(!it.key().endsWith(QLatin1String("Drums"), Qt::CaseInsensitive))
+                    ui.cboInstrument->addItem(it.key());
             }
             ui.cboInstrument->setCurrentIndex(-1);
             m_insFileName = fileName;

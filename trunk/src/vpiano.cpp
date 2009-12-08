@@ -468,9 +468,11 @@ void VPiano::readSettings()
     bool styledKnobs = settings.value(QSTR_STYLEDKNOBS, true).toBool();
     bool alwaysOnTop = settings.value(QSTR_ALWAYSONTOP, false).toBool();
     bool showNames = settings.value(QSTR_SHOWNOTENAMES, false).toBool();
+    int drumsChannel = settings.value(QSTR_DRUMSCHANNEL, MIDIGMDRUMSCHANNEL).toInt();
     settings.endGroup();
 
     dlgPreferences()->setNumOctaves(num_octaves);
+    dlgPreferences()->setDrumsChannel(drumsChannel);
     dlgPreferences()->setKeyPressedColor(keyColor);
     dlgPreferences()->setGrabKeyboard(grabKb);
     dlgPreferences()->setStyledWidgets(styledKnobs);
@@ -568,6 +570,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences()->getStyledWidgets());
     settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences()->getAlwaysOnTop());
     settings.setValue(QSTR_SHOWNOTENAMES, ui.actionNoteNames->isChecked());
+    settings.setValue(QSTR_DRUMSCHANNEL, dlgPreferences()->getDrumsChannel());
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONNECTIONS);

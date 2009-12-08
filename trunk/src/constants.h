@@ -74,6 +74,7 @@ const QString QSTR_VMPK("VMPK");
 const QString QSTR_VMPKINPUT("VMPK Input");
 const QString QSTR_VMPKOUTPUT("VMPK Output");
 const QString QSTR_DEFAULTINS("gmgsxg.ins");
+const QString QSTR_DRUMSCHANNEL("DrumsChannel");
 
 const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
 
@@ -84,6 +85,7 @@ const char SYSEXFILENAME[] = "SYSEXFILENAME\0";
 const char SYSEXFILEDATA[] = "SYSEXFILEDATA\0";
 
 const int TOOLBARLABELMARGIN = 5;
+const int MIDIGMDRUMSCHANNEL = 9;
 
 #if defined(Q_WS_MAC) && defined(QT_MAC_USE_COCOA)
 #error "This program requires Qt built with the Carbon framework. Sorry."

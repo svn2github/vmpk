@@ -31,6 +31,7 @@ class Preferences : public QDialog
 public:
     Preferences(QWidget *parent = 0);
     int getNumOctaves() const { return m_numOctaves; }
+    int getDrumsChannel() const { return m_drumsChannel; }
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
     bool getGrabKeyboard() const { return m_grabKb; }
     bool getStyledWidgets() const { return m_styledKnobs; }
@@ -42,6 +43,7 @@ public:
     QString getInstrumentName();
     void apply();
     Instrument* getInstrument();
+    Instrument* getDrumsInstrument();
     void setRawKeyMapFileName( const QString fileName );
     void setKeyMapFileName( const QString fileName );
     KeyboardMap* getKeyboardMap() { return &m_keymap; }
@@ -49,6 +51,7 @@ public:
 
 public slots:
     void setNumOctaves(int value) { m_numOctaves = value; }
+    void setDrumsChannel(int value) { m_drumsChannel = value; }
     void setGrabKeyboard(bool value) { m_grabKb = value; }
     void setStyledWidgets(bool value) { m_styledKnobs = value; }
     void setAlwaysOnTop(bool value) { m_alwaysOnTop = value; }
@@ -70,6 +73,7 @@ private:
     QString m_insFileName;
     InstrumentList m_ins;
     int m_numOctaves;
+    int m_drumsChannel;
     bool m_grabKb;
     bool m_styledKnobs;
     bool m_alwaysOnTop;
