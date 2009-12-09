@@ -138,7 +138,7 @@ public slots:
     void slotProgChanged(const int index);
     void slotBaseOctave(const int octave);
     void slotTranspose(const int transpose);
-    void slotOutChannel(const int channel);
+    void slotChannelChanged(const int channel);
     void slotCtlChanged(const int index);
     void slotHelpContents();
     void slotOpenWebSite();
@@ -152,16 +152,18 @@ public slots:
 private:
     void initialization();
     bool initMidi();
-    void initControllers();
     void readSettings();
     void writeSettings();
     void applyPreferences();
     void applyConnections();
     void applyInitialSettings();
+    void populateInstruments();
+    void populateControllers();
     void refreshConnections();
     void initToolBars();
     void clearExtraControllers();
     void initExtraControllers();
+    void initControllers(int channel);
     void sendController(const int controller, const int value);
     void resetAllControllers();
     void allNotesOff();
@@ -213,11 +215,11 @@ private:
     QComboBox* m_comboProg;
     QStyle* m_dialStyle;
     Instrument* m_ins;
-    QMap<int,int> m_ctlState, m_ctlSettings;
     QStringList m_extraControls;
-    int m_lastBank;
-    int m_lastProg;
-    int m_lastCtl;
+    QMap<int,QMap<int,int> > m_ctlState, m_ctlSettings;
+    QMap<int,int> m_lastBank;
+    QMap<int,int> m_lastProg;
+    QMap<int,int> m_lastCtl;
     int m_channel;
     int m_velocity;
     int m_baseOctave;

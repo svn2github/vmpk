@@ -203,7 +203,7 @@ void VPiano::initToolBars()
     lbl->setMargin(TOOLBARLABELMARGIN);
     m_sboxChannel = new QSpinBox(this);
     m_sboxChannel->setMinimum(1);
-    m_sboxChannel->setMaximum(16);
+    m_sboxChannel->setMaximum(MIDICHANNELS);
     m_sboxChannel->setValue(m_channel + 1);
     m_sboxChannel->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxChannel);
@@ -237,7 +237,7 @@ void VPiano::initToolBars()
     m_Velocity->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_Velocity);
     connect( m_sboxChannel, SIGNAL(valueChanged(int)),
-             this, SLOT(slotOutChannel(int)) );
+             this, SLOT(slotChannelChanged(int)) );
     connect( m_sboxOctave, SIGNAL(valueChanged(int)),
              this, SLOT(slotBaseOctave(int)) );
     connect( m_sboxTranspose, SIGNAL(valueChanged(int)),
@@ -363,8 +363,8 @@ void VPiano::initExtraControllers()
         ExtraControl::decodeString( s, lbl, control, type,
                                     minValue, maxValue, defValue,
                                     size, fileName );
-        if (m_ctlState.contains(control))
-            value = m_ctlState[control];
+        if (m_ctlState[m_channel].contains(control))
+            value = m_ctlState[m_channel][control];
         else
             value = defValue;
         switch(type) {
@@ -512,19 +512,23 @@ void VPiano::readSettings()
     settings.endGroup();
     dlgPreferences()->setRawKeyboard(rawKeyboard);
 
-    settings.beginGroup(QSTR_INSTRUMENT);
-    m_lastBank = settings.value(QSTR_BANK, -1).toInt();
-    m_lastProg = settings.value(QSTR_PROGRAM, 0).toInt();
-    m_lastCtl = settings.value(QSTR_CONTROLLER, 1).toInt();
-    settings.endGroup();
+    for (int chan=0; chan<MIDICHANNELS; ++chan) {
+        QString group = QSTR_INSTRUMENT + QString::number(chan);
+        settings.beginGroup(group);
+        m_lastBank[chan] = settings.value(QSTR_BANK, -1).toInt();
+        m_lastProg[chan] = settings.value(QSTR_PROGRAM, 0).toInt();
+        m_lastCtl[chan] = settings.value(QSTR_CONTROLLER, 1).toInt();
+        settings.endGroup();
 
-    settings.beginGroup(QSTR_CONTROLLERS);
-    foreach(const QString& key, settings.allKeys()) {
-        int ctl = key.toInt();
-        int val = settings.value(key, 0).toInt();
-        m_ctlSettings[ctl] = val;
+        group = QSTR_CONTROLLERS + QString::number(chan);
+        settings.beginGroup(group);
+        foreach(const QString& key, settings.allKeys()) {
+            int ctl = key.toInt();
+            int val = settings.value(key, 0).toInt();
+            m_ctlSettings[chan][ctl] = val;
+        }
+        settings.endGroup();
     }
-    settings.endGroup();
 
     settings.beginGroup(QSTR_EXTRACONTROLLERS);
     m_extraControls.clear();
@@ -586,12 +590,24 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_RAWMAPFILE, ui.pianokeybd->getRawKeyboardMap()->getFileName());
     settings.endGroup();
 
-    settings.beginGroup(QSTR_CONTROLLERS);
-    QMap<int,int>::const_iterator it;
-    for(it = m_ctlState.constBegin(); it != m_ctlState.constEnd(); ++it) {
-        settings.setValue(QString::number(it.key()), it.value());
+    for (int chan=0; chan<MIDICHANNELS; ++chan) {
+
+        QString group = QSTR_CONTROLLERS + QString::number(chan);
+        settings.beginGroup(group);
+        QMap<int,int>::const_iterator it, end;
+        it = m_ctlState[chan].constBegin();
+        end = m_ctlState[chan].constEnd();
+        for (; it != end; ++it)
+            settings.setValue(QString::number(it.key()), it.value());
+        settings.endGroup();
+
+        group = QSTR_INSTRUMENT + QString::number(chan);
+        settings.beginGroup(group);
+        settings.setValue(QSTR_BANK, m_lastBank[chan]);
+        settings.setValue(QSTR_PROGRAM, m_lastProg[chan]);
+        settings.setValue(QSTR_CONTROLLER, m_lastCtl[chan]);
+        settings.endGroup();
     }
-    settings.endGroup();
 
     settings.beginGroup(QSTR_EXTRACONTROLLERS);
     int i = 0;
@@ -599,12 +615,6 @@ void VPiano::writeSettings()
         QString key = QString("%1").arg(i++, 2, 10, QChar('0'));
         settings.setValue(key, ctl);
     }
-    settings.endGroup();
-
-    settings.beginGroup(QSTR_INSTRUMENT);
-    settings.setValue(QSTR_BANK, m_comboBank->itemData(m_comboBank->currentIndex()).toInt());
-    settings.setValue(QSTR_PROGRAM, m_comboProg->itemData(m_comboProg->currentIndex()).toInt());
-    settings.setValue(QSTR_CONTROLLER, m_comboControl->itemData(m_comboControl->currentIndex()).toInt());
     settings.endGroup();
 
     settings.sync();
@@ -632,7 +642,7 @@ void VPiano::customEvent ( QEvent *event )
         int val = ev->getValue();
         updateController(ctl, val);
         updateExtraController(ctl, val);
-        m_ctlState[ctl] = val;
+        m_ctlState[m_channel][ctl] = val;
     }
     else if ( event->type() ==  BenderEventType ) {
         BenderEvent *ev = static_cast<BenderEvent*>(event);
@@ -724,8 +734,8 @@ void VPiano::resetAllControllers()
     sendController(CTL_RESET_ALL_CTL, 0);
     int index = m_comboControl->currentIndex();
     int ctl = m_comboControl->itemData(index).toInt();
-    int val = m_ctlState[ctl];
-    initControllers();
+    int val = m_ctlState[m_channel][ctl];
+    initControllers(m_channel);
     m_comboControl->setCurrentIndex(index);
     m_Control->setValue(val);
     m_Control->setToolTip(QString::number(val));
@@ -735,8 +745,8 @@ void VPiano::resetAllControllers()
         QVariant c = w->property(MIDICTLNUMBER);
         if (c.isValid()) {
             ctl = c.toInt();
-            if (m_ctlState.contains(ctl)) {
-                val = m_ctlState[ctl];
+            if (m_ctlState[m_channel].contains(ctl)) {
+                val = m_ctlState[m_channel][ctl];
                 QVariant p = w->property("value");
                 if (p.isValid()) {
                     w->setProperty("value", val);
@@ -768,6 +778,7 @@ void VPiano::programChange(const int program)
     message.push_back(STATUS_PROGRAM + (chan & MASK_CHANNEL));
     message.push_back(pgm & MASK_SAFETY);
     messageWrapper( &message );
+    m_lastProg[m_channel] = program;
 }
 
 void VPiano::bankChange(const int bank)
@@ -790,6 +801,7 @@ void VPiano::bankChange(const int bank)
     default: /* if method is 3 or above, do nothing */
         break;
     }
+    m_lastBank[m_channel] = bank;
 }
 
 void VPiano::bender(const int value)
@@ -843,7 +855,7 @@ void VPiano::slotControlClicked(const bool boolValue)
             int value = boolValue ? on.toInt() : off.toInt();
             sendController( controller, value );
             updateController( controller, value );
-            m_ctlState[ controller ] = value;
+            m_ctlState[m_channel][controller] = value;
         } else {
             QVariant data = s->property(SYSEXFILEDATA);
             sendSysex(data.toByteArray());
@@ -865,7 +877,7 @@ void VPiano::slotExtraController(const int value)
         int controller = p.toInt();
         sendController( controller, value );
         updateController( controller, value );
-        m_ctlState[ controller ] = value;
+        m_ctlState[m_channel][controller] = value;
         setWidgetTip(w, value);
     }
 }
@@ -876,7 +888,7 @@ void VPiano::slotController(const int value)
     int controller = m_comboControl->itemData(index).toInt();
     sendController( controller, value );
     updateExtraController( controller, value );
-    m_ctlState[ controller ] = value;
+    m_ctlState[m_channel][controller] = value;
     setWidgetTip(m_Control, value);
 }
 
@@ -986,31 +998,43 @@ void VPiano::applyConnections()
     }
 }
 
-void VPiano::initControllers()
+void VPiano::initControllers(int channel)
+{
+    if (m_ins != NULL) {
+        InstrumentData controls = m_ins->control();
+        InstrumentData::ConstIterator it, end;
+        it = controls.begin();
+        end = controls.end();
+        for( ; it != end; ++it ) {
+            int ctl = it.key();
+            switch (ctl) {
+            case CTL_VOLUME:
+                m_ctlState[channel][CTL_VOLUME] = 100;
+                break;
+            case CTL_PAN:
+                m_ctlState[channel][CTL_PAN] = 64;
+                break;
+            case CTL_EXPRESSION:
+                m_ctlState[channel][CTL_EXPRESSION] = 127;
+                break;
+            default:
+                m_ctlState[channel][ctl] = 0;
+            }
+        }
+    }
+}
+
+void VPiano::populateControllers()
 {
     m_comboControl->blockSignals(true);
     m_comboControl->clear();
     if (m_ins != NULL) {
         InstrumentData controls = m_ins->control();
-        InstrumentData::ConstIterator i;
-        for( i=controls.begin(); i!=controls.end(); ++i ) {
-            m_comboControl->addItem(i.value(), i.key());
-            //qDebug() << "Control[" << i.key() << "]=" << i.value();
-            // initialize controller values
-            switch (i.key()) {
-            case CTL_VOLUME:
-                m_ctlState[CTL_VOLUME] = 100;
-                break;
-            case CTL_PAN:
-                m_ctlState[CTL_PAN] = 64;
-                break;
-            case CTL_EXPRESSION:
-                m_ctlState[CTL_EXPRESSION] = 127;
-                break;
-            default:
-                m_ctlState[i.key()] = 0;
-            }
-        }
+        InstrumentData::ConstIterator it, end;
+        it = controls.begin();
+        end = controls.end();
+        for( ; it != end; ++it )
+            m_comboControl->addItem(it.value(), it.key());
     }
     m_comboControl->blockSignals(false);
 }
@@ -1040,26 +1064,8 @@ void VPiano::applyPreferences()
     else
         ui.pianokeybd->resetRawKeyboardMap();
 
-    m_ins = NULL;
-    m_comboBank->clear();
-    m_comboProg->clear();
-
-    if (!dlgPreferences()->getInstrumentsFileName().isEmpty() &&
-         dlgPreferences()->getInstrumentsFileName() != QSTR_DEFAULT &&
-         (m_ins = dlgPreferences()->getInstrument()) != NULL) {
-        //qDebug() << "Instrument Name:" << m_ins->instrumentName();
-        //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
-        m_ctlState.clear();
-        initControllers();
-        InstrumentPatches patches = m_ins->patches();
-        InstrumentPatches::ConstIterator j;
-        for( j=patches.begin(); j!=patches.end(); ++j ) {
-            //if (j.key() < 0) continue;
-            InstrumentData patch = j.value();
-            m_comboBank->addItem(patch.name(), j.key());
-            //qDebug() << "---- Bank[" << j.key() << "]=" << patch.name();
-        }
-    }
+    populateInstruments();
+    populateControllers();
 
     QPoint wpos = pos();
     Qt::WindowFlags flags = windowFlags();
@@ -1074,19 +1080,50 @@ void VPiano::applyPreferences()
     show();
 }
 
+void VPiano::populateInstruments()
+{
+    m_ins = NULL;
+    m_comboBank->clear();
+    m_comboProg->clear();
+    if (!dlgPreferences()->getInstrumentsFileName().isEmpty() &&
+         dlgPreferences()->getInstrumentsFileName() != QSTR_DEFAULT) {
+        if (m_channel == dlgPreferences()->getDrumsChannel())
+            m_ins = dlgPreferences()->getDrumsInstrument();
+        else
+            m_ins = dlgPreferences()->getInstrument();
+        if (m_ins != NULL) {
+            //qDebug() << "Instrument Name:" << m_ins->instrumentName();
+            //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
+            InstrumentPatches patches = m_ins->patches();
+            InstrumentPatches::ConstIterator j;
+            for( j=patches.begin(); j!=patches.end(); ++j ) {
+                //if (j.key() < 0) continue;
+                InstrumentData patch = j.value();
+                m_comboBank->addItem(patch.name(), j.key());
+                //qDebug() << "---- Bank[" << j.key() << "]=" << patch.name();
+            }
+        }
+    }
+}
+
 void VPiano::applyInitialSettings()
 {
     int idx;
-    QMap<int,int>::Iterator i, j;
-    for(i = m_ctlSettings.begin(); i != m_ctlSettings.end(); ++i) {
-        j = m_ctlState.find(i.key());
-        if (j != m_ctlState.end())
-            m_ctlState[i.key()] = i.value();
+    for ( int ch=0; ch<MIDICHANNELS; ++ch) {
+        initControllers(ch);
+        QMap<int,int>::Iterator i, j, end;
+        i = m_ctlSettings[ch].begin();
+        end = m_ctlSettings[ch].end();
+        for (; i != end; ++i) {
+            j = m_ctlState[ch].find(i.key());
+            if (j != m_ctlState[ch].end())
+                m_ctlState[ch][i.key()] = i.value();
+        }
     }
 
     for(idx = 0; idx < m_comboControl->count(); ++idx) {
         int ctl = m_comboControl->itemData(idx).toInt();
-        if (ctl == m_lastCtl) {
+        if (ctl == m_lastCtl[m_channel]) {
             m_comboControl->setCurrentIndex(idx);
             break;
         }
@@ -1094,7 +1131,7 @@ void VPiano::applyInitialSettings()
 
     for(idx = 0; idx < m_comboBank->count(); ++idx) {
         int bank = m_comboBank->itemData(idx).toInt();
-        if (bank == m_lastBank) {
+        if (bank == m_lastBank[m_channel]) {
             m_comboBank->setCurrentIndex(idx);
             break;
         }
@@ -1102,7 +1139,7 @@ void VPiano::applyInitialSettings()
 
     for(idx = 0; idx < m_comboProg->count(); ++idx) {
         int pgm = m_comboProg->itemData(idx).toInt();
-        if (pgm == m_lastProg) {
+        if (pgm == m_lastProg[m_channel]) {
             m_comboProg->setCurrentIndex(idx);
             break;
         }
@@ -1193,11 +1230,41 @@ void VPiano::slotTranspose(const int transpose)
 	}
 }
 
-void VPiano::slotOutChannel(const int channel)
+void VPiano::slotChannelChanged(const int channel)
 {
+    int idx;
     int c = channel - 1;
     if (c != m_channel) {
+        int drms = dlgPreferences()->getDrumsChannel();
+        bool updDrums = ((c == drms) || (m_channel == drms));
         m_channel = c;
+        if (updDrums) {
+            populateInstruments();
+            populateControllers();
+        }
+        for(idx = 0; idx < m_comboControl->count(); ++idx) {
+            int ctl = m_comboControl->itemData(idx).toInt();
+            if (ctl == m_lastCtl[m_channel]) {
+                m_comboControl->setCurrentIndex(idx);
+                updateController(ctl, m_ctlState[m_channel][ctl]);
+                updateExtraController(ctl, m_ctlState[m_channel][ctl]);
+                break;
+            }
+        }
+        for(idx = 0; idx < m_comboBank->count(); ++idx) {
+            int bank = m_comboBank->itemData(idx).toInt();
+            if (bank == m_lastBank[m_channel]) {
+                m_comboBank->setCurrentIndex(idx);
+                break;
+            }
+        }
+        for(idx = 0; idx < m_comboProg->count(); ++idx) {
+            int pgm = m_comboProg->itemData(idx).toInt();
+            if (pgm == m_lastProg[m_channel]) {
+                m_comboProg->setCurrentIndex(idx);
+                break;
+            }
+        }
     }
 }
 
@@ -1235,9 +1302,10 @@ void VPiano::updateExtraController(int ctl, int val)
 void VPiano::slotCtlChanged(const int index)
 {
     int ctl = m_comboControl->itemData(index).toInt();
-    int val = m_ctlState[ctl];
+    int val = m_ctlState[m_channel][ctl];
     m_Control->setValue(val);
     m_Control->setToolTip(QString::number(val));
+    m_lastCtl[m_channel] = ctl;
 }
 
 void VPiano::grabKb()
