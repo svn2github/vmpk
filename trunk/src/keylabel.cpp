@@ -16,11 +16,19 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QFont>
 #include "keylabel.h"
+#include "pianokey.h"
+#include <QFont>
+#include <QDebug>
 
 KeyLabel::KeyLabel(QGraphicsItem *parent) : QGraphicsTextItem(parent)
 {
     setAcceptedMouseButtons(Qt::NoButton);
     rotate(270);
+}
+
+QRectF KeyLabel::boundingRect() const
+{
+    PianoKey* key = static_cast<PianoKey*>(parentItem());
+    return mapRectFromScene(key->rect());
 }

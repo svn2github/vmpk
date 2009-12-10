@@ -303,8 +303,13 @@ QString PianoScene::noteName(const int note)
                                  trUtf8("A"), trUtf8("B♭"), trUtf8("B")};
     int num = (note + m_transpose + 12) % 12;
     int oct = m_baseOctave + ((note + m_transpose) / 12) - 1;
-    QString name = m_useFlats ? m_names_f[num] : m_names_s[num];
-    return QString("%1<span style='vertical-align:sub;'>%2</span>").arg(name).arg(oct);
+    if (m_noteNames.isEmpty()) {
+        QString name = m_useFlats ? m_names_f[num] : m_names_s[num];
+        return QString("%1<span style='vertical-align:sub;'>%2</span>").arg(name).arg(oct);
+    } else {
+        int noteIndex = note + m_transpose + 12*m_baseOctave;
+        return QString("<span style='font-size:5pt;'>%1</span>").arg(m_noteNames[noteIndex]);
+    }
 }
 
 void PianoScene::refreshLabels()
@@ -352,4 +357,16 @@ void PianoScene::setRawKeyboardMode(bool b)
         RawKeybdApp* rapp = dynamic_cast<RawKeybdApp*>(qApp);
         if (rapp != NULL) rapp->setRawKbdEnable(m_rawkbd);
     }
+}
+
+void PianoScene::useCustomNoteNames(const QStringList& names)
+{
+    m_noteNames = names;
+    refreshLabels();
+}
+
+void PianoScene::useStandardNoteNames()
+{
+    m_noteNames.clear();
+    refreshLabels();
 }

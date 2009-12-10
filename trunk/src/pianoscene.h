@@ -71,6 +71,8 @@ public:
     void keyOff( const int note );
     bool getRawKeyboardMode() const { return m_rawkbd; }
     void setRawKeyboardMode(const bool b);
+    void useCustomNoteNames(const QStringList& names);
+    void useStandardNoteNames();
 
 signals:
     void noteOn(int n);
@@ -109,6 +111,7 @@ private:
     KeyboardMap* m_keybdMap;
     QList<PianoKey*> m_keys;
     QList<KeyLabel*> m_labels;
+    QStringList m_noteNames;
 };
 
 #endif /*PIANOSCENE_H_*/

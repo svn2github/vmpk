@@ -176,6 +176,7 @@ private:
     void grabKb();
     void releaseKb();
     void updateStyles();
+    void updateNoteNames(bool drums);
     void setWidgetTip(QWidget* w, int val);
     void sendSysex(const QByteArray& data);
     QByteArray readSysexDataFile(const QString& fileName);

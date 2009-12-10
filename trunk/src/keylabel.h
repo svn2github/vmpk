@@ -27,6 +27,7 @@ class VPIANO_EXPORT KeyLabel : public QGraphicsTextItem
 public:
     KeyLabel(QGraphicsItem *parent = 0);
     virtual ~KeyLabel() {}
+    virtual QRectF boundingRect() const;
 };
 
 #endif // KEYLABEL_H

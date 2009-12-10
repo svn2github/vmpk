@@ -1030,10 +1030,8 @@ void VPiano::populateControllers()
     m_comboControl->clear();
     if (m_ins != NULL) {
         InstrumentData controls = m_ins->control();
-        InstrumentData::ConstIterator it, end;
-        it = controls.begin();
-        end = controls.end();
-        for( ; it != end; ++it )
+        InstrumentData::ConstIterator it, end = controls.end();
+        for( it = controls.begin(); it != end; ++it )
             m_comboControl->addItem(it.value(), it.key());
     }
     m_comboControl->blockSignals(false);
@@ -1066,6 +1064,7 @@ void VPiano::applyPreferences()
 
     populateInstruments();
     populateControllers();
+    updateNoteNames(m_channel == dlgPreferences()->getDrumsChannel());
 
     QPoint wpos = pos();
     Qt::WindowFlags flags = windowFlags();
@@ -1076,6 +1075,7 @@ void VPiano::applyPreferences()
     setWindowFlags( flags );
     move(wpos);
 
+    slotShowNoteNames();
     updateStyles();
     show();
 }
@@ -1211,6 +1211,7 @@ void VPiano::slotProgChanged(const int index)
     int pgm = m_comboProg->itemData(index).toInt();
     if (pgm >= 0)
         programChange(pgm);
+    updateNoteNames(m_channel == dlgPreferences()->getDrumsChannel());
 }
 
 void VPiano::slotBaseOctave(const int octave)
@@ -1230,6 +1231,24 @@ void VPiano::slotTranspose(const int transpose)
 	}
 }
 
+void VPiano::updateNoteNames(bool drums)
+{
+    if (drums && (m_ins != NULL)) {
+        int b = m_lastBank[m_channel];
+        int p = m_lastProg[m_channel];
+        const InstrumentData& notes = m_ins->notes(b, p);
+        QStringList noteNames;
+        for(int n=0; n<128; ++n) {
+            if (notes.contains(n))
+                noteNames << notes[n];
+            else
+                noteNames << QString();
+        }
+        ui.pianokeybd->useCustomNoteNames(noteNames);
+    } else
+        ui.pianokeybd->useStandardNoteNames();
+}
+
 void VPiano::slotChannelChanged(const int channel)
 {
     int idx;
@@ -1241,6 +1260,7 @@ void VPiano::slotChannelChanged(const int channel)
         if (updDrums) {
             populateInstruments();
             populateControllers();
+            updateNoteNames(m_channel == drms);
         }
         for(idx = 0; idx < m_comboControl->count(); ++idx) {
             int ctl = m_comboControl->itemData(idx).toInt();
@@ -1434,7 +1454,6 @@ RiffImportDlg* VPiano::dlgRiffImport()
     }
     return m_dlgRiffImport;
 }
-
 
 void VPiano::setWidgetTip(QWidget* w, int val)
 {
