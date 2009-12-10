@@ -69,9 +69,19 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>DialogExtraControls</name>
     <message>
-        <location filename="../src/extracontrols.cpp" line="66"/>
+        <location filename="../src/extracontrols.cpp" line="69"/>
         <source>New Control</source>
         <translation>Новый регулятор</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.cpp" line="234"/>
+        <source>System Exclusive File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.cpp" line="234"/>
+        <source>System Exclusive (*.syx)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="14"/>
@@ -129,45 +139,70 @@ p, li { white-space: pre-wrap; }
         <translation>Ползунок</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="185"/>
+        <location filename="../src/extracontrols.ui" line="166"/>
+        <source>Button Ctl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="171"/>
+        <source>Button SysEx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="195"/>
         <source>Default ON</source>
         <translation>По умолчанию ВКЛ</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="192"/>
+        <location filename="../src/extracontrols.ui" line="202"/>
         <source>value ON:</source>
         <translation>значение ВКЛ:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="209"/>
+        <location filename="../src/extracontrols.ui" line="219"/>
         <source>value OFF:</source>
         <translation>значение ВЫКЛ:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="230"/>
-        <location filename="../src/extracontrols.ui" line="285"/>
-        <location filename="../src/extracontrols.ui" line="357"/>
+        <location filename="../src/extracontrols.ui" line="240"/>
+        <location filename="../src/extracontrols.ui" line="295"/>
+        <location filename="../src/extracontrols.ui" line="367"/>
         <source>Min. value:</source>
         <translation>Мин. значение:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="247"/>
-        <location filename="../src/extracontrols.ui" line="302"/>
-        <location filename="../src/extracontrols.ui" line="374"/>
+        <location filename="../src/extracontrols.ui" line="257"/>
+        <location filename="../src/extracontrols.ui" line="312"/>
+        <location filename="../src/extracontrols.ui" line="384"/>
         <source>Max. value:</source>
         <translation>Макс. значение:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="264"/>
-        <location filename="../src/extracontrols.ui" line="319"/>
-        <location filename="../src/extracontrols.ui" line="391"/>
+        <location filename="../src/extracontrols.ui" line="274"/>
+        <location filename="../src/extracontrols.ui" line="329"/>
+        <location filename="../src/extracontrols.ui" line="401"/>
         <source>Default value:</source>
         <translation>По умолчанию:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="340"/>
+        <location filename="../src/extracontrols.ui" line="350"/>
         <source>Display size:</source>
         <translation>Размер на экране:</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="422"/>
+        <source>value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="456"/>
+        <source>File name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="473"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -1063,14 +1098,14 @@ p, li { white-space: pre-wrap; }
         <translation>Описания инструментов (*.ins)</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="168"/>
-        <location filename="../src/preferences.cpp" line="179"/>
+        <location filename="../src/preferences.cpp" line="182"/>
+        <location filename="../src/preferences.cpp" line="193"/>
         <source>Open keyboard map definition</source>
         <translation>Открыть описание привязок клавиш</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="170"/>
-        <location filename="../src/preferences.cpp" line="181"/>
+        <location filename="../src/preferences.cpp" line="184"/>
+        <location filename="../src/preferences.cpp" line="195"/>
         <source>Keyboard map (*.xml)</source>
         <translation>Привязки клавиш (*.xml)</translation>
     </message>
@@ -1118,73 +1153,73 @@ p, li { white-space: pre-wrap; }
         <translation>Файл инструментов</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="116"/>
+        <location filename="../src/preferences.ui" line="119"/>
         <source>The instruments definition file currently loaded</source>
         <translation>Файл описания инструментов, загруженный в данный момент</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="119"/>
+        <location filename="../src/preferences.ui" line="122"/>
         <source>default</source>
         <translation>по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="129"/>
+        <location filename="../src/preferences.ui" line="132"/>
         <source>Press this button to load an instruments definition file from disk.</source>
         <translation>Нажмите эту кнопку, чтобы загрузить файл описания инструментов с диска.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="132"/>
+        <location filename="../src/preferences.ui" line="135"/>
         <source>load...</source>
         <translation>загрузить...</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="145"/>
+        <location filename="../src/preferences.ui" line="148"/>
         <source>Instrument</source>
         <translation>Инструмент</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="164"/>
+        <location filename="../src/preferences.ui" line="170"/>
         <source>Change the instrument definition being currently used. Each instruments definition file may hold several instruments on it.</source>
         <translation>Изменить описание инструмента, используемое в данный момент. Каждый файл описания инструментов может содержать несколько инструментов.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="171"/>
+        <location filename="../src/preferences.ui" line="177"/>
         <source>Keyboard Map</source>
         <translation>Привязка клавиш</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="181"/>
-        <location filename="../src/preferences.ui" line="198"/>
+        <location filename="../src/preferences.ui" line="190"/>
+        <location filename="../src/preferences.ui" line="210"/>
         <source>Load...</source>
         <translation>Загрузить...</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="188"/>
+        <location filename="../src/preferences.ui" line="197"/>
         <source>Raw Keyboard Map</source>
         <translation>Системная привязка клавиш</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="205"/>
+        <location filename="../src/preferences.ui" line="217"/>
         <source>Change the widget (knobs, switches) style, either using the custom look or reverting to the style selected in qtconfig.</source>
         <translation>Изменить отображение виджетов (ручек, переключателей), используя либо собственный стиль, либо определённый в qtconfig.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="208"/>
+        <location filename="../src/preferences.ui" line="220"/>
         <source>Styled Widgets</source>
         <translation>Стилизованные виджеты</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="218"/>
+        <location filename="../src/preferences.ui" line="230"/>
         <source>Check this box to keep the keyboard window always visible, on top of other windows.</source>
         <translation>Установите этот флажок, чтобы окно клавиатуры было видно всегда, поверх других окон.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="221"/>
+        <location filename="../src/preferences.ui" line="233"/>
         <source>Always On Top</source>
         <translation>Поверх окон</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="228"/>
+        <location filename="../src/preferences.ui" line="240"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1197,12 +1232,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Установите этот флажок, чтобы захватывать клавиатуру ПК, даже если элемент управления клавиатурой не в фокусе. &lt;span style=&quot; font-weight:600;&quot;&gt;Замечание для пользователей Linux:&lt;/span&gt; эта опция хорошо работает в стандартном окружении KDE, но не работает в таких оконных менеджерах, как metacity и compiz. Также известно, что использование этой опции ломает контекстные меню в приложениях GTK.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="235"/>
+        <location filename="../src/preferences.ui" line="247"/>
         <source>Grab Computer Keyboard</source>
         <translation>Захватывать клавиатуру компьютера</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="242"/>
+        <location filename="../src/preferences.ui" line="254"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1221,19 +1256,102 @@ p, li { white-space: pre-wrap; }
 &lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Более быстрая обработка&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="252"/>
+        <location filename="../src/preferences.ui" line="264"/>
         <source>Raw Computer Keyboard</source>
         <translation>Системная клавиатура компьютера</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="259"/>
-        <source>Check this box to display the note names over the piano keys.</source>
-        <translation>Установите этот флажок, чтобы показывать названия нот над клавишами пианино.</translation>
+        <location filename="../src/preferences.ui" line="278"/>
+        <source>Drums Channel</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="262"/>
+        <location filename="../src/preferences.ui" line="289"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="294"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="299"/>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="304"/>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="309"/>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="314"/>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="319"/>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="324"/>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="329"/>
+        <source>8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="334"/>
+        <source>9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="339"/>
+        <source>10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="344"/>
+        <source>11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="349"/>
+        <source>12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="354"/>
+        <source>13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="359"/>
+        <source>14</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="364"/>
+        <source>15</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check this box to display the note names over the piano keys.</source>
+        <translation type="obsolete">Установите этот флажок, чтобы показывать названия нот над клавишами пианино.</translation>
+    </message>
+    <message>
         <source>Show Note Names</source>
-        <translation>Показывать названия нот</translation>
+        <translation type="obsolete">Показывать названия нот</translation>
     </message>
 </context>
 <context>
@@ -1336,68 +1454,68 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="164"/>
-        <location filename="../src/vpiano.cpp" line="1230"/>
+        <location filename="../src/vpiano.cpp" line="165"/>
+        <location filename="../src/vpiano.cpp" line="1364"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="165"/>
+        <location filename="../src/vpiano.cpp" line="166"/>
         <source>No MIDI output ports available. Aborting</source>
         <translation>Нет доступных портов вывода MIDI. Завершение</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="188"/>
+        <location filename="../src/vpiano.cpp" line="189"/>
         <source>Error. Aborting</source>
         <translation>Ошибка. Завершение</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="201"/>
+        <location filename="../src/vpiano.cpp" line="202"/>
         <source>Channel:</source>
         <translation>Канал:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="209"/>
+        <location filename="../src/vpiano.cpp" line="210"/>
         <source>Base Octave:</source>
         <translation>Базовая октава:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="217"/>
+        <location filename="../src/vpiano.cpp" line="218"/>
         <source>Transpose:</source>
         <translation>Перенос:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="225"/>
+        <location filename="../src/vpiano.cpp" line="226"/>
         <source>Velocity:</source>
         <translation>Громкость:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="247"/>
+        <location filename="../src/vpiano.cpp" line="248"/>
         <source>Control:</source>
         <translation>Регулятор:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="253"/>
+        <location filename="../src/vpiano.cpp" line="254"/>
         <source>Value:</source>
         <translation>Значение:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="269"/>
+        <location filename="../src/vpiano.cpp" line="270"/>
         <source>Bender:</source>
         <translation>Зажим:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="283"/>
+        <location filename="../src/vpiano.cpp" line="284"/>
         <source>Bank:</source>
         <translation>Банк:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="289"/>
+        <location filename="../src/vpiano.cpp" line="290"/>
         <source>Program:</source>
         <translation>Программа:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1230"/>
+        <location filename="../src/vpiano.cpp" line="1364"/>
         <source>No help file found</source>
         <translation>Не найден файл справки</translation>
     </message>
@@ -1422,196 +1540,201 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="92"/>
-        <location filename="../src/vpiano.ui" line="238"/>
+        <location filename="../src/vpiano.ui" line="93"/>
+        <location filename="../src/vpiano.ui" line="239"/>
         <source>&amp;Notes</source>
         <translation>&amp;Ноты</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="114"/>
-        <location filename="../src/vpiano.ui" line="249"/>
+        <location filename="../src/vpiano.ui" line="115"/>
+        <location filename="../src/vpiano.ui" line="250"/>
         <source>&amp;Controllers</source>
         <translation>&amp;Регуляторы</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="136"/>
-        <location filename="../src/vpiano.ui" line="260"/>
+        <location filename="../src/vpiano.ui" line="137"/>
+        <location filename="../src/vpiano.ui" line="261"/>
         <source>Pitch &amp;Bender</source>
         <translation>&amp;Зажим высоты</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="158"/>
-        <location filename="../src/vpiano.ui" line="271"/>
+        <location filename="../src/vpiano.ui" line="159"/>
+        <location filename="../src/vpiano.ui" line="272"/>
         <source>&amp;Programs</source>
         <translation>&amp;Программы</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="179"/>
-        <location filename="../src/vpiano.ui" line="346"/>
+        <location filename="../src/vpiano.ui" line="180"/>
+        <location filename="../src/vpiano.ui" line="347"/>
         <source>&amp;Extra Controls</source>
         <translation>&amp;Дополнительные регуляторы</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="195"/>
+        <location filename="../src/vpiano.ui" line="196"/>
         <source>&amp;Quit</source>
         <translation>В&amp;ыход</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="198"/>
+        <location filename="../src/vpiano.ui" line="199"/>
         <source>Exit the program</source>
         <translation>Выйти из программы</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="203"/>
+        <location filename="../src/vpiano.ui" line="204"/>
         <source>&amp;Preferences</source>
         <translation>&amp;Параметры</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="206"/>
+        <location filename="../src/vpiano.ui" line="207"/>
         <source>Edit the program settings</source>
         <translation>Редактировать настройки программы</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="211"/>
+        <location filename="../src/vpiano.ui" line="212"/>
         <source>&amp;Connections</source>
         <translation>&amp;Соединения</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="214"/>
+        <location filename="../src/vpiano.ui" line="215"/>
         <source>Edit the MIDI connections</source>
         <translation>Редактировать соединения MIDI</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="219"/>
+        <location filename="../src/vpiano.ui" line="220"/>
         <source>&amp;About</source>
         <translation>&amp;О программе</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="222"/>
+        <location filename="../src/vpiano.ui" line="223"/>
         <source>Show the About box</source>
         <translation>Показать информацию об этой программе</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="227"/>
+        <location filename="../src/vpiano.ui" line="228"/>
         <source>About Q&amp;t</source>
         <translation>О Q&amp;t</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="230"/>
+        <location filename="../src/vpiano.ui" line="231"/>
         <source>Show the Qt about box</source>
         <translation>Показать информацию о Qt</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="241"/>
+        <location filename="../src/vpiano.ui" line="242"/>
         <source>Show or hide the Notes toolbar</source>
         <translation>Показать или скрыть панель Ноты</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="252"/>
+        <location filename="../src/vpiano.ui" line="253"/>
         <source>Show or hide the Controller toolbar</source>
         <translation>Показать или скрыть панель Регуляторы</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="263"/>
+        <location filename="../src/vpiano.ui" line="264"/>
         <source>Show or hide the Pitch Bender toolbar</source>
         <translation>Показать или скрыть Зажим высоты</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="274"/>
+        <location filename="../src/vpiano.ui" line="275"/>
         <source>Show or hide the Programs toolbar</source>
         <translation>Показать или скрыть панель Программы</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="285"/>
+        <location filename="../src/vpiano.ui" line="286"/>
         <source>&amp;Status Bar</source>
         <translation>&amp;Строка состояния</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="290"/>
+        <location filename="../src/vpiano.ui" line="291"/>
         <source>Panic</source>
         <translation>Паника</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="293"/>
+        <location filename="../src/vpiano.ui" line="294"/>
         <source>Stops all active notes</source>
         <translation>Останавливает все активные ноты</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="298"/>
+        <location filename="../src/vpiano.ui" line="299"/>
         <source>Reset All</source>
         <translation>Сбросить всё</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="301"/>
+        <location filename="../src/vpiano.ui" line="302"/>
         <source>Resets all the controllers</source>
         <translation>Сбросить все регуляторы</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="306"/>
+        <location filename="../src/vpiano.ui" line="307"/>
         <source>Reset</source>
         <translation>Сбросить</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="309"/>
+        <location filename="../src/vpiano.ui" line="310"/>
         <source>Resets the Bender value</source>
         <translation>Сбрасывает значение Зажима</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="314"/>
+        <location filename="../src/vpiano.ui" line="315"/>
         <source>&amp;Keyboard Map</source>
         <translation>Привязки &amp;клавиш</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="317"/>
+        <location filename="../src/vpiano.ui" line="318"/>
         <source>Edit the current keyboard layout</source>
         <translation>Редактировать текущую раскладку клавиатуры</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="322"/>
+        <location filename="../src/vpiano.ui" line="323"/>
         <source>&amp;Contents</source>
         <translation>&amp;Содержание</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="325"/>
+        <location filename="../src/vpiano.ui" line="326"/>
         <source>Open the index of the help document</source>
         <translation>Открыть индекс документа справки</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="330"/>
+        <location filename="../src/vpiano.ui" line="331"/>
         <source>VMPK &amp;Web site</source>
         <translation>&amp;Веб-сайт VMPK</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="333"/>
+        <location filename="../src/vpiano.ui" line="334"/>
         <source>Open the VMPK web site address using a web browser</source>
         <translation>Открыть веб-сайт VMPK используя веб-браузер</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="338"/>
+        <location filename="../src/vpiano.ui" line="339"/>
         <source>&amp;Import SoundFont...</source>
         <translation>&amp;Импортировать SoundFont...</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="351"/>
-        <location filename="../src/vpiano.ui" line="362"/>
+        <location filename="../src/vpiano.ui" line="352"/>
+        <location filename="../src/vpiano.ui" line="363"/>
         <source>Edit</source>
         <translation>Правка</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="354"/>
-        <location filename="../src/vpiano.ui" line="379"/>
+        <location filename="../src/vpiano.ui" line="355"/>
+        <location filename="../src/vpiano.ui" line="380"/>
         <source>Open the Extra Controls editor</source>
         <translation>Открыть редактор дополнительных регуляторов</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="365"/>
+        <location filename="../src/vpiano.ui" line="366"/>
         <source>Open the Banks/Programs editor</source>
         <translation>Открыть редактор Банков/Программ</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="376"/>
+        <location filename="../src/vpiano.ui" line="377"/>
         <source>&amp;Extra Controllers</source>
         <translation>&amp;Дополнительные регуляторы</translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.ui" line="388"/>
+        <source>N&amp;ote Names</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

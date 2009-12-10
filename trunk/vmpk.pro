@@ -133,5 +133,6 @@ RESOURCES += data/vmpk.qrc
 TRANSLATIONS += translations/vmpk_es.ts \
     translations/vmpk_tr.ts \
     translations/vmpk_de.ts \
-    translations/vmpk_ru.ts
+    translations/vmpk_ru.ts \
+    translations/vmpk_fr.ts
 include(updateqm.pri)
