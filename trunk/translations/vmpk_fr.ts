@@ -37,7 +37,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The following copyright notice is also applicable:&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This program contains &lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2007 Gary P. Scavone&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/about.ui" line="139"/>
@@ -59,12 +59,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/extracontrols.cpp" line="234"/>
         <source>System Exclusive File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier System Exclusive</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.cpp" line="234"/>
         <source>System Exclusive (*.syx)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="14"/>
@@ -124,12 +124,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/extracontrols.ui" line="166"/>
         <source>Button Ctl</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton d&apos;envoi contrôleur</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="171"/>
         <source>Button SysEx</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton d&apos;envoi SysEx</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="195"/>
@@ -175,17 +175,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/extracontrols.ui" line="422"/>
         <source>value:</source>
-        <translation type="unfinished"></translation>
+        <translation>valeur:</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="456"/>
         <source>File name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du fichier à envoyer:</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="473"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1214,87 +1214,87 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="278"/>
         <source>Drums Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal de Batterie</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="289"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="294"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="299"/>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="304"/>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="309"/>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="314"/>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="319"/>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="324"/>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="329"/>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="334"/>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="339"/>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="344"/>
         <source>11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="349"/>
         <source>12</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="354"/>
         <source>13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="359"/>
         <source>14</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="364"/>
         <source>15</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
@@ -1743,7 +1743,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/vpiano.ui" line="388"/>
         <source>N&amp;ote Names</source>
-        <translation type="unfinished"></translation>
+        <translation>Noms des N&amp;otes</translation>
     </message>
     <message>
         <source>Load...</source>
