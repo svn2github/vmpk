@@ -56,11 +56,12 @@ macx {
         data/it-qwerty.xml \
         data/vkeybd-default.xml \
         data/pc102mac.xml \
-        $$DESTDIR/translations/vmpk_es.qm \
-        $$DESTDIR/translations/vmpk_ru.qm \
-        $$DESTDIR/translations/vmpk_tr.qm \
+        $$DESTDIR/translations/vmpk_cs.qm \
         $$DESTDIR/translations/vmpk_de.qm \
-        $$DESTDIR/translations/vmpk_fr.qm 
+        $$DESTDIR/translations/vmpk_es.qm \
+        $$DESTDIR/translations/vmpk_fr.qm \
+        $$DESTDIR/translations/vmpk_ru.qm \
+        $$DESTDIR/translations/vmpk_tr.qm 
     BUNDLE_RES.path = Contents/Resources
     QMAKE_BUNDLE_DATA += BUNDLE_RES
     LIBS += -framework \
@@ -132,9 +133,10 @@ SOURCES += src/kmapdialog.cpp \
     src/extracontrols.cpp \
     src/qticonloader.cpp
 RESOURCES += data/vmpk.qrc
-TRANSLATIONS += translations/vmpk_es.ts \
-    translations/vmpk_tr.ts \
+TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_de.ts \
+    translations/vmpk_es.ts \
+    translations/vmpk_fr.ts \
     translations/vmpk_ru.ts \
-    translations/vmpk_fr.ts
+    translations/vmpk_tr.ts 
 include(updateqm.pri)

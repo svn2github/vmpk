@@ -79,11 +79,12 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\help_es.html
     File ${VMPKDIR}\data\help_ru.html
     File ${VMPKDIR}\data\help_tr.html
-    File ${VMPKDIR}\build\translations\vmpk_es.qm
-    File ${VMPKDIR}\build\translations\vmpk_tr.qm
+    File ${VMPKDIR}\build\translations\vmpk_cs.qm
     File ${VMPKDIR}\build\translations\vmpk_de.qm
-    File ${VMPKDIR}\build\translations\vmpk_ru.qm
+    File ${VMPKDIR}\build\translations\vmpk_es.qm
     File ${VMPKDIR}\build\translations\vmpk_fr.qm
+    File ${VMPKDIR}\build\translations\vmpk_ru.qm
+    File ${VMPKDIR}\build\translations\vmpk_tr.qm
 
     # Installing library C:\MinGW\bin\mingwm10.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
@@ -138,11 +139,12 @@ done${UNSECTION_ID}:
 
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
-    Delete /REBOOTOK $INSTDIR\vmpk_es.qm
-    Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_cs.qm
     Delete /REBOOTOK $INSTDIR\vmpk_de.qm
-    Delete /REBOOTOK $INSTDIR\vmpk_ru.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_es.qm
     Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_ru.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
     Delete /REBOOTOK $INSTDIR\german.xml
