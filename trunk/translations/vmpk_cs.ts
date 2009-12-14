@@ -69,9 +69,19 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>DialogExtraControls</name>
     <message>
-        <location filename="../src/extracontrols.cpp" line="66"/>
+        <location filename="../src/extracontrols.cpp" line="69"/>
         <source>New Control</source>
         <translation>Nový ovládací prvek</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.cpp" line="234"/>
+        <source>System Exclusive File</source>
+        <translation>Výhradní systémový soubor</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.cpp" line="234"/>
+        <source>System Exclusive (*.syx)</source>
+        <translation>Výhradní systémový (*.syx)</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="14"/>
@@ -129,45 +139,70 @@ p, li { white-space: pre-wrap; }
         <translation>Posuvník</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="185"/>
+        <location filename="../src/extracontrols.ui" line="166"/>
+        <source>Button Ctl</source>
+        <translation>Tlačítko Ctl</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="171"/>
+        <source>Button SysEx</source>
+        <translation>Tlačítko SysEx</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="195"/>
         <source>Default ON</source>
         <translation>Výchozí ZAPNUTO</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="192"/>
+        <location filename="../src/extracontrols.ui" line="202"/>
         <source>value ON:</source>
         <translation>Hodnota ZAPNUTO:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="209"/>
+        <location filename="../src/extracontrols.ui" line="219"/>
         <source>value OFF:</source>
         <translation>Hodnota VYPNUTO:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="230"/>
-        <location filename="../src/extracontrols.ui" line="285"/>
-        <location filename="../src/extracontrols.ui" line="357"/>
+        <location filename="../src/extracontrols.ui" line="240"/>
+        <location filename="../src/extracontrols.ui" line="295"/>
+        <location filename="../src/extracontrols.ui" line="367"/>
         <source>Min. value:</source>
         <translation>Nejmenší hodnota:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="247"/>
-        <location filename="../src/extracontrols.ui" line="302"/>
-        <location filename="../src/extracontrols.ui" line="374"/>
+        <location filename="../src/extracontrols.ui" line="257"/>
+        <location filename="../src/extracontrols.ui" line="312"/>
+        <location filename="../src/extracontrols.ui" line="384"/>
         <source>Max. value:</source>
         <translation>Největší hodnota:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="264"/>
-        <location filename="../src/extracontrols.ui" line="319"/>
-        <location filename="../src/extracontrols.ui" line="391"/>
+        <location filename="../src/extracontrols.ui" line="274"/>
+        <location filename="../src/extracontrols.ui" line="329"/>
+        <location filename="../src/extracontrols.ui" line="401"/>
         <source>Default value:</source>
         <translation>Výchozí hodnota:</translation>
     </message>
     <message>
-        <location filename="../src/extracontrols.ui" line="340"/>
+        <location filename="../src/extracontrols.ui" line="350"/>
         <source>Display size:</source>
         <translation>Velikost zobrazení:</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="422"/>
+        <source>value:</source>
+        <translation>Hodnota:</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="456"/>
+        <source>File name:</source>
+        <translation>Název souboru:</translation>
+    </message>
+    <message>
+        <location filename="../src/extracontrols.ui" line="473"/>
+        <source>...</source>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -193,28 +228,28 @@ p, li { white-space: pre-wrap; }
         <translation>Editor přiřazení kláves</translation>
     </message>
     <message>
-        <location filename="../src/kmapdialog.cpp" line="44"/>
+        <location filename="../src/kmapdialog.cpp" line="45"/>
         <source>Key Code</source>
         <translation>Kód klávesy</translation>
     </message>
     <message>
-        <location filename="../src/kmapdialog.cpp" line="44"/>
+        <location filename="../src/kmapdialog.cpp" line="45"/>
         <source>Key</source>
         <translation>Klávesa</translation>
     </message>
     <message>
-        <location filename="../src/kmapdialog.cpp" line="87"/>
+        <location filename="../src/kmapdialog.cpp" line="88"/>
         <source>Open keyboard map definition</source>
         <translation>Otevřít soubor s přiřazením kláves na klávesnici</translation>
     </message>
     <message>
-        <location filename="../src/kmapdialog.cpp" line="89"/>
-        <location filename="../src/kmapdialog.cpp" line="102"/>
+        <location filename="../src/kmapdialog.cpp" line="90"/>
+        <location filename="../src/kmapdialog.cpp" line="103"/>
         <source>Keyboard map (*.xml)</source>
         <translation>Soubor s uspořádáním klávesnice (*.xml)</translation>
     </message>
     <message>
-        <location filename="../src/kmapdialog.cpp" line="100"/>
+        <location filename="../src/kmapdialog.cpp" line="101"/>
         <source>Save keyboard map definition</source>
         <translation>Uložit soubor s uspořádáním klávesnice</translation>
     </message>
@@ -222,12 +257,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>KMapDialogClass</name>
     <message>
-        <location filename="../src/kmapdialog.ui" line="17"/>
+        <location filename="../src/kmapdialog.ui" line="14"/>
         <source>Key Map Editor</source>
         <translation>Editor přiřazení kláves</translation>
     </message>
     <message>
-        <location filename="../src/kmapdialog.ui" line="33"/>
+        <location filename="../src/kmapdialog.ui" line="27"/>
         <source>This box displays the name of the current mapping file</source>
         <translation>Toto políčko ukazuje název nyní používaného souboru s uspořádáním klávesnice</translation>
     </message>
@@ -1063,14 +1098,14 @@ p, li { white-space: pre-wrap; }
         <translation>Vymezení nástrojů (*.ins)</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="168"/>
-        <location filename="../src/preferences.cpp" line="179"/>
+        <location filename="../src/preferences.cpp" line="182"/>
+        <location filename="../src/preferences.cpp" line="193"/>
         <source>Open keyboard map definition</source>
         <translation>Otevřít soubor s přiřazením kláves na klávesnici</translation>
     </message>
     <message>
-        <location filename="../src/preferences.cpp" line="170"/>
-        <location filename="../src/preferences.cpp" line="181"/>
+        <location filename="../src/preferences.cpp" line="184"/>
+        <location filename="../src/preferences.cpp" line="195"/>
         <source>Keyboard map (*.xml)</source>
         <translation>Soubor s uspořádáním klávesnice (*.xml)</translation>
     </message>
@@ -1118,64 +1153,64 @@ p, li { white-space: pre-wrap; }
         <translation>Soubor s nástrojem</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="116"/>
+        <location filename="../src/preferences.ui" line="119"/>
         <source>The instruments definition file currently loaded</source>
         <translation>Soubor s vymezením nástroje, který je v současnosti nahrán</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="119"/>
+        <location filename="../src/preferences.ui" line="122"/>
         <source>default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="129"/>
+        <location filename="../src/preferences.ui" line="132"/>
         <source>Press this button to load an instruments definition file from disk.</source>
         <translation>Stiskněte toto tlačítko, abyste nahrál soubor s vymezením nástroje z pevného disku.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="132"/>
+        <location filename="../src/preferences.ui" line="135"/>
         <source>load...</source>
         <translation>Nahrát...</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="145"/>
+        <location filename="../src/preferences.ui" line="148"/>
         <source>Instrument</source>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="164"/>
+        <location filename="../src/preferences.ui" line="170"/>
         <source>Change the instrument definition being currently used. Each instruments definition file may hold several instruments on it.</source>
         <translation>Změňte soubor s vymezením nástroje, který je v současnosti používán. Každý soubor s vymezením nástroje může více obsahovat nástrojů.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="171"/>
+        <location filename="../src/preferences.ui" line="177"/>
         <source>Keyboard Map</source>
         <translation>Uspořádání klávesnice</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="181"/>
-        <location filename="../src/preferences.ui" line="198"/>
+        <location filename="../src/preferences.ui" line="190"/>
+        <location filename="../src/preferences.ui" line="210"/>
         <source>Load...</source>
         <translation>Nahrát...</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="188"/>
+        <location filename="../src/preferences.ui" line="197"/>
         <source>Raw Keyboard Map</source>
         <translatorcomment>There is no good/short way to translate this to german :-/</translatorcomment>
         <translation>Neupravené přiřazení kláves</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="205"/>
+        <location filename="../src/preferences.ui" line="217"/>
         <source>Change the widget (knobs, switches) style, either using the custom look or reverting to the style selected in qtconfig.</source>
         <translation>Změňte styl prvku (knoflíky, přepínače), buď pomocí uživatelsky stanoveného vzhledu, nebo vrácením se k stylu vybranému v qtconfig.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="208"/>
+        <location filename="../src/preferences.ui" line="220"/>
         <source>Styled Widgets</source>
         <translation>Stylizované prvky</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="242"/>
+        <location filename="../src/preferences.ui" line="254"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1194,6 +1229,91 @@ p, li { white-space: pre-wrap; }
 &lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Rychlejší zpracování&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../src/preferences.ui" line="278"/>
+        <source>Drums Channel</source>
+        <translation>Kanál bicích</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="289"/>
+        <source>None</source>
+        <translation>Žádný</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="294"/>
+        <source>1</source>
+        <translation>1</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="299"/>
+        <source>2</source>
+        <translation>2</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="304"/>
+        <source>3</source>
+        <translation>3</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="309"/>
+        <source>4</source>
+        <translation>4</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="314"/>
+        <source>5</source>
+        <translation>5</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="319"/>
+        <source>6</source>
+        <translation>6</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="324"/>
+        <source>7</source>
+        <translation>7</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="329"/>
+        <source>8</source>
+        <translation>8</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="334"/>
+        <source>9</source>
+        <translation>9</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="339"/>
+        <source>10</source>
+        <translation>10</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="344"/>
+        <source>11</source>
+        <translation>11</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="349"/>
+        <source>12</source>
+        <translation>12</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="354"/>
+        <source>13</source>
+        <translation>13</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="359"/>
+        <source>14</source>
+        <translation>14</translation>
+    </message>
+    <message>
+        <location filename="../src/preferences.ui" line="364"/>
+        <source>15</source>
+        <translation>15</translation>
+    </message>
+    <message>
         <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
         <translation type="obsolete">Mit dieser Option kann man das Aussehen der Knöpfe verändern; entweder der eigene Stil oder das Standardaussehen.</translation>
     </message>
@@ -1202,17 +1322,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Stylische Knöpfe</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="218"/>
+        <location filename="../src/preferences.ui" line="230"/>
         <source>Check this box to keep the keyboard window always visible, on top of other windows.</source>
         <translation>Zaškrtnutí tohoto políčka zajistí to, že okno s klávesnicí bude vždy viditelné a zůstane zobrazeno v popředí nad všemi ostatními okny.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="221"/>
+        <location filename="../src/preferences.ui" line="233"/>
         <source>Always On Top</source>
         <translation>Vždy nahoře</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="228"/>
+        <location filename="../src/preferences.ui" line="240"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1225,12 +1345,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zaškrtněte toto políčko kvůli popadnutí klávesnice počítače, i když nemá ovládání klávesnice ohnisko. &lt;span style=&quot; font-weight:600;&quot;&gt;Poznámka pro linuxové uživatele:&lt;/span&gt; tato volba pracuje dobře s běžnými plochami KDE, ale selhává v okenních správcích, jakými jsou metacity a compiz. Je také dobře známou skutečností, že použití této volby porušuje rozbalovací nabídky GTK aplikací.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;Tato volba popadne klávesnici, takže každý stisk klávesy je bezprostředně poslán aplikaci. (V Linuxu pracuje pouze pod KDE)</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="235"/>
+        <location filename="../src/preferences.ui" line="247"/>
         <source>Grab Computer Keyboard</source>
         <translation>Popadnout klávesnici počítače</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="252"/>
+        <location filename="../src/preferences.ui" line="264"/>
         <source>Raw Computer Keyboard</source>
         <translation>Popadnout neupravenou klávesnici počítače</translation>
     </message>
@@ -1239,14 +1359,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Tastatur einfangen</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="259"/>
         <source>Check this box to display the note names over the piano keys.</source>
-        <translation>Zaškrtněte toto políčko kvůli zobrazení názvů not nad klávesami klavíru.</translation>
+        <translation type="obsolete">Zaškrtněte toto políčko kvůli zobrazení názvů not nad klávesami klavíru.</translation>
     </message>
     <message>
-        <location filename="../src/preferences.ui" line="262"/>
         <source>Show Note Names</source>
-        <translation>Ukázat názvy not</translation>
+        <translation type="obsolete">Ukázat názvy not</translation>
     </message>
 </context>
 <context>
@@ -1349,63 +1467,63 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="162"/>
-        <location filename="../src/vpiano.cpp" line="1228"/>
+        <location filename="../src/vpiano.cpp" line="165"/>
+        <location filename="../src/vpiano.cpp" line="1364"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="163"/>
+        <location filename="../src/vpiano.cpp" line="166"/>
         <source>No MIDI output ports available. Aborting</source>
         <translation>Nejsou dostupné žádné výstupní přípojky MIDI. Ruší se</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="186"/>
+        <location filename="../src/vpiano.cpp" line="189"/>
         <source>Error. Aborting</source>
         <translation>Chyba. Ruší se</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="199"/>
+        <location filename="../src/vpiano.cpp" line="202"/>
         <source>Channel:</source>
         <translation>Kanál:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="207"/>
+        <location filename="../src/vpiano.cpp" line="210"/>
         <source>Base Octave:</source>
         <translation>Základní oktáva:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="215"/>
+        <location filename="../src/vpiano.cpp" line="218"/>
         <source>Transpose:</source>
         <translation>Převést:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="223"/>
+        <location filename="../src/vpiano.cpp" line="226"/>
         <source>Velocity:</source>
         <translation>Rychlost:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="245"/>
+        <location filename="../src/vpiano.cpp" line="248"/>
         <source>Control:</source>
         <translation>Ovládací prvek:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="251"/>
+        <location filename="../src/vpiano.cpp" line="254"/>
         <source>Value:</source>
         <translation>Hodnota:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="267"/>
+        <location filename="../src/vpiano.cpp" line="270"/>
         <source>Bender:</source>
         <translation>Menič:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="281"/>
+        <location filename="../src/vpiano.cpp" line="284"/>
         <source>Bank:</source>
         <translation>Banka:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="287"/>
+        <location filename="../src/vpiano.cpp" line="290"/>
         <source>Program:</source>
         <translation>Program:</translation>
     </message>
@@ -1450,14 +1568,13 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Speichere Tastaturbelegung</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1228"/>
+        <location filename="../src/vpiano.cpp" line="1364"/>
         <source>No help file found</source>
         <translation>Nepodařilo se najít žádný soubor s nápovědou</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="14"/>
         <source>Virtual Piano Keyboard</source>
-        <translation>Hrací deska klaviatury zdánlivého klavíru</translation>
+        <translation type="obsolete">Hrací deska klaviatury zdánlivého klavíru</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="37"/>
@@ -1484,161 +1601,166 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Pohled</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="92"/>
-        <location filename="../src/vpiano.ui" line="238"/>
+        <location filename="../src/vpiano.ui" line="93"/>
+        <location filename="../src/vpiano.ui" line="239"/>
         <source>&amp;Notes</source>
         <translation>&amp;Noty</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="114"/>
-        <location filename="../src/vpiano.ui" line="249"/>
+        <location filename="../src/vpiano.ui" line="115"/>
+        <location filename="../src/vpiano.ui" line="250"/>
         <source>&amp;Controllers</source>
         <translation>&amp;Ovládací prvky</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="136"/>
-        <location filename="../src/vpiano.ui" line="260"/>
+        <location filename="../src/vpiano.ui" line="137"/>
+        <location filename="../src/vpiano.ui" line="261"/>
         <source>Pitch &amp;Bender</source>
         <translation>&amp;Měnič výšky tónu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="158"/>
-        <location filename="../src/vpiano.ui" line="271"/>
+        <location filename="../src/vpiano.ui" line="159"/>
+        <location filename="../src/vpiano.ui" line="272"/>
         <source>&amp;Programs</source>
         <translation>&amp;Programy</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="179"/>
-        <location filename="../src/vpiano.ui" line="346"/>
+        <location filename="../src/vpiano.ui" line="180"/>
+        <location filename="../src/vpiano.ui" line="347"/>
         <source>&amp;Extra Controls</source>
         <translation>Další &amp;nastavení</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="195"/>
+        <location filename="../src/vpiano.ui" line="196"/>
         <source>&amp;Quit</source>
         <translation>&amp;Ukončit</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="198"/>
+        <location filename="../src/vpiano.ui" line="199"/>
         <source>Exit the program</source>
         <translation>Ukončit program</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="203"/>
+        <location filename="../src/vpiano.ui" line="204"/>
         <source>&amp;Preferences</source>
         <translation>&amp;Nastavení</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="206"/>
+        <location filename="../src/vpiano.ui" line="207"/>
         <source>Edit the program settings</source>
         <translation>Upravit nastavení programu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="211"/>
+        <location filename="../src/vpiano.ui" line="212"/>
         <source>&amp;Connections</source>
         <translation>&amp;Spojení</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="214"/>
+        <location filename="../src/vpiano.ui" line="215"/>
         <source>Edit the MIDI connections</source>
         <translation>Upravit spojení MIDI</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="219"/>
+        <location filename="../src/vpiano.ui" line="220"/>
         <source>&amp;About</source>
         <translation>&amp;O</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="222"/>
+        <location filename="../src/vpiano.ui" line="223"/>
         <source>Show the About box</source>
         <translation>Ukázat informace o programu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="227"/>
+        <location filename="../src/vpiano.ui" line="228"/>
         <source>About Q&amp;t</source>
         <translation>O Q&amp;t</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="230"/>
+        <location filename="../src/vpiano.ui" line="231"/>
         <source>Show the Qt about box</source>
         <translation>Ukázat informace o Qt</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="241"/>
+        <location filename="../src/vpiano.ui" line="242"/>
         <source>Show or hide the Notes toolbar</source>
         <translation>Ukázat nebo skrýt nástrojový pruh s notami</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="252"/>
+        <location filename="../src/vpiano.ui" line="253"/>
         <source>Show or hide the Controller toolbar</source>
         <translation>Ukázat nebo skrýt nástrojový pruh s ovládacími prvky</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="263"/>
+        <location filename="../src/vpiano.ui" line="264"/>
         <source>Show or hide the Pitch Bender toolbar</source>
         <translation>Ukázat nebo skrýt nástrojový pruh s měničem výšky tónu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="274"/>
+        <location filename="../src/vpiano.ui" line="275"/>
         <source>Show or hide the Programs toolbar</source>
         <translation>Ukázat nebo skrýt nástrojový pruh programu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="285"/>
+        <location filename="../src/vpiano.ui" line="286"/>
         <source>&amp;Status Bar</source>
         <translation>&amp;Stavový řádek</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="290"/>
+        <location filename="../src/vpiano.ui" line="291"/>
         <source>Panic</source>
         <translation>Nouzové zastavení</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="293"/>
+        <location filename="../src/vpiano.ui" line="294"/>
         <source>Stops all active notes</source>
         <translation>Zastaví všechny noty, které jsou v činnosti</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="298"/>
+        <location filename="../src/vpiano.ui" line="299"/>
         <source>Reset All</source>
         <translation>Nastavit znovu vše</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="301"/>
+        <location filename="../src/vpiano.ui" line="302"/>
         <source>Resets all the controllers</source>
         <translation>Nastaví znovu všechny ovládací prvky</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="306"/>
+        <location filename="../src/vpiano.ui" line="307"/>
         <source>Reset</source>
         <translation>Nastavit znovu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="309"/>
+        <location filename="../src/vpiano.ui" line="310"/>
         <source>Resets the Bender value</source>
         <translation>Nastaví znovu hodnotu měniče</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="351"/>
-        <location filename="../src/vpiano.ui" line="362"/>
+        <location filename="../src/vpiano.ui" line="352"/>
+        <location filename="../src/vpiano.ui" line="363"/>
         <source>Edit</source>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="354"/>
-        <location filename="../src/vpiano.ui" line="379"/>
+        <location filename="../src/vpiano.ui" line="355"/>
+        <location filename="../src/vpiano.ui" line="380"/>
         <source>Open the Extra Controls editor</source>
         <translation>Ukázat editor dalších ovládacích prvků</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="365"/>
+        <location filename="../src/vpiano.ui" line="366"/>
         <source>Open the Banks/Programs editor</source>
         <translation>Ukázat editor bank/programů</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="376"/>
+        <location filename="../src/vpiano.ui" line="377"/>
         <source>&amp;Extra Controllers</source>
         <translation>&amp;Další ovládací prvky</translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.ui" line="388"/>
+        <source>N&amp;ote Names</source>
+        <translation>Názvy n&amp;ot</translation>
     </message>
     <message>
         <source>Load...</source>
@@ -1657,7 +1779,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Speichere die aktuelle Tastaturbelegung</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="314"/>
+        <location filename="../src/vpiano.ui" line="315"/>
         <source>&amp;Keyboard Map</source>
         <translation>&amp;Uspořádání klávesnice</translation>
     </message>
@@ -1666,32 +1788,32 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="317"/>
+        <location filename="../src/vpiano.ui" line="318"/>
         <source>Edit the current keyboard layout</source>
         <translation>Upravit nynější uspořádání klávesnice</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="322"/>
+        <location filename="../src/vpiano.ui" line="323"/>
         <source>&amp;Contents</source>
         <translation>&amp;Obsah</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="325"/>
+        <location filename="../src/vpiano.ui" line="326"/>
         <source>Open the index of the help document</source>
         <translation>Otevřít rejstřík dokumentu s nápovědou</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="330"/>
+        <location filename="../src/vpiano.ui" line="331"/>
         <source>VMPK &amp;Web site</source>
         <translation>VMPK &amp;stránky na internetu</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="333"/>
+        <location filename="../src/vpiano.ui" line="334"/>
         <source>Open the VMPK web site address using a web browser</source>
         <translation>Otevřít adresu internetových stránek VMPK v prohlížeči</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="338"/>
+        <location filename="../src/vpiano.ui" line="339"/>
         <source>&amp;Import SoundFont...</source>
         <translation>&amp;Zavést zvukové písmo...</translation>
     </message>
