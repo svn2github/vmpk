@@ -76,12 +76,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/extracontrols.cpp" line="234"/>
         <source>System Exclusive File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл System Exclusive</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.cpp" line="234"/>
         <source>System Exclusive (*.syx)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="14"/>
@@ -126,6 +126,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/extracontrols.ui" line="151"/>
         <source>Knob</source>
+        <translatorcomment>Виджет в виде регулятора, который можно крутить. Не подобрал лучшего эквивалента</translatorcomment>
         <translation>Ручка</translation>
     </message>
     <message>
@@ -141,12 +142,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/extracontrols.ui" line="166"/>
         <source>Button Ctl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ктрл. кнопка</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="171"/>
         <source>Button SysEx</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопка SysEx</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="195"/>
@@ -192,17 +193,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/extracontrols.ui" line="422"/>
         <source>value:</source>
-        <translation type="unfinished"></translation>
+        <translation>значение:</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="456"/>
         <source>File name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя файла:</translation>
     </message>
     <message>
         <location filename="../src/extracontrols.ui" line="473"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -1263,87 +1264,87 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="278"/>
         <source>Drums Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал ударных</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="289"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="294"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="299"/>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="304"/>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="309"/>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="314"/>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="319"/>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="324"/>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="329"/>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="334"/>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="339"/>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="344"/>
         <source>11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="349"/>
         <source>12</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="354"/>
         <source>13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="359"/>
         <source>14</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/preferences.ui" line="364"/>
         <source>15</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Check this box to display the note names over the piano keys.</source>
@@ -1734,7 +1735,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/vpiano.ui" line="388"/>
         <source>N&amp;ote Names</source>
-        <translation type="unfinished"></translation>
+        <translation>Н&amp;азвания нот</translation>
     </message>
 </context>
 </TS>

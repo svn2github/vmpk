@@ -10,9 +10,11 @@ Translators:
     
     Pedro Lopez-Cabanillas - Spanish translation
         translations/vmpk_es.ts
+        data/help_es.html
 
     Serguey G Basalaev - Russian translation
         translations/vmpk_ru.ts
+        data/help_ru.html
 	
     Frank Kober - French and German translations
         translations/vmpk_fr.ts

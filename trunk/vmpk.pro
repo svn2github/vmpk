@@ -47,6 +47,7 @@ macx {
     DEFINES += __MACOSX_CORE__
     BUNDLE_RES.files = data/help.html \
         data/help_es.html \
+        data/help_ru.html \
         data/help_tr.html \
         data/gmgsxg.ins \
         data/spanish.xml \
@@ -56,9 +57,10 @@ macx {
         data/vkeybd-default.xml \
         data/pc102mac.xml \
         $$DESTDIR/translations/vmpk_es.qm \
-#       $$DESTDIR/translations/vmpk_ca.qm \
+        $$DESTDIR/translations/vmpk_ru.qm \
         $$DESTDIR/translations/vmpk_tr.qm \
-        $$DESTDIR/translations/vmpk_de.qm 
+        $$DESTDIR/translations/vmpk_de.qm \
+        $$DESTDIR/translations/vmpk_fr.qm 
     BUNDLE_RES.path = Contents/Resources
     QMAKE_BUNDLE_DATA += BUNDLE_RES
     LIBS += -framework \

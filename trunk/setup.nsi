@@ -3,10 +3,10 @@ Name "Virtual MIDI Piano Keyboard"
 # Defines
 !define QTFILES "C:\Qt\2009.03\qt\bin"
 !define MINGWFILES "C:\Qt\2009.03\mingw\bin"
-!define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.3.0"
+!define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.3.1"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.3.0
+!define VERSION 0.3.1
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -44,6 +44,7 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "Russian"
+!insertmacro MUI_LANGUAGE "French"
 
 # Installer attributes
 OutFile vmpk-${VERSION}-setup.exe
@@ -51,7 +52,7 @@ InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.3.0.0
+VIProductVersion 0.3.1.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
@@ -76,11 +77,13 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\gmgsxg.ins
     File ${VMPKDIR}\data\help.html
     File ${VMPKDIR}\data\help_es.html
+    File ${VMPKDIR}\data\help_ru.html
     File ${VMPKDIR}\data\help_tr.html
     File ${VMPKDIR}\build\translations\vmpk_es.qm
     File ${VMPKDIR}\build\translations\vmpk_tr.qm
     File ${VMPKDIR}\build\translations\vmpk_de.qm
     File ${VMPKDIR}\build\translations\vmpk_ru.qm
+    File ${VMPKDIR}\build\translations\vmpk_fr.qm
 
     # Installing library C:\MinGW\bin\mingwm10.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
@@ -139,6 +142,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_de.qm
     Delete /REBOOTOK $INSTDIR\vmpk_ru.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
     Delete /REBOOTOK $INSTDIR\german.xml
@@ -149,6 +153,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\gmgsxg.ins
     Delete /REBOOTOK $INSTDIR\help.html
     Delete /REBOOTOK $INSTDIR\help_es.html
+    Delete /REBOOTOK $INSTDIR\help_ru.html
     Delete /REBOOTOK $INSTDIR\help_tr.html
 
     # Uninstalling library $INSTDIR\mingwm10.dll

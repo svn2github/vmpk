@@ -129,6 +129,7 @@ IF (APPLE)
     SET(vmpk_RSC ../data/vmpk.icns
              ../data/help.html
              ../data/help_es.html
+             ../data/help_ru.html
              ../data/help_tr.html
              ../data/txt2ins.awk
              ../data/gmgsxg.ins

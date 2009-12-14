@@ -225,6 +225,7 @@ IF (WIN32)
         data/pc102win.xml
         data/help.html
         data/help_es.html
+        data/help_ru.html
         data/help_tr.html
     DESTINATION . )
 ENDIF (WIN32)
