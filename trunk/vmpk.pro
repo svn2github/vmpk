@@ -12,7 +12,7 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.3.0
+VERSION = 0.3.1
 DESTDIR = build
 OBJECTS_DIR = $$DESTDIR
 UI_DIR = $$DESTDIR
@@ -69,7 +69,7 @@ macx {
         -framework \
         CoreAudio \
         -framework \
-        CoreFoundation
+        CoreFoundation \
         -framework \
         Carbon
     system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)

@@ -49,7 +49,7 @@ download the open source edition from Nokia:
 
     http://qt.nokia.com/downloads/
 
-RtMIDI is included in the source package. It uses ALSA sequencer in Linux, 
+RtMIDI is included in the source package. It uses the ALSA sequencer in Linux, 
 WinMM in Windows and CoreMIDI in Mac OSX, which are the native MIDI systems in 
 all the supported platforms.
 
