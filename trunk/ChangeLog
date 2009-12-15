@@ -1,3 +1,9 @@
+2009-12-15
+    * Explicit link against -framework Carbon in Mac OSX
+    
+2009-12-14
+    * Czech translation, by Pavel Fric
+ 
 2009-12-12
     * French and German translations updated
     

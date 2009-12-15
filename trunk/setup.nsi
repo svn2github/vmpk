@@ -1,8 +1,8 @@
 Name "Virtual MIDI Piano Keyboard"
 
 # Defines
-!define QTFILES "C:\Qt\2009.03\qt\bin"
-!define MINGWFILES "C:\Qt\2009.03\mingw\bin"
+!define QTFILES "C:\Qt\2009.05\qt\bin"
+!define MINGWFILES "C:\Qt\2009.05\mingw\bin"
 !define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.3.1"
 
 !define REGKEY "SOFTWARE\$(^Name)"
@@ -41,10 +41,12 @@ Var StartMenuGroup
 
 # Installer languages
 !insertmacro MUI_LANGUAGE "English"
-!insertmacro MUI_LANGUAGE "Spanish"
+!insertmacro MUI_LANGUAGE "Czech"
+!insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "Russian"
-!insertmacro MUI_LANGUAGE "French"
+!insertmacro MUI_LANGUAGE "Spanish"
+!insertmacro MUI_LANGUAGE "Turkish"
 
 # Installer attributes
 OutFile vmpk-${VERSION}-setup.exe

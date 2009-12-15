@@ -94,7 +94,7 @@ ENDIF(${CMAKE_SYSTEM} MATCHES "Linux")
 
 IF(${CMAKE_SYSTEM} MATCHES "Darwin")
     ADD_DEFINITIONS(-D__MACOSX_CORE__)
-    LINK_LIBRARIES("-framework CoreMidi -framework CoreAudio -framework CoreFoundation")
+    LINK_LIBRARIES("-framework CoreMidi -framework CoreAudio -framework CoreFoundation -framework Carbon")
 ENDIF(${CMAKE_SYSTEM} MATCHES "Darwin")
 
 IF(${CMAKE_SYSTEM} MATCHES "IRIX")

@@ -70,6 +70,8 @@ macx {
         CoreAudio \
         -framework \
         CoreFoundation
+        -framework \
+        Carbon
     system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 irix* { 
