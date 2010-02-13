@@ -1003,8 +1003,8 @@ void VPiano::initControllers(int channel)
     if (m_ins != NULL) {
         InstrumentData controls = m_ins->control();
         InstrumentData::ConstIterator it, end;
-        it = controls.begin();
-        end = controls.end();
+        it = controls.constBegin();
+        end = controls.constEnd();
         for( ; it != end; ++it ) {
             int ctl = it.key();
             switch (ctl) {
@@ -1030,8 +1030,8 @@ void VPiano::populateControllers()
     m_comboControl->clear();
     if (m_ins != NULL) {
         InstrumentData controls = m_ins->control();
-        InstrumentData::ConstIterator it, end = controls.end();
-        for( it = controls.begin(); it != end; ++it )
+        InstrumentData::ConstIterator it, end = controls.constEnd();
+        for( it = controls.constBegin(); it != end; ++it )
             m_comboControl->addItem(it.value(), it.key());
     }
     m_comboControl->blockSignals(false);
@@ -1096,7 +1096,7 @@ void VPiano::populateInstruments()
             //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
             InstrumentPatches patches = m_ins->patches();
             InstrumentPatches::ConstIterator j;
-            for( j=patches.begin(); j!=patches.end(); ++j ) {
+            for( j = patches.constBegin(); j != patches.constEnd(); ++j ) {
                 //if (j.key() < 0) continue;
                 InstrumentData patch = j.value();
                 m_comboBank->addItem(patch.name(), j.key());
@@ -1195,7 +1195,7 @@ void VPiano::slotBankChanged(const int index)
     int bank = m_comboBank->itemData(index).toInt();
     InstrumentData patch = m_ins->patch(bank);
     InstrumentData::ConstIterator k;
-    for( k = patch.begin(); k != patch.end(); ++k ) {
+    for( k = patch.constBegin(); k != patch.constEnd(); ++k ) {
         //qDebug() << "patch[" << k.key() << "]=" << k.value();
         m_comboProg->addItem(k.value(), k.key());
     }

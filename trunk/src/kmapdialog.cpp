@@ -46,7 +46,7 @@ void KMapDialog::displayMap(const KeyboardMap* map)
     QFileInfo f(m_map.getFileName());
     ui.labelMapName->setText(f.fileName());
     KeyboardMap::ConstIterator it;
-    for(it = m_map.begin(); it != m_map.end(); ++it) {
+    for(it = m_map.constBegin(); it != m_map.constEnd(); ++it) {
         row = it.value();
         if (m_map.getRawMode()) {
             ui.tableWidget->setItem(row, 0, new QTableWidgetItem(QString::number(it.key())));

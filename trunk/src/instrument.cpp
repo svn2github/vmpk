@@ -511,7 +511,7 @@ void InstrumentList::saveData ( QTextStream& ts,
 	if (!data.basedOn().isEmpty())
 	    ts << "BasedOn=" << data.basedOn() << endl;
 	InstrumentData::ConstIterator it;
-	for (it = data.begin(); it != data.end(); ++it)
+	for (it = data.constBegin(); it != data.constEnd(); ++it)
 		ts << it.key() << "=" << it.value() << endl;
 	ts << endl;
 }

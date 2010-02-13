@@ -81,8 +81,8 @@ public:
 	Iterator end()   { return m_pData->map.end(); }
 
 	typedef DataMap::ConstIterator ConstIterator;
-	ConstIterator begin() const { return m_pData->map.constBegin(); }
-	ConstIterator end()   const { return m_pData->map.constEnd(); }
+	ConstIterator constBegin() const { return m_pData->map.constBegin(); }
+	ConstIterator constEnd()   const { return m_pData->map.constEnd(); }
 
 	unsigned int count() const { return m_pData->map.count(); }
 

@@ -137,7 +137,7 @@ void Preferences::setInstrumentsFileName( const QString fileName )
         if (m_ins.load(fileName)) {
             ui.txtFileInstrument->setText(f.fileName());
             InstrumentList::ConstIterator it;
-            for(it = m_ins.begin(); it != m_ins.end(); ++it) {
+            for(it = m_ins.constBegin(); it != m_ins.constEnd(); ++it) {
                 if(!it.key().endsWith(QLatin1String("Drums"), Qt::CaseInsensitive))
                     ui.cboInstrument->addItem(it.key());
             }
