@@ -169,7 +169,7 @@ You can use the MIDI synth library that is included in Mac OSX, but a program
 is needed to do so, like SimpleSynth (http://notahat.com). Also from the same 
 author is MIDI Patchbay. You can use also QSynth for the same price.
 
-ACKNOWLEDGEMENTS
+ACKNOWLEDGMENTS
 
 In addition to the aforementioned tools, VMPK uses work from the following
 open source projects. 
@@ -184,5 +184,7 @@ open source projects.
 
 * Icon and logo by Theresa Knott
   http://openclipart.org/media/files/TheresaKnott/346
+  
+See AUTHORS for a complete list of acknowledgments  
   
 Thank you very much.
