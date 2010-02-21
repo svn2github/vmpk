@@ -1,3 +1,6 @@
+2010-02-20
+    * RtMIDI updated to 1.0.11 
+
 2009-12-15
     * Explicit link against -framework Carbon in Mac OSX
     * Release 0.3.1
