@@ -979,93 +979,93 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/pianoscene.cpp" line="298"/>
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>C</source>
-        <translation></translation>
+        <translation>C</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="298"/>
         <source>C♯</source>
-        <translation></translation>
+        <translation>C♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="298"/>
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>D</source>
-        <translation></translation>
+        <translation>D</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="298"/>
         <source>D♯</source>
-        <translation></translation>
+        <translation>D♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="298"/>
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>E</source>
-        <translation></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="299"/>
         <location filename="../src/pianoscene.cpp" line="302"/>
         <source>F</source>
-        <translation></translation>
+        <translation>F</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="299"/>
         <source>F♯</source>
-        <translation></translation>
+        <translation>F♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="299"/>
         <location filename="../src/pianoscene.cpp" line="302"/>
         <source>G</source>
-        <translation></translation>
+        <translation>G</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="299"/>
         <source>G♯</source>
-        <translation></translation>
+        <translation>G♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="300"/>
         <location filename="../src/pianoscene.cpp" line="303"/>
         <source>A</source>
-        <translation></translation>
+        <translation>A</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="300"/>
         <source>A♯</source>
-        <translation></translation>
+        <translation>A♯</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="300"/>
         <location filename="../src/pianoscene.cpp" line="303"/>
         <source>B</source>
-        <translation></translation>
+        <translation>H</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>D♭</source>
-        <translation></translation>
+        <translation>D♭</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="301"/>
         <source>E♭</source>
-        <translation></translation>
+        <translation>E♭</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="302"/>
         <source>G♭</source>
-        <translation></translation>
+        <translation>G♭</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="302"/>
         <source>A♭</source>
-        <translation></translation>
+        <translation>A♭</translation>
     </message>
     <message utf8="true">
         <location filename="../src/pianoscene.cpp" line="303"/>
         <source>B♭</source>
-        <translation></translation>
+        <translation>B</translation>
     </message>
 </context>
 <context>
@@ -1739,7 +1739,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/vpiano.ui" line="388"/>
         <source>N&amp;ote Names</source>
-        <translation>Noten-Namen</translation>
+        <translation>N&amp;oten-Namen</translation>
     </message>
     <message>
         <source>Load...</source>
