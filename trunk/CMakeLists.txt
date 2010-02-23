@@ -180,7 +180,7 @@ IF (UNIX AND NOT APPLE)
 
     INSTALL(FILES data/vmpk_16x16.png 
         DESTINATION share/icons/hicolor/16x16/apps   
-       RENAME vmpk.png)
+        RENAME vmpk.png)
     
     INSTALL(FILES data/vmpk_32x32.png 
         DESTINATION share/icons/hicolor/32x32/apps   
@@ -194,9 +194,8 @@ IF (UNIX AND NOT APPLE)
         DESTINATION share/icons/hicolor/64x64/apps   
         RENAME vmpk.png)
 
-    INSTALL(FILES data/TheresaKnott_piano.svg
-        DESTINATION share/icons/hicolor/scalable/apps   
-        RENAME vmpk.svg)
+    INSTALL(FILES data/vmpk.svgz
+        DESTINATION share/icons/hicolor/scalable/apps )   
     
     INSTALL ( FILES 
         vmpk.desktop

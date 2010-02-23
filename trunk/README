@@ -116,6 +116,18 @@ If you want to install the program at some place other than the default
 (/usr/local) use the following CMake option:
 $ cmake . -DCMAKE_INSTALL_PREFIX=/usr
 
+NOTES FOR LINUX USERS
+
+A man page is included in the source package, ready to be installed and used. 
+But if you prefer to generate the man page yourself, the build system can do it 
+if you have installed in your system the following packages:
+* xsltproc program.
+* docbook XSLT stylesheets.
+
+The package names depend on the Linux distribution. For Debian they are:
+xsltproc, docbook-xsl and docbook-xml. For openSUSE: libxslt, docbook_4, and 
+docbook-xsl-stylesheets.
+
 NOTES FOR WINDOWS USERS
 
 To compile the sources in Windows, you need to download either the .bz2 or .gz 
