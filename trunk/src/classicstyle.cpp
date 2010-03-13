@@ -198,17 +198,21 @@ void ClassicStyle::drawPrimitive( PrimitiveElement pe, const QStyleOption *opt,
     static QSvgRenderer onRenderer(QString(":/vpiano/led_green.svg"));
     static QSvgRenderer offRenderer(QString(":/vpiano/led_grey.svg"));
     if (pe == PE_IndicatorCheckBox) {
+        QRect r = opt->rect;
         if (opt->state & State_On)
-            onRenderer.render(p, opt->rect);
+            onRenderer.render(p, r);
         else if (opt->state & State_Off)
-            offRenderer.render(p, opt->rect);
+            offRenderer.render(p, r);
         return;
-    } else if (pe == PE_FrameFocusRect) {
-        /*QPoint ce = opt->rect.center();
-        int rx = opt->rect.width() / 2;
-        int ry = opt->rect.height() / 2;
-        p->drawEllipse(ce, rx, ry);*/
+    } else if (pe == PE_FrameFocusRect)
         return;
-    }
     QCommonStyle::drawPrimitive(pe, opt, p, w);
+}
+
+int ClassicStyle::pixelMetric( PixelMetric metric, const QStyleOption *option,
+                               const QWidget *widget ) const
+{
+    if ( metric == PM_IndicatorWidth || metric == PM_IndicatorHeight )
+        return 24;
+    return QCommonStyle::pixelMetric( metric, option, widget );
 }

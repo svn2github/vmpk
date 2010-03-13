@@ -370,9 +370,7 @@ void VPiano::initExtraControllers()
         switch(type) {
         case 0:
             chkbox = new QCheckBox(this);
-            if (dlgPreferences()->getStyledWidgets()) {
-                chkbox->setStyle(m_dialStyle);
-            }
+            chkbox->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : NULL);
             chkbox->setProperty(MIDICTLONVALUE, maxValue);
             chkbox->setProperty(MIDICTLOFFVALUE, minValue);
             chkbox->setChecked(bool(value));
@@ -382,7 +380,7 @@ void VPiano::initExtraControllers()
         case 1:
             knob = new Knob(this);
             knob->setFixedSize(32, 32);
-            knob->setStyle(dlgPreferences()->getStyledWidgets()? m_dialStyle : NULL);
+            knob->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : NULL);
             knob->setMinimum(minValue);
             knob->setMaximum(maxValue);
             knob->setValue(value);
@@ -1313,7 +1311,8 @@ void VPiano::updateExtraController(int ctl, int val)
             v = w->property("checked");
             if (v.isValid()) {
                 QVariant on = w->property(MIDICTLONVALUE);
-                w->setProperty("checked", (val >= on.toInt()));
+                bool checked = (val >= on.toInt());
+                w->setProperty("checked", checked);
             }
         }
     }
