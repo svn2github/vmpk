@@ -46,6 +46,7 @@ macx {
     ICON = data/vmpk.icns
     DEFINES += __MACOSX_CORE__
     BUNDLE_RES.files = data/help.html \
+        data/help_de.html \
         data/help_es.html \
         data/help_ru.html \
         data/help_tr.html \
