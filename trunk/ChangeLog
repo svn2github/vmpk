@@ -2,8 +2,18 @@
     * German translation of manual added, edited document provided by 
       Philip Edelmann
       
+2010-03-13
+    * Larger shapes for switch extra controls, when using the custom qstyle.
+    
+2010-02-23
+    * Fixed German note names: English note B as H in German, 
+      and English B♭ as B in German
+    * Install a compressed SVGZ icon instead of the plain one
+    * Note for Linux users, regarding docbook XSLT and man page.
+
 2010-02-20
     * RtMIDI updated to 1.0.11 
+    * Compile using QT_STRICT_ITERATORS
 
 2009-12-15
     * Explicit link against -framework Carbon in Mac OSX

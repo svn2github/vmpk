@@ -19,10 +19,14 @@ Translators:
     Frank Kober - French and German translations
         translations/vmpk_fr.ts
         translations/vmpk_de.ts
+        data/help_de.html
  
     Pavel Fric - Czech translation
         translations/vmpk_cs.ts
 
+    Philip Edelmann - German translation
+        data/help_de.html
+        
 Other copyright owners:
 
     Gary P. Scavone     RtMIDI classes

@@ -128,6 +128,7 @@ IF (APPLE)
     SET(MACOSX_BUNDLE_BUNDLE_NAME "vmpk" )
     SET(vmpk_RSC ../data/vmpk.icns
              ../data/help.html
+             ../data/help_de.html
              ../data/help_es.html
              ../data/help_ru.html
              ../data/help_tr.html
