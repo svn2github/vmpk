@@ -5,6 +5,7 @@ SET( TRANSLATIONS_FILES
      vmpk_fr.ts
      vmpk_ru.ts
      vmpk_tr.ts 
+	 vmpk_zh_CN.ts
 )
 
 QT4_ADD_TRANSLATION(QM_FILES ${TRANSLATIONS_FILES})
