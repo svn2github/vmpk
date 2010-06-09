@@ -12,7 +12,7 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.3.1
+VERSION = 0.3.2svn
 DESTDIR = build
 OBJECTS_DIR = $$DESTDIR
 UI_DIR = $$DESTDIR
@@ -38,6 +38,7 @@ linux* {
     DEFINES += AVOID_TIMESTAMPING
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa
+    LIBS += -lX11
     system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 macx { 
@@ -62,7 +63,8 @@ macx {
         $$DESTDIR/translations/vmpk_es.qm \
         $$DESTDIR/translations/vmpk_fr.qm \
         $$DESTDIR/translations/vmpk_ru.qm \
-        $$DESTDIR/translations/vmpk_tr.qm 
+        $$DESTDIR/translations/vmpk_tr.qm \
+        $$DESTDIR/translations/vmpk_zh_CN.qm
     BUNDLE_RES.path = Contents/Resources
     QMAKE_BUNDLE_DATA += BUNDLE_RES
     LIBS += -framework \
@@ -141,5 +143,6 @@ TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_es.ts \
     translations/vmpk_fr.ts \
     translations/vmpk_ru.ts \
-    translations/vmpk_tr.ts 
+    translations/vmpk_tr.ts \
+    translations/vmpk_zh_CN.ts
 include(updateqm.pri)

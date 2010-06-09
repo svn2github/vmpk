@@ -27,6 +27,9 @@ Translators:
     Philip Edelmann - German translation
         data/help_de.html
         
+    Rui Fan - Chinese translation
+        translations/vmpk_zh_CN.ts
+
 Other copyright owners:
 
     Gary P. Scavone     RtMIDI classes
