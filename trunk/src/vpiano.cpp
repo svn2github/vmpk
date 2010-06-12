@@ -28,6 +28,10 @@
 #include <QSpinBox>
 #include <QDial>
 
+#if ENABLE_DBUS
+#include <QtDBus/QDBusConnection>
+#endif
+
 #include "vpiano.h"
 #include "instrument.h"
 #include "mididefs.h"
@@ -41,6 +45,10 @@
 #include "preferences.h"
 #include "midisetup.h"
 #include "kmapdialog.h"
+
+#if ENABLE_DBUS
+#include "vmpkadaptor.h"
+#endif
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
@@ -58,6 +66,14 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     m_dlgExtra(NULL),
     m_dlgRiffImport(NULL)
 {
+
+#if ENABLE_DBUS
+    new VmpkAdaptor(this);
+    QDBusConnection dbus = QDBusConnection::sessionBus();
+    dbus.registerObject("/", this);
+    dbus.registerService("net.sourceforge.vmpk");
+#endif
+
     ui.setupUi(this);
     ui.actionStatusBar->setChecked(false);
     connect(ui.actionAbout, SIGNAL(triggered()), SLOT(slotAbout()));
@@ -628,11 +644,15 @@ void VPiano::customEvent ( QEvent *event )
 {
     if ( event->type() == NoteOnEventType ) {
         NoteOnEvent *ev = static_cast<NoteOnEvent*>(event);
-        ui.pianokeybd->showNoteOn(ev->getNote());
+        int n = ev->getNote();
+        ui.pianokeybd->showNoteOn(n);
+        emit signal_noteon(n);
     }
     else if ( event->type() == NoteOffEventType ) {
         NoteOffEvent *ev = static_cast<NoteOffEvent*>(event);
-        ui.pianokeybd->showNoteOff(ev->getNote());
+        int n = ev->getNote();
+        ui.pianokeybd->showNoteOff(n);
+        emit signal_noteoff(n);
     }
     else if ( event->type() ==  ControllerEventType ) {
         ControllerEvent *ev = static_cast<ControllerEvent*>(event);
@@ -641,12 +661,14 @@ void VPiano::customEvent ( QEvent *event )
         updateController(ctl, val);
         updateExtraController(ctl, val);
         m_ctlState[m_channel][ctl] = val;
+        emit signal_controller(ctl, val);
     }
     else if ( event->type() ==  BenderEventType ) {
         BenderEvent *ev = static_cast<BenderEvent*>(event);
         int val = ev->getValue();
         m_bender->setValue(val);
         m_bender->setToolTip(QString::number(val));
+        emit signal_bender(val);
     }
     event->accept();
 }
@@ -802,7 +824,7 @@ void VPiano::bankChange(const int bank)
     m_lastBank[m_channel] = bank;
 }
 
-void VPiano::bender(const int value)
+void VPiano::sendBender(const int value)
 {
     std::vector<unsigned char> message;
     int v = value + BENDER_MID; // v >= 0, v <= 16384
@@ -829,7 +851,7 @@ void VPiano::slotResetAllControllers()
 void VPiano::slotResetBender()
 {
     m_bender->setValue(0);
-    bender(0);
+    sendBender(0);
 }
 
 void VPiano::sendSysex(const QByteArray& data)
@@ -892,14 +914,14 @@ void VPiano::slotController(const int value)
 
 void VPiano::slotBender(const int pos)
 {
-    bender(pos);
+    sendBender(pos);
     setWidgetTip(m_bender, pos);
 }
 
 void VPiano::slotBenderReleased()
 {
     m_bender->setValue(0);
-    bender(0);
+    sendBender(0);
     setWidgetTip(m_bender, 0);
 }
 
@@ -1468,3 +1490,33 @@ void VPiano::slotShowNoteNames()
 
 //void VPiano::slotEditPrograms()
 //{ }
+
+#if ENABLE_DBUS
+void VPiano::noteon(int note)
+{
+    noteOn(note);
+    NoteOnEvent *ev = new NoteOnEvent(note);
+    QApplication::postEvent(this, ev);
+}
+
+void VPiano::noteoff(int note)
+{
+    noteOff(note);
+    NoteOffEvent *ev = new NoteOffEvent(note);
+    QApplication::postEvent(this, ev);
+}
+
+void VPiano::controller(int control, int value)
+{
+    sendController(control, value);
+    ControllerEvent *ev = new ControllerEvent(control, value);
+    QApplication::postEvent(this, ev);
+}
+
+void VPiano::bender(int value)
+{
+    sendBender(value);
+    BenderEvent *ev = new BenderEvent(value);
+    QApplication::postEvent(this, ev);
+}
+#endif

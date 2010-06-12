@@ -100,6 +100,8 @@ private:
 class VPiano : public QMainWindow, public PianoHandler
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "net.sourceforge.vmpk")
+
 public:
     VPiano( QWidget * parent = 0, Qt::WindowFlags flags = 0 );
     virtual ~VPiano();
@@ -120,7 +122,21 @@ protected:
     void showEvent ( QShowEvent *event );
     void hideEvent( QHideEvent *event );
 
-public slots:
+#if ENABLE_DBUS
+public Q_SLOTS:
+    void noteon(int note);
+    void noteoff(int note);
+    void controller(int control, int value);
+    void bender(int value);
+
+Q_SIGNALS:
+    void signal_noteon(int note);
+    void signal_noteoff(int note);
+    void signal_controller(int control, int value);
+    void signal_bender(int value);
+#endif /*ENABLE_DBUS*/
+
+protected Q_SLOTS:
     void slotAbout();
     void slotAboutQt();
     void slotConnections();
@@ -169,7 +185,7 @@ private:
     void allNotesOff();
     void bankChange(const int bank);
     void programChange(const int program);
-    void bender(const int value);
+    void sendBender(const int value);
     void messageWrapper(std::vector<unsigned char> *message) const;
     void updateController(int ctl, int val);
     void updateExtraController(int ctl, int val);

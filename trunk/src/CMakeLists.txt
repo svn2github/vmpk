@@ -99,6 +99,10 @@ SET(vmpk_qtobject_SRCS
     vpiano.h
 )
 
+IF(ENABLE_DBUS)
+    QT4_ADD_DBUS_ADAPTOR(vmpk_SRCS net.sourceforge.vmpk.xml vpiano.h VPiano)
+ENDIF(ENABLE_DBUS)
+
 QT4_WRAP_CPP(vmpk_moc_SRCS ${vmpk_qtobject_SRCS})
 
 IF (UNIX AND NOT APPLE)
