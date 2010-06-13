@@ -16,22 +16,6 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QString>
-#include <QSettings>
-#include <QInputDialog>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QApplication>
-#include <QCloseEvent>
-#include <QComboBox>
-#include <QSlider>
-#include <QSpinBox>
-#include <QDial>
-
-#if ENABLE_DBUS
-#include <QtDBus/QDBusConnection>
-#endif
-
 #include "vpiano.h"
 #include "instrument.h"
 #include "mididefs.h"
@@ -45,10 +29,24 @@
 #include "preferences.h"
 #include "midisetup.h"
 #include "kmapdialog.h"
+#include "events.h"
 
 #if ENABLE_DBUS
 #include "vmpkadaptor.h"
+#include <QtDBus/QDBusConnection>
 #endif
+
+#include <QString>
+#include <QSettings>
+#include <QInputDialog>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QApplication>
+#include <QCloseEvent>
+#include <QComboBox>
+#include <QSlider>
+#include <QSpinBox>
+#include <QDial>
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
@@ -141,8 +139,8 @@ void midiCallback( double /*deltatime*/,
     unsigned char channelFilter = instance->getInputChannel();
     if (channel == channelFilter) {
         switch( status ) {
-        case STATUS_NOTEON:
-        case STATUS_NOTEOFF: {
+        case STATUS_NOTEOFF:
+        case STATUS_NOTEON: {
                 unsigned char midi_note = message->at(1);
                 unsigned char vel = message->at(2);
                 if ((status == STATUS_NOTEOFF) || (vel == 0))
@@ -151,15 +149,31 @@ void midiCallback( double /*deltatime*/,
                     ev = new NoteOnEvent(midi_note);
             }
             break;
-        case STATUS_CONTROLLER: {
+        case STATUS_POLYAFT: {
+                unsigned char note = message->at(1);
+                unsigned char value = message->at(2);
+                ev = new PolyKeyPressEvent(note, value);
+            }
+            break;
+        case STATUS_CTLCHG: {
                 unsigned char ctl = message->at(1);
                 unsigned char val = message->at(2);
-                ev = new ControllerEvent(ctl, val);
+                ev = new ControlChangeEvent(ctl, val);
+            }
+            break;
+        case STATUS_PROGRAM: {
+                unsigned char value = message->at(1);
+                ev = new ProgramChangeEvent(value);
+            }
+            break;
+        case STATUS_CHANAFT: {
+                unsigned char value = message->at(1);
+                ev = new ChannelKeyPressEvent(value);
             }
             break;
         case STATUS_BENDER: {
                 int value = (message->at(1) + 0x80 * message->at(2)) - BENDER_MID;
-                ev = new BenderEvent(value);
+                ev = new PitchWheelEvent(value);
             }
             break;
         }
@@ -178,8 +192,8 @@ bool VPiano::initMidi()
         if (nOutPorts == 0) {
             delete m_midiout;
             m_midiout = 0;
-            QMessageBox::critical(this, tr("Error"),
-                                  tr("No MIDI output ports available. Aborting"));
+            QMessageBox::critical( this, tr("Error"),
+                tr("No MIDI output ports available. Aborting") );
             return false;
         }
         int nInPorts = m_midiin->getPortCount();
@@ -197,7 +211,8 @@ bool VPiano::initMidi()
         m_midiout->openPort( m_currentOut = 0 );
 #endif
         if (m_midiin != NULL) {
-            m_midiin->ignoreTypes(true,true,true); //ignore SYX, clock and active sense
+            // ignore SYX, clock and active sense
+            m_midiin->ignoreTypes(true,true,true);
             m_midiin->setCallback( &midiCallback, this );
             m_inputActive = true;
         }
@@ -309,8 +324,8 @@ void VPiano::initToolBars()
     m_comboProg->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     m_comboProg->setFocusPolicy(Qt::NoFocus);
     ui.toolBarPrograms->addWidget(m_comboProg);
-    connect( m_comboBank, SIGNAL(currentIndexChanged(int)), SLOT(slotBankChanged(int)) );
-    connect( m_comboProg, SIGNAL(currentIndexChanged(int)), SLOT(slotProgChanged(int)) );
+    connect( m_comboBank, SIGNAL(activated(int)), SLOT(slotBankChanged(int)) );
+    connect( m_comboProg, SIGNAL(activated(int)), SLOT(slotProgChanged(int)) );
     // Toolbars actions: toggle view
     connect(ui.toolBarNotes->toggleViewAction(), SIGNAL(toggled(bool)),
             ui.actionNotes, SLOT(setChecked(bool)));
@@ -646,29 +661,46 @@ void VPiano::customEvent ( QEvent *event )
         NoteOnEvent *ev = static_cast<NoteOnEvent*>(event);
         int n = ev->getNote();
         ui.pianokeybd->showNoteOn(n);
-        emit signal_noteon(n);
+        emit event_noteon(n);
     }
     else if ( event->type() == NoteOffEventType ) {
         NoteOffEvent *ev = static_cast<NoteOffEvent*>(event);
         int n = ev->getNote();
         ui.pianokeybd->showNoteOff(n);
-        emit signal_noteoff(n);
+        emit event_noteoff(n);
     }
-    else if ( event->type() ==  ControllerEventType ) {
-        ControllerEvent *ev = static_cast<ControllerEvent*>(event);
+    else if ( event->type() == PolyKeyPressEventType ) {
+        PolyKeyPressEvent *ev = static_cast<PolyKeyPressEvent*>(event);
+        int n = ev->getNote();
+        int v = ev->getValue();
+        emit event_polykeypress(n, v);
+    }
+    else if ( event->type() ==  ControlChangeEventType ) {
+        ControlChangeEvent *ev = static_cast<ControlChangeEvent*>(event);
         int ctl = ev->getController();
         int val = ev->getValue();
         updateController(ctl, val);
         updateExtraController(ctl, val);
         m_ctlState[m_channel][ctl] = val;
-        emit signal_controller(ctl, val);
+        emit event_controlchange(ctl, val);
     }
-    else if ( event->type() ==  BenderEventType ) {
-        BenderEvent *ev = static_cast<BenderEvent*>(event);
+    else if ( event->type() ==  ProgramChangeEventType) {
+        ProgramChangeEvent *ev = static_cast<ProgramChangeEvent*>(event);
+        int val = ev->getValue();
+        updateProgramChange(val);
+        emit event_programchange(val);
+    }
+    else if ( event->type() ==  ChannelKeyPressEventType ) {
+        ChannelKeyPressEvent *ev = static_cast<ChannelKeyPressEvent*>(event);
+        int val = ev->getValue();
+        emit event_chankeypress(val);
+    }
+    else if ( event->type() ==  PitchWheelEventType ) {
+        PitchWheelEvent *ev = static_cast<PitchWheelEvent*>(event);
         int val = ev->getValue();
         m_bender->setValue(val);
         m_bender->setToolTip(QString::number(val));
-        emit signal_bender(val);
+        emit event_pitchwheel(val);
     }
     event->accept();
 }
@@ -708,7 +740,7 @@ void VPiano::messageWrapper(std::vector<unsigned char> *message) const
     }
 }
 
-void VPiano::noteOn(const int midiNote)
+void VPiano::sendNoteOn(const int midiNote)
 {
     std::vector<unsigned char> message;
     if ((midiNote & MASK_SAFETY) == midiNote) {
@@ -722,7 +754,13 @@ void VPiano::noteOn(const int midiNote)
     }
 }
 
-void VPiano::noteOff(const int midiNote)
+void VPiano::noteOn(const int midiNote)
+{
+    sendNoteOn(midiNote);
+    emit event_noteon(midiNote);
+}
+
+void VPiano::sendNoteOff(const int midiNote)
 {
     std::vector<unsigned char> message;
     if ((midiNote & MASK_SAFETY) == midiNote) {
@@ -736,6 +774,12 @@ void VPiano::noteOff(const int midiNote)
     }
 }
 
+void VPiano::noteOff(const int midiNote)
+{
+    sendNoteOff(midiNote);
+    emit event_noteoff(midiNote);
+}
+
 void VPiano::sendController(const int controller, const int value)
 {
     std::vector<unsigned char> message;
@@ -743,7 +787,7 @@ void VPiano::sendController(const int controller, const int value)
     unsigned char ctl  = static_cast<unsigned char>(controller);
     unsigned char val  = static_cast<unsigned char>(value);
     // Controller: 0xB0 + channel, ctl, val
-    message.push_back(STATUS_CONTROLLER + (chan & MASK_CHANNEL));
+    message.push_back(STATUS_CTLCHG + (chan & MASK_CHANNEL));
     message.push_back(ctl & MASK_SAFETY);
     message.push_back(val & MASK_SAFETY);
     messageWrapper( &message );
@@ -789,7 +833,7 @@ void VPiano::allNotesOff()
     ui.pianokeybd->allKeysOff();
 }
 
-void VPiano::programChange(const int program)
+void VPiano::sendProgramChange(const int program)
 {
     std::vector<unsigned char> message;
     unsigned char chan = static_cast<unsigned char>(m_channel);
@@ -822,6 +866,30 @@ void VPiano::bankChange(const int bank)
         break;
     }
     m_lastBank[m_channel] = bank;
+}
+
+void VPiano::sendPolyKeyPress(const int note, const int value)
+{
+    std::vector<unsigned char> message;
+    unsigned char chan = static_cast<unsigned char>(m_channel);
+    unsigned char midi_note  = static_cast<unsigned char>(note);
+    unsigned char val  = static_cast<unsigned char>(value);
+    // Polyphonic After-touch: 0xA0 + channel, note, value
+    message.push_back(STATUS_POLYAFT + (chan & MASK_CHANNEL));
+    message.push_back(midi_note & MASK_SAFETY);
+    message.push_back(val & MASK_SAFETY);
+    messageWrapper( &message );
+}
+
+void VPiano::sendChanKeyPress(const int value)
+{
+    std::vector<unsigned char> message;
+    unsigned char chan = static_cast<unsigned char>(m_channel);
+    unsigned char val  = static_cast<unsigned char>(value);
+    // Channel After-touch: 0xD0 + channel, value
+    message.push_back(STATUS_CHANAFT + (chan & MASK_CHANNEL));
+    message.push_back(val & MASK_SAFETY);
+    messageWrapper( &message );
 }
 
 void VPiano::sendBender(const int value)
@@ -1122,6 +1190,11 @@ void VPiano::populateInstruments()
                 m_comboBank->addItem(patch.name(), j.key());
                 //qDebug() << "---- Bank[" << j.key() << "]=" << patch.name();
             }
+            m_comboBank->setCurrentIndex(0);
+            int bank = m_comboBank->itemData(0).toInt();
+            if (bank < 0)
+                bank = 0;
+            slotBankChanged(bank);
         }
     }
 }
@@ -1151,8 +1224,11 @@ void VPiano::applyInitialSettings()
 
     for(idx = 0; idx < m_comboBank->count(); ++idx) {
         int bank = m_comboBank->itemData(idx).toInt();
+        if (bank < 0)
+            bank = 0;
         if (bank == m_lastBank[m_channel]) {
             m_comboBank->setCurrentIndex(idx);
+            slotBankChanged(idx);
             break;
         }
     }
@@ -1161,6 +1237,7 @@ void VPiano::applyInitialSettings()
         int pgm = m_comboProg->itemData(idx).toInt();
         if (pgm == m_lastProg[m_channel]) {
             m_comboProg->setCurrentIndex(idx);
+            slotProgChanged(idx);
             break;
         }
     }
@@ -1230,7 +1307,7 @@ void VPiano::slotProgChanged(const int index)
         bankChange(bank);
     int pgm = m_comboProg->itemData(index).toInt();
     if (pgm >= 0)
-        programChange(pgm);
+        sendProgramChange(pgm);
     updateNoteNames(m_channel == dlgPreferences()->getDrumsChannel());
 }
 
@@ -1245,9 +1322,9 @@ void VPiano::slotBaseOctave(const int octave)
 
 void VPiano::slotTranspose(const int transpose)
 {
-        if (transpose != m_transpose) {
-                ui.pianokeybd->setTranspose(transpose);
-                m_transpose = transpose;
+    if (transpose != m_transpose) {
+        ui.pianokeybd->setTranspose(transpose);
+        m_transpose = transpose;
 	}
 }
 
@@ -1295,6 +1372,7 @@ void VPiano::slotChannelChanged(const int channel)
             int bank = m_comboBank->itemData(idx).toInt();
             if (bank == m_lastBank[m_channel]) {
                 m_comboBank->setCurrentIndex(idx);
+                slotBankChanged(idx);
                 break;
             }
         }
@@ -1302,6 +1380,7 @@ void VPiano::slotChannelChanged(const int channel)
             int pgm = m_comboProg->itemData(idx).toInt();
             if (pgm == m_lastProg[m_channel]) {
                 m_comboProg->setCurrentIndex(idx);
+                slotProgChanged(idx);
                 break;
             }
         }
@@ -1336,6 +1415,18 @@ void VPiano::updateExtraController(int ctl, int val)
                 bool checked = (val >= on.toInt());
                 w->setProperty("checked", checked);
             }
+        }
+    }
+}
+
+void VPiano::updateProgramChange(int val)
+{
+    for(int idx = 0; idx < m_comboProg->count(); ++idx) {
+        int pgm = m_comboProg->itemData(idx).toInt();
+        if (pgm == val) {
+            m_comboProg->setCurrentIndex(idx);
+            updateNoteNames(m_channel == dlgPreferences()->getDrumsChannel());
+            break;
         }
     }
 }
@@ -1492,31 +1583,86 @@ void VPiano::slotShowNoteNames()
 //{ }
 
 #if ENABLE_DBUS
-void VPiano::noteon(int note)
+
+void VPiano::quit()
 {
-    noteOn(note);
-    NoteOnEvent *ev = new NoteOnEvent(note);
-    QApplication::postEvent(this, ev);
+    qApp->quit();
+}
+
+void VPiano::panic()
+{
+    slotPanic();
+}
+
+void VPiano::channel(int value)
+{
+    if (value >= 0 && value < MIDICHANNELS)
+        m_sboxChannel->setValue(value + 1);
+}
+
+void VPiano::octave(int value)
+{
+    m_sboxOctave->setValue(value);
+}
+
+void VPiano::transpose(int value)
+{
+    m_sboxTranspose->setValue(value);
+}
+
+void VPiano::velocity(int value)
+{
+    m_Velocity->setValue(value);
 }
 
 void VPiano::noteoff(int note)
 {
-    noteOff(note);
+    sendNoteOff(note);
     NoteOffEvent *ev = new NoteOffEvent(note);
     QApplication::postEvent(this, ev);
 }
 
-void VPiano::controller(int control, int value)
+void VPiano::noteon(int note)
 {
-    sendController(control, value);
-    ControllerEvent *ev = new ControllerEvent(control, value);
+    sendNoteOn(note);
+    NoteOnEvent *ev = new NoteOnEvent(note);
     QApplication::postEvent(this, ev);
 }
 
-void VPiano::bender(int value)
+void VPiano::polykeypress(int note, int value)
 {
-    sendBender(value);
-    BenderEvent *ev = new BenderEvent(value);
+    sendPolyKeyPress(note, value);
+    PolyKeyPressEvent *ev = new PolyKeyPressEvent(note, value);
     QApplication::postEvent(this, ev);
 }
-#endif
+
+void VPiano::controlchange(int control, int value)
+{
+    sendController(control, value);
+    ControlChangeEvent *ev = new ControlChangeEvent(control, value);
+    QApplication::postEvent(this, ev);
+}
+
+void VPiano::programchange(int value)
+{
+    sendProgramChange(value);
+    ProgramChangeEvent *ev = new ProgramChangeEvent(value);
+    QApplication::postEvent(this, ev);
+}
+
+
+void VPiano::chankeypress(int value)
+{
+    sendChanKeyPress(value);
+    ChannelKeyPressEvent *ev = new ChannelKeyPressEvent(value);
+    QApplication::postEvent(this, ev);
+}
+
+void VPiano::pitchwheel(int value)
+{
+    sendBender(value);
+    PitchWheelEvent *ev = new PitchWheelEvent(value);
+    QApplication::postEvent(this, ev);
+}
+
+#endif /* ENABLE_DBUS */

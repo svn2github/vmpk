@@ -30,8 +30,10 @@
 
 #define STATUS_NOTEOFF    0x80
 #define STATUS_NOTEON     0x90
-#define STATUS_CONTROLLER 0xB0
+#define STATUS_POLYAFT    0xA0
+#define STATUS_CTLCHG     0xB0
 #define STATUS_PROGRAM    0xC0
+#define STATUS_CHANAFT    0xD0
 #define STATUS_BENDER     0xE0
 
 #define BENDER_MIN       -8192

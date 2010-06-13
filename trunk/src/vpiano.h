@@ -19,11 +19,9 @@
 #ifndef VPIANO_H
 #define VPIANO_H
 
-#include <QMainWindow>
-#include <QEvent>
-
 #include "ui_vpiano.h"
-#include "mididefs.h"
+#include "pianoscene.h"
+#include <QtGui/QMainWindow>
 
 class QComboBox;
 class QSpinBox;
@@ -40,67 +38,9 @@ class KMapDialog;
 class DialogExtraControls;
 class RiffImportDlg;
 
-const QEvent::Type NoteOnEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEON ));
-const QEvent::Type NoteOffEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_NOTEOFF ));
-const QEvent::Type ControllerEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_CONTROLLER ));
-const QEvent::Type BenderEventType = QEvent::Type( QEvent::registerEventType( QEvent::User + STATUS_BENDER));
-
-class NoteEvent : public QEvent
-{
-public:
-    NoteEvent(unsigned char note, QEvent::Type type)
-        : QEvent(type),
-        m_note(note) { }
-    unsigned char getNote() const { return m_note; }
-private:
-    unsigned char m_note;
-};
-
-class NoteOnEvent : public NoteEvent
-{
-public:
-    NoteOnEvent(unsigned char note)
-        : NoteEvent(note, NoteOnEventType)
-    { }
-};
-
-class NoteOffEvent : public NoteEvent
-{
-public:
-    NoteOffEvent(unsigned char note)
-        : NoteEvent(note, NoteOffEventType)
-    { }
-};
-
-class ControllerEvent : public QEvent
-{
-public:
-    ControllerEvent(unsigned char ctl, unsigned char val)
-        : QEvent(ControllerEventType),
-        m_ctl(ctl),
-        m_value(val)
-        { }
-    unsigned char getController() const { return m_ctl; }
-    unsigned char getValue() const { return m_value; }
-private:
-    unsigned char m_ctl;
-    unsigned char m_value;
-};
-
-class BenderEvent : public QEvent
-{
-public:
-    BenderEvent(int value) : QEvent(BenderEventType), m_value(value)
-    { }
-    int getValue() const { return m_value; }
-private:
-    int m_value;
-};
-
 class VPiano : public QMainWindow, public PianoHandler
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "net.sourceforge.vmpk")
 
 public:
     VPiano( QWidget * parent = 0, Qt::WindowFlags flags = 0 );
@@ -123,17 +63,32 @@ protected:
     void hideEvent( QHideEvent *event );
 
 #if ENABLE_DBUS
+
 public Q_SLOTS:
-    void noteon(int note);
+    void quit();
+    void panic();
+    void channel(int value);
+    void octave(int value);
+    void transpose(int value);
+    void velocity(int value);
+
     void noteoff(int note);
-    void controller(int control, int value);
-    void bender(int value);
+    void noteon(int note);
+    void polykeypress(int note, int value);
+    void controlchange(int control, int value);
+    void programchange(int value);
+    void chankeypress(int value);
+    void pitchwheel(int value);
 
 Q_SIGNALS:
-    void signal_noteon(int note);
-    void signal_noteoff(int note);
-    void signal_controller(int control, int value);
-    void signal_bender(int value);
+    void event_noteoff(int note);
+    void event_noteon(int note);
+    void event_polykeypress(int note, int value);
+    void event_controlchange(int control, int value);
+    void event_programchange(int value);
+    void event_chankeypress(int value);
+    void event_pitchwheel(int value);
+
 #endif /*ENABLE_DBUS*/
 
 protected Q_SLOTS:
@@ -184,11 +139,16 @@ private:
     void resetAllControllers();
     void allNotesOff();
     void bankChange(const int bank);
-    void programChange(const int program);
+    void sendNoteOn(const int midiNote);
+    void sendNoteOff(const int midiNote);
+    void sendProgramChange(const int program);
     void sendBender(const int value);
+    void sendPolyKeyPress(const int note, const int value);
+    void sendChanKeyPress(const int value);
     void messageWrapper(std::vector<unsigned char> *message) const;
     void updateController(int ctl, int val);
     void updateExtraController(int ctl, int val);
+    void updateProgramChange(int val);
     void grabKb();
     void releaseKb();
     void updateStyles();
