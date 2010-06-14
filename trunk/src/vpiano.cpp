@@ -1296,6 +1296,7 @@ void VPiano::slotBankChanged(const int index)
         //qDebug() << "patch[" << k.key() << "]=" << k.value();
         m_comboProg->addItem(k.value(), k.key());
     }
+    slotProgChanged(0);
 }
 
 void VPiano::slotProgChanged(const int index)
@@ -1394,6 +1395,23 @@ void VPiano::updateController(int ctl, int val)
     if (controller == ctl) {
         m_Control->setValue(val);
         m_Control->setToolTip(QString::number(val));
+    }
+    m_ctlState[m_channel][ctl] = val;
+    if ((ctl == CTL_MSB || ctl == CTL_LSB ) && m_ins != NULL) {
+        if (m_ins->bankSelMethod() == 0)
+            m_lastBank[m_channel] = m_ctlState[m_channel][CTL_MSB] << 7 |
+                                    m_ctlState[m_channel][CTL_LSB];
+        else
+            m_lastBank[m_channel] = val;
+
+        for(int idx = 0; idx < m_comboBank->count(); ++idx) {
+            int bank = m_comboBank->itemData(idx).toInt();
+            if (bank == m_lastBank[m_channel]) {
+                m_comboBank->setCurrentIndex(idx);
+                slotBankChanged(idx);
+                break;
+            }
+        }
     }
 }
 
