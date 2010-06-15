@@ -61,10 +61,14 @@ public:
 public Q_SLOTS:
     void quit();
     void panic();
+    void reset_controllers();
     void channel(int value);
     void octave(int value);
     void transpose(int value);
     void velocity(int value);
+    void connect_in(const QString &value);
+    void connect_out(const QString &value);
+    void connect_thru(bool value);
 
     void noteoff(int note);
     void noteon(int note);

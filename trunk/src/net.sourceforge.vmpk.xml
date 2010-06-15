@@ -9,6 +9,9 @@
     <method name="panic">
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
+    <method name="reset_controllers">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
     <method name="channel">
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
       <arg name="value" type="i" direction="in"/>
@@ -24,6 +27,18 @@
     <method name="velocity">
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
       <arg name="value" type="i" direction="in"/>
+    </method>
+    <method name="connect_in">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+      <arg name="value" type="s" direction="in"/>
+    </method>
+    <method name="connect_out">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+      <arg name="value" type="s" direction="in"/>
+    </method>
+    <method name="connect_thru">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+      <arg name="value" type="b" direction="in"/>
     </method>
 <!-- standard MIDI channel event generators -->
     <method name="noteoff">

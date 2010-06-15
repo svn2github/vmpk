@@ -1605,6 +1605,11 @@ void VPiano::panic()
     allNotesOff();
 }
 
+void VPiano::reset_controllers()
+{
+    resetAllControllers();
+}
+
 void VPiano::channel(int value)
 {
     if (value >= 0 && value < MIDICHANNELS)
@@ -1624,6 +1629,31 @@ void VPiano::transpose(int value)
 void VPiano::velocity(int value)
 {
     m_Velocity->setValue(value);
+}
+
+void VPiano::connect_in(const QString &value)
+{
+    if( m_midiin != 0) {
+        dlgMidiSetup()->setInputEnabled(true);
+        dlgMidiSetup()->setCurrentInput(value);
+        applyConnections();
+    }
+}
+
+void VPiano::connect_out(const QString &value)
+{
+    if( m_midiout != 0) {
+        dlgMidiSetup()->setCurrentOutput(value);
+        applyConnections();
+    }
+}
+
+void VPiano::connect_thru(bool value)
+{
+    if( m_midiin != 0 && m_midiout != 0) {
+        dlgMidiSetup()->setThruEnabled(value);
+        applyConnections();
+    }
 }
 
 void VPiano::noteoff(int note)
