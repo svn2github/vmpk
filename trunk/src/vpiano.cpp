@@ -1201,7 +1201,7 @@ void VPiano::populateInstruments()
 
 void VPiano::applyInitialSettings()
 {
-    int idx;
+    int idx, ctl;
     for ( int ch=0; ch<MIDICHANNELS; ++ch) {
         initControllers(ch);
         QMap<int,int>::Iterator i, j, end;
@@ -1213,10 +1213,11 @@ void VPiano::applyInitialSettings()
                 m_ctlState[ch][i.key()] = i.value();
         }
     }
-
-    idx = m_comboControl->findData(m_lastCtl[m_channel]);
+    ctl = m_lastCtl[m_channel];
+    idx = m_comboControl->findData(ctl);
     if (idx != -1)
         m_comboControl->setCurrentIndex(idx);
+    slotControlSliderMoved(m_ctlState[m_channel][ctl]);
     updateBankChange(m_lastBank[m_channel]);
     idx = m_comboProg->findData(m_lastProg[m_channel]);
     m_comboProg->setCurrentIndex(idx);
@@ -1447,6 +1448,7 @@ void VPiano::slotComboControlCurrentIndexChanged(const int index)
     m_Control->setValue(val);
     m_Control->setToolTip(QString::number(val));
     m_lastCtl[m_channel] = ctl;
+    slotControlSliderMoved(val);
 }
 
 void VPiano::grabKb()
