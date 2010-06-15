@@ -201,6 +201,10 @@ IF (UNIX AND NOT APPLE)
         DESTINATION share/icons/hicolor/64x64/apps   
         RENAME vmpk.png)
 
+    INSTALL(FILES data/vmpk_128x128.png 
+        DESTINATION share/icons/hicolor/128x128/apps   
+        RENAME vmpk.png)
+
     INSTALL(FILES data/vmpk.svgz
         DESTINATION share/icons/hicolor/scalable/apps )   
     
