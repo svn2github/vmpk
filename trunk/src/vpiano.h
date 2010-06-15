@@ -56,12 +56,6 @@ public:
     // static methods
     static QString dataDirectory();
 
-protected:
-    void closeEvent ( QCloseEvent *event );
-    void customEvent ( QEvent *event );
-    void showEvent ( QShowEvent *event );
-    void hideEvent( QHideEvent *event );
-
 #if ENABLE_DBUS
 
 public Q_SLOTS:
@@ -110,8 +104,8 @@ protected Q_SLOTS:
     void slotControlClicked(const bool value);
     void slotBenderSliderMoved(const int pos);
     void slotBenderSliderReleased();
-    void slotComboBankActivated(const int index);
-    void slotComboProgActivated(const int index);
+    void slotComboBankActivated(const int index = -1);
+    void slotComboProgActivated(const int index = -1);
     void slotBaseOctaveValueChanged(const int octave);
     void slotTransposeValueChanged(const int transpose);
     void slotVelocityValueChanged(int value);
@@ -119,6 +113,12 @@ protected Q_SLOTS:
     void slotComboControlCurrentIndexChanged(const int index);
     //void slotEditPrograms();
     //void slotDebugDestroyed(QObject *obj);
+
+protected:
+    void closeEvent ( QCloseEvent *event );
+    void customEvent ( QEvent *event );
+    void showEvent ( QShowEvent *event );
+    void hideEvent( QHideEvent *event );
 
 private:
     void initialization();
@@ -128,8 +128,9 @@ private:
     void applyPreferences();
     void applyConnections();
     void applyInitialSettings();
-    void populateInstruments();
     void populateControllers();
+    void populateInstruments();
+    void populatePrograms(int bank = -1);
     void refreshConnections();
     void initToolBars();
     void clearExtraControllers();
@@ -149,7 +150,8 @@ private:
     void sendMessageWrapper(std::vector<unsigned char> *message) const;
     void updateController(int ctl, int val);
     void updateExtraController(int ctl, int val);
-    void updateProgramChange(int val);
+    void updateBankChange(int bank = -1);
+    void updateProgramChange(int program = -1);
     void grabKb();
     void releaseKb();
     void updateStyles();

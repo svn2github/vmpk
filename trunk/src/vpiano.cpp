@@ -36,17 +36,17 @@
 #include <QtDBus/QDBusConnection>
 #endif
 
-#include <QString>
-#include <QSettings>
-#include <QInputDialog>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QApplication>
-#include <QCloseEvent>
-#include <QComboBox>
-#include <QSlider>
-#include <QSpinBox>
-#include <QDial>
+#include <QtCore/QString>
+#include <QtCore/QSettings>
+#include <QtGui/QInputDialog>
+#include <QtGui/QFileDialog>
+#include <QtGui/QMessageBox>
+#include <QtGui/QApplication>
+#include <QtGui/QCloseEvent>
+#include <QtGui/QComboBox>
+#include <QtGui/QSlider>
+#include <QtGui/QSpinBox>
+#include <QtGui/QDial>
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
@@ -64,14 +64,12 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     m_dlgExtra(NULL),
     m_dlgRiffImport(NULL)
 {
-
 #if ENABLE_DBUS
     new VmpkAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/", this);
     dbus.registerService("net.sourceforge.vmpk");
 #endif
-
     ui.setupUi(this);
     ui.actionStatusBar->setChecked(false);
     connect(ui.actionAbout, SIGNAL(triggered()), SLOT(slotAbout()));
@@ -489,7 +487,6 @@ void VPiano::initExtraControllers()
 void VPiano::readSettings()
 {
     QSettings settings;
-
     settings.beginGroup(QSTR_WINDOW);
     restoreGeometry(settings.value(QSTR_GEOMETRY).toByteArray());
     restoreState(settings.value(QSTR_STATE).toByteArray());
@@ -853,7 +850,6 @@ void VPiano::sendProgramChange(const int program)
     message.push_back(STATUS_PROGRAM + (chan & MASK_CHANNEL));
     message.push_back(pgm & MASK_SAFETY);
     sendMessageWrapper( &message );
-    m_lastProg[m_channel] = program;
 }
 
 void VPiano::sendBankChange(const int bank)
@@ -1161,7 +1157,6 @@ void VPiano::applyPreferences()
 
     populateInstruments();
     populateControllers();
-    updateNoteNames(m_channel == dlgPreferences()->getDrumsChannel());
 
     QPoint wpos = pos();
     Qt::WindowFlags flags = windowFlags();
@@ -1199,11 +1194,7 @@ void VPiano::populateInstruments()
                 m_comboBank->addItem(patch.name(), j.key());
                 //qDebug() << "---- Bank[" << j.key() << "]=" << patch.name();
             }
-            m_comboBank->setCurrentIndex(0);
-            int bank = m_comboBank->itemData(0).toInt();
-            if (bank < 0)
-                bank = 0;
-            slotComboBankActivated(bank);
+            updateBankChange(m_lastBank[m_channel]);
         }
     }
 }
@@ -1223,33 +1214,13 @@ void VPiano::applyInitialSettings()
         }
     }
 
-    for(idx = 0; idx < m_comboControl->count(); ++idx) {
-        int ctl = m_comboControl->itemData(idx).toInt();
-        if (ctl == m_lastCtl[m_channel]) {
-            m_comboControl->setCurrentIndex(idx);
-            break;
-        }
-    }
-
-    for(idx = 0; idx < m_comboBank->count(); ++idx) {
-        int bank = m_comboBank->itemData(idx).toInt();
-        if (bank < 0)
-            bank = 0;
-        if (bank == m_lastBank[m_channel]) {
-            m_comboBank->setCurrentIndex(idx);
-            slotComboBankActivated(idx);
-            break;
-        }
-    }
-
-    for(idx = 0; idx < m_comboProg->count(); ++idx) {
-        int pgm = m_comboProg->itemData(idx).toInt();
-        if (pgm == m_lastProg[m_channel]) {
-            m_comboProg->setCurrentIndex(idx);
-            slotComboProgActivated(idx);
-            break;
-        }
-    }
+    idx = m_comboControl->findData(m_lastCtl[m_channel]);
+    if (idx != -1)
+        m_comboControl->setCurrentIndex(idx);
+    updateBankChange(m_lastBank[m_channel]);
+    idx = m_comboProg->findData(m_lastProg[m_channel]);
+    m_comboProg->setCurrentIndex(idx);
+    slotComboProgActivated(idx);
 }
 
 void VPiano::slotPreferences()
@@ -1294,30 +1265,44 @@ void VPiano::slotEditKeyboardMap()
     grabKb();
 }
 
-void VPiano::slotComboBankActivated(const int index)
+void VPiano::populatePrograms(int bank)
 {
+    if (bank < 0)
+        return;
     m_comboProg->clear();
-    if (index < 0) return;
-    int bank = m_comboBank->itemData(index).toInt();
     InstrumentData patch = m_ins->patch(bank);
     InstrumentData::ConstIterator k;
-    for( k = patch.constBegin(); k != patch.constEnd(); ++k ) {
-        //qDebug() << "patch[" << k.key() << "]=" << k.value();
+    for( k = patch.constBegin(); k != patch.constEnd(); ++k )
         m_comboProg->addItem(k.value(), k.key());
-    }
-    slotComboProgActivated(0);
+        //qDebug() << "patch[" << k.key() << "]=" << k.value();
+}
+
+void VPiano::slotComboBankActivated(const int index)
+{
+    int idx = index;
+    if (idx < 0)
+        m_comboBank->setCurrentIndex(idx = 0);
+    int bank = m_comboBank->itemData(idx).toInt();
+    populatePrograms(bank);
+    slotComboProgActivated();
 }
 
 void VPiano::slotComboProgActivated(const int index)
 {
-    if (index < 0) return;
+    int idx = index;
+    if (idx < 0)
+        m_comboProg->setCurrentIndex(idx = 0);
     int bankIdx = m_comboBank->currentIndex();
     int bank = m_comboBank->itemData(bankIdx).toInt();
-    if (bank >= 0)
+    if (bank >= 0) {
         sendBankChange(bank);
-    int pgm = m_comboProg->itemData(index).toInt();
-    if (pgm >= 0)
+        m_lastBank[m_channel] = bank;
+    }
+    int pgm = m_comboProg->itemData(idx).toInt();
+    if (pgm >= 0) {
         sendProgramChange(pgm);
+        m_lastProg[m_channel] = pgm;
+    }
     updateNoteNames(m_channel == dlgPreferences()->getDrumsChannel());
 }
 
@@ -1367,33 +1352,16 @@ void VPiano::slotChannelValueChanged(const int channel)
         if (updDrums) {
             populateInstruments();
             populateControllers();
-            updateNoteNames(m_channel == drms);
         }
-        for(idx = 0; idx < m_comboControl->count(); ++idx) {
-            int ctl = m_comboControl->itemData(idx).toInt();
-            if (ctl == m_lastCtl[m_channel]) {
-                m_comboControl->setCurrentIndex(idx);
-                updateController(ctl, m_ctlState[m_channel][ctl]);
-                updateExtraController(ctl, m_ctlState[m_channel][ctl]);
-                break;
-            }
+        idx = m_comboControl->findData(m_lastCtl[m_channel]);
+        if (idx != -1) {
+            int ctl = m_lastCtl[m_channel];
+            m_comboControl->setCurrentIndex(idx);
+            updateController(ctl, m_ctlState[m_channel][ctl]);
+            updateExtraController(ctl, m_ctlState[m_channel][ctl]);
         }
-        for(idx = 0; idx < m_comboBank->count(); ++idx) {
-            int bank = m_comboBank->itemData(idx).toInt();
-            if (bank == m_lastBank[m_channel]) {
-                m_comboBank->setCurrentIndex(idx);
-                slotComboBankActivated(idx);
-                break;
-            }
-        }
-        for(idx = 0; idx < m_comboProg->count(); ++idx) {
-            int pgm = m_comboProg->itemData(idx).toInt();
-            if (pgm == m_lastProg[m_channel]) {
-                m_comboProg->setCurrentIndex(idx);
-                slotComboProgActivated(idx);
-                break;
-            }
-        }
+        updateBankChange(m_lastBank[m_channel]);
+        updateProgramChange(m_lastProg[m_channel]);
     }
 }
 
@@ -1413,14 +1381,7 @@ void VPiano::updateController(int ctl, int val)
         else
             m_lastBank[m_channel] = val;
 
-        for(int idx = 0; idx < m_comboBank->count(); ++idx) {
-            int bank = m_comboBank->itemData(idx).toInt();
-            if (bank == m_lastBank[m_channel]) {
-                m_comboBank->setCurrentIndex(idx);
-                slotComboBankActivated(idx);
-                break;
-            }
-        }
+        updateBankChange(m_lastBank[m_channel]);
     }
 }
 
@@ -1446,17 +1407,37 @@ void VPiano::updateExtraController(int ctl, int val)
     }
 }
 
-void VPiano::updateProgramChange(int val)
+void VPiano::updateBankChange(int bank)
 {
-    for(int idx = 0; idx < m_comboProg->count(); ++idx) {
-        int pgm = m_comboProg->itemData(idx).toInt();
-        if (pgm == val) {
-            m_comboProg->setCurrentIndex(idx);
-            m_lastProg[m_channel] = val;
-            updateNoteNames(m_channel == dlgPreferences()->getDrumsChannel());
-            break;
+    int idx;
+    if (bank < 0) {
+        m_comboBank->setCurrentIndex(idx = 0);
+        bank = m_comboBank->itemData(idx).toInt();
+    } else {
+        idx = m_comboBank->findData(bank);
+        if (idx != -1) {
+            m_comboBank->setCurrentIndex(idx);
+            m_lastBank[m_channel] = bank;
         }
     }
+    populatePrograms(bank);
+    updateProgramChange();
+}
+
+void VPiano::updateProgramChange(int program)
+{
+    int idx;
+    if (program < 0) {
+        m_comboProg->setCurrentIndex(idx = 0);
+        program = m_comboProg->itemData(idx).toInt();
+    } else {
+        idx = m_comboProg->findData(program);
+        if (idx != -1) {
+            m_comboProg->setCurrentIndex(idx);
+            m_lastProg[m_channel] = program;
+        }
+    }
+    updateNoteNames(m_channel == dlgPreferences()->getDrumsChannel());
 }
 
 void VPiano::slotComboControlCurrentIndexChanged(const int index)
@@ -1677,7 +1658,6 @@ void VPiano::programchange(int value)
     ProgramChangeEvent *ev = new ProgramChangeEvent(value);
     QApplication::postEvent(this, ev);
 }
-
 
 void VPiano::chankeypress(int value)
 {
