@@ -75,6 +75,7 @@ public Q_SLOTS:
     void polykeypress(int note, int value);
     void controlchange(int control, int value);
     void programchange(int value);
+    void programnamechange(const QString &value);
     void chankeypress(int value);
     void pitchwheel(int value);
 

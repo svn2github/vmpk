@@ -4,9 +4,8 @@ import sys
 import time
 import dbus
 
-def main():
+if __name__ == '__main__':
     bus = dbus.SessionBus()
-
     try:
         object = bus.get_object("net.sourceforge.vmpk", "/")
     except dbus.DBusException:
@@ -15,7 +14,8 @@ def main():
 
     # interface methods
     interface = dbus.Interface(object, "net.sourceforge.vmpk")
-    interface.programchange(73);
+    #interface.programchange(73);
+    interface.programnamechange("flute");
     interface.noteon(69);
     time.sleep(1);
     interface.noteoff(69);
@@ -25,6 +25,3 @@ def main():
 
     # close vmpk
     interface.quit()
-
-if __name__ == '__main__':
-    main()

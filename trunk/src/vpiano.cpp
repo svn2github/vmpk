@@ -1691,6 +1691,15 @@ void VPiano::programchange(int value)
     QApplication::postEvent(this, ev);
 }
 
+void VPiano::programnamechange(const QString &value)
+{
+    int idx = m_comboProg->findText(value, Qt::MatchFixedString);
+    if (idx != -1) {
+        int prg = m_comboProg->itemData(idx).toInt();
+        programchange(prg);
+    }
+}
+
 void VPiano::chankeypress(int value)
 {
     sendChanKeyPress(value);

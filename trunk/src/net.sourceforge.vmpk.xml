@@ -63,6 +63,10 @@
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
       <arg name="value" type="i" direction="in"/>
     </method>
+    <method name="programnamechange">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+      <arg name="value" type="s" direction="in"/>
+    </method>
     <method name="chankeypress">
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
       <arg name="value" type="i" direction="in"/>
