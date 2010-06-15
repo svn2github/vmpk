@@ -1217,11 +1217,11 @@ void VPiano::applyInitialSettings()
     idx = m_comboControl->findData(ctl);
     if (idx != -1)
         m_comboControl->setCurrentIndex(idx);
-    slotControlSliderMoved(m_ctlState[m_channel][ctl]);
+    //slotControlSliderMoved(m_ctlState[m_channel][ctl]);
     updateBankChange(m_lastBank[m_channel]);
     idx = m_comboProg->findData(m_lastProg[m_channel]);
     m_comboProg->setCurrentIndex(idx);
-    slotComboProgActivated(idx);
+    //slotComboProgActivated(idx);
 }
 
 void VPiano::slotPreferences()
@@ -1448,7 +1448,7 @@ void VPiano::slotComboControlCurrentIndexChanged(const int index)
     m_Control->setValue(val);
     m_Control->setToolTip(QString::number(val));
     m_lastCtl[m_channel] = ctl;
-    slotControlSliderMoved(val);
+    //slotControlSliderMoved(val);
 }
 
 void VPiano::grabKb()
