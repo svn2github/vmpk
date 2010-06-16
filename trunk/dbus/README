@@ -4,7 +4,29 @@ VMPK D-Bus interface
 Interface name: "net.sourceforge.vmpk"
 Path: "/"
 
-Methods:
+Window control methods:
+    void hide();
+    void lower();
+    void move(int x, int y);
+    void raise();
+    void repaint();
+    void resize(int width, int height);
+    void setDisabled(bool disable);
+    void setEnabled(bool enable);
+    void setFocus();
+    void setHidden(bool hidden);
+    void setStyleSheet(const QString &styleSheet);
+    void setVisible(bool visible);
+    void setWindowModified(bool modified);
+    void setWindowTitle(const QString &title);
+    void show();
+    void showFullScreen();
+    void showMaximized();
+    void showMinimized();
+    void showNormal();
+    void update();
+
+Program methods:
     void quit();
     void panic();
     void reset_controllers();
@@ -16,6 +38,7 @@ Methods:
     void connect_out(const QString &value);
     void connect_thru(bool value);
 
+MIDI methods:
     void noteoff(int note);
     void noteon(int note);
     void polykeypress(int note, int value);
