@@ -109,7 +109,7 @@ VPiano::~VPiano()
 
 void VPiano::initialization()
 {
-    if (m_initialized = initMidi()) {
+    if ((m_initialized = initMidi())) {
         refreshConnections();
         readSettings();
         initToolBars();
@@ -670,19 +670,25 @@ void VPiano::customEvent ( QEvent *event )
         NoteOnEvent *ev = static_cast<NoteOnEvent*>(event);
         int n = ev->getNote();
         ui.pianokeybd->showNoteOn(n);
+#ifdef ENABLE_DBUS
         emit event_noteon(n);
+#endif
     }
     else if ( event->type() == NoteOffEventType ) {
         NoteOffEvent *ev = static_cast<NoteOffEvent*>(event);
         int n = ev->getNote();
         ui.pianokeybd->showNoteOff(n);
+#ifdef ENABLE_DBUS
         emit event_noteoff(n);
+#endif
     }
     else if ( event->type() == PolyKeyPressEventType ) {
+#ifdef ENABLE_DBUS
         PolyKeyPressEvent *ev = static_cast<PolyKeyPressEvent*>(event);
         int n = ev->getNote();
         int v = ev->getValue();
         emit event_polykeypress(n, v);
+#endif
     }
     else if ( event->type() ==  ControlChangeEventType ) {
         ControlChangeEvent *ev = static_cast<ControlChangeEvent*>(event);
@@ -690,25 +696,33 @@ void VPiano::customEvent ( QEvent *event )
         int val = ev->getValue();
         updateController(ctl, val);
         updateExtraController(ctl, val);
+#ifdef ENABLE_DBUS
         emit event_controlchange(ctl, val);
+#endif
     }
     else if ( event->type() ==  ProgramChangeEventType) {
         ProgramChangeEvent *ev = static_cast<ProgramChangeEvent*>(event);
         int val = ev->getValue();
         updateProgramChange(val);
+#ifdef ENABLE_DBUS
         emit event_programchange(val);
+#endif
     }
     else if ( event->type() ==  ChannelKeyPressEventType ) {
+#ifdef ENABLE_DBUS
         ChannelKeyPressEvent *ev = static_cast<ChannelKeyPressEvent*>(event);
         int val = ev->getValue();
         emit event_chankeypress(val);
+#endif
     }
     else if ( event->type() ==  PitchWheelEventType ) {
         PitchWheelEvent *ev = static_cast<PitchWheelEvent*>(event);
         int val = ev->getValue();
         m_bender->setValue(val);
         m_bender->setToolTip(QString::number(val));
+#ifdef ENABLE_DBUS
         emit event_pitchwheel(val);
+#endif
     }
     event->accept();
 }
@@ -765,7 +779,9 @@ void VPiano::sendNoteOn(const int midiNote)
 void VPiano::noteOn(const int midiNote)
 {
     sendNoteOn(midiNote);
+#ifdef ENABLE_DBUS
     emit event_noteon(midiNote);
+#endif
 }
 
 void VPiano::sendNoteOff(const int midiNote)
@@ -785,7 +801,9 @@ void VPiano::sendNoteOff(const int midiNote)
 void VPiano::noteOff(const int midiNote)
 {
     sendNoteOff(midiNote);
+#ifdef ENABLE_DBUS
     emit event_noteoff(midiNote);
+#endif
 }
 
 void VPiano::sendController(const int controller, const int value)
@@ -1321,7 +1339,7 @@ void VPiano::slotTransposeValueChanged(const int transpose)
     if (transpose != m_transpose) {
         ui.pianokeybd->setTranspose(transpose);
         m_transpose = transpose;
-	}
+        }
 }
 
 void VPiano::updateNoteNames(bool drums)
