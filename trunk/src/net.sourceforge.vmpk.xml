@@ -2,6 +2,61 @@
   "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
   <interface name="net.sourceforge.vmpk">
+<!-- window/widget interface controls -->
+    <method name="close">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
+    <method name="hide">
+    </method>
+    <method name="lower">
+    </method>
+    <method name="raise">
+    </method>
+    <method name="repaint">
+    </method>
+    <method name="setDisabled">
+      <arg name="disable" type="b" direction="in"/>
+    </method> 
+    <method name="setEnabled">
+      <arg name="enable" type="b" direction="in"/>
+    </method> 
+    <method name="setFocus">
+    </method> 
+    <method name="setHidden">
+      <arg name="hidden" type="b" direction="in"/>
+    </method> 
+    <method name="setStyleSheet">
+      <arg name="styleSheet" type="s" direction="in"/>
+    </method> 
+    <method name="setVisible">
+      <arg name="visible" type="b" direction="in"/>
+    </method>
+    <method name="setWindowModified">
+      <arg name="modified" type="b" direction="in"/>
+    </method>
+    <method name="setWindowTitle">
+      <arg name="title" type="s" direction="in"/>
+    </method>
+    <method name="show">
+    </method>
+    <method name="showFullScreen">
+    </method>
+    <method name="showMaximized">
+    </method>
+    <method name="showMinimized">
+    </method>
+    <method name="showNormal">
+    </method>
+    <method name="update">
+    </method>
+    <method name="resize">
+      <arg name="width" type="i" direction="in"/>
+      <arg name="height" type="i" direction="in"/>
+    </method>
+    <method name="move">
+      <arg name="x" type="i" direction="in"/>
+      <arg name="y" type="i" direction="in"/>
+    </method>
 <!-- basic program interface controls -->
     <method name="quit">
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
