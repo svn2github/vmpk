@@ -19,9 +19,9 @@
 #ifndef KMAPDIALOG_H
 #define KMAPDIALOG_H
 
-#include <QDialog>
 #include "ui_kmapdialog.h"
 #include "keyboardmap.h"
+#include <QtGui/QDialog>
 
 class KMapDialog : public QDialog
 {

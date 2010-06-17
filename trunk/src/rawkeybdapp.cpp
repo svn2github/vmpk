@@ -17,10 +17,9 @@
 */
 
 #include "rawkeybdapp.h"
-//#include <QDebug>
 
 #if defined(Q_WS_X11)
-#include <QX11Info>
+#include <QtGui/QX11Info>
 #include <X11/Xlib.h>
 struct qt_auto_repeat_data
 {

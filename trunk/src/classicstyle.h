@@ -32,7 +32,7 @@
 #ifndef CLASSICTYLE_H_
 #define CLASSICTYLE_H_
 
-#include <QtGui>
+#include <QtGui/QCommonStyle>
 
 class ClassicStyle : public QCommonStyle
 {

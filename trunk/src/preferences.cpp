@@ -20,10 +20,10 @@
 #include "constants.h"
 #include "vpiano.h"
 
-#include <QPushButton>
-#include <QShowEvent>
-#include <QFileDialog>
-#include <QColorDialog>
+#include <QtGui/QPushButton>
+#include <QtGui/QShowEvent>
+#include <QtGui/QFileDialog>
+#include <QtGui/QColorDialog>
 
 Preferences::Preferences(QWidget *parent)
     : QDialog(parent),

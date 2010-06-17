@@ -18,10 +18,10 @@
 
 #include "pianoscene.h"
 #include "rawkeybdapp.h"
-#include <QApplication>
-#include <QPalette>
-#include <QGraphicsSceneMouseEvent>
-#include <QKeyEvent>
+#include <QtGui/QApplication>
+#include <QtGui/QPalette>
+#include <QtGui/QGraphicsSceneMouseEvent>
+#include <QtGui/QKeyEvent>
 
 #define KEYWIDTH  18
 #define KEYHEIGHT 72

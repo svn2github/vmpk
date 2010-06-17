@@ -38,6 +38,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QSettings>
+#include <QtGui/QDesktopServices>
 #include <QtGui/QInputDialog>
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
@@ -47,6 +48,8 @@
 #include <QtGui/QSlider>
 #include <QtGui/QSpinBox>
 #include <QtGui/QDial>
+#include <QtGui/QToolButton>
+#include <QtGui/QToolTip>
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
@@ -1434,6 +1437,8 @@ void VPiano::updateBankChange(int bank)
     if (bank < 0) {
         m_comboBank->setCurrentIndex(idx = 0);
         bank = m_comboBank->itemData(idx).toInt();
+        if (bank < 0)
+            bank = 0;
     } else {
         idx = m_comboBank->findData(bank);
         if (idx != -1) {

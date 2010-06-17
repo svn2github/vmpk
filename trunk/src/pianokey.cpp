@@ -17,10 +17,10 @@
 */
 
 #include "pianokey.h"
-#include <QApplication>
-#include <QPainter>
-#include <QPalette>
-#include <QSvgRenderer>
+#include <QtGui/QApplication>
+#include <QtGui/QPainter>
+#include <QtGui/QPalette>
+#include <QtSvg/QSvgRenderer>
 
 static const QBrush blackBrush = QBrush(Qt::black);
 static const QBrush whiteBrush = QBrush(Qt::white);

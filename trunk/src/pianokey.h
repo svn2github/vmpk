@@ -20,8 +20,8 @@
 #define PIANOKEY_H_
 
 #include "pianodefs.h"
-#include <QGraphicsRectItem>
-#include <QBrush>
+#include <QtGui/QGraphicsRectItem>
+#include <QtGui/QBrush>
 
 class VPIANO_EXPORT PianoKey : public QGraphicsRectItem
 {

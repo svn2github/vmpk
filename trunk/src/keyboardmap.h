@@ -19,9 +19,9 @@
 #ifndef KEYBOARDMAP_H
 #define KEYBOARDMAP_H
 
-#include <QHash>
-#include <QIODevice>
 #include "constants.h"
+#include <QtCore/QHash>
+#include <QtCore/QIODevice>
 
 class KeyboardMap : public QHash<int, int>
 {

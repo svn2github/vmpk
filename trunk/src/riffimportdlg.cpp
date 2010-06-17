@@ -16,11 +16,11 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QFileInfo>
-#include <QFile>
-#include <QTextStream>
-#include <QFileDialog>
-#include <QDesktopServices>
+#include <QtCore/QFileInfo>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QtGui/QFileDialog>
+#include <QtGui/QDesktopServices>
 
 #include "riffimportdlg.h"
 #include "ui_riffimportdlg.h"

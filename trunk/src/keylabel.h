@@ -20,7 +20,7 @@
 #define KEYLABEL_H
 
 #include "pianodefs.h"
-#include <QGraphicsTextItem>
+#include <QtGui/QGraphicsTextItem>
 
 class VPIANO_EXPORT KeyLabel : public QGraphicsTextItem
 {

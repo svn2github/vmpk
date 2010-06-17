@@ -19,8 +19,8 @@
 #ifndef RIFF_H
 #define RIFF_H
 
-#include <QObject>
-#include <QDataStream>
+#include <QtCore/QObject>
+#include <QtCore/QDataStream>
 
 #define CKID_RIFF 0x46464952
 #define CKID_LIST 0x5453494c

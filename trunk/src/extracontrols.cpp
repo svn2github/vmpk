@@ -19,8 +19,8 @@
 #include "extracontrols.h"
 #include "qticonloader.h"
 #include "ui_extracontrols.h"
-#include <QFileDialog>
-#include <QPushButton>
+#include <QtGui/QFileDialog>
+#include <QtGui/QPushButton>
 
 DialogExtraControls::DialogExtraControls(QWidget *parent) :
     QDialog(parent),

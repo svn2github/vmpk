@@ -20,9 +20,9 @@
 #include "vpiano.h"
 #include "rawkeybdapp.h"
 
-#include <QtGui>
-#include <QApplication>
-#include <QLibraryInfo>
+#include <QtGui/QApplication>
+#include <QtCore/QLibraryInfo>
+#include <QtCore/QTranslator>
 
 int main(int argc, char *argv[])
 {

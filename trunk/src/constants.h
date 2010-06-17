@@ -19,8 +19,8 @@
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 
-#include <QApplication>
-#include <QString>
+#include <QtGui/QApplication>
+#include <QtCore/QString>
 #include "vmpk_version.h"
 
 /* Don't translate any string defined in this header */

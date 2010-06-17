@@ -20,7 +20,7 @@
 #define RIFFIMPORTDLG_H
 
 #include <QtGui/QDialog>
-#include <QMap>
+#include <QtCore/QMap>
 
 #include "riff.h"
 

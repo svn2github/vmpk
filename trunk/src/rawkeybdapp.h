@@ -20,7 +20,7 @@
 #define RAWKEYBDAPP_H
 
 #include "pianodefs.h"
-#include <QApplication>
+#include <QtGui/QApplication>
 
 class RawKbdHandler {
 public:

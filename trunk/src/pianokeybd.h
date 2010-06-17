@@ -21,7 +21,7 @@
 
 #include "pianoscene.h"
 #include "rawkeybdapp.h"
-#include <QGraphicsView>
+#include <QtGui/QGraphicsView>
 
 #if defined(VPIANO_PLUGIN)
 #include <QtDesigner/QDesignerExportWidget>

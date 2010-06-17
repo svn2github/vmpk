@@ -23,7 +23,7 @@
 #ifndef KNOB_H
 #define KNOB_H
 
-#include <QDial>
+#include <QtGui/QDial>
 
 //-------------------------------------------------------------------------
 // Knob - A better QDial

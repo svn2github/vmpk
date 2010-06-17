@@ -29,11 +29,12 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QtGui>
-#include <QSvgRenderer>
-#include <iostream>
-#include <cmath>
 #include "classicstyle.h"
+
+#include <QtGui/QPainter>
+#include <QtGui/QStyleOptionSlider>
+#include <QtSvg/QSvgRenderer>
+#include <qmath.h>
 
 #define DIAL_MIN (0.25 * M_PI)
 #define DIAL_MAX (1.75 * M_PI)
@@ -42,17 +43,17 @@
 static void drawTick(QPainter *p, float angle, int size, bool internal)
 {
 	float hyp = float(size) / 2.0;
-	float x0 = hyp - (hyp - 1) * sin(angle);
-	float y0 = hyp + (hyp - 1) * cos(angle);
+	float x0 = hyp - (hyp - 1) * qSin(angle);
+	float y0 = hyp + (hyp - 1) * qCos(angle);
 	if (internal) {
 		float len = hyp / 4;
-		float x1 = hyp - (hyp - len) * sin(angle);
-		float y1 = hyp + (hyp - len) * cos(angle);
+		float x1 = hyp - (hyp - len) * qSin(angle);
+		float y1 = hyp + (hyp - len) * qCos(angle);
 		p->drawLine(int(x0), int(y0), int(x1), int(y1));
 	} else {
 		float len = hyp / 4;
-		float x1 = hyp - (hyp + len) * sin(angle);
-		float y1 = hyp + (hyp + len) * cos(angle);
+		float x1 = hyp - (hyp + len) * qSin(angle);
+		float y1 = hyp + (hyp + len) * qCos(angle);
 		p->drawLine(int(x0), int(y0), int(x1), int(y1));
 	}
 }
@@ -179,8 +180,8 @@ ClassicStyle::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *o
     float x0 = hyp;
     float y0 = hyp;
 
-    float x = hyp - len * sin(angle);
-    float y = hyp + len * cos(angle);
+    float x = hyp - len * qSin(angle);
+    float y = hyp + len * qCos(angle);
 
     c = pal.dark().color();
     pen.setColor((dial->state & State_Enabled) ? c.dark(130) : c);

@@ -19,10 +19,10 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
-#include <QDialog>
 #include "ui_preferences.h"
 #include "instrument.h"
 #include "keyboardmap.h"
+#include <QtGui/QDialog>
 
 class Preferences : public QDialog
 {

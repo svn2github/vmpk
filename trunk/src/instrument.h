@@ -26,8 +26,8 @@
 #ifndef __instrument_h
 #define __instrument_h
 
-#include <QStringList>
-#include <QMap>
+#include <QtCore/QStringList>
+#include <QtCore/QMap>
 
 // Forward declarations.
 class QTextStream;

@@ -18,8 +18,7 @@
 
 #include "keylabel.h"
 #include "pianokey.h"
-#include <QFont>
-#include <QDebug>
+#include <QtGui/QFont>
 
 KeyLabel::KeyLabel(QGraphicsItem *parent) : QGraphicsTextItem(parent)
 {

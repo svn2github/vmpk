@@ -19,8 +19,8 @@
 #ifndef MIDISETUP_H
 #define MIDISETUP_H
 
-#include <QDialog>
 #include "ui_midisetup.h"
+#include <QtGui/QDialog>
 
 class MidiSetup : public QDialog
 {

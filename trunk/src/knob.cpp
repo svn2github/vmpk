@@ -21,8 +21,8 @@
 */
 
 #include "knob.h"
-#include <QMouseEvent>
-#include <QWheelEvent>
+#include <QtGui/QMouseEvent>
+#include <QtGui/QWheelEvent>
 #include <cmath>
 
 //-------------------------------------------------------------------------

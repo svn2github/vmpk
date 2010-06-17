@@ -18,11 +18,11 @@
 
 #include "kmapdialog.h"
 #include "vpiano.h"
-#include <QFileInfo>
-#include <QHeaderView>
-#include <QPushButton>
-#include <QKeySequence>
-#include <QFileDialog>
+#include <QtCore/QFileInfo>
+#include <QtGui/QHeaderView>
+#include <QtGui/QPushButton>
+#include <QtGui/QKeySequence>
+#include <QtGui/QFileDialog>
 
 KMapDialog::KMapDialog(QWidget *parent)
     : QDialog(parent)

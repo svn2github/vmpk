@@ -18,12 +18,11 @@
 
 #include "keyboardmap.h"
 
-#include <QFile>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QKeySequence>
-#include <QMessageBox>
-//#include <QDebug>
+#include <QtCore/QFile>
+#include <QtXml/QXmlStreamReader>
+#include <QtXml/QXmlStreamWriter>
+#include <QtGui/QKeySequence>
+#include <QtGui/QMessageBox>
 
 void KeyboardMap::loadFromXMLFile(const QString fileName)
 {

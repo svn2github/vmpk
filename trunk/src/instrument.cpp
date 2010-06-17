@@ -22,12 +22,11 @@
 
 #include "instrument.h"
 
-#include <QFileInfo>
-#include <QFile>
-#include <QTextStream>
-#include <QRegExp>
-#include <QDate>
-
+#include <QtCore/QFileInfo>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QtCore/QRegExp>
+#include <QtCore/QDate>
 
 //----------------------------------------------------------------------
 // class Instrument -- instrument definition instance class.

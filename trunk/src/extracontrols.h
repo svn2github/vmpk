@@ -19,8 +19,8 @@
 #ifndef EXTRACONTROLS_H
 #define EXTRACONTROLS_H
 
-#include <QDialog>
-#include <QListWidgetItem>
+#include <QtGui/QDialog>
+#include <QtGui/QListWidgetItem>
 
 namespace Ui {
     class DialogExtraControls;

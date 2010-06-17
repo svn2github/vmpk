@@ -22,8 +22,8 @@
 #include "pianokey.h"
 #include "keylabel.h"
 #include "keyboardmap.h"
-#include <QGraphicsScene>
-#include <QHash>
+#include <QtGui/QGraphicsScene>
+#include <QtCore/QHash>
 
 class PianoHandler
 {
