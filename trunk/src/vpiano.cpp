@@ -1289,11 +1289,13 @@ void VPiano::populatePrograms(int bank)
     if (bank < 0)
         return;
     m_comboProg->clear();
-    InstrumentData patch = m_ins->patch(bank);
-    InstrumentData::ConstIterator k;
-    for( k = patch.constBegin(); k != patch.constEnd(); ++k )
-        m_comboProg->addItem(k.value(), k.key());
-        //qDebug() << "patch[" << k.key() << "]=" << k.value();
+    if (m_ins != NULL) {
+        InstrumentData patch = m_ins->patch(bank);
+        InstrumentData::ConstIterator k;
+        for( k = patch.constBegin(); k != patch.constEnd(); ++k )
+            m_comboProg->addItem(k.value(), k.key());
+            //qDebug() << "patch[" << k.key() << "]=" << k.value();
+    }
 }
 
 void VPiano::slotComboBankActivated(const int index)
