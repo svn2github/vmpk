@@ -1,12 +1,12 @@
 Name "Virtual MIDI Piano Keyboard"
 
 # Defines
-!define QTFILES "C:\Qt\2009.05\qt\bin"
-!define MINGWFILES "C:\Qt\2009.05\mingw\bin"
-!define VMPKDIR "C:\msys\1.0\home\pedro\vmpk-0.3.1"
+!define QTFILES "C:\Qt\2010.03\qt\bin"
+!define MINGWFILES "C:\Qt\2010.03\mingw\bin"
+!define VMPKDIR "C:\Proyectos\vmpk-0.3.2svn"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.3.1
+!define VERSION 0.3.2
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -41,6 +41,7 @@ Var StartMenuGroup
 
 # Installer languages
 !insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "SimpChinese"
 !insertmacro MUI_LANGUAGE "Czech"
 !insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "German"
@@ -54,7 +55,7 @@ InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.3.1.0
+VIProductVersion 0.3.2.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
@@ -78,6 +79,7 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\pc102win.xml
     File ${VMPKDIR}\data\gmgsxg.ins
     File ${VMPKDIR}\data\help.html
+    File ${VMPKDIR}\data\help_de.html
     File ${VMPKDIR}\data\help_es.html
     File ${VMPKDIR}\data\help_ru.html
     File ${VMPKDIR}\data\help_tr.html
@@ -87,9 +89,13 @@ Section -Main SEC0000
     File ${VMPKDIR}\build\translations\vmpk_fr.qm
     File ${VMPKDIR}\build\translations\vmpk_ru.qm
     File ${VMPKDIR}\build\translations\vmpk_tr.qm
+    File ${VMPKDIR}\build\translations\vmpk_zh_CN.qm
 
-    # Installing library C:\MinGW\bin\mingwm10.dll
+    # Installing library mingwm10.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
+
+    # Installing library libgcc_s_dw2-1.dll
+    !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\libgcc_s_dw2-1.dll $INSTDIR\libgcc_s_dw2-1.dll $INSTDIR
 
     # Installing library C:\Qt\4.4.1\bin\QtCore4.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${QTFILES}\QtCore4.dll $INSTDIR\QtCore4.dll $INSTDIR
@@ -147,6 +153,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_ru.qm
     Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_zh_CN.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
     Delete /REBOOTOK $INSTDIR\german.xml
@@ -156,12 +163,16 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\pc102win.xml
     Delete /REBOOTOK $INSTDIR\gmgsxg.ins
     Delete /REBOOTOK $INSTDIR\help.html
+    Delete /REBOOTOK $INSTDIR\help_de.html
     Delete /REBOOTOK $INSTDIR\help_es.html
     Delete /REBOOTOK $INSTDIR\help_ru.html
     Delete /REBOOTOK $INSTDIR\help_tr.html
 
     # Uninstalling library $INSTDIR\mingwm10.dll
     !insertmacro UnInstallLib DLL SHARED REBOOT_PROTECTED $INSTDIR\mingwm10.dll
+
+    # Uninstalling library $INSTDIR\libgcc_s_dw2-1.dll
+    !insertmacro UnInstallLib DLL SHARED REBOOT_PROTECTED $INSTDIR\libgcc_s_dw2-1.dll
 
     # Uninstalling library $INSTDIR\QtCore4.dll
     !insertmacro UnInstallLib DLL NOTSHARED REBOOT_PROTECTED $INSTDIR\QtCore4.dll

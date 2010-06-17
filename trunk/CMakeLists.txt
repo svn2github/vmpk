@@ -219,13 +219,14 @@ ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
     INCLUDE (InstallRequiredSystemLibraries)
-    SET ( QTLIBLIST QtCore QtGui QtXml )
+    SET ( QTLIBLIST QtCore QtGui QtXml QtSvg )
     GET_FILENAME_COMPONENT(QT_DLL_PATH_tmp ${QT_QMAKE_EXECUTABLE} PATH)
     FOREACH(qtlib ${QTLIBLIST})
         INSTALL ( FILES ${QT_DLL_PATH_tmp}/${qtlib}4.dll
                   DESTINATION . )
     ENDFOREACH(qtlib)
-    INSTALL ( FILES ${QT_DLL_PATH_tmp}/mingwm10.dll
+    INSTALL ( FILES ${QT_DLL_PATH_tmp}/mingwm10.dll 
+                    ${QT_DLL_PATH_tmp}/libgcc_s_dw2-1.dll
               DESTINATION . )
     INSTALL ( FILES
         data/azerty.xml
