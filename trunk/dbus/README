@@ -1,6 +1,8 @@
 VMPK D-Bus interface
 ====================
 
+The D-Bus interface is available in VMPK since the release 0.3.2 (June 2010). 
+
 Interface name: "net.sourceforge.vmpk"
 Path: "/"
 
@@ -68,3 +70,16 @@ Python:
  
 Bash shell script:
     bigben.sh
+
+BUILDING
+========
+
+CMake builds by default the D-Bus interface feature. To disable it, use this 
+option at configuration time:
+
+$ cmake . -DENABLE_DBUS=OFF
+
+On the other hand, the Qmake build system doesn't build the D_Bus interface 
+unless you explicitly enable it at configure time:
+
+$ qmake DEFINES+=ENABLE_DBUS

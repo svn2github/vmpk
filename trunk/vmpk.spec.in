@@ -5,7 +5,7 @@
 
 Name:           vmpk
 Version:        @VERSION@
-Release:        0
+Release:        1
 License:        GPL v3 or later
 Summary:        Virtual MIDI Piano Keyboard
 Group:          Productivity/Multimedia/Sound/Midi
@@ -49,19 +49,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS README ChangeLog AUTHORS TODO COPYING
 %doc %{_mandir}/*
 %dir %{_datadir}/%name
-%dir %{_datadir}/icons/hicolor
-%dir %{_datadir}/icons/hicolor/16x16
-%dir %{_datadir}/icons/hicolor/32x32
-%dir %{_datadir}/icons/hicolor/48x48
-%dir %{_datadir}/icons/hicolor/64x64
-%dir %{_datadir}/icons/hicolor/scalable
-%dir %{_datadir}/icons/hicolor/16x16/apps
-%dir %{_datadir}/icons/hicolor/32x32/apps
-%dir %{_datadir}/icons/hicolor/48x48/apps
-%dir %{_datadir}/icons/hicolor/64x64/apps
-%dir %{_datadir}/icons/hicolor/scalable/apps
-%dir %{_datadir}/applications
-%dir %{_datadir}/locale
 %{_bindir}/%name
 %{_datadir}/%name/*
 %{_datadir}/icons/hicolor/*/*/*
@@ -69,14 +56,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/locale/*
 
 %changelog
-* Sun Sep 27 2009 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.3.0
+* Fir Jun 18 2010 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.3.2
 - New release
-
-* Sun May 31 2009 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.2.5
-- New release
-  
-* Fri Sep 5 2008 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.1.1  
-- New release  
-
-* Sun Aug 31 2008 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.1.0
-- First public release

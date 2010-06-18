@@ -12,7 +12,7 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.3.2svn
+VERSION = 0.3.2
 DESTDIR = build
 OBJECTS_DIR = $$DESTDIR
 UI_DIR = $$DESTDIR
@@ -22,7 +22,7 @@ CONFIG -= debug_and_release
 CONFIG -= debug
 CONFIG += release
 unix:QMAKE_POST_LINK=strip $(TARGET)
-win32:QMAKE_POST_LINK=strip.exe $(TARGET) 
+win32:QMAKE_POST_LINK=strip $$DESTDIR/$(TARGET)
 QT += core \
     gui \
     xml \
