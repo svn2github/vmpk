@@ -18,13 +18,17 @@ OBJECTS_DIR = $$DESTDIR
 UI_DIR = $$DESTDIR
 MOC_DIR = $$DESTDIR
 RCC_DIR = $$DESTDIR
+CONFIG += release
+CONFIG -= debug_and_release
+CONFIG -= debug
 QT += core \
     gui \
     xml \
     svg
-CONFIG += release
-CONFIG -= debug_and_release
-CONFIG -= debug
+contains(DEFINES, ENABLE_DBUS) {
+    CONFIG += qdbus
+    DBUS_ADAPTORS += src/net.sourceforge.vmpk.xml
+}
 VERSIONH = $$sprintf(const QString PGM_VERSION(\"%1\");,$$VERSION)
 system($$QMAKE_MKDIR $$DESTDIR)
 win32 { 
@@ -36,9 +40,8 @@ win32 {
 linux* { 
     DEFINES += __LINUX_ALSASEQ__
     DEFINES += AVOID_TIMESTAMPING
-    CONFIG += link_pkgconfig
+    CONFIG += link_pkgconfig x11
     PKGCONFIG += alsa
-    LIBS += -lX11
     system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 macx { 
@@ -86,58 +89,63 @@ irix* {
 debug:DEFINES += __RTMIDI_DEBUG__
 INCLUDEPATH += src
 # Input
-FORMS += src/kmapdialog.ui \
+
+FORMS += src/about.ui \
+    src/extracontrols.ui \
+    src/kmapdialog.ui \
     src/midisetup.ui \
-    src/vpiano.ui \
-    src/about.ui \
     src/preferences.ui \
     src/riffimportdlg.ui \
-    src/extracontrols.ui
-HEADERS += src/kmapdialog.h \
-    src/keyboardmap.h \
-    src/mididefs.h \
-    src/instrument.h \
-    src/midisetup.h \
-    src/RtError.h \
-    src/RtMidi.h \
-    src/knob.h \
-    src/keylabel.h \
-    src/pianodefs.h \
-    src/pianokey.h \
-    src/pianokeybd.h \
-    src/pianoscene.h \
+    src/vpiano.ui
+
+HEADERS += src/about.h \
     src/classicstyle.h \
-    src/vpiano.h \
-    src/about.h \
+    src/constants.h \
+    src/events.h \
+    src/extracontrols.h \
+    src/instrument.h \
+    src/keyboardmap.h \
+    src/keylabel.h \
+    src/kmapdialog.h \
+    src/knob.h \
+    src/mididefs.h \
+    src/midisetup.h \
+    src/pianodefs.h \
+    src/pianokeybd.h \
+    src/pianokey.h \
+    src/pianoscene.h \
     src/preferences.h \
+    src/qticonloader.h \
     src/rawkeybdapp.h \
     src/riff.h \
     src/riffimportdlg.h \
-    src/instrument.h \
-    src/constants.h \
-    src/extracontrols.h \
-    src/qticonloader.h
-SOURCES += src/kmapdialog.cpp \
+    src/RtError.h \
+    src/RtMidi.h \
+    src/vpiano.h
+    
+SOURCES += src/about.cpp \
+    src/classicstyle.cpp \
+    src/extracontrols.cpp \
+    src/instrument.cpp \
     src/keyboardmap.cpp \
-    src/midisetup.cpp \
-    src/RtMidi.cpp \
-    src/knob.cpp \
     src/keylabel.cpp \
-    src/pianokey.cpp \
+    src/kmapdialog.cpp \
+    src/knob.cpp \
+    src/main.cpp \
+    src/midisetup.cpp \
     src/pianokeybd.cpp \
+    src/pianokey.cpp \
     src/pianoscene.cpp \
+    src/preferences.cpp \
+    src/qticonloader.cpp \
     src/rawkeybdapp.cpp \
     src/riff.cpp \
     src/riffimportdlg.cpp \
-    src/classicstyle.cpp \
-    src/vpiano.cpp \
-    src/about.cpp \
-    src/preferences.cpp \
-    src/instrument.cpp \
-    src/main.cpp \
-    src/extracontrols.cpp \
-    src/qticonloader.cpp
+    src/RtMidi.cpp \
+    src/vpiano.cpp
+
 RESOURCES += data/vmpk.qrc
+
 TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_de.ts \
     translations/vmpk_es.ts \

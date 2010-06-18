@@ -100,7 +100,12 @@ SET(vmpk_qtobject_SRCS
 )
 
 IF(ENABLE_DBUS)
-    QT4_ADD_DBUS_ADAPTOR(vmpk_SRCS net.sourceforge.vmpk.xml vpiano.h VPiano)
+    QT4_ADD_DBUS_ADAPTOR( vmpk_SRCS 
+                          net.sourceforge.vmpk.xml 
+                          vpiano.h 
+                          VPiano
+                          vmpk_adaptor
+    )
 ENDIF(ENABLE_DBUS)
 
 QT4_WRAP_CPP(vmpk_moc_SRCS ${vmpk_qtobject_SRCS})

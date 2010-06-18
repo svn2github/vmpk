@@ -32,12 +32,10 @@
 #include "events.h"
 
 #if ENABLE_DBUS
-#include "vmpkadaptor.h"
+#include "vmpk_adaptor.h"
 #include <QtDBus/QDBusConnection>
 #endif
 
-#include <QtCore/QString>
-#include <QtCore/QSettings>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QInputDialog>
 #include <QtGui/QFileDialog>
@@ -50,6 +48,10 @@
 #include <QtGui/QDial>
 #include <QtGui/QToolButton>
 #include <QtGui/QToolTip>
+#include <QtCore/QUrl>
+#include <QtCore/QString>
+#include <QtCore/QSettings>
+#include <QtCore/QDebug>
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
