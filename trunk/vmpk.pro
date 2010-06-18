@@ -18,9 +18,11 @@ OBJECTS_DIR = $$DESTDIR
 UI_DIR = $$DESTDIR
 MOC_DIR = $$DESTDIR
 RCC_DIR = $$DESTDIR
-CONFIG += release
 CONFIG -= debug_and_release
 CONFIG -= debug
+CONFIG += release
+unix:QMAKE_POST_LINK=strip $(TARGET)
+win32:QMAKE_POST_LINK=strip.exe $(TARGET) 
 QT += core \
     gui \
     xml \
