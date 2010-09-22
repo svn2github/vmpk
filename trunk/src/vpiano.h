@@ -116,6 +116,17 @@ protected Q_SLOTS:
     void slotVelocityValueChanged(int value);
     void slotChannelValueChanged(const int channel);
     void slotComboControlCurrentIndexChanged(const int index);
+    void slotShortcuts();
+    void slotVelocityUp();
+    void slotVelocityDown();
+    void slotBankNext();
+    void slotBankPrev();
+    void slotProgramNext();
+    void slotProgramPrev();
+    void slotControllerNext();
+    void slotControllerPrev();
+    void slotControllerUp();
+    void slotControllerDown();
     //void slotEditPrograms();
     //void slotDebugDestroyed(QObject *obj);
 

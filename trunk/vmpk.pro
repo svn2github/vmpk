@@ -1,5 +1,5 @@
 # Virtual MIDI Piano Keyboard
-# Copyright (C) 2008 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net>
+# Copyright (C) 2008-2010 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net>
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
@@ -12,7 +12,7 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.3.2
+VERSION = 0.3.3
 DESTDIR = build
 OBJECTS_DIR = $$DESTDIR
 UI_DIR = $$DESTDIR
@@ -98,7 +98,8 @@ FORMS += src/about.ui \
     src/midisetup.ui \
     src/preferences.ui \
     src/riffimportdlg.ui \
-    src/vpiano.ui
+    src/shortcutdialog.ui \
+    src/vpiano.ui \
 
 HEADERS += src/about.h \
     src/classicstyle.h \
@@ -123,6 +124,7 @@ HEADERS += src/about.h \
     src/riffimportdlg.h \
     src/RtError.h \
     src/RtMidi.h \
+    src/shortcutdialog.h \
     src/vpiano.h
     
 SOURCES += src/about.cpp \
@@ -144,6 +146,7 @@ SOURCES += src/about.cpp \
     src/riff.cpp \
     src/riffimportdlg.cpp \
     src/RtMidi.cpp \
+    src/shortcutdialog.cpp \
     src/vpiano.cpp
 
 RESOURCES += data/vmpk.qrc
@@ -155,4 +158,5 @@ TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_ru.ts \
     translations/vmpk_tr.ts \
     translations/vmpk_zh_CN.ts
+
 include(updateqm.pri)

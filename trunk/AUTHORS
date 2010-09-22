@@ -37,11 +37,15 @@ Other copyright owners:
         src/RtMidi.h
         src/RtMidi.cpp
 
-    Rui Nuno Capela     Instrument definition data classes, Knob widget
+    Rui Nuno Capela     Instrument definition data classes, Knob widget, 
+                        Shortcuts Editor Dialog
         src/instrument.h
         src/instrument.cpp
         src/knob.h
         src/knob.cpp
+        src/shortcutdialog.h
+        src/shortcutdialog.ui
+        src/shortcutdialog.cpp
 
     Chris Cannam, Pedro Lopez-Cabanillas, Queen Mary University of London
         src/classicstyle.h

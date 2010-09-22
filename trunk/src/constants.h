@@ -67,6 +67,7 @@ const QString QSTR_GRABKB("GrabKeyboard");
 const QString QSTR_STYLEDKNOBS("StyledKnobs");
 const QString QSTR_ALWAYSONTOP("AlwaysOnTop");
 const QString QSTR_SHOWNOTENAMES("ShowNoteNames");
+const QString QSTR_SHOWSTATUSBAR("ShowStatusBar");
 const QString QSTR_RAWKEYBOARDMODE("RawKeyboardMode");
 const QString QSTR_EXTRACONTROLLERS("ExtraControllers");
 const QString QSTR_EXTRACTLPREFIX("ExtraCtl_");
@@ -75,6 +76,7 @@ const QString QSTR_VMPKINPUT("VMPK Input");
 const QString QSTR_VMPKOUTPUT("VMPK Output");
 const QString QSTR_DEFAULTINS("gmgsxg.ins");
 const QString QSTR_DRUMSCHANNEL("DrumsChannel");
+const QString QSTR_SHORTCUTS("Shortcuts");
 
 const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
 

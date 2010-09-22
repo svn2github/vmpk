@@ -30,6 +30,7 @@
 #include "midisetup.h"
 #include "kmapdialog.h"
 #include "events.h"
+#include "shortcutdialog.h"
 
 #if ENABLE_DBUS
 #include "vmpk_adaptor.h"
@@ -76,7 +77,6 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     dbus.registerService("net.sourceforge.vmpk");
 #endif
     ui.setupUi(this);
-    ui.actionStatusBar->setChecked(false);
     connect(ui.actionAbout, SIGNAL(triggered()), SLOT(slotAbout()));
     connect(ui.actionAbout_Qt, SIGNAL(triggered()), SLOT(slotAboutQt()));
     connect(ui.actionConnections, SIGNAL(triggered()), SLOT(slotConnections()));
@@ -87,6 +87,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionImportSoundFont, SIGNAL(triggered()), SLOT(slotImportSF()));
     connect(ui.actionEditExtraControls, SIGNAL(triggered()), SLOT(slotEditExtraControls()));
     connect(ui.actionNoteNames, SIGNAL(triggered()), SLOT(slotShowNoteNames()));
+    connect(ui.actionShortcuts, SIGNAL(triggered()), SLOT(slotShortcuts()));
     ui.pianokeybd->setPianoHandler(this);
     initialization();
 }
@@ -278,6 +279,22 @@ void VPiano::initToolBars()
              SLOT(slotTransposeValueChanged(int)) );
     connect( m_Velocity, SIGNAL(valueChanged(int)),
              SLOT(slotVelocityValueChanged(int)) );
+    connect( ui.actionChannelUp, SIGNAL(triggered()),
+             m_sboxChannel, SLOT(stepUp()) );
+    connect( ui.actionChannelDown, SIGNAL(triggered()),
+             m_sboxChannel, SLOT(stepDown()) );
+    connect( ui.actionOctaveUp, SIGNAL(triggered()),
+             m_sboxOctave, SLOT(stepUp()) );
+    connect( ui.actionOctaveDown, SIGNAL(triggered()),
+             m_sboxOctave, SLOT(stepDown()) );
+    connect( ui.actionTransposeUp, SIGNAL(triggered()),
+             m_sboxTranspose, SLOT(stepUp()) );
+    connect( ui.actionTransposeDown, SIGNAL(triggered()),
+             m_sboxTranspose, SLOT(stepDown()) );
+    connect( ui.actionVelocityUp, SIGNAL(triggered()),
+             SLOT(slotVelocityUp()) );
+    connect( ui.actionVelocityDown, SIGNAL(triggered()),
+             SLOT(slotVelocityDown()) );
     // Controllers tool bar
     ui.toolBarControllers->addWidget(lbl = new QLabel(tr("Control:"), this));
     lbl->setMargin(TOOLBARLABELMARGIN);
@@ -355,6 +372,23 @@ void VPiano::initToolBars()
              SLOT(slotResetBender()));
     connect( ui.actionEditExtra, SIGNAL(triggered()),
              SLOT(slotEditExtraControls()));
+    // Tools actions
+    connect( ui.actionNextBank, SIGNAL(triggered()),
+             SLOT(slotBankNext()) );
+    connect( ui.actionPreviousBank, SIGNAL(triggered()),
+             SLOT(slotBankPrev()) );
+    connect( ui.actionNextProgram, SIGNAL(triggered()),
+             SLOT(slotProgramNext()) );
+    connect( ui.actionPreviousProgram, SIGNAL(triggered()),
+             SLOT(slotProgramPrev()) );
+    connect( ui.actionNextController, SIGNAL(triggered()),
+             SLOT(slotControllerNext()) );
+    connect( ui.actionPreviousController, SIGNAL(triggered()),
+             SLOT(slotControllerPrev()) );
+    connect( ui.actionControllerDown, SIGNAL(triggered()),
+             SLOT(slotControllerDown()) );
+    connect( ui.actionControllerUp, SIGNAL(triggered()),
+             SLOT(slotControllerUp()) );
     /* connect( ui.actionEditPrograms, SIGNAL(triggered()),
              SLOT(slotEditPrograms())); */
 }
@@ -510,6 +544,7 @@ void VPiano::readSettings()
     bool styledKnobs = settings.value(QSTR_STYLEDKNOBS, true).toBool();
     bool alwaysOnTop = settings.value(QSTR_ALWAYSONTOP, false).toBool();
     bool showNames = settings.value(QSTR_SHOWNOTENAMES, false).toBool();
+    bool showStatusBar = settings.value(QSTR_SHOWSTATUSBAR, false).toBool();
     int drumsChannel = settings.value(QSTR_DRUMSCHANNEL, MIDIGMDRUMSCHANNEL).toInt();
     settings.endGroup();
 
@@ -520,6 +555,7 @@ void VPiano::readSettings()
     dlgPreferences()->setStyledWidgets(styledKnobs);
     dlgPreferences()->setAlwaysOnTop(alwaysOnTop);
     ui.actionNoteNames->setChecked(showNames);
+    ui.actionStatusBar->setChecked(showStatusBar);
     slotShowNoteNames();
     if (!insFileName.isEmpty()) {
         dlgPreferences()->setInstrumentsFileName(insFileName);
@@ -581,6 +617,21 @@ void VPiano::readSettings()
     }
     settings.endGroup();
 
+    settings.beginGroup(QSTR_SHORTCUTS);
+    QList<QAction *> actions = findChildren<QAction *> ();
+    QListIterator<QAction *> iter(actions);
+    while (iter.hasNext()) {
+        QAction *pAction = iter.next();
+        if (pAction->objectName().isEmpty())
+            continue;
+        const QString& sKey = '/' + pAction->objectName();
+        const QString& sValue = settings.value('/' + sKey).toString();
+        if (sValue.isEmpty())
+            continue;
+        pAction->setShortcut(QKeySequence(sValue));
+    }
+    settings.endGroup();
+
     ui.pianokeybd->getKeyboardMap()->setRawMode(false);
     ui.pianokeybd->getRawKeyboardMap()->setRawMode(true);
     if (!mapFile.isEmpty() && mapFile != QSTR_DEFAULT) {
@@ -616,6 +667,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences()->getStyledWidgets());
     settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences()->getAlwaysOnTop());
     settings.setValue(QSTR_SHOWNOTENAMES, ui.actionNoteNames->isChecked());
+    settings.setValue(QSTR_SHOWSTATUSBAR, ui.actionStatusBar->isChecked());
     settings.setValue(QSTR_DRUMSCHANNEL, dlgPreferences()->getDrumsChannel());
     settings.endGroup();
 
@@ -656,6 +708,22 @@ void VPiano::writeSettings()
     foreach(const QString& ctl, m_extraControls)  {
         QString key = QString("%1").arg(i++, 2, 10, QChar('0'));
         settings.setValue(key, ctl);
+    }
+    settings.endGroup();
+
+    settings.beginGroup(QSTR_SHORTCUTS);
+    QList<QAction *> actions = findChildren<QAction *> ();
+    QListIterator<QAction *> iter(actions);
+    while (iter.hasNext()) {
+        QAction *pAction = iter.next();
+        if (pAction->objectName().isEmpty())
+            continue;
+        const QString& sKey = '/' + pAction->objectName();
+        const QString& sValue = QString(pAction->shortcut());
+        if (!sValue.isEmpty())
+            settings.setValue(sKey, sValue);
+        else if (settings.contains(sKey))
+                settings.remove(sKey);
     }
     settings.endGroup();
 
@@ -1742,3 +1810,83 @@ void VPiano::pitchwheel(int value)
 }
 
 #endif /* ENABLE_DBUS */
+
+void VPiano::slotShortcuts()
+{
+    ShortcutDialog shcutDlg(findChildren<QAction*>());
+    releaseKb();
+    shcutDlg.exec();
+    grabKb();
+}
+
+void VPiano::slotBankNext()
+{
+    int index = m_comboBank->currentIndex();
+    if (index < m_comboBank->count()-1) {
+        m_comboBank->setCurrentIndex(++index);
+        slotComboBankActivated(index);
+    }
+}
+
+void VPiano::slotBankPrev()
+{
+    int index = m_comboBank->currentIndex();
+    if (index > 0) {
+        m_comboBank->setCurrentIndex(--index);
+        slotComboBankActivated(index);
+    }
+}
+
+void VPiano::slotProgramNext()
+{
+    int index = m_comboProg->currentIndex();
+    if (index < m_comboProg->count()-1) {
+        m_comboProg->setCurrentIndex(++index);
+        slotComboProgActivated(index);
+    }
+}
+
+void VPiano::slotProgramPrev()
+{
+    int index = m_comboProg->currentIndex();
+    if (index > 0) {
+        m_comboProg->setCurrentIndex(--index);
+        slotComboProgActivated(index);
+    }
+}
+
+void VPiano::slotControllerNext()
+{
+    int index = m_comboControl->currentIndex();
+    if (index < m_comboControl->count()-1)
+        m_comboControl->setCurrentIndex(++index);
+}
+
+void VPiano::slotControllerPrev()
+{
+    int index = m_comboControl->currentIndex();
+    if (index > 0)
+        m_comboControl->setCurrentIndex(--index);
+}
+
+void VPiano::slotVelocityUp()
+{
+    m_Velocity->triggerAction(Knob::SliderPageStepAdd);
+}
+
+void VPiano::slotVelocityDown()
+{
+    m_Velocity->triggerAction(Knob::SliderPageStepSub);
+}
+
+void VPiano::slotControllerUp()
+{
+    m_Control->triggerAction(Knob::SliderPageStepAdd);
+    slotControlSliderMoved(m_Control->value());
+}
+
+void VPiano::slotControllerDown()
+{
+    m_Control->triggerAction(Knob::SliderPageStepSub);
+    slotControlSliderMoved(m_Control->value());
+}

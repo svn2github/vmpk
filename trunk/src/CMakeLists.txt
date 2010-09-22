@@ -33,6 +33,7 @@ SET(vmpk_forms_SRCS
     preferences.ui
     riffimportdlg.ui
     vpiano.ui
+    shortcutdialog.ui
 )
 
 QT4_WRAP_UI(vmpk_ui_SRCS ${vmpk_forms_SRCS})
@@ -81,6 +82,8 @@ SET(vmpk_SRCS
     RtMidi.h
     vpiano.cpp
     vpiano.h
+    shortcutdialog.cpp
+    shortcutdialog.h
 )
 
 QT4_ADD_RESOURCES(vmpk_SRCS ../data/vmpk.qrc)
@@ -97,6 +100,7 @@ SET(vmpk_qtobject_SRCS
     riff.h
     riffimportdlg.h
     vpiano.h
+    shortcutdialog.h
 )
 
 IF(ENABLE_DBUS)
