@@ -30,29 +30,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain(QSTR_DOMAIN);
     QCoreApplication::setApplicationName(QSTR_APPNAME);
     RawKeybdApp a(argc, argv);
-
-    QString localeDirectory =
-#ifdef Q_OS_WIN32
-        QApplication::applicationDirPath();
-#endif
-#ifdef Q_OS_LINUX
-        QApplication::applicationDirPath() + "/../share/locale/";
-#endif
-#ifdef Q_OS_DARWIN
-        QApplication::applicationDirPath() + "/../Resources/";
-#endif
-    QTranslator tr_q, tr_p;
-    QString loc_q = QSTR_QTPX + QLocale::system().name();
-    QString loc_p = QSTR_VMPKPX + QLocale::system().name();
-    tr_q.load(loc_q, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    tr_p.load(loc_p, localeDirectory);
-    a.installTranslator(&tr_q);
-    a.installTranslator(&tr_p);
-
     VPiano w;
     if (w.isInitialized()) {
         w.show();
         return a.exec();
     }
-    return 1;
+    return EXIT_FAILURE;
 }

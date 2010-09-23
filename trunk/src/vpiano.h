@@ -23,6 +23,7 @@
 #include "pianoscene.h"
 #include <QtGui/QMainWindow>
 
+class QTranslator;
 class QComboBox;
 class QSpinBox;
 class QSlider;
@@ -55,6 +56,7 @@ public:
 
     // static methods
     static QString dataDirectory();
+    static QString localeDirectory();
 
 #if ENABLE_DBUS
 
@@ -127,6 +129,7 @@ protected Q_SLOTS:
     void slotControllerPrev();
     void slotControllerUp();
     void slotControllerDown();
+    void slotSwitchLanguage(QAction *action);
     //void slotEditPrograms();
     //void slotDebugDestroyed(QObject *obj);
 
@@ -174,6 +177,8 @@ private:
     void updateNoteNames(bool drums);
     void setWidgetTip(QWidget* w, int val);
     QByteArray readSysexDataFile(const QString& fileName);
+    void createLanguageMenu();
+    QString configuredLanguage();
 
     About *dlgAbout();
     Preferences *dlgPreferences();
@@ -219,6 +224,9 @@ private:
     int m_velocity;
     int m_baseOctave;
     int m_transpose;
+    QString m_language;
+    QMap<QString, QString> m_supportedLangs;
+    QTranslator *m_trq, *m_trp;
 };
 
 #endif // VPIANO_H

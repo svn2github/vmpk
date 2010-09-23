@@ -76,9 +76,28 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     dbus.registerObject("/", this);
     dbus.registerService("net.sourceforge.vmpk");
 #endif
+    m_trq = new QTranslator(this);
+    m_trp = new QTranslator(this);
+    QString loc_q = QSTR_QTPX + configuredLanguage();
+    QString loc_p = QSTR_VMPKPX + configuredLanguage();
+    QString path_q = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    QString path_p = VPiano::localeDirectory();
+    qDebug() << "Qt trans." << path_q << loc_q << m_trq->load(loc_q, path_q);
+    qDebug() << "VMPK trans." << path_p << loc_p << m_trp->load(loc_p, path_p);
+    QCoreApplication::installTranslator(m_trq);
+    QCoreApplication::installTranslator(m_trp);
     ui.setupUi(this);
+    m_supportedLangs.insert(QLatin1String("cs"),    tr("Czech"));
+    m_supportedLangs.insert(QLatin1String("de"),    tr("German"));
+    m_supportedLangs.insert(QLatin1String("en_US"), tr("English"));
+    m_supportedLangs.insert(QLatin1String("es"),    tr("Spanish"));
+    m_supportedLangs.insert(QLatin1String("fr"),    tr("French"));
+    m_supportedLangs.insert(QLatin1String("ru"),    tr("Russian"));
+    m_supportedLangs.insert(QLatin1String("tr"),    tr("Turkish"));
+    m_supportedLangs.insert(QLatin1String("zh_CN"), tr("Chinese"));
+
     connect(ui.actionAbout, SIGNAL(triggered()), SLOT(slotAbout()));
-    connect(ui.actionAbout_Qt, SIGNAL(triggered()), SLOT(slotAboutQt()));
+    connect(ui.actionAboutQt, SIGNAL(triggered()), SLOT(slotAboutQt()));
     connect(ui.actionConnections, SIGNAL(triggered()), SLOT(slotConnections()));
     connect(ui.actionPreferences, SIGNAL(triggered()), SLOT(slotPreferences()));
     connect(ui.actionEditKM, SIGNAL(triggered()), SLOT(slotEditKeyboardMap()));
@@ -118,6 +137,7 @@ void VPiano::initialization()
     if ((m_initialized = initMidi())) {
         refreshConnections();
         readSettings();
+        createLanguageMenu();
         initToolBars();
         applyPreferences();
         applyConnections();
@@ -536,6 +556,7 @@ void VPiano::readSettings()
     m_velocity = settings.value(QSTR_VELOCITY, 100).toInt();
     m_baseOctave = settings.value(QSTR_BASEOCTAVE, 3).toInt();
     m_transpose = settings.value(QSTR_TRANSPOSE, 0).toInt();
+    m_language = settings.value(QSTR_LANGUAGE, QLocale::system().name()).toString();
     int num_octaves = settings.value(QSTR_NUMOCTAVES, 5).toInt();
     QString insFileName = settings.value(QSTR_INSTRUMENTSDEFINITION).toString();
     QString insName = settings.value(QSTR_INSTRUMENTNAME).toString();
@@ -659,6 +680,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_VELOCITY, m_velocity);
     settings.setValue(QSTR_BASEOCTAVE, m_baseOctave);
     settings.setValue(QSTR_TRANSPOSE, m_transpose);
+    settings.setValue(QSTR_LANGUAGE, m_language);
     settings.setValue(QSTR_NUMOCTAVES, dlgPreferences()->getNumOctaves());
     settings.setValue(QSTR_INSTRUMENTSDEFINITION, dlgPreferences()->getInstrumentsFileName());
     settings.setValue(QSTR_INSTRUMENTNAME, dlgPreferences()->getInstrumentName());
@@ -1338,6 +1360,15 @@ QString VPiano::dataDirectory()
     return QString();
 }
 
+QString VPiano::localeDirectory()
+{
+#ifdef Q_OS_LINUX
+    return VPiano::dataDirectory() + "locale/";
+#else
+    return VPiano::dataDirectory();
+#endif
+}
+
 void VPiano::slotEditKeyboardMap()
 {
     KeyboardMap* map;
@@ -1565,7 +1596,7 @@ void VPiano::releaseKb()
 void VPiano::slotHelpContents()
 {
     QStringList hlps;
-    QLocale loc = QLocale::system();
+    QLocale loc(m_language);
     QStringList lc = loc.name().split("_");
     hlps += QString("help_%1.html").arg(loc.name());
     if (lc.count() > 1)
@@ -1889,4 +1920,52 @@ void VPiano::slotControllerDown()
 {
     m_Control->triggerAction(Knob::SliderPageStepSub);
     slotControlSliderMoved(m_Control->value());
+}
+
+QString VPiano::configuredLanguage()
+{
+    if (m_language.isEmpty()) {
+        QSettings settings;
+        settings.beginGroup(QSTR_PREFERENCES);
+        m_language = settings.value(QSTR_LANGUAGE, QLocale::system().name()).toString();
+        settings.endGroup();
+        QLocale::setDefault(QLocale(m_language));
+    }
+    return m_language;
+}
+
+void VPiano::slotSwitchLanguage(QAction *action)
+{
+    m_language = action->data().toString();
+    QMessageBox::information(this, tr("Language Changed"),
+        tr("The language for this application has been changed. "
+           "The change will take effect the next time the application "
+           "is started."));
+}
+
+void VPiano::createLanguageMenu()
+{
+    QActionGroup *languageGroup = new QActionGroup(this);
+    connect(languageGroup, SIGNAL(triggered(QAction *)),
+            SLOT(slotSwitchLanguage(QAction *)));
+    QDir dir(VPiano::localeDirectory());
+    QStringList fileNames = dir.entryList(QStringList(QSTR_VMPKPX + "*.qm"));
+    QStringList locales;
+    locales << "en_US";
+    foreach (const QString& fileName, fileNames) {
+        QString locale = fileName;
+        locale.remove(0, locale.indexOf('_') + 1);
+        locale.truncate(locale.lastIndexOf('.'));
+        locales << locale;
+    }
+    locales.sort();
+    foreach (const QString& loc, locales) {
+        QAction *action = new QAction(m_supportedLangs.value(loc), this);
+        action->setCheckable(true);
+        action->setData(loc);
+        ui.menuLanguage->addAction(action);
+        languageGroup->addAction(action);
+        if (loc == configuredLanguage())
+            action->setChecked(true);
+    }
 }

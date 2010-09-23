@@ -249,23 +249,13 @@ ShortcutDialog::ShortcutDialog ( QList<QAction *> actions,
 	QDialog::setWindowModality(Qt::ApplicationModal);
 
 	m_iDirtyCount = 0;
-
-//	m_ui.qtractorShortcutTable = new QTableWidget(0, 3, this);
 	m_ui.ShortcutTable->setIconSize(QSize(16, 16));
 	m_ui.ShortcutTable->setItemDelegate(
 		new ShortcutTableItemDelegate(m_ui.ShortcutTable));
-//	m_ui.ShortcutTable->setSelectionMode(QAbstractItemView::SingleSelection);
-//	m_ui.ShortcutTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-//	m_ui.ShortcutTable->setAlternatingRowColors(true);
-//	m_ui.ShortcutTable->setSortingEnabled(true);
-
-//	m_ui.ShortcutTable->setHorizontalHeaderLabels(
-//		QStringList() << tr("Item") << tr("Description") << tr("Shortcut"));
 	m_ui.ShortcutTable->horizontalHeader()->setStretchLastSection(true);
 	m_ui.ShortcutTable->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 	m_ui.ShortcutTable->horizontalHeader()->resizeSection(0, 120);
 	m_ui.ShortcutTable->horizontalHeader()->resizeSection(1, 260);
-
 	int iRowHeight = m_ui.ShortcutTable->fontMetrics().height() + 4;
 	m_ui.ShortcutTable->verticalHeader()->setDefaultSectionSize(iRowHeight);
 	m_ui.ShortcutTable->verticalHeader()->hide();
@@ -342,7 +332,7 @@ void ShortcutDialog::reject (void)
 		if (m_ui.DialogButtonBox->button(QDialogButtonBox::Ok)->isEnabled())
 			buttons |= QMessageBox::Apply;
 		switch (QMessageBox::warning(this,
-			tr("Warning"), // + " - " QTRACTOR_TITLE,
+			tr("Warning"),
 			tr("Keyboard shortcuts have been changed.\n\n"
 			"Do you want to apply the changes?"),
 			buttons)) {

@@ -71,11 +71,17 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <widget class="QMenu" name="menuLanguage">
+     <property name="title">
+      <string>&amp;Language</string>
+     </property>
+    </widget>
     <addaction name="actionContents"/>
     <addaction name="actionWebSite"/>
+    <addaction name="menuLanguage"/>
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
-    <addaction name="actionAbout_Qt"/>
+    <addaction name="actionAboutQt"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -281,9 +287,9 @@
     <string>Show the About box</string>
    </property>
   </action>
-  <action name="actionAbout_Qt">
+  <action name="actionAboutQt">
    <property name="text">
-    <string>About Q&amp;t</string>
+    <string>About &amp;Qt</string>
    </property>
    <property name="statusTip">
     <string>Show the Qt about box</string>
@@ -518,10 +524,10 @@
   </action>
   <action name="actionChannelUp">
    <property name="text">
-    <string>Channel Up</string>
+    <string>Next  Channel</string>
    </property>
    <property name="statusTip">
-    <string>Play and listen one channel higher</string>
+    <string>Play and listen next channel</string>
    </property>
    <property name="shortcut">
     <string>Up</string>
@@ -529,10 +535,10 @@
   </action>
   <action name="actionChannelDown">
    <property name="text">
-    <string>Channel Down</string>
+    <string>Previous Channel</string>
    </property>
    <property name="statusTip">
-    <string>Play and listen one channel lower</string>
+    <string>Play and listen previous channel</string>
    </property>
    <property name="shortcut">
     <string>Down</string>

@@ -77,6 +77,7 @@ const QString QSTR_VMPKOUTPUT("VMPK Output");
 const QString QSTR_DEFAULTINS("gmgsxg.ins");
 const QString QSTR_DRUMSCHANNEL("DrumsChannel");
 const QString QSTR_SHORTCUTS("Shortcuts");
+const QString QSTR_LANGUAGE("Language");
 
 const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
 
