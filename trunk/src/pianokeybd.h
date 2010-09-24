@@ -42,7 +42,7 @@ class QDESIGNER_WIDGET_EXPORT PianoKeybd : public QGraphicsView, public RawKbdHa
 #if defined(VPIANO_PLUGIN)
     Q_CLASSINFO("Author", "Pedro Lopez-Cabanillas <plcl@users.sf.net>")
     Q_CLASSINFO("URL", "http://sourceforge.net/projects/vmpk")
-    Q_CLASSINFO("Version", "0.9")
+    Q_CLASSINFO("Version", "0.10")
 #endif
 public:
     PianoKeybd(QWidget *parent = 0);
@@ -80,13 +80,15 @@ public:
     void setRawKeyboardMode(const bool b) { m_scene->setRawKeyboardMode(b); }
     void useCustomNoteNames(const QStringList& names) { m_scene->useCustomNoteNames(names); }
     void useStandardNoteNames() { m_scene->useStandardNoteNames(); }
+    int getVelocity() { return m_scene->getVelocity(); }
+    void setVelocity(const int velocity) { m_scene->setVelocity(velocity); }
 // RawKbdHandler methods
     bool handleKeyPressed(int keycode);
     bool handleKeyReleased(int keycode);
 
 public slots:
-    void showNoteOn( int midiNote );
-    void showNoteOff( int midiNote );
+    void showNoteOn( int midiNote, int vel = 0 );
+    void showNoteOff( int midiNote, int vel = 0 );
 
 signals:
     void noteOn( int midiNote );

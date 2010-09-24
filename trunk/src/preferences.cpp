@@ -32,7 +32,8 @@ Preferences::Preferences(QWidget *parent)
     m_grabKb(false),
     m_styledKnobs(true),
     m_alwaysOnTop(false),
-    m_rawKeyboard(false)
+    m_rawKeyboard(false),
+    m_velocityColor(true)
 {
     ui.setupUi( this );
     ui.txtFileInstrument->setText(QSTR_DEFAULT);
@@ -58,6 +59,7 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.chkStyledKnobs->setChecked( m_styledKnobs );
         ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
         ui.chkRawKeyboard->setChecked( m_rawKeyboard );
+        ui.chkVelocityColor->setChecked( m_velocityColor );
         if (!m_keyPressedColor.isValid()) {
             setKeyPressedColor(QApplication::palette().highlight().color());
         }
@@ -72,6 +74,7 @@ void Preferences::apply()
     m_styledKnobs = ui.chkStyledKnobs->isChecked();
     m_alwaysOnTop = ui.chkAlwaysOnTop->isChecked();
     m_rawKeyboard = ui.chkRawKeyboard->isChecked();
+    m_velocityColor = ui.chkVelocityColor->isChecked();
     if ( ui.txtFileRawKmap->text().isEmpty() ||
          ui.txtFileRawKmap->text() == QSTR_DEFAULT)
         m_rawmap.setFileName(QSTR_DEFAULT);
@@ -231,6 +234,7 @@ void Preferences::restoreDefaults()
     ui.spinNumOctaves->setValue(5);
     ui.txtFileKmap->setText(QSTR_DEFAULT);
     ui.txtFileRawKmap->setText(QSTR_DEFAULT);
+    ui.chkVelocityColor->setChecked(true);
     setInstrumentsFileName(VPiano::dataDirectory() + QSTR_DEFAULTINS);
     ui.cboInstrument->setCurrentIndex(0);
 }

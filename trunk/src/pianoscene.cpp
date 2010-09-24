@@ -41,7 +41,8 @@ PianoScene::PianoScene ( const int baseOctave,
     m_rawkbd( false ),
     m_keyPressedColor( keyPressedColor ),
     m_mousePressed( false ),
-    m_handler( NULL )
+    m_velocity( 100 ),
+    m_handler( 0 )
 {
     QBrush hilightBrush(m_keyPressedColor.isValid() ? m_keyPressedColor : QApplication::palette().highlight());
     QFont lblFont(QApplication::font());
@@ -86,30 +87,34 @@ QSize PianoScene::sizeHint() const
     return QSize(KEYWIDTH * m_numOctaves * 7, KEYHEIGHT);
 }
 
-void PianoScene::showKeyOn( PianoKey* key )
+void PianoScene::showKeyOn( PianoKey* key, int vel )
 {
+    if (vel != 0 && m_keyPressedColor.isValid() ) {
+        QBrush hilightBrush(m_keyPressedColor.lighter(200 - vel));
+        key->setPressedBrush(hilightBrush);
+    }
     key->setPressed(true);
 }
 
-void PianoScene::showKeyOff( PianoKey* key )
+void PianoScene::showKeyOff( PianoKey* key, int )
 {
     key->setPressed(false);
 }
 
-void PianoScene::showNoteOn( const int note )
+void PianoScene::showNoteOn( const int note, int vel )
 {
     int n = note - m_baseOctave*12 - m_transpose;
     if ((note >= m_minNote) && (note <= m_maxNote) &&
         (n >= 0) && (n < m_keys.size()))
-        showKeyOn(m_keys[n]);
+        showKeyOn(m_keys[n], vel);
 }
 
-void PianoScene::showNoteOff( const int note )
+void PianoScene::showNoteOff( const int note, int vel )
 {
     int n = note - m_baseOctave*12 - m_transpose;
     if ((note >= m_minNote) && (note <= m_maxNote) &&
         (n >= 0) && (n < m_keys.size()))
-        showKeyOff(m_keys[n]);
+        showKeyOff(m_keys[n], vel);
 }
 
 void PianoScene::keyOn( PianoKey* key )
@@ -121,7 +126,7 @@ void PianoScene::keyOn( PianoKey* key )
         } else {
             emit noteOn(n);
         }
-        showKeyOn(key);
+        showKeyOn(key, m_velocity);
     }
 }
 
@@ -134,7 +139,7 @@ void PianoScene::keyOff( PianoKey* key )
         } else {
             emit noteOff(n);
         }
-        showKeyOff(key);
+        showKeyOff(key, 0);
     }
 }
 

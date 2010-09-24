@@ -40,35 +40,34 @@ const QEvent::Type PitchWheelEventType = QEvent::Type(
 class NoteEvent : public QEvent
 {
 public:
-    NoteEvent(unsigned char note, QEvent::Type type)
-        : QEvent(type), m_note(note) { }
+    NoteEvent(unsigned char note, unsigned char val, QEvent::Type type)
+        : QEvent(type), m_note(note), m_value(val) { }
     unsigned char getNote() const { return m_note; }
-private:
+    unsigned char getValue() const { return m_value; }
+protected:
     unsigned char m_note;
+    unsigned char m_value;
 };
 
 class NoteOffEvent : public NoteEvent
 {
 public:
-    NoteOffEvent(unsigned char note)
-        : NoteEvent(note, NoteOffEventType) { }
+    NoteOffEvent(unsigned char note, unsigned char vel)
+        : NoteEvent(note, vel, NoteOffEventType) { }
 };
 
 class NoteOnEvent : public NoteEvent
 {
 public:
-    NoteOnEvent(unsigned char note)
-        : NoteEvent(note, NoteOnEventType) { }
+    NoteOnEvent(unsigned char note, unsigned char vel)
+        : NoteEvent(note, vel, NoteOnEventType) { }
 };
 
 class PolyKeyPressEvent : public NoteEvent
 {
 public:
     PolyKeyPressEvent(unsigned char note, unsigned char value)
-        : NoteEvent(note, PolyKeyPressEventType), m_value(value) { }
-    unsigned char getValue() const { return m_value; }
-private:
-    unsigned char m_value;
+        : NoteEvent(note, value, PolyKeyPressEventType) { }
 };
 
 class ControlChangeEvent : public QEvent

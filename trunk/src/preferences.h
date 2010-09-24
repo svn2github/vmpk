@@ -37,6 +37,7 @@ public:
     bool getStyledWidgets() const { return m_styledKnobs; }
     bool getAlwaysOnTop() const { return m_alwaysOnTop; }
     bool getRawKeyboard() const { return m_rawKeyboard; }
+    bool getVelocityColor() const { return m_velocityColor; }
     void setInstrumentsFileName( const QString fileName );
     QString getInstrumentsFileName();
     void setInstrumentName( const QString name );
@@ -56,6 +57,7 @@ public slots:
     void setStyledWidgets(bool value) { m_styledKnobs = value; }
     void setAlwaysOnTop(bool value) { m_alwaysOnTop = value; }
     void setRawKeyboard(bool value) { m_rawKeyboard = value; }
+    void setVelocityColor(bool value) { m_velocityColor = value; }
     void setKeyPressedColor(QColor value);
     void slotOpenInstrumentFile();
     void slotSelectColor();
@@ -78,6 +80,7 @@ private:
     bool m_styledKnobs;
     bool m_alwaysOnTop;
     bool m_rawKeyboard;
+    bool m_velocityColor;
     QColor m_keyPressedColor;
     KeyboardMap m_keymap;
     KeyboardMap m_rawmap;

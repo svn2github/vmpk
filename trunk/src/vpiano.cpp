@@ -63,12 +63,12 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     m_inputActive(false),
     m_midiThru(false),
     m_initialized(false),
-    m_dlgAbout(NULL),
-    m_dlgPreferences(NULL),
-    m_dlgMidiSetup(NULL),
-    m_dlgKeyMap(NULL),
-    m_dlgExtra(NULL),
-    m_dlgRiffImport(NULL)
+    m_dlgAbout(0),
+    m_dlgPreferences(0),
+    m_dlgMidiSetup(0),
+    m_dlgKeyMap(0),
+    m_dlgExtra(0),
+    m_dlgRiffImport(0)
 {
 #if ENABLE_DBUS
     new VmpkAdaptor(this);
@@ -114,11 +114,11 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
 VPiano::~VPiano()
 {
     try {
-        if (m_midiout != NULL) {
+        if (m_midiout != 0) {
             m_midiout->closePort();
             delete m_midiout;
         }
-        if (m_midiin != NULL) {
+        if (m_midiin != 0) {
             if (m_inputActive) {
                 m_midiin->cancelCallback();
                 m_inputActive = false;
@@ -155,7 +155,7 @@ void midiCallback( double /*deltatime*/,
                    std::vector< unsigned char > *message,
                    void *userData )
 {
-    QEvent* ev = NULL;
+    QEvent* ev = 0;
     VPiano* instance = static_cast<VPiano*>(userData);
     instance->midiThru(message);
     unsigned char status = message->at(0) & MASK_STATUS;
@@ -168,9 +168,9 @@ void midiCallback( double /*deltatime*/,
                 unsigned char midi_note = message->at(1);
                 unsigned char vel = message->at(2);
                 if ((status == STATUS_NOTEOFF) || (vel == 0))
-                    ev = new NoteOffEvent(midi_note);
+                    ev = new NoteOffEvent(midi_note, vel);
                 else
-                    ev = new NoteOnEvent(midi_note);
+                    ev = new NoteOnEvent(midi_note, vel);
             }
             break;
         case STATUS_POLYAFT: {
@@ -202,7 +202,7 @@ void midiCallback( double /*deltatime*/,
             break;
         }
     }
-    if (ev != NULL)
+    if (ev != 0)
         QApplication::postEvent(instance, ev);
 }
 
@@ -223,18 +223,18 @@ bool VPiano::initMidi()
         int nInPorts = m_midiin->getPortCount();
         if (nInPorts == 0) {
             delete m_midiin;
-            m_midiin = NULL;
+            m_midiin = 0;
         }
 #endif
 #if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)
-        if (m_midiout != NULL)
+        if (m_midiout != 0)
             m_midiout->openVirtualPort(QSTR_VMPKOUTPUT.toStdString());
-        if (m_midiin != NULL)
+        if (m_midiin != 0)
             m_midiin->openVirtualPort(QSTR_VMPKINPUT.toStdString());
 #else //if defined(__WINDOWS_MM__) || defined(__IRIX_MD__)
         m_midiout->openPort( m_currentOut = 0 );
 #endif
-        if (m_midiin != NULL) {
+        if (m_midiin != 0) {
             // ignore SYX, clock and active sense
             m_midiin->ignoreTypes(true,true,true);
             m_midiin->setCallback( &midiCallback, this );
@@ -285,7 +285,7 @@ void VPiano::initToolBars()
     m_Velocity->setStyle(dlgPreferences()->getStyledWidgets()? m_dialStyle : 0);
     m_Velocity->setMinimum(0);
     m_Velocity->setMaximum(127);
-    m_Velocity->setDefaultValue(100);
+    m_Velocity->setDefaultValue(MIDIVELOCITY);
     m_Velocity->setDialMode(Knob::LinearMode);
     m_Velocity->setValue(m_velocity);
     m_Velocity->setToolTip(QString::number(m_velocity));
@@ -443,12 +443,12 @@ QByteArray VPiano::readSysexDataFile(const QString& fileName)
 
 void VPiano::initExtraControllers()
 {
-    QWidget *w = NULL;
-    QCheckBox *chkbox = NULL;
-    Knob *knob = NULL;
-    QSpinBox *spin = NULL;
-    QSlider *slider = NULL;
-    QToolButton *button = NULL;
+    QWidget *w = 0;
+    QCheckBox *chkbox = 0;
+    Knob *knob = 0;
+    QSpinBox *spin = 0;
+    QSlider *slider = 0;
+    QToolButton *button = 0;
     foreach(const QString& s, m_extraControls) {
         QString lbl;
         int control = 0;
@@ -469,7 +469,7 @@ void VPiano::initExtraControllers()
         switch(type) {
         case 0:
             chkbox = new QCheckBox(this);
-            chkbox->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : NULL);
+            chkbox->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : 0);
             chkbox->setProperty(MIDICTLONVALUE, maxValue);
             chkbox->setProperty(MIDICTLOFFVALUE, minValue);
             chkbox->setChecked(bool(value));
@@ -479,7 +479,7 @@ void VPiano::initExtraControllers()
         case 1:
             knob = new Knob(this);
             knob->setFixedSize(32, 32);
-            knob->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : NULL);
+            knob->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : 0);
             knob->setMinimum(minValue);
             knob->setMaximum(maxValue);
             knob->setValue(value);
@@ -526,9 +526,9 @@ void VPiano::initExtraControllers()
             w = button;
             break;
         default:
-            w = NULL;
+            w = 0;
         }
-        if (w != NULL) {
+        if (w != 0) {
             if (!lbl.isEmpty() && type < 4) {
                 QLabel *qlbl = new QLabel(lbl, this);
                 qlbl->setMargin(TOOLBARLABELMARGIN);
@@ -553,7 +553,7 @@ void VPiano::readSettings()
 
     settings.beginGroup(QSTR_PREFERENCES);
     m_channel = settings.value(QSTR_CHANNEL, 0).toInt();
-    m_velocity = settings.value(QSTR_VELOCITY, 100).toInt();
+    m_velocity = settings.value(QSTR_VELOCITY, MIDIVELOCITY).toInt();
     m_baseOctave = settings.value(QSTR_BASEOCTAVE, 3).toInt();
     m_transpose = settings.value(QSTR_TRANSPOSE, 0).toInt();
     m_language = settings.value(QSTR_LANGUAGE, QLocale::system().name()).toString();
@@ -566,6 +566,7 @@ void VPiano::readSettings()
     bool alwaysOnTop = settings.value(QSTR_ALWAYSONTOP, false).toBool();
     bool showNames = settings.value(QSTR_SHOWNOTENAMES, false).toBool();
     bool showStatusBar = settings.value(QSTR_SHOWSTATUSBAR, false).toBool();
+    bool velocityColor = settings.value(QSTR_VELOCITYCOLOR, true).toBool();
     int drumsChannel = settings.value(QSTR_DRUMSCHANNEL, MIDIGMDRUMSCHANNEL).toInt();
     settings.endGroup();
 
@@ -575,8 +576,10 @@ void VPiano::readSettings()
     dlgPreferences()->setGrabKeyboard(grabKb);
     dlgPreferences()->setStyledWidgets(styledKnobs);
     dlgPreferences()->setAlwaysOnTop(alwaysOnTop);
+    dlgPreferences()->setVelocityColor(velocityColor);
     ui.actionNoteNames->setChecked(showNames);
     ui.actionStatusBar->setChecked(showStatusBar);
+    ui.pianokeybd->setVelocity( velocityColor ? m_velocity : MIDIVELOCITY );
     slotShowNoteNames();
     if (!insFileName.isEmpty()) {
         dlgPreferences()->setInstrumentsFileName(insFileName);
@@ -595,7 +598,7 @@ void VPiano::readSettings()
     inEnabled = true;
 #endif
 
-    if (m_midiin == NULL) {
+    if (m_midiin == 0) {
         dlgMidiSetup()->inputNotAvailable();
     } else {
         dlgMidiSetup()->setInputEnabled(inEnabled);
@@ -691,6 +694,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_SHOWNOTENAMES, ui.actionNoteNames->isChecked());
     settings.setValue(QSTR_SHOWSTATUSBAR, ui.actionStatusBar->isChecked());
     settings.setValue(QSTR_DRUMSCHANNEL, dlgPreferences()->getDrumsChannel());
+    settings.setValue(QSTR_VELOCITYCOLOR, dlgPreferences()->getVelocityColor());
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONNECTIONS);
@@ -764,7 +768,8 @@ void VPiano::customEvent ( QEvent *event )
     if ( event->type() == NoteOnEventType ) {
         NoteOnEvent *ev = static_cast<NoteOnEvent*>(event);
         int n = ev->getNote();
-        ui.pianokeybd->showNoteOn(n);
+        int v = (dlgPreferences()->getVelocityColor() ? ev->getValue() : MIDIVELOCITY );
+        ui.pianokeybd->showNoteOn(n, v);
 #ifdef ENABLE_DBUS
         emit event_noteon(n);
 #endif
@@ -967,7 +972,7 @@ void VPiano::sendProgramChange(const int program)
 
 void VPiano::sendBankChange(const int bank)
 {
-    int method = (m_ins != NULL) ? m_ins->bankSelMethod() : 0;
+    int method = (m_ins != 0) ? m_ins->bankSelMethod() : 0;
     int lsb, msb;
     switch (method) {
     case 0:
@@ -1074,6 +1079,7 @@ void VPiano::slotVelocityValueChanged(int value)
 {
     m_velocity = value;
     setWidgetTip(m_Velocity, value);
+    ui.pianokeybd->setVelocity(dlgPreferences()->getVelocityColor() ? value : MIDIVELOCITY);
 }
 
 void VPiano::slotExtraController(const int value)
@@ -1131,7 +1137,7 @@ void VPiano::refreshConnections()
     try {
         dlgMidiSetup()->clearCombos();
         // inputs
-        if (m_midiin == NULL) {
+        if (m_midiin == 0) {
             dlgMidiSetup()->inputNotAvailable();
             dlgMidiSetup()->setInputEnabled(false);
         } else {
@@ -1181,7 +1187,7 @@ void VPiano::applyConnections()
             m_midiout->openPort(i);
         }
         m_currentOut = i;
-        if (m_midiin != NULL) {
+        if (m_midiin != 0) {
             nInPorts = m_midiin->getPortCount();
             i = dlgMidiSetup()->selectedInput();
             if (m_inputActive && (i != m_currentIn)) {
@@ -1206,7 +1212,7 @@ void VPiano::applyConnections()
 
 void VPiano::initControllers(int channel)
 {
-    if (m_ins != NULL) {
+    if (m_ins != 0) {
         InstrumentData controls = m_ins->control();
         InstrumentData::ConstIterator it, end;
         it = controls.constBegin();
@@ -1215,13 +1221,13 @@ void VPiano::initControllers(int channel)
             int ctl = it.key();
             switch (ctl) {
             case CTL_VOLUME:
-                m_ctlState[channel][CTL_VOLUME] = 100;
+                m_ctlState[channel][CTL_VOLUME] = MIDIVOLUME;
                 break;
             case CTL_PAN:
-                m_ctlState[channel][CTL_PAN] = 64;
+                m_ctlState[channel][CTL_PAN] = MIDIPAN;
                 break;
             case CTL_EXPRESSION:
-                m_ctlState[channel][CTL_EXPRESSION] = 127;
+                m_ctlState[channel][CTL_EXPRESSION] = MIDIEXPRESSION;
                 break;
             default:
                 m_ctlState[channel][ctl] = 0;
@@ -1234,7 +1240,7 @@ void VPiano::populateControllers()
 {
     m_comboControl->blockSignals(true);
     m_comboControl->clear();
-    if (m_ins != NULL) {
+    if (m_ins != 0) {
         InstrumentData controls = m_ins->control();
         InstrumentData::ConstIterator it, end = controls.constEnd();
         for( it = controls.constBegin(); it != end; ++it )
@@ -1255,6 +1261,7 @@ void VPiano::applyPreferences()
     }
     ui.pianokeybd->setKeyPressedColor(dlgPreferences()->getKeyPressedColor());
     ui.pianokeybd->setRawKeyboardMode(dlgPreferences()->getRawKeyboard());
+    ui.pianokeybd->setVelocity(dlgPreferences()->getVelocityColor() ? m_velocity : MIDIVELOCITY );
 
     KeyboardMap* map = dlgPreferences()->getKeyboardMap();
     if (!map->getFileName().isEmpty() && map->getFileName() != QSTR_DEFAULT )
@@ -1287,7 +1294,7 @@ void VPiano::applyPreferences()
 
 void VPiano::populateInstruments()
 {
-    m_ins = NULL;
+    m_ins = 0;
     m_comboBank->clear();
     m_comboProg->clear();
     if (!dlgPreferences()->getInstrumentsFileName().isEmpty() &&
@@ -1296,7 +1303,7 @@ void VPiano::populateInstruments()
             m_ins = dlgPreferences()->getDrumsInstrument();
         else
             m_ins = dlgPreferences()->getInstrument();
-        if (m_ins != NULL) {
+        if (m_ins != 0) {
             //qDebug() << "Instrument Name:" << m_ins->instrumentName();
             //qDebug() << "Bank Selection method: " << m_ins->bankSelMethod();
             InstrumentPatches patches = m_ins->patches();
@@ -1393,7 +1400,7 @@ void VPiano::populatePrograms(int bank)
     if (bank < 0)
         return;
     m_comboProg->clear();
-    if (m_ins != NULL) {
+    if (m_ins != 0) {
         InstrumentData patch = m_ins->patch(bank);
         InstrumentData::ConstIterator k;
         for( k = patch.constBegin(); k != patch.constEnd(); ++k )
@@ -1450,7 +1457,7 @@ void VPiano::slotTransposeValueChanged(const int transpose)
 
 void VPiano::updateNoteNames(bool drums)
 {
-    if (drums && (m_ins != NULL)) {
+    if (drums && (m_ins != 0)) {
         int b = m_lastBank[m_channel];
         int p = m_lastProg[m_channel];
         const InstrumentData& notes = m_ins->notes(b, p);
@@ -1499,7 +1506,7 @@ void VPiano::updateController(int ctl, int val)
         m_Control->setToolTip(QString::number(val));
     }
     m_ctlState[m_channel][ctl] = val;
-    if ((ctl == CTL_MSB || ctl == CTL_LSB ) && m_ins != NULL) {
+    if ((ctl == CTL_MSB || ctl == CTL_LSB ) && m_ins != 0) {
         if (m_ins->bankSelMethod() == 0)
             m_lastBank[m_channel] = m_ctlState[m_channel][CTL_MSB] << 7 |
                                     m_ctlState[m_channel][CTL_LSB];
@@ -1623,11 +1630,11 @@ void VPiano::updateStyles()
 {
     QList<Knob *> allKnobs = findChildren<Knob *> ();
     foreach(Knob* knob, allKnobs) {
-        knob->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : NULL);
+        knob->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : 0);
     }
     QList<QCheckBox *> allChkbox = ui.toolBarExtra->findChildren<QCheckBox *> ();
     foreach(QCheckBox* chkbox, allChkbox) {
-        chkbox->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : NULL);
+        chkbox->setStyle(dlgPreferences()->getStyledWidgets() ? m_dialStyle : 0);
     }
 }
 
@@ -1658,7 +1665,7 @@ void VPiano::slotEditExtraControls()
 
 About* VPiano::dlgAbout()
 {
-    if (m_dlgAbout == NULL) {
+    if (m_dlgAbout == 0) {
         m_dlgAbout = new About(this);
     }
     return m_dlgAbout;
@@ -1666,7 +1673,7 @@ About* VPiano::dlgAbout()
 
 Preferences* VPiano::dlgPreferences()
 {
-    if (m_dlgPreferences == NULL) {
+    if (m_dlgPreferences == 0) {
         m_dlgPreferences = new Preferences(this);
     }
     return m_dlgPreferences;
@@ -1674,7 +1681,7 @@ Preferences* VPiano::dlgPreferences()
 
 MidiSetup* VPiano::dlgMidiSetup()
 {
-    if (m_dlgMidiSetup == NULL) {
+    if (m_dlgMidiSetup == 0) {
         m_dlgMidiSetup = new MidiSetup(this);
     }
     return m_dlgMidiSetup;
@@ -1682,7 +1689,7 @@ MidiSetup* VPiano::dlgMidiSetup()
 
 KMapDialog* VPiano::dlgKeyMap()
 {
-    if (m_dlgKeyMap == NULL) {
+    if (m_dlgKeyMap == 0) {
         m_dlgKeyMap = new KMapDialog(this);
     }
     return m_dlgKeyMap;
@@ -1690,7 +1697,7 @@ KMapDialog* VPiano::dlgKeyMap()
 
 DialogExtraControls* VPiano::dlgExtra()
 {
-    if (m_dlgExtra == NULL) {
+    if (m_dlgExtra == 0) {
         m_dlgExtra = new DialogExtraControls(this);
     }
     return m_dlgExtra;
@@ -1698,7 +1705,7 @@ DialogExtraControls* VPiano::dlgExtra()
 
 RiffImportDlg* VPiano::dlgRiffImport()
 {
-    if (m_dlgRiffImport == NULL) {
+    if (m_dlgRiffImport == 0) {
         m_dlgRiffImport = new RiffImportDlg(this);
     }
     return m_dlgRiffImport;
@@ -1785,14 +1792,14 @@ void VPiano::connect_thru(bool value)
 void VPiano::noteoff(int note)
 {
     sendNoteOff(note);
-    NoteOffEvent *ev = new NoteOffEvent(note);
+    NoteOffEvent *ev = new NoteOffEvent(note, 0);
     QApplication::postEvent(this, ev);
 }
 
 void VPiano::noteon(int note)
 {
     sendNoteOn(note);
-    NoteOnEvent *ev = new NoteOnEvent(note);
+    NoteOnEvent *ev = new NoteOnEvent(note, m_velocity);
     QApplication::postEvent(this, ev);
 }
 

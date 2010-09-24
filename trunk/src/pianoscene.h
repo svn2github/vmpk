@@ -61,8 +61,8 @@ public:
     bool useFlats() const { return m_useFlats; }
     void setUseFlats(const bool use);
 
-    void showNoteOn( const int note );
-    void showNoteOff( const int note );
+    void showNoteOn( const int note, int vel = 0 );
+    void showNoteOff( const int note, int vel = 0 );
     int baseOctave() const { return m_baseOctave; }
     void setBaseOctave( const int base );
     int numOctaves() const { return m_numOctaves; }
@@ -73,14 +73,16 @@ public:
     void setRawKeyboardMode(const bool b);
     void useCustomNoteNames(const QStringList& names);
     void useStandardNoteNames();
+    int getVelocity() { return m_velocity; }
+    void setVelocity(const int velocity) { m_velocity = velocity; }
 
 signals:
     void noteOn(int n);
     void noteOff(int n);
 
 protected:
-    void showKeyOn( PianoKey* key );
-    void showKeyOff( PianoKey* key );
+    void showKeyOn( PianoKey* key, int vel );
+    void showKeyOff( PianoKey* key, int vel );
     void keyOn( PianoKey* key );
     void keyOff( PianoKey* key );
     PianoKey* getKeyForPos( const QPointF& p ) const;
@@ -107,6 +109,7 @@ private:
     bool m_rawkbd;
     QColor m_keyPressedColor;
     bool m_mousePressed;
+    int m_velocity;
     PianoHandler* m_handler;
     KeyboardMap* m_keybdMap;
     QList<PianoKey*> m_keys;

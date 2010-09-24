@@ -72,14 +72,14 @@ void PianoKeybd::resizeEvent(QResizeEvent *event)
     fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);
 }
 
-void PianoKeybd::showNoteOn(int midiNote)
+void PianoKeybd::showNoteOn(int midiNote, int vel)
 {
-    m_scene->showNoteOn(midiNote);
+    m_scene->showNoteOn(midiNote, vel);
 }
 
-void PianoKeybd::showNoteOff(int midiNote)
+void PianoKeybd::showNoteOff(int midiNote, int vel)
 {
-    m_scene->showNoteOff(midiNote);
+    m_scene->showNoteOff(midiNote, vel);
 }
 
 void PianoKeybd::initDefaultMap()
