@@ -52,6 +52,8 @@
 #include <QtCore/QUrl>
 #include <QtCore/QString>
 #include <QtCore/QSettings>
+#include <QtCore/QTranslator>
+#include <QtCore/QLibraryInfo>
 #include <QtCore/QDebug>
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
