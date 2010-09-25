@@ -81,6 +81,7 @@
     <addaction name="menuLanguage"/>
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
+    <addaction name="actionAboutTranslation"/>
     <addaction name="actionAboutQt"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -652,6 +653,14 @@
    </property>
    <property name="shortcut">
     <string>Home</string>
+   </property>
+  </action>
+  <action name="actionAboutTranslation">
+   <property name="text">
+    <string>About &amp;Translation</string>
+   </property>
+   <property name="statusTip">
+    <string>Show information about the program language translation</string>
    </property>
   </action>
  </widget>

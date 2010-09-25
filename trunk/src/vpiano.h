@@ -95,6 +95,7 @@ Q_SIGNALS:
 protected Q_SLOTS:
     void slotAbout();
     void slotAboutQt();
+    void slotAboutTranslation();
     void slotConnections();
     void slotPreferences();
     void slotEditKeyboardMap();

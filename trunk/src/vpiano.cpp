@@ -100,6 +100,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
 
     connect(ui.actionAbout, SIGNAL(triggered()), SLOT(slotAbout()));
     connect(ui.actionAboutQt, SIGNAL(triggered()), SLOT(slotAboutQt()));
+    connect(ui.actionAboutTranslation, SIGNAL(triggered()), SLOT(slotAboutTranslation()));
     connect(ui.actionConnections, SIGNAL(triggered()), SLOT(slotConnections()));
     connect(ui.actionPreferences, SIGNAL(triggered()), SLOT(slotPreferences()));
     connect(ui.actionEditKM, SIGNAL(triggered()), SLOT(slotEditKeyboardMap()));
@@ -1977,4 +1978,18 @@ void VPiano::createLanguageMenu()
         if (loc == configuredLanguage())
             action->setChecked(true);
     }
+}
+
+void VPiano::slotAboutTranslation()
+{
+    QString common = tr("<p>VMPK is developed and translated thanks to the "
+        "volunteer work of many people from around the world. If you want to "
+        "join the team or have any question, please visit the forums at "
+        "<a href='http://sourceforge.net/projects/vmpk/forums'>SourceForge</a>"
+        "</p>");
+    if (m_language == "en_US" || m_supportedLangs.count(m_language) < 1)
+        QMessageBox::information(this, tr("Translation Information"), common);
+    else
+        QMessageBox::information(this, tr("Translation"),
+            tr("<p>Translation by TRANSLATOR_NAME_AND_EMAIL</p>%1").arg(common));
 }
