@@ -168,3 +168,8 @@ QString MidiSetup::selectedOutputName() const
     else
         return QString();
 }
+
+void MidiSetup::retranslateUi()
+{
+    ui.retranslateUi(this);
+}

@@ -144,3 +144,8 @@ void RiffImportDlg::save()
         data.close();
     }
 }
+
+void RiffImportDlg::retranslateUi()
+{
+    ui->retranslateUi(this);
+}

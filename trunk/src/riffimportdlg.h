@@ -45,6 +45,7 @@ public:
     QString getInput() { return m_input; }
     QString getName() { return m_name; }
     void save();
+    void retranslateUi();
 
 protected slots:
     void slotInstrument(int bank, int pc, QString name);

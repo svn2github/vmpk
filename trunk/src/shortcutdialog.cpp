@@ -350,5 +350,9 @@ void ShortcutDialog::reject (void)
 		QDialog::reject();
 }
 
+void ShortcutDialog::retranslateUi()
+{
+    m_ui.retranslateUi(this);
+}
 
 // end of ShortcutDialog.cpp

@@ -244,3 +244,8 @@ void Preferences::slotRestoreDefaults()
     restoreDefaults();
     setKeyPressedColor(QApplication::palette().highlight().color());
 }
+
+void Preferences::retranslateUi()
+{
+    ui.retranslateUi(this);
+}

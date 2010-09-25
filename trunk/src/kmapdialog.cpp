@@ -28,12 +28,12 @@ KMapDialog::KMapDialog(QWidget *parent)
     : QDialog(parent)
 {
 	ui.setupUi(this);
-	QPushButton* btnOpen = ui.buttonBox->addButton(tr("Open..."), QDialogButtonBox::ActionRole);
-    QPushButton* btnSave = ui.buttonBox->addButton(tr("Save As..."), QDialogButtonBox::ActionRole);
-    btnOpen->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_DialogOpenButton)));
-    btnSave->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_DialogSaveButton)));
-	connect(btnOpen, SIGNAL(clicked()), SLOT(slotOpen()));
-    connect(btnSave, SIGNAL(clicked()), SLOT(slotSave()));
+	m_btnOpen = ui.buttonBox->addButton(tr("Open..."), QDialogButtonBox::ActionRole);
+    m_btnSave = ui.buttonBox->addButton(tr("Save As..."), QDialogButtonBox::ActionRole);
+    m_btnOpen->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_DialogOpenButton)));
+    m_btnSave->setIcon(style()->standardIcon(QStyle::StandardPixmap(QStyle::SP_DialogSaveButton)));
+	connect(m_btnOpen, SIGNAL(clicked()), SLOT(slotOpen()));
+    connect(m_btnSave, SIGNAL(clicked()), SLOT(slotSave()));
 }
 
 void KMapDialog::displayMap(const KeyboardMap* map)
@@ -105,4 +105,11 @@ void KMapDialog::slotSave()
         updateMap();
         m_map.saveToXMLFile(fileName);
     }
+}
+
+void KMapDialog::retranslateUi()
+{
+    ui.retranslateUi(this);
+    m_btnOpen->setText(tr("Open..."));
+    m_btnSave->setText(tr("Save As..."));
 }

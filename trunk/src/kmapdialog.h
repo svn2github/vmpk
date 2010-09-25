@@ -33,6 +33,7 @@ public:
     void save(const QString fileName);
     void displayMap(const KeyboardMap* map);
     void getMap(KeyboardMap* map);
+    void retranslateUi();
 
 public slots:
     void slotOpen();
@@ -41,6 +42,8 @@ public slots:
 private:
     void updateMap();
 
+    QPushButton* m_btnOpen;
+    QPushButton* m_btnSave;
     KeyboardMap m_map;
     Ui::KMapDialogClass ui;
 };

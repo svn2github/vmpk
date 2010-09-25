@@ -75,6 +75,7 @@ public:
     void useStandardNoteNames();
     int getVelocity() { return m_velocity; }
     void setVelocity(const int velocity) { m_velocity = velocity; }
+    void retranslate();
 
 signals:
     void noteOn(int n);
@@ -115,6 +116,8 @@ private:
     QList<PianoKey*> m_keys;
     QList<KeyLabel*> m_labels;
     QStringList m_noteNames;
+    QStringList m_names_s;
+    QStringList m_names_f;
 };
 
 #endif /*PIANOSCENE_H_*/

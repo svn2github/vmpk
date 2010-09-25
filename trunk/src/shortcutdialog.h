@@ -121,6 +121,7 @@ public:
 
 	// Constructor.
 	ShortcutDialog(QList<QAction *> actions, QWidget *pParent = NULL);
+    void retranslateUi();
 
 protected slots:
 

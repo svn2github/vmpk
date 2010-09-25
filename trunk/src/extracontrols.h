@@ -85,6 +85,7 @@ public:
     ~DialogExtraControls();
     void setControls(const QStringList& ctls);
     QStringList getControls();
+    void retranslateUi();
 
 public slots:
     void addControl();

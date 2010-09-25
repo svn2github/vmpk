@@ -74,12 +74,11 @@ PianoScene::PianoScene ( const int baseOctave,
             key->setPressedBrush(hilightBrush);
         m_keys.insert(i, key);
         addItem( key );
-        lbl->setHtml(noteName(i));
-        lbl->setVisible(m_showLabels);
         lbl->setFont(lblFont);
         m_labels.insert(i, lbl);
     }
     hideOrShowKeys();
+    retranslate();
 }
 
 QSize PianoScene::sizeHint() const
@@ -300,16 +299,12 @@ void PianoScene::setBaseOctave(const int base)
 
 QString PianoScene::noteName(const int note)
 {
-    const QString m_names_s[] = {trUtf8("C"), trUtf8("C♯"), trUtf8("D"), trUtf8("D♯"), trUtf8("E"),
-                                 trUtf8("F"), trUtf8("F♯"), trUtf8("G"), trUtf8("G♯"),
-                                 trUtf8("A"), trUtf8("A♯"), trUtf8("B")};
-    const QString m_names_f[] = {trUtf8("C"), trUtf8("D♭"), trUtf8("D"), trUtf8("E♭"), trUtf8("E"),
-                                 trUtf8("F"), trUtf8("G♭"), trUtf8("G"), trUtf8("A♭"),
-                                 trUtf8("A"), trUtf8("B♭"), trUtf8("B")};
     int num = (note + m_transpose + 12) % 12;
     int oct = m_baseOctave + ((note + m_transpose) / 12) - 1;
     if (m_noteNames.isEmpty()) {
-        QString name = m_useFlats ? m_names_f[num] : m_names_s[num];
+        QString name;
+        if (!m_names_f.isEmpty() && !m_names_s.isEmpty())
+            name = m_useFlats ? m_names_f[num] : m_names_s[num];
         return QString("%1<span style='vertical-align:sub;'>%2</span>").arg(name).arg(oct);
     } else {
         int noteIndex = note + m_transpose + 12*m_baseOctave;
@@ -373,5 +368,36 @@ void PianoScene::useCustomNoteNames(const QStringList& names)
 void PianoScene::useStandardNoteNames()
 {
     m_noteNames.clear();
+    refreshLabels();
+}
+
+void PianoScene::retranslate()
+{
+    m_names_s.clear();
+    m_names_f.clear();
+    m_names_s << trUtf8("C")
+              << trUtf8("C♯")
+              << trUtf8("D")
+              << trUtf8("D♯")
+              << trUtf8("E")
+              << trUtf8("F")
+              << trUtf8("F♯")
+              << trUtf8("G")
+              << trUtf8("G♯")
+              << trUtf8("A")
+              << trUtf8("A♯")
+              << trUtf8("B");
+    m_names_f << trUtf8("C")
+              << trUtf8("D♭")
+              << trUtf8("D")
+              << trUtf8("E♭")
+              << trUtf8("E")
+              << trUtf8("F")
+              << trUtf8("G♭")
+              << trUtf8("G")
+              << trUtf8("A♭")
+              << trUtf8("A")
+              << trUtf8("B♭")
+              << trUtf8("B");
     refreshLabels();
 }

@@ -80,23 +80,14 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
 #endif
     m_trq = new QTranslator(this);
     m_trp = new QTranslator(this);
-    QString loc_q = QSTR_QTPX + configuredLanguage();
-    QString loc_p = QSTR_VMPKPX + configuredLanguage();
-    QString path_q = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-    QString path_p = VPiano::localeDirectory();
-    qDebug() << "Qt trans." << path_q << loc_q << m_trq->load(loc_q, path_q);
-    qDebug() << "VMPK trans." << path_p << loc_p << m_trp->load(loc_p, path_p);
+    m_trq->load( QSTR_QTPX + configuredLanguage(),
+                 QLibraryInfo::location(QLibraryInfo::TranslationsPath) );
+    m_trp->load( QSTR_VMPKPX + configuredLanguage(),
+                 VPiano::localeDirectory() );
     QCoreApplication::installTranslator(m_trq);
     QCoreApplication::installTranslator(m_trp);
     ui.setupUi(this);
-    m_supportedLangs.insert(QLatin1String("cs"),    tr("Czech"));
-    m_supportedLangs.insert(QLatin1String("de"),    tr("German"));
-    m_supportedLangs.insert(QLatin1String("en_US"), tr("English"));
-    m_supportedLangs.insert(QLatin1String("es"),    tr("Spanish"));
-    m_supportedLangs.insert(QLatin1String("fr"),    tr("French"));
-    m_supportedLangs.insert(QLatin1String("ru"),    tr("Russian"));
-    m_supportedLangs.insert(QLatin1String("tr"),    tr("Turkish"));
-    m_supportedLangs.insert(QLatin1String("zh_CN"), tr("Chinese"));
+    initLanguages();
 
     connect(ui.actionAbout, SIGNAL(triggered()), SLOT(slotAbout()));
     connect(ui.actionAboutQt, SIGNAL(triggered()), SLOT(slotAboutQt()));
@@ -253,36 +244,40 @@ bool VPiano::initMidi()
 
 void VPiano::initToolBars()
 {
-    QLabel *lbl;
+    //QLabel *lbl;
     m_dialStyle = new ClassicStyle();
     m_dialStyle->setParent(this);
     // Notes tool bar
-    ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Channel:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblChannel = new QLabel(tr("Channel:"), this);
+    ui.toolBarNotes->addWidget(m_lblChannel);
+    m_lblChannel->setMargin(TOOLBARLABELMARGIN);
     m_sboxChannel = new QSpinBox(this);
     m_sboxChannel->setMinimum(1);
     m_sboxChannel->setMaximum(MIDICHANNELS);
     m_sboxChannel->setValue(m_channel + 1);
     m_sboxChannel->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxChannel);
-    ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Base Octave:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblBaseOctave = new QLabel(tr("Base Octave:"), this);
+    ui.toolBarNotes->addWidget(m_lblBaseOctave);
+    m_lblBaseOctave->setMargin(TOOLBARLABELMARGIN);
     m_sboxOctave = new QSpinBox(this);
     m_sboxOctave->setMinimum(0);
     m_sboxOctave->setMaximum(9);
     m_sboxOctave->setValue(m_baseOctave);
     m_sboxOctave->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxOctave);
-    ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Transpose:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblTranspose = new QLabel(tr("Transpose:"), this);
+    ui.toolBarNotes->addWidget(m_lblTranspose);
+    m_lblTranspose->setMargin(TOOLBARLABELMARGIN);
     m_sboxTranspose = new QSpinBox(this);
     m_sboxTranspose->setMinimum(-11);
     m_sboxTranspose->setMaximum(11);
     m_sboxTranspose->setValue(m_transpose);
     m_sboxTranspose->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxTranspose);
-    ui.toolBarNotes->addWidget(lbl = new QLabel(tr("Velocity:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblVelocity = new QLabel(tr("Velocity:"), this);
+    ui.toolBarNotes->addWidget(m_lblVelocity);
+    m_lblVelocity->setMargin(TOOLBARLABELMARGIN);
     m_Velocity = new Knob(this);
     m_Velocity->setFixedSize(32, 32);
     m_Velocity->setStyle(dlgPreferences()->getStyledWidgets()? m_dialStyle : 0);
@@ -319,14 +314,16 @@ void VPiano::initToolBars()
     connect( ui.actionVelocityDown, SIGNAL(triggered()),
              SLOT(slotVelocityDown()) );
     // Controllers tool bar
-    ui.toolBarControllers->addWidget(lbl = new QLabel(tr("Control:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblControl = new QLabel(tr("Control:"), this);
+    ui.toolBarControllers->addWidget(m_lblControl);
+    m_lblControl ->setMargin(TOOLBARLABELMARGIN);
     m_comboControl = new QComboBox(this);
     m_comboControl->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     m_comboControl->setFocusPolicy(Qt::NoFocus);
     ui.toolBarControllers->addWidget(m_comboControl);
-    ui.toolBarControllers->addWidget(lbl = new QLabel(tr("Value:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblValue = new QLabel(tr("Value:"), this);
+    ui.toolBarControllers->addWidget(m_lblValue);
+    m_lblValue->setMargin(TOOLBARLABELMARGIN);
     m_Control= new Knob(this);
     m_Control->setFixedSize(32, 32);
     m_Control->setStyle(dlgPreferences()->getStyledWidgets()? m_dialStyle : 0);
@@ -343,8 +340,9 @@ void VPiano::initToolBars()
     connect( m_Control, SIGNAL(sliderMoved(int)),
              SLOT(slotControlSliderMoved(int)) );
     // Pitch bender tool bar
-    ui.toolBarBender->addWidget(lbl = new QLabel(tr("Bender:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblBender = new QLabel(tr("Bender:"), this);
+    ui.toolBarBender->addWidget(m_lblBender);
+    m_lblBender->setMargin(TOOLBARLABELMARGIN);
     m_bender = new QSlider(this);
     m_bender->setOrientation(Qt::Horizontal);
     m_bender->setMaximumWidth(200);
@@ -359,14 +357,16 @@ void VPiano::initToolBars()
     connect( m_bender, SIGNAL(sliderReleased()),
              SLOT(slotBenderSliderReleased()) );
     // Programs tool bar
-    ui.toolBarPrograms->addWidget(lbl = new QLabel(tr("Bank:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblBank = new QLabel(tr("Bank:"), this);
+    ui.toolBarPrograms->addWidget(m_lblBank);
+    m_lblBank->setMargin(TOOLBARLABELMARGIN);
     m_comboBank = new QComboBox(this);
     m_comboBank->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     m_comboBank->setFocusPolicy(Qt::NoFocus);
     ui.toolBarPrograms->addWidget(m_comboBank);
-    ui.toolBarPrograms->addWidget(lbl = new QLabel(tr("Program:"), this));
-    lbl->setMargin(TOOLBARLABELMARGIN);
+    m_lblProgram = new QLabel(tr("Program:"), this);
+    ui.toolBarPrograms->addWidget(m_lblProgram);
+    m_lblProgram->setMargin(TOOLBARLABELMARGIN);
     m_comboProg = new QComboBox(this);
     m_comboProg->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     m_comboProg->setFocusPolicy(Qt::NoFocus);
@@ -1939,18 +1939,24 @@ QString VPiano::configuredLanguage()
         settings.beginGroup(QSTR_PREFERENCES);
         m_language = settings.value(QSTR_LANGUAGE, QLocale::system().name()).toString();
         settings.endGroup();
-        QLocale::setDefault(QLocale(m_language));
     }
     return m_language;
 }
 
 void VPiano::slotSwitchLanguage(QAction *action)
 {
-    m_language = action->data().toString();
-    QMessageBox::information(this, tr("Language Changed"),
-        tr("The language for this application has been changed. "
-           "The change will take effect the next time the application "
-           "is started."));
+    QString lang = action->data().toString();
+    if ( QMessageBox::question (this, tr("Language Changed"),
+            tr("The language for this application is going to change to %1. "
+               "Do you want to continue?").arg(m_supportedLangs[lang]),
+            QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
+    {
+        m_language = lang;
+        retranslateUi();
+        m_currentLang = action;
+    } else {
+        m_currentLang->setChecked(true);
+    }
 }
 
 void VPiano::createLanguageMenu()
@@ -1975,8 +1981,10 @@ void VPiano::createLanguageMenu()
         action->setData(loc);
         ui.menuLanguage->addAction(action);
         languageGroup->addAction(action);
-        if (loc == configuredLanguage())
+        if (loc == configuredLanguage()) {
             action->setChecked(true);
+            m_currentLang = action;
+        }
     }
 }
 
@@ -1992,4 +2000,56 @@ void VPiano::slotAboutTranslation()
     else
         QMessageBox::information(this, tr("Translation"),
             tr("<p>Translation by TRANSLATOR_NAME_AND_EMAIL</p>%1").arg(common));
+}
+
+void VPiano::retranslateUi()
+{
+    m_trq->load( QSTR_QTPX + configuredLanguage(),
+                 QLibraryInfo::location(QLibraryInfo::TranslationsPath) );
+    m_trp->load( QSTR_VMPKPX + configuredLanguage(),
+                 VPiano::localeDirectory() );
+    ui.retranslateUi(this);
+    ui.pianokeybd->retranslate();
+    initLanguages();
+    ui.menuLanguage->clear();
+    createLanguageMenu();
+    retranslateToolbars();
+    if (m_dlgAbout != 0)
+        m_dlgAbout->retranslateUi();
+    if (m_dlgPreferences != 0)
+        m_dlgPreferences->retranslateUi();
+    if (m_dlgMidiSetup != 0)
+        m_dlgMidiSetup->retranslateUi();
+    if (m_dlgKeyMap != 0)
+        m_dlgKeyMap->retranslateUi();
+    if (m_dlgExtra != 0)
+        m_dlgExtra->retranslateUi();
+    if (m_dlgRiffImport != 0)
+        m_dlgRiffImport->retranslateUi();
+}
+
+void VPiano::initLanguages()
+{
+    m_supportedLangs.clear();
+    m_supportedLangs.insert(QLatin1String("cs"),    tr("Czech"));
+    m_supportedLangs.insert(QLatin1String("de"),    tr("German"));
+    m_supportedLangs.insert(QLatin1String("en_US"), tr("English"));
+    m_supportedLangs.insert(QLatin1String("es"),    tr("Spanish"));
+    m_supportedLangs.insert(QLatin1String("fr"),    tr("French"));
+    m_supportedLangs.insert(QLatin1String("ru"),    tr("Russian"));
+    m_supportedLangs.insert(QLatin1String("tr"),    tr("Turkish"));
+    m_supportedLangs.insert(QLatin1String("zh_CN"), tr("Chinese"));
+}
+
+void VPiano::retranslateToolbars()
+{
+    m_lblBank->setText(tr("Bank:"));
+    m_lblBaseOctave->setText(tr("Base Octave:"));
+    m_lblBender->setText(tr("Bender:"));
+    m_lblChannel->setText(tr("Channel:"));
+    m_lblControl->setText(tr("Control:"));
+    m_lblProgram->setText(tr("Program:"));
+    m_lblTranspose->setText(tr("Transpose:"));
+    m_lblValue->setText(tr("Value:"));
+    m_lblVelocity->setText(tr("Velocity:"));
 }

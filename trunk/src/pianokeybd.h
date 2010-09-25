@@ -82,6 +82,7 @@ public:
     void useStandardNoteNames() { m_scene->useStandardNoteNames(); }
     int getVelocity() { return m_scene->getVelocity(); }
     void setVelocity(const int velocity) { m_scene->setVelocity(velocity); }
+    void retranslate();
 // RawKbdHandler methods
     bool handleKeyPressed(int keycode);
     bool handleKeyReleased(int keycode);

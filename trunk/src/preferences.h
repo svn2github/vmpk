@@ -49,6 +49,7 @@ public:
     void setKeyMapFileName( const QString fileName );
     KeyboardMap* getKeyboardMap() { return &m_keymap; }
     KeyboardMap* getRawKeyboardMap() { return &m_rawmap; }
+    void retranslateUi();
 
 public slots:
     void setNumOctaves(int value) { m_numOctaves = value; }

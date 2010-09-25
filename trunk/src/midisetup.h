@@ -44,6 +44,7 @@ public:
     int  selectedOutput();
     QString selectedInputName() const;
     QString selectedOutputName() const;
+    void retranslateUi();
 
 public slots:
     void toggledInput(bool state);

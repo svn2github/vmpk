@@ -1,11 +1,12 @@
 2010-09-25
     * About translation dialog
-   
+    * Dynamic language change without restart
+
 2010-09-24
     * New option: Translate MIDI velocity into key pressed color tint 
 
 2010-09-23
-    * Language menu to select another language after restart
+    * Language menu to select another language
 
 2010-09-22
     * Tool shortcuts 

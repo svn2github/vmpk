@@ -291,3 +291,8 @@ bool PianoKeybd::handleKeyReleased(int keycode)
     }
     return false;
 }
+
+void PianoKeybd::retranslate()
+{
+    m_scene->retranslate();
+}

@@ -239,6 +239,11 @@ void DialogExtraControls::openFile()
     }
 }
 
+void DialogExtraControls::retranslateUi()
+{
+    m_ui->retranslateUi(this);
+}
+
 QString ExtraControl::toString()
 {
     QStringList lst;

@@ -24,6 +24,7 @@
 #include <QtGui/QMainWindow>
 
 class QTranslator;
+class QLabel;
 class QComboBox;
 class QSpinBox;
 class QSlider;
@@ -49,6 +50,7 @@ public:
     int getInputChannel();
     void midiThru(std::vector<unsigned char> *message) const;
     bool isInitialized() const { return m_initialized; }
+    void retranslateUi();
 
     // PianoHandler methods
     void noteOn(const int midiNote);
@@ -188,6 +190,9 @@ private:
     DialogExtraControls *dlgExtra();
     RiffImportDlg *dlgRiffImport();
 
+    void initLanguages();
+    void retranslateToolbars();
+
     RtMidiOut* m_midiout;
     RtMidiIn* m_midiin;
     int m_currentOut;
@@ -205,6 +210,15 @@ private:
 
     Ui::VPiano ui;
 
+    QLabel* m_lblBank;
+    QLabel* m_lblBaseOctave;
+    QLabel* m_lblBender;
+    QLabel* m_lblChannel;
+    QLabel* m_lblControl;
+    QLabel* m_lblProgram;
+    QLabel* m_lblTranspose;
+    QLabel* m_lblValue;
+    QLabel* m_lblVelocity;
     QSpinBox* m_sboxChannel;
     QSpinBox* m_sboxOctave;
     QSpinBox* m_sboxTranspose;
@@ -228,6 +242,7 @@ private:
     QString m_language;
     QMap<QString, QString> m_supportedLangs;
     QTranslator *m_trq, *m_trp;
+    QAction *m_currentLang;
 };
 
 #endif // VPIANO_H

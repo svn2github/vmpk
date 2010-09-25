@@ -23,6 +23,12 @@ About::About(QWidget *parent)
     : QDialog(parent)
 {
     ui.setupUi(this);
+    retranslateUi();
+}
+
+void About::retranslateUi()
+{
+    ui.retranslateUi(this);
     ui.labelVersion->setText(tr("<html>"
             "<head>"
               "<meta name=\"qrichtext\" content=\"1\" />"
