@@ -1953,7 +1953,6 @@ void VPiano::slotSwitchLanguage(QAction *action)
     {
         m_language = lang;
         retranslateUi();
-        m_currentLang = action;
     } else {
         m_currentLang->setChecked(true);
     }
