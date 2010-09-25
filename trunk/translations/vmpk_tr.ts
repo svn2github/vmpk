@@ -4,7 +4,7 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../src/about.cpp" line="26"/>
+        <location filename="../src/about.cpp" line="32"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot;margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Version: %1&lt;br/&gt;Build date: %2&lt;br/&gt;Build time: %3&lt;br/&gt;Compiler: %4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -203,11 +203,13 @@ p, li { white-space: pre-wrap; }
     <name>KMapDialog</name>
     <message>
         <location filename="../src/kmapdialog.cpp" line="31"/>
+        <location filename="../src/kmapdialog.cpp" line="113"/>
         <source>Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.cpp" line="32"/>
+        <location filename="../src/kmapdialog.cpp" line="114"/>
         <source>Save As...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -987,94 +989,94 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PianoScene</name>
     <message>
-        <location filename="../src/pianoscene.cpp" line="303"/>
-        <location filename="../src/pianoscene.cpp" line="306"/>
+        <location filename="../src/pianoscene.cpp" line="378"/>
+        <location filename="../src/pianoscene.cpp" line="390"/>
         <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="303"/>
+        <location filename="../src/pianoscene.cpp" line="379"/>
         <source>C♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="303"/>
-        <location filename="../src/pianoscene.cpp" line="306"/>
+        <location filename="../src/pianoscene.cpp" line="380"/>
+        <location filename="../src/pianoscene.cpp" line="392"/>
         <source>D</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="303"/>
+        <location filename="../src/pianoscene.cpp" line="381"/>
         <source>D♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="303"/>
-        <location filename="../src/pianoscene.cpp" line="306"/>
+        <location filename="../src/pianoscene.cpp" line="382"/>
+        <location filename="../src/pianoscene.cpp" line="394"/>
         <source>E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="304"/>
-        <location filename="../src/pianoscene.cpp" line="307"/>
+        <location filename="../src/pianoscene.cpp" line="383"/>
+        <location filename="../src/pianoscene.cpp" line="395"/>
         <source>F</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="304"/>
+        <location filename="../src/pianoscene.cpp" line="384"/>
         <source>F♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="304"/>
-        <location filename="../src/pianoscene.cpp" line="307"/>
+        <location filename="../src/pianoscene.cpp" line="385"/>
+        <location filename="../src/pianoscene.cpp" line="397"/>
         <source>G</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="304"/>
+        <location filename="../src/pianoscene.cpp" line="386"/>
         <source>G♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="305"/>
-        <location filename="../src/pianoscene.cpp" line="308"/>
+        <location filename="../src/pianoscene.cpp" line="387"/>
+        <location filename="../src/pianoscene.cpp" line="399"/>
         <source>A</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="305"/>
+        <location filename="../src/pianoscene.cpp" line="388"/>
         <source>A♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="305"/>
-        <location filename="../src/pianoscene.cpp" line="308"/>
+        <location filename="../src/pianoscene.cpp" line="389"/>
+        <location filename="../src/pianoscene.cpp" line="401"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="306"/>
+        <location filename="../src/pianoscene.cpp" line="391"/>
         <source>D♭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="306"/>
+        <location filename="../src/pianoscene.cpp" line="393"/>
         <source>E♭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="307"/>
+        <location filename="../src/pianoscene.cpp" line="396"/>
         <source>G♭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="307"/>
+        <location filename="../src/pianoscene.cpp" line="398"/>
         <source>A♭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="308"/>
+        <location filename="../src/pianoscene.cpp" line="400"/>
         <source>B♭</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1489,134 +1491,143 @@ Do you want to apply the changes?</source>
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="222"/>
+        <location filename="../src/vpiano.cpp" line="213"/>
         <location filename="../src/vpiano.cpp" line="1623"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="223"/>
+        <location filename="../src/vpiano.cpp" line="214"/>
         <source>No MIDI output ports available. Aborting</source>
         <translation>Hiç MIDI çıktı portu yok. Çıkılıyor</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="247"/>
+        <location filename="../src/vpiano.cpp" line="238"/>
         <source>Error. Aborting</source>
         <translation>Hata. Çıkılıyor</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="260"/>
+        <location filename="../src/vpiano.cpp" line="251"/>
+        <location filename="../src/vpiano.cpp" line="2049"/>
         <source>Channel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="268"/>
+        <location filename="../src/vpiano.cpp" line="260"/>
+        <location filename="../src/vpiano.cpp" line="2047"/>
         <source>Base Octave:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="276"/>
+        <location filename="../src/vpiano.cpp" line="269"/>
+        <location filename="../src/vpiano.cpp" line="2052"/>
         <source>Transpose:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="284"/>
+        <location filename="../src/vpiano.cpp" line="278"/>
+        <location filename="../src/vpiano.cpp" line="2054"/>
         <source>Velocity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="322"/>
+        <location filename="../src/vpiano.cpp" line="317"/>
+        <location filename="../src/vpiano.cpp" line="2050"/>
         <source>Control:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="328"/>
+        <location filename="../src/vpiano.cpp" line="324"/>
+        <location filename="../src/vpiano.cpp" line="2053"/>
         <source>Value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="346"/>
+        <location filename="../src/vpiano.cpp" line="343"/>
+        <location filename="../src/vpiano.cpp" line="2048"/>
         <source>Bender:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="362"/>
+        <location filename="../src/vpiano.cpp" line="360"/>
+        <location filename="../src/vpiano.cpp" line="2046"/>
         <source>Bank:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="368"/>
+        <location filename="../src/vpiano.cpp" line="367"/>
+        <location filename="../src/vpiano.cpp" line="2051"/>
         <source>Program:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1985"/>
-        <source>&lt;p&gt;VMPK is developed and translated thanks to the volunteer work of many people from around the world. If you want to join the team or have any question, please visit the forums at &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.cpp" line="1991"/>
-        <source>Translation Information</source>
+        <location filename="../src/vpiano.cpp" line="1950"/>
+        <source>The language for this application is going to change to %1. Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="1993"/>
+        <source>&lt;p&gt;VMPK is developed and translated thanks to the volunteer work of many people from around the world. If you want to join the team or have any question, please visit the forums at &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="1999"/>
+        <source>Translation Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="2001"/>
         <source>Translation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1994"/>
+        <location filename="../src/vpiano.cpp" line="2002"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="92"/>
+        <location filename="../src/vpiano.cpp" line="2034"/>
         <source>Czech</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="93"/>
+        <location filename="../src/vpiano.cpp" line="2035"/>
         <source>German</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="94"/>
+        <location filename="../src/vpiano.cpp" line="2036"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="95"/>
+        <location filename="../src/vpiano.cpp" line="2037"/>
         <source>Spanish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="96"/>
+        <location filename="../src/vpiano.cpp" line="2038"/>
         <source>French</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="97"/>
+        <location filename="../src/vpiano.cpp" line="2039"/>
         <source>Russian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="98"/>
+        <location filename="../src/vpiano.cpp" line="2040"/>
         <source>Turkish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="99"/>
+        <location filename="../src/vpiano.cpp" line="2041"/>
         <source>Chinese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1950"/>
+        <location filename="../src/vpiano.cpp" line="1949"/>
         <source>Language Changed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.cpp" line="1951"/>
-        <source>The language for this application has been changed. The change will take effect the next time the application is started.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
