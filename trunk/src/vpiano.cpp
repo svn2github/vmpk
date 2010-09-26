@@ -797,8 +797,18 @@ void VPiano::customEvent ( QEvent *event )
         ControlChangeEvent *ev = static_cast<ControlChangeEvent*>(event);
         int ctl = ev->getController();
         int val = ev->getValue();
-        updateController(ctl, val);
-        updateExtraController(ctl, val);
+        switch (ctl) {
+        case CTL_ALL_SOUND_OFF:
+        case CTL_ALL_NOTES_OFF:
+            ui.pianokeybd->allKeysOff();
+            break;
+        case CTL_RESET_ALL_CTL:
+            initializeAllControllers();
+            break;
+        default:
+            updateController(ctl, val);
+            updateExtraController(ctl, val);
+        }
 #ifdef ENABLE_DBUS
         emit event_controlchange(ctl, val);
 #endif
@@ -925,6 +935,11 @@ void VPiano::sendController(const int controller, const int value)
 void VPiano::resetAllControllers()
 {
     sendController(CTL_RESET_ALL_CTL, 0);
+    initializeAllControllers();
+}
+
+void VPiano::initializeAllControllers()
+{
     int index = m_comboControl->currentIndex();
     int ctl = m_comboControl->itemData(index).toInt();
     int val = m_ctlState[m_channel][ctl];

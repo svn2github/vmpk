@@ -25,6 +25,7 @@
 
 #define CTL_MSB              0
 #define CTL_LSB           0x20
+#define CTL_ALL_SOUND_OFF 0x78
 #define CTL_RESET_ALL_CTL 0x79
 #define CTL_ALL_NOTES_OFF 0x7B
 

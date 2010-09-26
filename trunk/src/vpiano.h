@@ -159,6 +159,7 @@ private:
     void initExtraControllers();
     void initControllers(int channel);
     void resetAllControllers();
+    void initializeAllControllers();
     void allNotesOff();
     void sendController(const int controller, const int value);
     void sendBankChange(const int bank);

@@ -1,3 +1,7 @@
+2010-09-26
+    * Process incoming controller events: all sounds off, all notes off, 
+      reset all controllers.
+      
 2010-09-25
     * About translation dialog
     * Dynamic language change without restart
