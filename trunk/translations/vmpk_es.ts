@@ -1580,7 +1580,7 @@ Do you want to apply the changes?</source>
     <name>VPiano</name>
     <message>
         <location filename="../src/vpiano.cpp" line="213"/>
-        <location filename="../src/vpiano.cpp" line="1623"/>
+        <location filename="../src/vpiano.cpp" line="1638"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -1596,125 +1596,125 @@ Do you want to apply the changes?</source>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="251"/>
-        <location filename="../src/vpiano.cpp" line="2049"/>
+        <location filename="../src/vpiano.cpp" line="2063"/>
         <source>Channel:</source>
         <translation>Canal: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="260"/>
-        <location filename="../src/vpiano.cpp" line="2047"/>
+        <location filename="../src/vpiano.cpp" line="2061"/>
         <source>Base Octave:</source>
         <translation>Octava base: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="269"/>
-        <location filename="../src/vpiano.cpp" line="2052"/>
+        <location filename="../src/vpiano.cpp" line="2066"/>
         <source>Transpose:</source>
         <translation>Transposición: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="278"/>
-        <location filename="../src/vpiano.cpp" line="2054"/>
+        <location filename="../src/vpiano.cpp" line="2068"/>
         <source>Velocity:</source>
         <translation>Velocidad: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="317"/>
-        <location filename="../src/vpiano.cpp" line="2050"/>
+        <location filename="../src/vpiano.cpp" line="2064"/>
         <source>Control:</source>
         <translation>Control: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="324"/>
-        <location filename="../src/vpiano.cpp" line="2053"/>
+        <location filename="../src/vpiano.cpp" line="2067"/>
         <source>Value:</source>
         <translation>Valor: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="343"/>
-        <location filename="../src/vpiano.cpp" line="2048"/>
+        <location filename="../src/vpiano.cpp" line="2062"/>
         <source>Bender:</source>
         <translation>Inflexión: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="360"/>
-        <location filename="../src/vpiano.cpp" line="2046"/>
+        <location filename="../src/vpiano.cpp" line="2060"/>
         <source>Bank:</source>
         <translation>Banco: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="367"/>
-        <location filename="../src/vpiano.cpp" line="2051"/>
+        <location filename="../src/vpiano.cpp" line="2065"/>
         <source>Program:</source>
         <translation>Programa: </translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1950"/>
+        <location filename="../src/vpiano.cpp" line="1965"/>
         <source>The language for this application is going to change to %1. Do you want to continue?</source>
         <translation>El idioma de esta aplicación está a punto de cambiar a %1. ¿Deseas continuar?</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1993"/>
+        <location filename="../src/vpiano.cpp" line="2007"/>
         <source>&lt;p&gt;VMPK is developed and translated thanks to the volunteer work of many people from around the world. If you want to join the team or have any question, please visit the forums at &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;VMPK está desarrollado y traducido gracias al trabajo voluntario de mucha gente de todo el mundo. Si quieres unirte al equipo o tienes cualquier pregunta, por favor visita los foros en &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1999"/>
+        <location filename="../src/vpiano.cpp" line="2013"/>
         <source>Translation Information</source>
         <translation>Información sobre traducción</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2001"/>
+        <location filename="../src/vpiano.cpp" line="2015"/>
         <source>Translation</source>
         <translation>Traducción</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2002"/>
+        <location filename="../src/vpiano.cpp" line="2016"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
-        <translation>&lt;p&gt;Traducción por Pedro López-Cabanillas &amp;lt;plcl@users.sf.net&amp;gt;&lt;/p&gt;%1</translation>
+        <translation>&lt;p&gt;Traductor: Pedro López-Cabanillas &amp;lt;plcl@users.sf.net&amp;gt;&lt;/p&gt;%1</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2034"/>
+        <location filename="../src/vpiano.cpp" line="2048"/>
         <source>Czech</source>
         <translation>checo</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2035"/>
+        <location filename="../src/vpiano.cpp" line="2049"/>
         <source>German</source>
         <translation>alemán</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2036"/>
+        <location filename="../src/vpiano.cpp" line="2050"/>
         <source>English</source>
         <translation>inglés</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2037"/>
+        <location filename="../src/vpiano.cpp" line="2051"/>
         <source>Spanish</source>
         <translation>español</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2038"/>
+        <location filename="../src/vpiano.cpp" line="2052"/>
         <source>French</source>
         <translation>francés</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2039"/>
+        <location filename="../src/vpiano.cpp" line="2053"/>
         <source>Russian</source>
         <translation>ruso</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2040"/>
+        <location filename="../src/vpiano.cpp" line="2054"/>
         <source>Turkish</source>
         <translation>turco</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2041"/>
+        <location filename="../src/vpiano.cpp" line="2055"/>
         <source>Chinese</source>
         <translation>chino</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1949"/>
+        <location filename="../src/vpiano.cpp" line="1964"/>
         <source>Language Changed</source>
         <translation>Idioma modificado</translation>
     </message>
@@ -1975,7 +1975,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="365"/>
         <source>Esc</source>
-        <translation>Esc</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="370"/>
@@ -2000,7 +2000,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="400"/>
         <source>F1</source>
-        <translation>F1</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="416"/>
@@ -2067,7 +2067,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="490"/>
         <source>Right</source>
-        <translation>Derecha</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="495"/>
@@ -2135,12 +2135,12 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="534"/>
         <source>Up</source>
-        <translation>Arriba</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="545"/>
         <source>Down</source>
-        <translation>Abajo</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="550"/>
@@ -2343,7 +2343,7 @@ Do you want to apply the changes?</source>
         <translation>&amp;Importar SoundFont</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1623"/>
+        <location filename="../src/vpiano.cpp" line="1638"/>
         <source>No help file found</source>
         <translation>No se ha encontrado un archivo de ayuda</translation>
     </message>
