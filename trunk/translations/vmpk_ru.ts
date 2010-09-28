@@ -1616,7 +1616,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.cpp" line="2002"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
-        <translation>&lt;p&gt;Перевёл Сергей Басалаев &amp;&amp;lt;sbasalaev@gmail.com&amp;&amp;gt;&lt;/p&gt;%1</translation>
+        <translation>&lt;p&gt;Перевёл Сергей Басалаев &amp;lt;sbasalaev@gmail.com&amp;gt;&lt;/p&gt;%1</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2034"/>
