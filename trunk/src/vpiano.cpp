@@ -1954,6 +1954,7 @@ QString VPiano::configuredLanguage()
         settings.beginGroup(QSTR_PREFERENCES);
         m_language = settings.value(QSTR_LANGUAGE, QLocale::system().name()).toString();
         settings.endGroup();
+        qDebug() << Q_FUNC_INFO << m_language;
     }
     return m_language;
 }
