@@ -66,7 +66,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;/span&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;The following copyright notice is also applicable:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program contains &lt;/span&gt;&lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2010 Gary P. Scavone&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -1683,7 +1683,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.cpp" line="2002"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
-        <translation>&lt;p&gt;译者 &lt;/p&gt;%1</translation>
+        <translation>&lt;p&gt;译者 Rui Fan (&lt;a href=&apos;mailto:vanferry@gmail.com&apos;&gt;vanferry@gmail.com&lt;/a&gt;)&lt;/p&gt;%1</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2034"/>
@@ -1948,7 +1948,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="359"/>
         <source>Panic</source>
-        <translation></translation>
+        <translation type="unfinished">Panic</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="362"/>
@@ -1958,7 +1958,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="365"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="370"/>
@@ -1983,7 +1983,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="400"/>
         <source>F1</source>
-        <translation type="unfinished"></translation>
+        <translation>F1</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="416"/>
@@ -2035,8 +2035,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="479"/>
         <source>Open the Shortcuts editor</source>
-        <translation>打开快捷键编辑器
-</translation>
+        <translation>打开快捷键编辑器</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="484"/>
@@ -2051,7 +2050,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="490"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Right</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="495"/>
@@ -2066,7 +2065,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="501"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Left</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="506"/>
@@ -2081,7 +2080,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="512"/>
         <source>Ctrl+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Right</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="517"/>
@@ -2096,7 +2095,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="523"/>
         <source>Ctrl+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Left</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="528"/>
@@ -2121,7 +2120,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="655"/>
         <source>Home</source>
-        <translation></translation>
+        <translation>Home</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="660"/>
@@ -2136,12 +2135,12 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="534"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>向上</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="545"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>向下</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="550"/>
@@ -2156,7 +2155,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="556"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl++</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="561"/>
@@ -2171,7 +2170,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="567"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+-</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="572"/>
@@ -2186,7 +2185,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="578"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation>+</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="583"/>
@@ -2201,7 +2200,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="589"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="594"/>
@@ -2216,7 +2215,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="600"/>
         <source>Ctrl+PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+PgUp</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="605"/>
@@ -2231,7 +2230,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="611"/>
         <source>Ctrl+PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+PgDown</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="616"/>
@@ -2246,7 +2245,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="622"/>
         <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation>PgUp</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="627"/>
@@ -2261,7 +2260,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="633"/>
         <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation>PgDown</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="638"/>
@@ -2276,7 +2275,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="644"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>End</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="649"/>
