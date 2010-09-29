@@ -54,6 +54,7 @@
 #include <QtCore/QSettings>
 #include <QtCore/QTranslator>
 #include <QtCore/QLibraryInfo>
+#include <QtCore/QMapIterator>
 #include <QtCore/QDebug>
 
 VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
@@ -559,7 +560,6 @@ void VPiano::readSettings()
     m_velocity = settings.value(QSTR_VELOCITY, MIDIVELOCITY).toInt();
     m_baseOctave = settings.value(QSTR_BASEOCTAVE, 3).toInt();
     m_transpose = settings.value(QSTR_TRANSPOSE, 0).toInt();
-    m_language = settings.value(QSTR_LANGUAGE, QLocale::system().name()).toString();
     int num_octaves = settings.value(QSTR_NUMOCTAVES, 5).toInt();
     QString insFileName = settings.value(QSTR_INSTRUMENTSDEFINITION).toString();
     QString insName = settings.value(QSTR_INSTRUMENTNAME).toString();
@@ -1621,7 +1621,7 @@ void VPiano::releaseKb()
 void VPiano::slotHelpContents()
 {
     QStringList hlps;
-    QLocale loc(m_language);
+    QLocale loc(configuredLanguage());
     QStringList lc = loc.name().split("_");
     hlps += QString("help_%1.html").arg(loc.name());
     if (lc.count() > 1)
@@ -1951,8 +1951,9 @@ QString VPiano::configuredLanguage()
 {
     if (m_language.isEmpty()) {
         QSettings settings;
+        QString defLang = QLocale::system().name();
         settings.beginGroup(QSTR_PREFERENCES);
-        m_language = settings.value(QSTR_LANGUAGE, QLocale::system().name()).toString();
+        m_language = settings.value(QSTR_LANGUAGE, defLang).toString();
         settings.endGroup();
         qDebug() << Q_FUNC_INFO << m_language;
     }
@@ -1976,13 +1977,14 @@ void VPiano::slotSwitchLanguage(QAction *action)
 
 void VPiano::createLanguageMenu()
 {
+    QString currentLang = configuredLanguage();
     QActionGroup *languageGroup = new QActionGroup(this);
     connect(languageGroup, SIGNAL(triggered(QAction *)),
             SLOT(slotSwitchLanguage(QAction *)));
     QDir dir(VPiano::localeDirectory());
     QStringList fileNames = dir.entryList(QStringList(QSTR_VMPKPX + "*.qm"));
     QStringList locales;
-    locales << "en_US";
+    locales << "en";
     foreach (const QString& fileName, fileNames) {
         QString locale = fileName;
         locale.remove(0, locale.indexOf('_') + 1);
@@ -1990,13 +1992,14 @@ void VPiano::createLanguageMenu()
         locales << locale;
     }
     locales.sort();
+    qDebug() << "locales:" << locales;
     foreach (const QString& loc, locales) {
         QAction *action = new QAction(m_supportedLangs.value(loc), this);
         action->setCheckable(true);
         action->setData(loc);
         ui.menuLanguage->addAction(action);
         languageGroup->addAction(action);
-        if (loc == configuredLanguage()) {
+        if (currentLang.startsWith(loc)) {
             action->setChecked(true);
             m_currentLang = action;
         }
@@ -2010,11 +2013,23 @@ void VPiano::slotAboutTranslation()
         "join the team or have any question, please visit the forums at "
         "<a href='http://sourceforge.net/projects/vmpk/forums'>SourceForge</a>"
         "</p>");
-    if (m_language == "en_US" || m_supportedLangs.count(m_language) < 1)
-        QMessageBox::information(this, tr("Translation Information"), common);
-    else
+    QString currentLang = configuredLanguage();
+    bool supported(false);
+    if (!currentLang.startsWith("en")) {
+        QMapIterator<QString,QString> it(m_supportedLangs);
+        while (it.hasNext())  {
+            it.next();
+            if (currentLang.startsWith(it.key())) {
+                supported = true;
+                break;
+            }
+        }
+    }
+    if (supported)
         QMessageBox::information(this, tr("Translation"),
             tr("<p>Translation by TRANSLATOR_NAME_AND_EMAIL</p>%1").arg(common));
+    else
+        QMessageBox::information(this, tr("Translation Information"), common);
 }
 
 void VPiano::retranslateUi()
@@ -2046,13 +2061,13 @@ void VPiano::retranslateUi()
 void VPiano::initLanguages()
 {
     m_supportedLangs.clear();
-    m_supportedLangs.insert(QLatin1String("cs"),    tr("Czech"));
-    m_supportedLangs.insert(QLatin1String("de"),    tr("German"));
-    m_supportedLangs.insert(QLatin1String("en_US"), tr("English"));
-    m_supportedLangs.insert(QLatin1String("es"),    tr("Spanish"));
-    m_supportedLangs.insert(QLatin1String("fr"),    tr("French"));
-    m_supportedLangs.insert(QLatin1String("ru"),    tr("Russian"));
-    m_supportedLangs.insert(QLatin1String("tr"),    tr("Turkish"));
+    m_supportedLangs.insert(QLatin1String("cs"), tr("Czech"));
+    m_supportedLangs.insert(QLatin1String("de"), tr("German"));
+    m_supportedLangs.insert(QLatin1String("en"), tr("English"));
+    m_supportedLangs.insert(QLatin1String("es"), tr("Spanish"));
+    m_supportedLangs.insert(QLatin1String("fr"), tr("French"));
+    m_supportedLangs.insert(QLatin1String("ru"), tr("Russian"));
+    m_supportedLangs.insert(QLatin1String("tr"), tr("Turkish"));
     m_supportedLangs.insert(QLatin1String("zh_CN"), tr("Chinese"));
 }
 
