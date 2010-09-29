@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(QSTR_APPNAME);
     RawKeybdApp a(argc, argv);
 #ifdef Q_OS_LINUX
-    a.setWindowIcon(QIcon(":/vpiano/vmpk_32x32"));
+    a.setWindowIcon(QIcon(":/vpiano/vmpk_32x32.png"));
 #endif //Q_OS_LINUX
     VPiano w;
     if (w.isInitialized()) {
