@@ -1,7 +1,8 @@
 2010-09-29
-    * Set an application icon in Linux
+    * Set an application icon for Linux
     * Display the tooltips over the knobs and sliders instead of the mouse pos.
     * Language variants support fix 
+    * PianoScene fix: refactored allowing to trigger hidden keys
 
 2010-09-28
     * Translation updates

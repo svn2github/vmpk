@@ -89,7 +89,6 @@ protected:
     PianoKey* getKeyForPos( const QPointF& p ) const;
     PianoKey* getPianoKey( const int key ) const;
     QString noteName(const int note);
-
     void mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent );
@@ -99,6 +98,9 @@ protected:
 private:
     void hideOrShowKeys();
     void refreshLabels();
+    void triggerNoteOn( const int note );
+    void triggerNoteOff( const int note );
+    int getNoteFromKey( const int key ) const;
     
     int m_baseOctave;
     int m_numOctaves;

@@ -22,6 +22,7 @@
 #include <QtGui/QPalette>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QKeyEvent>
+#include <QtCore/QDebug>
 
 #define KEYWIDTH  18
 #define KEYHEIGHT 72
@@ -116,42 +117,58 @@ void PianoScene::showNoteOff( const int note, int vel )
         showKeyOff(m_keys[n], vel);
 }
 
-void PianoScene::keyOn( PianoKey* key )
+void PianoScene::triggerNoteOn( const int note )
 {
-    int n = m_baseOctave*12 + key->getNote() + m_transpose;
+    int n = m_baseOctave*12 + note + m_transpose;
+    qDebug() << Q_FUNC_INFO << n;
     if ((n >= m_minNote) && (n <= m_maxNote)) {
         if (m_handler != NULL) {
             m_handler->noteOn(n);
         } else {
             emit noteOn(n);
         }
-        showKeyOn(key, m_velocity);
     }
 }
 
-void PianoScene::keyOff( PianoKey* key )
+void PianoScene::triggerNoteOff( const int note )
 {
-    int n = m_baseOctave*12 + key->getNote() + m_transpose;
+    int n = m_baseOctave*12 + note + m_transpose;
+    qDebug() << Q_FUNC_INFO << n;
     if ((n >= m_minNote) && (n <= m_maxNote)) {
         if (m_handler != NULL) {
             m_handler->noteOff(n);
         } else {
             emit noteOff(n);
         }
-        showKeyOff(key, 0);
     }
+}
+
+void PianoScene::keyOn( PianoKey* key )
+{
+    triggerNoteOn(key->getNote());
+    showKeyOn(key, m_velocity);
+}
+
+void PianoScene::keyOff( PianoKey* key )
+{
+    triggerNoteOff(key->getNote());
+    showKeyOff(key, 0);
 }
 
 void PianoScene::keyOn(const int note)
 {
     if (note >=0 && note < m_keys.size())
         keyOn(m_keys[note]);
+    else
+        triggerNoteOn(note);
 }
 
 void PianoScene::keyOff(const int note)
 {
     if (note >=0 && note < m_keys.size())
         keyOff(m_keys[note]);
+    else
+        triggerNoteOff(note);
 }
 
 PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
@@ -207,26 +224,32 @@ void PianoScene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
     mouseEvent->ignore();
 }
 
-PianoKey* PianoScene::getPianoKey( const int key ) const
+int PianoScene::getNoteFromKey( const int key ) const
 {
     if (m_keybdMap != NULL) {
         KeyboardMap::ConstIterator it = m_keybdMap->constFind(key);
         if ((it != m_keybdMap->constEnd()) && (it.key() == key)) {
             int note = it.value();
-            if (note < m_keys.size())
-                return m_keys[note];
+            return note;
         }
     }
+    return -1;
+}
+
+PianoKey* PianoScene::getPianoKey( const int key ) const
+{
+    int note = getNoteFromKey(key);
+    if ((note >= 0) && (note < m_keys.size()))
+        return m_keys[note];
     return NULL;
 }
 
 void PianoScene::keyPressEvent ( QKeyEvent * keyEvent )
 {
     if ( !m_rawkbd && !keyEvent->isAutoRepeat() ) { // ignore auto-repeats
-        PianoKey* key = getPianoKey(keyEvent->key());
-        if (key != NULL) {
-            keyOn(key);
-        }
+        int note = getNoteFromKey(keyEvent->key());
+        if (note > -1)
+            keyOn(note);
     }
     keyEvent->accept();
 }
@@ -234,10 +257,9 @@ void PianoScene::keyPressEvent ( QKeyEvent * keyEvent )
 void PianoScene::keyReleaseEvent ( QKeyEvent * keyEvent )
 {
     if ( !m_rawkbd && !keyEvent->isAutoRepeat() ) { // ignore auto-repeats
-        PianoKey* key = getPianoKey(keyEvent->key());
-        if (key != NULL) {
-            keyOff(key);
-        }
+        int note = getNoteFromKey(keyEvent->key());
+        if (note > -1)
+            keyOff(note);
     }   
     keyEvent->accept();
 }
