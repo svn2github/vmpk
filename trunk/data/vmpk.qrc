@@ -1,5 +1,6 @@
 <RCC>
-  <qresource prefix="/vpiano" >
+  <qresource prefix="/vpiano">
+    <file>vmpk_32x32.png</file>
     <file>vmpk_128x128.png</file>
     <file>blkey.svg</file>
     <file>list-remove.svg</file>

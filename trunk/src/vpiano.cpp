@@ -1733,7 +1733,7 @@ void VPiano::setWidgetTip(QWidget* w, int val)
 {
     QString tip = QString::number(val);
     w->setToolTip(tip);
-    QToolTip::showText(QCursor::pos(), tip, this);
+    QToolTip::showText(w->parentWidget()->mapToGlobal(w->pos()), tip);
 }
 
 void VPiano::slotShowNoteNames()
