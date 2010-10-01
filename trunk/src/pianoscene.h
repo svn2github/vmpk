@@ -61,8 +61,8 @@ public:
     bool useFlats() const { return m_useFlats; }
     void setUseFlats(const bool use);
 
-    void showNoteOn( const int note, int vel = 0 );
-    void showNoteOff( const int note, int vel = 0 );
+    void showNoteOn( const int note, int vel = -1 );
+    void showNoteOff( const int note, int vel = -1 );
     int baseOctave() const { return m_baseOctave; }
     void setBaseOctave( const int base );
     int numOctaves() const { return m_numOctaves; }

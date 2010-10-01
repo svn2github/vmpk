@@ -89,7 +89,7 @@ QSize PianoScene::sizeHint() const
 
 void PianoScene::showKeyOn( PianoKey* key, int vel )
 {
-    if (vel != 0 && m_keyPressedColor.isValid() ) {
+    if (vel >= 0 && m_keyPressedColor.isValid() ) {
         QBrush hilightBrush(m_keyPressedColor.lighter(200 - vel));
         key->setPressedBrush(hilightBrush);
     }
@@ -120,7 +120,6 @@ void PianoScene::showNoteOff( const int note, int vel )
 void PianoScene::triggerNoteOn( const int note )
 {
     int n = m_baseOctave*12 + note + m_transpose;
-    qDebug() << Q_FUNC_INFO << n;
     if ((n >= m_minNote) && (n <= m_maxNote)) {
         if (m_handler != NULL) {
             m_handler->noteOn(n);
@@ -133,7 +132,6 @@ void PianoScene::triggerNoteOn( const int note )
 void PianoScene::triggerNoteOff( const int note )
 {
     int n = m_baseOctave*12 + note + m_transpose;
-    qDebug() << Q_FUNC_INFO << n;
     if ((n >= m_minNote) && (n <= m_maxNote)) {
         if (m_handler != NULL) {
             m_handler->noteOff(n);

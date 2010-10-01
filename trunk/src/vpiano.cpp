@@ -1955,7 +1955,7 @@ QString VPiano::configuredLanguage()
         settings.beginGroup(QSTR_PREFERENCES);
         m_language = settings.value(QSTR_LANGUAGE, defLang).toString();
         settings.endGroup();
-        qDebug() << Q_FUNC_INFO << m_language;
+        //qDebug() << Q_FUNC_INFO << m_language;
     }
     return m_language;
 }
@@ -1992,7 +1992,6 @@ void VPiano::createLanguageMenu()
         locales << locale;
     }
     locales.sort();
-    qDebug() << "locales:" << locales;
     foreach (const QString& loc, locales) {
         QAction *action = new QAction(m_supportedLangs.value(loc), this);
         action->setCheckable(true);

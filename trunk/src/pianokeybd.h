@@ -88,8 +88,8 @@ public:
     bool handleKeyReleased(int keycode);
 
 public slots:
-    void showNoteOn( int midiNote, int vel = 0 );
-    void showNoteOff( int midiNote, int vel = 0 );
+    void showNoteOn( int midiNote, int vel = -1 );
+    void showNoteOff( int midiNote, int vel = -1 );
 
 signals:
     void noteOn( int midiNote );
