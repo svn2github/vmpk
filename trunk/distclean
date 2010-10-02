@@ -1,18 +1,7 @@
 #!/bin/bash
-rm -f  CMakeCache.txt
-rm -f  cmake_install.cmake
-rm -f  cmake_uninstall.cmake
-rm -f  CPackConfig.cmake
-rm -f  CPackSourceConfig.cmake
-rm -f  install_manifest.txt
 rm -f  vmpk.spec
-rm -f  progress.make
 rm -f  Makefile*
 rm -f  Info.plist
-rm -f  .DS_Store
 rm -f  translations/*.qm
 rm -rf *.xcodeproj
-rm -rf CMakeFiles
-rm -rf CMakeScripts
-rm -rf _CPack_Packages
 rm -rf build/*

@@ -6,7 +6,7 @@ Name "Virtual MIDI Piano Keyboard"
 !define VMPKDIR "C:\Proyectos\vmpk-0.3.2"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.3.2
+!define VERSION 0.3.3
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -43,11 +43,11 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "SimpChinese"
 !insertmacro MUI_LANGUAGE "Czech"
-!insertmacro MUI_LANGUAGE "French"
-!insertmacro MUI_LANGUAGE "German"
+#!insertmacro MUI_LANGUAGE "French"
+#!insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "Russian"
 !insertmacro MUI_LANGUAGE "Spanish"
-!insertmacro MUI_LANGUAGE "Turkish"
+#!insertmacro MUI_LANGUAGE "Turkish"
 
 # Installer attributes
 OutFile vmpk-${VERSION}-setup.exe
@@ -55,7 +55,7 @@ InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.3.2.0
+VIProductVersion 0.3.3.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
@@ -79,16 +79,16 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\pc102win.xml
     File ${VMPKDIR}\data\gmgsxg.ins
     File ${VMPKDIR}\data\help.html
-    File ${VMPKDIR}\data\help_de.html
+#    File ${VMPKDIR}\data\help_de.html
     File ${VMPKDIR}\data\help_es.html
     File ${VMPKDIR}\data\help_ru.html
     File ${VMPKDIR}\data\help_tr.html
     File ${VMPKDIR}\build\translations\vmpk_cs.qm
-    File ${VMPKDIR}\build\translations\vmpk_de.qm
+#    File ${VMPKDIR}\build\translations\vmpk_de.qm
     File ${VMPKDIR}\build\translations\vmpk_es.qm
-    File ${VMPKDIR}\build\translations\vmpk_fr.qm
+#    File ${VMPKDIR}\build\translations\vmpk_fr.qm
     File ${VMPKDIR}\build\translations\vmpk_ru.qm
-    File ${VMPKDIR}\build\translations\vmpk_tr.qm
+#    File ${VMPKDIR}\build\translations\vmpk_tr.qm
     File ${VMPKDIR}\build\translations\vmpk_zh_CN.qm
 
     # Installing library mingwm10.dll
@@ -148,11 +148,11 @@ done${UNSECTION_ID}:
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vmpk_cs.qm
-    Delete /REBOOTOK $INSTDIR\vmpk_de.qm
+#    Delete /REBOOTOK $INSTDIR\vmpk_de.qm
     Delete /REBOOTOK $INSTDIR\vmpk_es.qm
-    Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
+#    Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_ru.qm
-    Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
+#    Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_zh_CN.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe
     Delete /REBOOTOK $INSTDIR\spanish.xml
@@ -163,7 +163,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\pc102win.xml
     Delete /REBOOTOK $INSTDIR\gmgsxg.ins
     Delete /REBOOTOK $INSTDIR\help.html
-    Delete /REBOOTOK $INSTDIR\help_de.html
+#    Delete /REBOOTOK $INSTDIR\help_de.html
     Delete /REBOOTOK $INSTDIR\help_es.html
     Delete /REBOOTOK $INSTDIR\help_ru.html
     Delete /REBOOTOK $INSTDIR\help_tr.html

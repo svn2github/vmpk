@@ -49,11 +49,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS README ChangeLog AUTHORS TODO COPYING
 %doc %{_mandir}/*
 %dir %{_datadir}/%name
+%dir %{_datadir}/%name/locale
 %{_bindir}/%name
 %{_datadir}/%name/*
+%{_datadir}/%name/locale/*
 %{_datadir}/icons/hicolor/*/*/*
 %{_datadir}/applications/%name.desktop
-%{_datadir}/locale/*
 
 %changelog
 * Fir Jun 18 2010 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.3.2

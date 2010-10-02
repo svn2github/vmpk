@@ -39,7 +39,7 @@ SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
 SET (VERSION_MAJOR "0")
 SET (VERSION_MINOR "3")
 SET (VERSION_PATCH "3")
-SET (VERSION_SUFFIX "svn")
+SET (VERSION_SUFFIX "")
 SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX})
 
 MESSAGE(STATUS "vmpk ${VERSION} prefix: ${CMAKE_INSTALL_PREFIX}")
@@ -117,9 +117,9 @@ IF(${CMAKE_SYSTEM} MATCHES "Windows")
     LINK_LIBRARIES(winmm)
 ENDIF(${CMAKE_SYSTEM} MATCHES "Windows")
 
-ADD_SUBDIRECTORY(src build)
-ADD_SUBDIRECTORY(translations build/translations)
-CONFIGURE_FILE(vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
+ADD_SUBDIRECTORY (src)
+ADD_SUBDIRECTORY (translations)
+CONFIGURE_FILE (vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
 
 # uninstall custom target
 CONFIGURE_FILE(
@@ -132,30 +132,20 @@ ADD_CUSTOM_TARGET ( uninstall
 
 IF (UNIX)
     ADD_CUSTOM_TARGET ( distclean
-        COMMAND rm -f  CMakeCache.txt
-        COMMAND rm -f  cmake_install.cmake
-        COMMAND rm -f  cmake_uninstall.cmake
-        COMMAND rm -f  CPackConfig.cmake
-        COMMAND rm -f  CPackSourceConfig.cmake
-        COMMAND rm -f  install_manifest.txt
-        COMMAND rm -f  vmpk.spec
-        COMMAND rm -f  progress.make
-        COMMAND rm -f  Makefile
-        COMMAND rm -rf CMakeFiles
-        COMMAND rm -rf _CPack_Packages
         COMMAND rm -rf build/*
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     )
-    ADD_DEPENDENCIES(distclean clean)
+    ADD_DEPENDENCIES (distclean clean)
     
     ADD_CUSTOM_TARGET ( tarball
-        COMMAND mkdir -p vmpk-${VERSION}
+        COMMAND mkdir -p vmpk-${VERSION}/translations/
         COMMAND cp -r cmake_admin vmpk-${VERSION}
         COMMAND cp -r data vmpk-${VERSION}
         COMMAND cp -r src vmpk-${VERSION}
-        COMMAND cp -r translations vmpk-${VERSION}
         COMMAND cp -r man vmpk-${VERSION}
         COMMAND cp -r dbus vmpk-${VERSION}
+        COMMAND cp translations/vmpk_{cs,es,ru,zh_CN}.ts vmpk-${VERSION}/translations/
+        COMMAND cp translations/CMakeLists.txt vmpk-${VERSION}/translations/
         COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.desktop vmpk.pro updateqm.pri vmpk.spec.in vmpk-${VERSION}
         COMMAND tar -cj --exclude=.* -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
         COMMAND tar -cz --exclude=.* -f vmpk-${VERSION}.tar.gz vmpk-${VERSION}
@@ -166,7 +156,11 @@ ENDIF (UNIX)
 
 IF (UNIX AND NOT APPLE)
 
-    ADD_SUBDIRECTORY(man build/man)
+    ADD_SUBDIRECTORY (man)
+
+# unmaintained translations:
+# data/help_de.html
+# data/help_tr.html
 
     INSTALL ( FILES
         data/azerty.xml
@@ -178,10 +172,8 @@ IF (UNIX AND NOT APPLE)
         data/pc102x11.xml
         data/txt2ins.awk
         data/help.html
-        data/help_de.html
         data/help_es.html
         data/help_ru.html
-        data/help_tr.html
     DESTINATION 
         share/vmpk 
     )
@@ -228,6 +220,10 @@ IF (WIN32)
     INSTALL ( FILES ${QT_DLL_PATH_tmp}/mingwm10.dll 
                     ${QT_DLL_PATH_tmp}/libgcc_s_dw2-1.dll
               DESTINATION . )
+
+# unmaintained translations:
+# data/help_de.html
+# data/help_tr.html
     INSTALL ( FILES
         data/azerty.xml
         data/vkeybd-default.xml
@@ -237,10 +233,8 @@ IF (WIN32)
         data/spanish.xml
         data/pc102win.xml
         data/help.html
-        data/help_de.html
         data/help_es.html
         data/help_ru.html
-        data/help_tr.html
     DESTINATION . )
 ENDIF (WIN32)
 

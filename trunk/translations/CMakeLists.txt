@@ -1,11 +1,12 @@
 SET( TRANSLATIONS_FILES 
+# unmaintained translations, not installed
+# vmpk_de.ts 
+# vmpk_fr.ts
+# vmpk_tr.ts 
      vmpk_cs.ts 
-     vmpk_de.ts 
      vmpk_es.ts 
-     vmpk_fr.ts
      vmpk_ru.ts
-     vmpk_tr.ts 
-	 vmpk_zh_CN.ts
+     vmpk_zh_CN.ts
 )
 
 QT4_ADD_TRANSLATION(QM_FILES ${TRANSLATIONS_FILES})

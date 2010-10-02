@@ -1,3 +1,7 @@
+2010-10-01
+    * Buildsystem updates
+    * exclude unmaintained translations from builds and distribution
+
 2010-09-29
     * Set an application icon for Linux
     * Display the tooltips over the knobs and sliders instead of the mouse pos.
@@ -20,6 +24,7 @@
 
 2010-09-23
     * Language menu to select another language
+    * (Linux) translation files moved to $prefix/share/vmpk/locale
 
 2010-09-22
     * Tool shortcuts 
