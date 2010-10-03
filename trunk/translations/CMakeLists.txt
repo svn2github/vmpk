@@ -1,6 +1,6 @@
 SET( TRANSLATIONS_FILES 
 # unmaintained translations, not installed
-# vmpk_de.ts 
+     vmpk_de.ts 
 # vmpk_fr.ts
 # vmpk_tr.ts 
      vmpk_cs.ts 
