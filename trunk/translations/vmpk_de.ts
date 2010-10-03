@@ -1590,7 +1590,7 @@ Wollen Sie die Änderungen anwenden?</translation>
     <message>
         <location filename="../src/vpiano.cpp" line="2002"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
-        <translation>&lt;p&gt;Übersetzt von TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</translation>
+        <translation>&lt;p&gt;Übersetzt von Frank Kober &lt;emuse@users.sourceforge.net&gt; &lt;/p&gt;%1</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2034"/>
