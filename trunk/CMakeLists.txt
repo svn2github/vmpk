@@ -146,7 +146,7 @@ IF (UNIX)
         COMMAND cp -r dbus vmpk-${VERSION}
         COMMAND cp translations/vmpk_{cs,de,es,fr,ru,zh_CN}.ts vmpk-${VERSION}/translations/
         COMMAND cp translations/CMakeLists.txt vmpk-${VERSION}/translations/
-        COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.desktop vmpk.pro updateqm.pri vmpk.spec.in vmpk-${VERSION}
+        COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.desktop vmpk.pro updateqm.pri vmpk.spec.in qt.conf vmpk-${VERSION}
         COMMAND tar -cj --exclude=.* -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
         COMMAND tar -cz --exclude=.* -f vmpk-${VERSION}.tar.gz vmpk-${VERSION}
         COMMAND rm -rf vmpk-${VERSION}

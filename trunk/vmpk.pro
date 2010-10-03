@@ -61,6 +61,13 @@ macx {
         data/it-qwerty.xml \
         data/vkeybd-default.xml \
         data/pc102mac.xml \
+        qt.conf \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_cs.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_de.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_es.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_fr.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_ru.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_zh_CN.qm \
         $$DESTDIR/translations/vmpk_cs.qm \
         $$DESTDIR/translations/vmpk_de.qm \
         $$DESTDIR/translations/vmpk_es.qm \
@@ -97,7 +104,7 @@ FORMS += src/about.ui \
     src/preferences.ui \
     src/riffimportdlg.ui \
     src/shortcutdialog.ui \
-    src/vpiano.ui \
+    src/vpiano.ui
 
 HEADERS += src/about.h \
     src/classicstyle.h \
@@ -149,9 +156,8 @@ SOURCES += src/about.cpp \
 
 RESOURCES += data/vmpk.qrc
 
-# unmaintained translations, not distributed
+# unmaintained translation, not distributed
 # translations/vmpk_fr.ts \
-# translations/vmpk_tr.ts \
 TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_de.ts \
     translations/vmpk_es.ts \
