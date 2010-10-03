@@ -70,7 +70,7 @@ quint32 Riff::read32bit()
 
 QString Riff::readstr(int size)
 {
-    char buffer[size+1];
+    char *buffer = (char *) alloca (size+1); //char buffer[size+1];
     m_IOStream->readRawData(buffer, size);
     buffer[size] = 0;
     return QString(buffer).trimmed();

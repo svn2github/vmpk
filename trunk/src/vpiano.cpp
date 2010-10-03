@@ -79,6 +79,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     dbus.registerObject("/", this);
     dbus.registerService("net.sourceforge.vmpk");
 #endif
+    qDebug() << Q_FUNC_INFO << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
     m_trq = new QTranslator(this);
     m_trp = new QTranslator(this);
     m_trq->load( QSTR_QTPX + configuredLanguage(),

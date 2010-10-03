@@ -21,8 +21,6 @@ RCC_DIR = $$DESTDIR
 CONFIG -= debug_and_release
 CONFIG -= debug
 CONFIG += release
-unix:QMAKE_POST_LINK=strip $(TARGET)
-win32:QMAKE_POST_LINK=strip $$DESTDIR/$(TARGET)
 QT += core \
     gui \
     xml \
@@ -52,10 +50,10 @@ macx {
     ICON = data/vmpk.icns
     DEFINES += __MACOSX_CORE__
     BUNDLE_RES.files = data/help.html \
-#        data/help_de.html \
+        data/help_de.html \
         data/help_es.html \
         data/help_ru.html \
-#        data/help_tr.html \
+#       data/help_tr.html \
         data/gmgsxg.ins \
         data/spanish.xml \
         data/german.xml \
@@ -64,11 +62,11 @@ macx {
         data/vkeybd-default.xml \
         data/pc102mac.xml \
         $$DESTDIR/translations/vmpk_cs.qm \
-#        $$DESTDIR/translations/vmpk_de.qm \
+        $$DESTDIR/translations/vmpk_de.qm \
         $$DESTDIR/translations/vmpk_es.qm \
-#        $$DESTDIR/translations/vmpk_fr.qm \
+#       $$DESTDIR/translations/vmpk_fr.qm \
         $$DESTDIR/translations/vmpk_ru.qm \
-#        $$DESTDIR/translations/vmpk_tr.qm \
+#       $$DESTDIR/translations/vmpk_tr.qm \
         $$DESTDIR/translations/vmpk_zh_CN.qm
     BUNDLE_RES.path = Contents/Resources
     QMAKE_BUNDLE_DATA += BUNDLE_RES
@@ -152,10 +150,10 @@ SOURCES += src/about.cpp \
 RESOURCES += data/vmpk.qrc
 
 # unmaintained translations, not distributed
-# translations/vmpk_de.ts \
 # translations/vmpk_fr.ts \
 # translations/vmpk_tr.ts \
 TRANSLATIONS +=  translations/vmpk_cs.ts \
+    translations/vmpk_de.ts \
     translations/vmpk_es.ts \
     translations/vmpk_ru.ts \
     translations/vmpk_zh_CN.ts

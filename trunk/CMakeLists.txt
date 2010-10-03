@@ -144,7 +144,7 @@ IF (UNIX)
         COMMAND cp -r src vmpk-${VERSION}
         COMMAND cp -r man vmpk-${VERSION}
         COMMAND cp -r dbus vmpk-${VERSION}
-        COMMAND cp translations/vmpk_{cs,es,ru,zh_CN}.ts vmpk-${VERSION}/translations/
+        COMMAND cp translations/vmpk_{cs,de,es,ru,zh_CN}.ts vmpk-${VERSION}/translations/
         COMMAND cp translations/CMakeLists.txt vmpk-${VERSION}/translations/
         COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.desktop vmpk.pro updateqm.pri vmpk.spec.in vmpk-${VERSION}
         COMMAND tar -cj --exclude=.* -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
@@ -159,9 +159,7 @@ IF (UNIX AND NOT APPLE)
     ADD_SUBDIRECTORY (man)
 
 # unmaintained translations:
-# data/help_de.html
 # data/help_tr.html
-
     INSTALL ( FILES
         data/azerty.xml
         data/vkeybd-default.xml
@@ -172,6 +170,7 @@ IF (UNIX AND NOT APPLE)
         data/pc102x11.xml
         data/txt2ins.awk
         data/help.html
+        data/help_de.html
         data/help_es.html
         data/help_ru.html
     DESTINATION 
@@ -222,7 +221,6 @@ IF (WIN32)
               DESTINATION . )
 
 # unmaintained translations:
-# data/help_de.html
 # data/help_tr.html
     INSTALL ( FILES
         data/azerty.xml
@@ -233,6 +231,7 @@ IF (WIN32)
         data/spanish.xml
         data/pc102win.xml
         data/help.html
+        data/help_de.html
         data/help_es.html
         data/help_ru.html
     DESTINATION . )
