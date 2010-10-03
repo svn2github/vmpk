@@ -64,7 +64,7 @@ macx {
         $$DESTDIR/translations/vmpk_cs.qm \
         $$DESTDIR/translations/vmpk_de.qm \
         $$DESTDIR/translations/vmpk_es.qm \
-#       $$DESTDIR/translations/vmpk_fr.qm \
+        $$DESTDIR/translations/vmpk_fr.qm \
         $$DESTDIR/translations/vmpk_ru.qm \
 #       $$DESTDIR/translations/vmpk_tr.qm \
         $$DESTDIR/translations/vmpk_zh_CN.qm
@@ -155,6 +155,7 @@ RESOURCES += data/vmpk.qrc
 TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_de.ts \
     translations/vmpk_es.ts \
+    translations/vmpk_fr.ts \
     translations/vmpk_ru.ts \
     translations/vmpk_zh_CN.ts
 
