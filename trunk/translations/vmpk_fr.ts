@@ -37,7 +37,15 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;/span&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;The following copyright notice is also applicable:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program contains &lt;/span&gt;&lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2010 Gary P. Scavone&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Copyright © 2008-2010, &lt;/span&gt;&lt;a href=&quot;mailto:plcl@users.sf.net?subject=VMPK&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; text-decoration: underline; color:#0057ae;&quot;&gt;Pedro Lopez-Cabanillas &amp;lt;plcl@users.sf.net&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Ce programme est un logiciel libre: vous pouvez le redistribuer et/ou modifier sous les conditions de la License Publique Générale GNU (GPL) telle que publiée par la Free Software Foundation, en la version 3 de la License, ou (à votre choix) en toute version ultérieure.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Ce programme est disribué dans l&apos;espoir d&apos;être utile, mais SANS GARANTIE AUCUNE, et particulièrement SANS garantie implicite de VALEUR COMMERCIALE ou d&apos;UTILITE A QUELCONQUE APPLICATION. Consultez la License Publique Générale GNU (GPL) pour plus de précisions. Vous devez avoir reçu une copie de la License Publique Générale GNU (GPL) avec ce programme. Si ce n&apos;est pas le cas, consultez &lt;/span&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;La notice de copyright suivante est également applicable:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Ce programme contient des classes C++&lt;/span&gt;&lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;: realtime MIDI i/o&lt;br /&gt;Copyright © 2003-2010 Gary P. Scavone&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/about.ui" line="156"/>
@@ -1301,7 +1309,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="389"/>
         <source>Translate MIDI velocity to key pressed color tint</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduire la vélocité MIDI à la couleur des touches</translation>
     </message>
     <message>
         <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
@@ -1459,34 +1467,36 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/shortcutdialog.ui" line="32"/>
         <source>Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Raccourcis Clavier</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.ui" line="60"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.ui" line="65"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Déscription</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.ui" line="70"/>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Raccourci</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.cpp" line="335"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.cpp" line="336"/>
         <source>Keyboard shortcuts have been changed.
 
 Do you want to apply the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Les raccourcis clavier ont été modifiés
+
+Voulez-vous appliquer ces modifications?</translation>
     </message>
 </context>
 <context>
@@ -1564,72 +1574,72 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.cpp" line="1950"/>
         <source>The language for this application is going to change to %1. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>La langue de cette application va changer à %1. Voulez-vous continuer?</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="1993"/>
         <source>&lt;p&gt;VMPK is developed and translated thanks to the volunteer work of many people from around the world. If you want to join the team or have any question, please visit the forums at &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;VMPK est développé et traduit grâce au travail volontaire fourni par de nombreuses personnes du monde entier. Si vous souhaitez rejoindre l&apos;équipe ou si vous avez d&apos;autres questions, n&apos;hésitez pas à rejoindre les forums sur &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="1999"/>
         <source>Translation Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informations sur la traduction</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2001"/>
         <source>Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduction</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2002"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Traduit par Frank Kober (emuse@users.sourceforge.net)&lt;/p&gt;%1</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2034"/>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>Tchèque</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2035"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Allemand</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2036"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Anglais</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2037"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Espagnol</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2038"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Français</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2039"/>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Russe</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2040"/>
         <source>Turkish</source>
-        <translation type="unfinished"></translation>
+        <translation>Turque</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2041"/>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinois</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="1949"/>
         <source>Language Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>La langue a changé</translation>
     </message>
     <message>
         <source> Channel: </source>
@@ -1702,7 +1712,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="76"/>
         <source>&amp;Language</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Langue</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="89"/>
@@ -1712,22 +1722,22 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="102"/>
         <source>&amp;Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Outils</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="106"/>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="117"/>
         <source>Controllers</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôleurs</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="126"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmes</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="158"/>
@@ -1806,7 +1816,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="293"/>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos de &amp;Qt</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="296"/>
@@ -1841,7 +1851,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="354"/>
         <source>Show or hide the Status Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher ou cacher la Barre d&apos;Etat</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="359"/>
@@ -1856,7 +1866,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="365"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Echap</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="370"/>
@@ -1881,17 +1891,17 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="400"/>
         <source>F1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="416"/>
         <source>Import SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer un SoundFont</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="427"/>
         <source>Show or hide the Extra Controls toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher ou cacher la Barre d&apos;outils de contrôles supplémentaires</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="432"/>
@@ -1913,277 +1923,277 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="457"/>
         <source>&amp;Extra Controllers</source>
-        <translation>Contrôles s&amp;upplémentaires</translation>
+        <translation>Contrôleurs s&amp;upplémentaires</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="468"/>
         <source>N&amp;ote Names</source>
-        <translation>Noms des N&amp;otes</translation>
+        <translation>Noms des n&amp;otes</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="471"/>
         <source>Show or hide the note names</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher ou cacher les noms des notes</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="476"/>
         <source>&amp;Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Raccourcis</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="479"/>
         <source>Open the Shortcuts editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir l&apos;éditeur des raccourcis</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="484"/>
         <source>Octave Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Octave +</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="487"/>
         <source>Play one octave higher</source>
-        <translation type="unfinished"></translation>
+        <translation>Jouer une octave plus haut</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="490"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Droite</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="495"/>
         <source>Octave Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Octave -</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="498"/>
         <source>Play one octave lower</source>
-        <translation type="unfinished"></translation>
+        <translation>Jouer une octave plus bas</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="501"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauche</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="506"/>
         <source>Transpose Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Transposer +</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="509"/>
         <source>Transpose one semitone higher</source>
-        <translation type="unfinished"></translation>
+        <translation>Transposer vers le haut d&apos;une demi note</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="512"/>
         <source>Ctrl+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Droite</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="517"/>
         <source>Transpose Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Transposer -</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="520"/>
         <source>Transpose one semitone lower</source>
-        <translation type="unfinished"></translation>
+        <translation>Transposer vers le bas d&apos;une demi note</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="523"/>
         <source>Ctrl+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Gauche</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="528"/>
         <source>Next  Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal suivant</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="531"/>
         <source>Play and listen next channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Jouer et écouter sur le canal suivant</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="539"/>
         <source>Previous Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal précédent</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="542"/>
         <source>Play and listen previous channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Jouer et écouter sur le canal précédent</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="655"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="660"/>
         <source>About &amp;Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos de la &amp;Traduction</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="663"/>
         <source>Show information about the program language translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Informations sur la traduction linguistique du programme</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="534"/>
         <source>Up</source>
-        <translation type="unfinished">Monter</translation>
+        <translation>Monter</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="545"/>
         <source>Down</source>
-        <translation type="unfinished">Descendre</translation>
+        <translation>Descendre</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="550"/>
         <source>Next Controller</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôleur suivant</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="553"/>
         <source>Select the next controller</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le contrôleur suivant</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="556"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="561"/>
         <source>Previous Controller</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôleur précédent</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="564"/>
         <source>Select the previous controller</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le contrôleur précédent</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="567"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="572"/>
         <source>Controller Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôleur +</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="575"/>
         <source>Increment the controller value</source>
-        <translation type="unfinished"></translation>
+        <translation>Incrémenter la valeur du contrôleur</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="578"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="583"/>
         <source>Controller Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôleur -</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="586"/>
         <source>Decrement the controller value</source>
-        <translation type="unfinished"></translation>
+        <translation>Décrémenter la valeur du contrôleur</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="589"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="594"/>
         <source>Next Bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Banque suivante</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="597"/>
         <source>Select the next instrument bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner la banque d&apos;instruments suivante</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="600"/>
         <source>Ctrl+PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="605"/>
         <source>Previous Bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Banque précédente</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="608"/>
         <source>Select the previous instrument bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner la banque d&apos;instruments précédente</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="611"/>
         <source>Ctrl+PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="616"/>
         <source>Next Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Programme suivant</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="619"/>
         <source>Select the next instrument program</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le programme d&apos;instrument suivant</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="622"/>
         <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="627"/>
         <source>Previous Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Programme précédent</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="630"/>
         <source>Select the previous instrument program</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le programme d&apos;instrument précédent</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="633"/>
         <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="638"/>
         <source>Velocity Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Vélocité +</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="641"/>
         <source>Increment note velocity</source>
-        <translation type="unfinished"></translation>
+        <translation>Incrémenter la vélocité de note</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="644"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Fin</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="649"/>
         <source>Velocity Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Vélocité -</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="652"/>
         <source>Decrement note velocity</source>
-        <translation type="unfinished"></translation>
+        <translation>Décrémenter la vélocité de note</translation>
     </message>
     <message>
         <source>Load...</source>
