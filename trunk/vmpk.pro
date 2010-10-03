@@ -152,10 +152,10 @@ SOURCES += src/about.cpp \
 RESOURCES += data/vmpk.qrc
 
 # unmaintained translations, not distributed
-TRANSLATIONS +=  translations/vmpk_cs.ts \
 # translations/vmpk_de.ts \
 # translations/vmpk_fr.ts \
 # translations/vmpk_tr.ts \
+TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_es.ts \
     translations/vmpk_ru.ts \
     translations/vmpk_zh_CN.ts

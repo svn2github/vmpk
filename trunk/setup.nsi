@@ -1,9 +1,10 @@
 Name "Virtual MIDI Piano Keyboard"
 
 # Defines
-!define QTFILES "C:\Qt\2010.03\qt\bin"
-!define MINGWFILES "C:\Qt\2010.03\mingw\bin"
-!define VMPKDIR "C:\Proyectos\vmpk-0.3.2"
+!define QTFILES "C:\Qt\2010.05\qt\bin"
+!define QTLANG "C:\Qt\2010.05\qt\translations"
+!define MINGWFILES "C:\Qt\2010.05\mingw\bin"
+!define VMPKDIR "C:\Proyectos\vmpk-0.3.3"
 
 !define REGKEY "SOFTWARE\$(^Name)"
 !define VERSION 0.3.3
@@ -65,11 +66,13 @@ VIAddVersionKey FileDescription ""
 VIAddVersionKey LegalCopyright ""
 InstallDirRegKey HKLM "${REGKEY}" Path
 ShowUninstDetails show
+Icon src/vmpk.ico
 
 # Installer sections
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
+    File ${VMPKDIR}\qt.conf
     File ${VMPKDIR}\build\vmpk.exe
     File ${VMPKDIR}\data\spanish.xml
     File ${VMPKDIR}\data\german.xml
@@ -82,7 +85,7 @@ Section -Main SEC0000
 #    File ${VMPKDIR}\data\help_de.html
     File ${VMPKDIR}\data\help_es.html
     File ${VMPKDIR}\data\help_ru.html
-    File ${VMPKDIR}\data\help_tr.html
+#    File ${VMPKDIR}\data\help_tr.html
     File ${VMPKDIR}\build\translations\vmpk_cs.qm
 #    File ${VMPKDIR}\build\translations\vmpk_de.qm
     File ${VMPKDIR}\build\translations\vmpk_es.qm
@@ -90,6 +93,10 @@ Section -Main SEC0000
     File ${VMPKDIR}\build\translations\vmpk_ru.qm
 #    File ${VMPKDIR}\build\translations\vmpk_tr.qm
     File ${VMPKDIR}\build\translations\vmpk_zh_CN.qm
+    File ${QTLANG}\qt_cs.qm
+    File ${QTLANG}\qt_es.qm
+    File ${QTLANG}\qt_ru.qm
+    File ${QTLANG}\qt_zh_CN.qm
 
     # Installing library mingwm10.dll
     !insertmacro InstallLib DLL NOTSHARED REBOOT_PROTECTED ${MINGWFILES}\mingwm10.dll $INSTDIR\mingwm10.dll $INSTDIR
@@ -147,6 +154,11 @@ done${UNSECTION_ID}:
 
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
+    Delete /REBOOTOK $INSTDIR\qt.conf
+    Delete /REBOOTOK $INSTDIR\qt_cs.qm
+    Delete /REBOOTOK $INSTDIR\qt_es.qm
+    Delete /REBOOTOK $INSTDIR\qt_ru.qm
+    Delete /REBOOTOK $INSTDIR\qt_zh_CN.qm
     Delete /REBOOTOK $INSTDIR\vmpk_cs.qm
 #    Delete /REBOOTOK $INSTDIR\vmpk_de.qm
     Delete /REBOOTOK $INSTDIR\vmpk_es.qm
