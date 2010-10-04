@@ -1016,94 +1016,94 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PianoScene</name>
     <message>
-        <location filename="../src/pianoscene.cpp" line="378"/>
-        <location filename="../src/pianoscene.cpp" line="390"/>
+        <location filename="../src/pianoscene.cpp" line="398"/>
+        <location filename="../src/pianoscene.cpp" line="410"/>
         <source>C</source>
         <translation>До</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="379"/>
+        <location filename="../src/pianoscene.cpp" line="399"/>
         <source>C♯</source>
         <translation>До♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="380"/>
-        <location filename="../src/pianoscene.cpp" line="392"/>
+        <location filename="../src/pianoscene.cpp" line="400"/>
+        <location filename="../src/pianoscene.cpp" line="412"/>
         <source>D</source>
         <translation>Ре</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="381"/>
+        <location filename="../src/pianoscene.cpp" line="401"/>
         <source>D♯</source>
         <translation>Ре♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="382"/>
-        <location filename="../src/pianoscene.cpp" line="394"/>
+        <location filename="../src/pianoscene.cpp" line="402"/>
+        <location filename="../src/pianoscene.cpp" line="414"/>
         <source>E</source>
         <translation>Ми</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="383"/>
-        <location filename="../src/pianoscene.cpp" line="395"/>
+        <location filename="../src/pianoscene.cpp" line="403"/>
+        <location filename="../src/pianoscene.cpp" line="415"/>
         <source>F</source>
         <translation>Фа</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="384"/>
+        <location filename="../src/pianoscene.cpp" line="404"/>
         <source>F♯</source>
         <translation>Фа♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="385"/>
-        <location filename="../src/pianoscene.cpp" line="397"/>
+        <location filename="../src/pianoscene.cpp" line="405"/>
+        <location filename="../src/pianoscene.cpp" line="417"/>
         <source>G</source>
         <translation>Соль</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="386"/>
+        <location filename="../src/pianoscene.cpp" line="406"/>
         <source>G♯</source>
         <translation>Соль♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="387"/>
-        <location filename="../src/pianoscene.cpp" line="399"/>
+        <location filename="../src/pianoscene.cpp" line="407"/>
+        <location filename="../src/pianoscene.cpp" line="419"/>
         <source>A</source>
         <translation>Ля</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="388"/>
+        <location filename="../src/pianoscene.cpp" line="408"/>
         <source>A♯</source>
         <translation>Ля♯</translation>
     </message>
     <message>
-        <location filename="../src/pianoscene.cpp" line="389"/>
-        <location filename="../src/pianoscene.cpp" line="401"/>
+        <location filename="../src/pianoscene.cpp" line="409"/>
+        <location filename="../src/pianoscene.cpp" line="421"/>
         <source>B</source>
         <translation>Си</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="391"/>
+        <location filename="../src/pianoscene.cpp" line="411"/>
         <source>D♭</source>
         <translation>Ре♭</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="393"/>
+        <location filename="../src/pianoscene.cpp" line="413"/>
         <source>E♭</source>
         <translation>Ми♭</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="396"/>
+        <location filename="../src/pianoscene.cpp" line="416"/>
         <source>G♭</source>
         <translation>Соль♭</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="398"/>
+        <location filename="../src/pianoscene.cpp" line="418"/>
         <source>A♭</source>
         <translation>Ля♭</translation>
     </message>
     <message utf8="true">
-        <location filename="../src/pianoscene.cpp" line="400"/>
+        <location filename="../src/pianoscene.cpp" line="420"/>
         <source>B♭</source>
         <translation>Си♭</translation>
     </message>
@@ -1519,147 +1519,151 @@ Do you want to apply the changes?</source>
 <context>
     <name>VPiano</name>
     <message>
-        <location filename="../src/vpiano.cpp" line="213"/>
-        <location filename="../src/vpiano.cpp" line="1623"/>
+        <location filename="../src/vpiano.cpp" line="214"/>
+        <location filename="../src/vpiano.cpp" line="1638"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="214"/>
+        <location filename="../src/vpiano.cpp" line="215"/>
         <source>No MIDI output ports available. Aborting</source>
         <translation>Нет доступных портов вывода MIDI. Завершение</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="238"/>
+        <location filename="../src/vpiano.cpp" line="239"/>
         <source>Error. Aborting</source>
         <translation>Ошибка. Завершение</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="251"/>
-        <location filename="../src/vpiano.cpp" line="2049"/>
+        <location filename="../src/vpiano.cpp" line="252"/>
+        <location filename="../src/vpiano.cpp" line="2079"/>
         <source>Channel:</source>
         <translation>Канал:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="260"/>
-        <location filename="../src/vpiano.cpp" line="2047"/>
+        <location filename="../src/vpiano.cpp" line="261"/>
+        <location filename="../src/vpiano.cpp" line="2077"/>
         <source>Base Octave:</source>
         <translation>Базовая октава:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="269"/>
-        <location filename="../src/vpiano.cpp" line="2052"/>
+        <location filename="../src/vpiano.cpp" line="270"/>
+        <location filename="../src/vpiano.cpp" line="2082"/>
         <source>Transpose:</source>
         <translation>Перенос:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="278"/>
-        <location filename="../src/vpiano.cpp" line="2054"/>
+        <location filename="../src/vpiano.cpp" line="279"/>
+        <location filename="../src/vpiano.cpp" line="2084"/>
         <source>Velocity:</source>
         <translation>Громкость:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="317"/>
-        <location filename="../src/vpiano.cpp" line="2050"/>
+        <location filename="../src/vpiano.cpp" line="318"/>
+        <location filename="../src/vpiano.cpp" line="2080"/>
         <source>Control:</source>
         <translation>Регулятор:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="324"/>
-        <location filename="../src/vpiano.cpp" line="2053"/>
+        <location filename="../src/vpiano.cpp" line="325"/>
+        <location filename="../src/vpiano.cpp" line="2083"/>
         <source>Value:</source>
         <translation>Значение:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="343"/>
-        <location filename="../src/vpiano.cpp" line="2048"/>
+        <location filename="../src/vpiano.cpp" line="344"/>
+        <location filename="../src/vpiano.cpp" line="2078"/>
         <source>Bender:</source>
         <translation>Зажим:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="360"/>
-        <location filename="../src/vpiano.cpp" line="2046"/>
+        <location filename="../src/vpiano.cpp" line="361"/>
+        <location filename="../src/vpiano.cpp" line="2076"/>
         <source>Bank:</source>
         <translation>Банк:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="367"/>
-        <location filename="../src/vpiano.cpp" line="2051"/>
+        <location filename="../src/vpiano.cpp" line="368"/>
+        <location filename="../src/vpiano.cpp" line="2081"/>
         <source>Program:</source>
         <translation>Программа:</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1623"/>
+        <location filename="../src/vpiano.cpp" line="1638"/>
         <source>No help file found</source>
         <translation>Не найден файл справки</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1950"/>
+        <location filename="../src/vpiano.cpp" line="1967"/>
         <source>The language for this application is going to change to %1. Do you want to continue?</source>
         <translation>Язык этого приложения изменится на %1. Хотите продолжить?</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1993"/>
+        <location filename="../src/vpiano.cpp" line="2010"/>
         <source>&lt;p&gt;VMPK is developed and translated thanks to the volunteer work of many people from around the world. If you want to join the team or have any question, please visit the forums at &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;VMPK разрабатывается и переводится благодаря работе добровольцев со всего мира. Если Вы хотите присоединиться к команде или у Вас есть какие-нибудь вопросы, посетите форумы на &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1999"/>
+        <location filename="../src/vpiano.cpp" line="2031"/>
         <source>Translation Information</source>
         <translation>Информация о переводе</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2001"/>
+        <location filename="../src/vpiano.cpp" line="2028"/>
         <source>Translation</source>
         <translation>Перевод</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2002"/>
+        <location filename="../src/vpiano.cpp" line="2029"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
         <translation>&lt;p&gt;Перевёл Сергей Басалаев &amp;lt;sbasalaev@gmail.com&amp;gt;&lt;/p&gt;%1</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2034"/>
+        <location filename="../src/vpiano.cpp" line="2063"/>
         <source>Czech</source>
         <translation>Чешский</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2035"/>
+        <location filename="../src/vpiano.cpp" line="2064"/>
         <source>German</source>
         <translation>Немецкий</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2036"/>
+        <location filename="../src/vpiano.cpp" line="2065"/>
         <source>English</source>
         <translation>Английский</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2037"/>
+        <location filename="../src/vpiano.cpp" line="2066"/>
         <source>Spanish</source>
         <translation>Испанский</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2038"/>
+        <location filename="../src/vpiano.cpp" line="2067"/>
         <source>French</source>
         <translation>Французский</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2039"/>
+        <location filename="../src/vpiano.cpp" line="2068"/>
+        <source>Dutch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="2069"/>
         <source>Russian</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2040"/>
         <source>Turkish</source>
-        <translation>Турецкий</translation>
+        <translation type="obsolete">Турецкий</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2041"/>
+        <location filename="../src/vpiano.cpp" line="2071"/>
         <source>Chinese</source>
         <translation>Китайский</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="1949"/>
+        <location filename="../src/vpiano.cpp" line="1966"/>
         <source>Language Changed</source>
         <translation>Язык изменён</translation>
     </message>
