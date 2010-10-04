@@ -44,14 +44,14 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "SimpChinese"
 !insertmacro MUI_LANGUAGE "Czech"
-#!insertmacro MUI_LANGUAGE "French"
-#!insertmacro MUI_LANGUAGE "German"
+!insertmacro MUI_LANGUAGE "French"
+!insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "Russian"
 !insertmacro MUI_LANGUAGE "Spanish"
 #!insertmacro MUI_LANGUAGE "Turkish"
 
 # Installer attributes
-OutFile vmpk-${VERSION}-setup.exe
+OutFile vmpk-${VERSION}-win32-setup.exe
 InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
@@ -82,19 +82,21 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\pc102win.xml
     File ${VMPKDIR}\data\gmgsxg.ins
     File ${VMPKDIR}\data\help.html
-#    File ${VMPKDIR}\data\help_de.html
+    File ${VMPKDIR}\data\help_de.html
     File ${VMPKDIR}\data\help_es.html
     File ${VMPKDIR}\data\help_ru.html
 #    File ${VMPKDIR}\data\help_tr.html
     File ${VMPKDIR}\build\translations\vmpk_cs.qm
-#    File ${VMPKDIR}\build\translations\vmpk_de.qm
+    File ${VMPKDIR}\build\translations\vmpk_de.qm
     File ${VMPKDIR}\build\translations\vmpk_es.qm
-#    File ${VMPKDIR}\build\translations\vmpk_fr.qm
+    File ${VMPKDIR}\build\translations\vmpk_fr.qm
     File ${VMPKDIR}\build\translations\vmpk_ru.qm
 #    File ${VMPKDIR}\build\translations\vmpk_tr.qm
     File ${VMPKDIR}\build\translations\vmpk_zh_CN.qm
     File ${QTLANG}\qt_cs.qm
+    File ${QTLANG}\qt_de.qm
     File ${QTLANG}\qt_es.qm
+    File ${QTLANG}\qt_fr.qm
     File ${QTLANG}\qt_ru.qm
     File ${QTLANG}\qt_zh_CN.qm
 
@@ -156,13 +158,15 @@ done${UNSECTION_ID}:
 Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\qt.conf
     Delete /REBOOTOK $INSTDIR\qt_cs.qm
+    Delete /REBOOTOK $INSTDIR\qt_de.qm
     Delete /REBOOTOK $INSTDIR\qt_es.qm
+    Delete /REBOOTOK $INSTDIR\qt_fr.qm
     Delete /REBOOTOK $INSTDIR\qt_ru.qm
     Delete /REBOOTOK $INSTDIR\qt_zh_CN.qm
     Delete /REBOOTOK $INSTDIR\vmpk_cs.qm
-#    Delete /REBOOTOK $INSTDIR\vmpk_de.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_de.qm
     Delete /REBOOTOK $INSTDIR\vmpk_es.qm
-#    Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_ru.qm
 #    Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_zh_CN.qm
@@ -175,10 +179,10 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\pc102win.xml
     Delete /REBOOTOK $INSTDIR\gmgsxg.ins
     Delete /REBOOTOK $INSTDIR\help.html
-#    Delete /REBOOTOK $INSTDIR\help_de.html
+    Delete /REBOOTOK $INSTDIR\help_de.html
     Delete /REBOOTOK $INSTDIR\help_es.html
     Delete /REBOOTOK $INSTDIR\help_ru.html
-    Delete /REBOOTOK $INSTDIR\help_tr.html
+#    Delete /REBOOTOK $INSTDIR\help_tr.html
 
     # Uninstalling library $INSTDIR\mingwm10.dll
     !insertmacro UnInstallLib DLL SHARED REBOOT_PROTECTED $INSTDIR\mingwm10.dll
