@@ -57,5 +57,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applications/%name.desktop
 
 %changelog
-* Fir Jun 18 2010 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.3.2
+* Mon Oct 4 2010 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.3.3
+- New release
+
+* Fri Jun 18 2010 Pedro Lopez-Cabanillas <plcl@users.sourceforge.net> 0.3.2
 - New release
