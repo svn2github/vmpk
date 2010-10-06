@@ -38,7 +38,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;/span&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;The following copyright notice is also applicable:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program contains &lt;/span&gt;&lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2010 Gary P. Scavone&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/about.ui" line="156"/>
@@ -1334,7 +1334,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="389"/>
         <source>Translate MIDI velocity to key pressed color tint</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik de MIDI-aanslagsnelheid om de kleurtint van aangeslagen toetsen te bepalen</translation>
     </message>
 </context>
 <context>
@@ -1439,34 +1439,36 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/shortcutdialog.ui" line="32"/>
         <source>Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneltoetsen</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.ui" line="60"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Actie</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.ui" line="65"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschrijving</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.ui" line="70"/>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneltoetsen</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.cpp" line="335"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing</translation>
     </message>
     <message>
         <location filename="../src/shortcutdialog.cpp" line="336"/>
         <source>Keyboard shortcuts have been changed.
 
 Do you want to apply the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>De sneltoetsen zijn gewijzigd.
+
+Wilt u de wijzigingen toepassen?</translation>
     </message>
 </context>
 <context>
@@ -1489,7 +1491,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="76"/>
         <source>&amp;Language</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Taal</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="89"/>
@@ -1499,22 +1501,22 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="102"/>
         <source>&amp;Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gereedschappen</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="106"/>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Noten</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="117"/>
         <source>Controllers</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="126"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programma&apos;s</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="158"/>
@@ -1587,13 +1589,9 @@ Do you want to apply the changes?</source>
         <translation>Geef het &apos;Over VMPK&apos;-venster weer</translation>
     </message>
     <message>
-        <source>About Q&amp;t</source>
-        <translation type="obsolete">Over Q&amp;t</translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="293"/>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Over &amp;Qt</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="296"/>
@@ -1628,7 +1626,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="354"/>
         <source>Show or hide the Status Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon of verberg de statusbalk</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="359"/>
@@ -1643,7 +1641,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="365"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="370"/>
@@ -1668,7 +1666,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="386"/>
         <source>&amp;Keyboard Map</source>
-        <translation>&amp;Toetsenbordtoewijzing</translation>
+        <translation>&amp;Toetsenbordtoewijzingen</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="389"/>
@@ -1688,7 +1686,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="400"/>
         <source>F1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="405"/>
@@ -1703,17 +1701,17 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="413"/>
         <source>&amp;Import SoundFont...</source>
-        <translation>SoundFont &amp;Importeren...</translation>
+        <translation>&amp;Importeer SoundFont...</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="416"/>
         <source>Import SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>Importeer een SoundFont</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="427"/>
         <source>Show or hide the Extra Controls toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon of verberg de extra controls-editor</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="432"/>
@@ -1745,267 +1743,267 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.ui" line="471"/>
         <source>Show or hide the note names</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon of verberg de notennamen</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="476"/>
         <source>&amp;Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sneltoetsen</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="479"/>
         <source>Open the Shortcuts editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Open de sneltoetseneditor</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="484"/>
         <source>Octave Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Octaaf omhoog</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="487"/>
         <source>Play one octave higher</source>
-        <translation type="unfinished"></translation>
+        <translation>Speel een octaaf hoger af</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="490"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="495"/>
         <source>Octave Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Octaaf omlaag</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="498"/>
         <source>Play one octave lower</source>
-        <translation type="unfinished"></translation>
+        <translation>Speel een octaaf lager af</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="501"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="506"/>
         <source>Transpose Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Transponeer omhoog</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="509"/>
         <source>Transpose one semitone higher</source>
-        <translation type="unfinished"></translation>
+        <translation>Transponeer een halve noot omhoog</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="512"/>
         <source>Ctrl+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Rechts</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="517"/>
         <source>Transpose Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Transponeer omlaag</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="520"/>
         <source>Transpose one semitone lower</source>
-        <translation type="unfinished"></translation>
+        <translation>Transponeer een halve noot omlaag</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="523"/>
         <source>Ctrl+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Links</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="528"/>
         <source>Next  Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgende kanaal</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="531"/>
         <source>Play and listen next channel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Speel en beluister het volgende kanaal</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="534"/>
         <source>Up</source>
-        <translation type="unfinished">Omhoog</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="539"/>
         <source>Previous Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorige kanaal</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="542"/>
         <source>Play and listen previous channel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Speel en beluister het vorige kanaal</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="545"/>
         <source>Down</source>
-        <translation type="unfinished">Omlaag</translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="550"/>
         <source>Next Controller</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgende controller</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="553"/>
         <source>Select the next controller</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de volgende controller</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="556"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="561"/>
         <source>Previous Controller</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorige controller</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="564"/>
         <source>Select the previous controller</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de vorige controller</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="567"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="572"/>
         <source>Controller Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhoog controllerwaarde</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="575"/>
         <source>Increment the controller value</source>
-        <translation type="unfinished"></translation>
+        <translation>Incrementeer de controllerwaarde</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="578"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="583"/>
         <source>Controller Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlaag controllerwaarde</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="586"/>
         <source>Decrement the controller value</source>
-        <translation type="unfinished"></translation>
+        <translation>Decrementeer de controllerwaarde</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="589"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="594"/>
         <source>Next Bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgende bank</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="597"/>
         <source>Select the next instrument bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de volgende instrumentenbank</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="600"/>
         <source>Ctrl+PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="605"/>
         <source>Previous Bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorige bank</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="608"/>
         <source>Select the previous instrument bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de vorige instrumentenbank</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="611"/>
         <source>Ctrl+PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="616"/>
         <source>Next Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgende programma</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="619"/>
         <source>Select the next instrument program</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer het volgende instrumentprogramma</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="622"/>
         <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="627"/>
         <source>Previous Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorige programma</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="630"/>
         <source>Select the previous instrument program</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer het vorige instrumentprogramma</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="633"/>
         <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="638"/>
         <source>Velocity Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhoog aanslagsnelheid</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="641"/>
         <source>Increment note velocity</source>
-        <translation type="unfinished"></translation>
+        <translation>Incrementeer de aanslagsnelheid van noten</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="644"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="649"/>
         <source>Velocity Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlaag aanslagsnelheid</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="652"/>
         <source>Decrement note velocity</source>
-        <translation type="unfinished"></translation>
+        <translation>Decrementeer de aanslagsnelheid van noten</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="655"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="660"/>
         <source>About &amp;Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Over de &amp;vertaling</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="663"/>
         <source>Show information about the program language translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef informatie over de programmavertaling weer</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="214"/>
@@ -2087,72 +2085,72 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/vpiano.cpp" line="1966"/>
         <source>Language Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal gewijzigd</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="1967"/>
         <source>The language for this application is going to change to %1. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>De taal voor deze applicatie wordt veranderd naar %1. Wilt u verder gaan?</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2010"/>
         <source>&lt;p&gt;VMPK is developed and translated thanks to the volunteer work of many people from around the world. If you want to join the team or have any question, please visit the forums at &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;VMPK is ontwikkeld en vertaald dankzij het vrijwilligerswerk door vele mensen over de hele wereld. Wilt u meehelpen of hebt u vragen, bezoek dan de forums op &lt;a href=&apos;http://sourceforge.net/projects/vmpk/forums&apos;&gt;SourceForge&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2028"/>
         <source>Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertaling</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2029"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vertaling door Wouter Reckman (gennerate@zonnet.nl)&lt;/p&gt;%1</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2031"/>
         <source>Translation Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertalingsinformatie</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2063"/>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>Tsjechisch</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2064"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Duits</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2065"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Engels</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2066"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaans</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2067"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2068"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederlands</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2069"/>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Russisch</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2071"/>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinees</translation>
     </message>
 </context>
 </TS>
