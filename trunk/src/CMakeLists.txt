@@ -25,6 +25,8 @@ LINK_DIRECTORIES (
 FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h
      "const QString PGM_VERSION(\"${VERSION}\");\n")
 
+CONFIGURE_FILE ( vmpk.rc.in ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc IMMEDIATE @ONLY )
+    
 SET(vmpk_forms_SRCS
     about.ui
     extracontrols.ui
@@ -124,11 +126,18 @@ IF (UNIX AND NOT APPLE)
 ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
-    ADD_WINDRES_OBJS(vmpk_SRCS vpianoico.rc)
+    SET ( vmpk_RESOURCES )
+    IF ( MINGW )
+        ADD_WINDRES_OBJS( vmpk_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc )
+    ENDIF ( MINGW )
+    IF ( MSVC )
+        SET ( vmpk_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc )
+    ENDIF ( MSVC )
     ADD_EXECUTABLE ( vmpk WIN32
         ${vmpk_ui_SRCS}
         ${vmpk_moc_SRCS}
-        ${vmpk_SRCS} )
+        ${vmpk_SRCS} 
+        ${vmpk_RESOURCES} )
     INSTALL ( TARGETS vmpk
               RUNTIME DESTINATION . )
 ENDIF (WIN32)
