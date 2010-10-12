@@ -152,6 +152,7 @@ IF (APPLE)
              ../data/help.html
              ../data/help_de.html
              ../data/help_es.html
+             ../data/help_nl.html
              ../data/help_ru.html
              ../data/help_tr.html
              ../data/txt2ins.awk

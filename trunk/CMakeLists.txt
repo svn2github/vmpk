@@ -172,6 +172,7 @@ IF (UNIX AND NOT APPLE)
         data/help.html
         data/help_de.html
         data/help_es.html
+        data/help_nl.html
         data/help_ru.html
     DESTINATION 
         share/vmpk 
@@ -233,6 +234,7 @@ IF (WIN32)
         data/help.html
         data/help_de.html
         data/help_es.html
+        data/help_nl.html
         data/help_ru.html
     DESTINATION . )
 ENDIF (WIN32)

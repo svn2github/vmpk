@@ -84,6 +84,7 @@ Section -Main SEC0000
     File ${VMPKDIR}\data\help.html
     File ${VMPKDIR}\data\help_de.html
     File ${VMPKDIR}\data\help_es.html
+    File ${VMPKDIR}\data\help_nl.html
     File ${VMPKDIR}\data\help_ru.html
 #    File ${VMPKDIR}\data\help_tr.html
     File ${VMPKDIR}\build\translations\vmpk_cs.qm
@@ -181,6 +182,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\help.html
     Delete /REBOOTOK $INSTDIR\help_de.html
     Delete /REBOOTOK $INSTDIR\help_es.html
+    Delete /REBOOTOK $INSTDIR\help_nl.html
     Delete /REBOOTOK $INSTDIR\help_ru.html
 #    Delete /REBOOTOK $INSTDIR\help_tr.html
 
