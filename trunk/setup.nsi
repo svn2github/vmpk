@@ -4,10 +4,10 @@ Name "Virtual MIDI Piano Keyboard"
 !define QTFILES "C:\Qt\2010.05\qt\bin"
 !define QTLANG "C:\Qt\2010.05\qt\translations"
 !define MINGWFILES "C:\Qt\2010.05\mingw\bin"
-!define VMPKDIR "C:\Proyectos\vmpk-0.3.3"
+!define VMPKDIR "C:\Proyectos\vmpk-0.3.4"
 
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.3.3
+!define VERSION 0.3.4
 !define COMPANY VMPK
 !define URL http://vmpk.sourceforge.net/
 
@@ -56,7 +56,7 @@ InstallDir $PROGRAMFILES\vmpk
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 0.3.3.0
+VIProductVersion 0.3.4.0
 VIAddVersionKey ProductName VMPK
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
@@ -91,6 +91,7 @@ Section -Main SEC0000
     File ${VMPKDIR}\build\translations\vmpk_de.qm
     File ${VMPKDIR}\build\translations\vmpk_es.qm
     File ${VMPKDIR}\build\translations\vmpk_fr.qm
+    File ${VMPKDIR}\build\translations\vmpk_nl.qm
     File ${VMPKDIR}\build\translations\vmpk_ru.qm
 #    File ${VMPKDIR}\build\translations\vmpk_tr.qm
     File ${VMPKDIR}\build\translations\vmpk_zh_CN.qm
@@ -168,6 +169,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vmpk_de.qm
     Delete /REBOOTOK $INSTDIR\vmpk_es.qm
     Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_nl.qm
     Delete /REBOOTOK $INSTDIR\vmpk_ru.qm
 #    Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_zh_CN.qm

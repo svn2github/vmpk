@@ -12,7 +12,7 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.3.3
+VERSION = 0.3.4svn
 DESTDIR = build
 OBJECTS_DIR = $$DESTDIR
 UI_DIR = $$DESTDIR
