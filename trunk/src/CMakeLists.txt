@@ -22,11 +22,11 @@ LINK_DIRECTORIES (
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h
-     "const QString PGM_VERSION(\"${VERSION}\");\n")
+IF (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h)
+    FILE ( WRITE ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h
+           "const QString PGM_VERSION(\"${VERSION}\");\n" )
+ENDIF (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h)
 
-CONFIGURE_FILE ( vmpk.rc.in ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc IMMEDIATE @ONLY )
-    
 SET(vmpk_forms_SRCS
     about.ui
     extracontrols.ui
@@ -127,6 +127,8 @@ ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
     SET ( vmpk_RESOURCES )
+    CONFIGURE_FILE ( vmpk.rc.in ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc 
+                     IMMEDIATE @ONLY )
     IF ( MINGW )
         ADD_WINDRES_OBJS( vmpk_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc )
     ENDIF ( MINGW )

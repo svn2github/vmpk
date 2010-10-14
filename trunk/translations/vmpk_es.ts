@@ -1596,55 +1596,55 @@ Do you want to apply the changes?</source>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="252"/>
-        <location filename="../src/vpiano.cpp" line="2079"/>
+        <location filename="../src/vpiano.cpp" line="2080"/>
         <source>Channel:</source>
         <translation>Canal: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="261"/>
-        <location filename="../src/vpiano.cpp" line="2077"/>
+        <location filename="../src/vpiano.cpp" line="2078"/>
         <source>Base Octave:</source>
         <translation>Octava base: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="270"/>
-        <location filename="../src/vpiano.cpp" line="2082"/>
+        <location filename="../src/vpiano.cpp" line="2083"/>
         <source>Transpose:</source>
         <translation>Transposición: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="279"/>
-        <location filename="../src/vpiano.cpp" line="2084"/>
+        <location filename="../src/vpiano.cpp" line="2085"/>
         <source>Velocity:</source>
         <translation>Velocidad: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="318"/>
-        <location filename="../src/vpiano.cpp" line="2080"/>
+        <location filename="../src/vpiano.cpp" line="2081"/>
         <source>Control:</source>
         <translation>Control: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="325"/>
-        <location filename="../src/vpiano.cpp" line="2083"/>
+        <location filename="../src/vpiano.cpp" line="2084"/>
         <source>Value:</source>
         <translation>Valor: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="344"/>
-        <location filename="../src/vpiano.cpp" line="2078"/>
+        <location filename="../src/vpiano.cpp" line="2079"/>
         <source>Bender:</source>
         <translation>Inflexión: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="361"/>
-        <location filename="../src/vpiano.cpp" line="2076"/>
+        <location filename="../src/vpiano.cpp" line="2077"/>
         <source>Bank:</source>
         <translation>Banco: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="368"/>
-        <location filename="../src/vpiano.cpp" line="2081"/>
+        <location filename="../src/vpiano.cpp" line="2082"/>
         <source>Program:</source>
         <translation>Programa: </translation>
     </message>
@@ -1662,6 +1662,11 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.cpp" line="2031"/>
         <source>Translation Information</source>
         <translation>Información sobre traducción</translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="2070"/>
+        <source>Swedish</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2028"/>
@@ -1713,7 +1718,7 @@ Do you want to apply the changes?</source>
         <translation type="obsolete">turco</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2071"/>
+        <location filename="../src/vpiano.cpp" line="2072"/>
         <source>Chinese</source>
         <translation>chino</translation>
     </message>
@@ -1903,11 +1908,6 @@ Do you want to apply the changes?</source>
         <translation>Acerca de &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="523"/>
-        <source>Ctrl+Left</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="528"/>
         <source>Next  Channel</source>
         <translation>Siguiente Canal</translation>
@@ -1977,11 +1977,6 @@ Do you want to apply the changes?</source>
         <translation>Detiene todas las notas activas</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="365"/>
-        <source>Esc</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="370"/>
         <source>Reset All</source>
         <translation>Restablecer</translation>
@@ -2000,11 +1995,6 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.ui" line="381"/>
         <source>Resets the Bender value</source>
         <translation>Restablece el valor de la Inflexión</translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="400"/>
-        <source>F1</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="416"/>
@@ -2069,11 +2059,6 @@ Do you want to apply the changes?</source>
         <translation>Ejecutar una octava superior</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="490"/>
-        <source>Right</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="495"/>
         <source>Octave Down</source>
         <translation>Octava inferior</translation>
@@ -2082,11 +2067,6 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.ui" line="498"/>
         <source>Play one octave lower</source>
         <translation>Ejecutar en una octava inferior</translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="501"/>
-        <source>Left</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="506"/>
@@ -2099,11 +2079,6 @@ Do you want to apply the changes?</source>
         <translation>Transportar un semitono superior</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="512"/>
-        <source>Ctrl+Right</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="517"/>
         <source>Transpose Down</source>
         <translation>Transporte descendente</translation>
@@ -2112,11 +2087,6 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.ui" line="520"/>
         <source>Transpose one semitone lower</source>
         <translation>Transportar un semitono inferior</translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="655"/>
-        <source>Home</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="660"/>
@@ -2137,16 +2107,6 @@ Do you want to apply the changes?</source>
         <translation type="obsolete">Ejecutar y reproducir en el canal siguiente</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="534"/>
-        <source>Up</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="545"/>
-        <source>Down</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="550"/>
         <source>Next Controller</source>
         <translation>Siguiente controlador</translation>
@@ -2155,11 +2115,6 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.ui" line="553"/>
         <source>Select the next controller</source>
         <translation>Seleccionar el controlador siguiente</translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="556"/>
-        <source>Ctrl++</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="561"/>
@@ -2172,11 +2127,6 @@ Do you want to apply the changes?</source>
         <translation>Seleccionar el controlador anterior</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="567"/>
-        <source>Ctrl+-</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="572"/>
         <source>Controller Up</source>
         <translation>Incrementar controlador</translation>
@@ -2185,11 +2135,6 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.ui" line="575"/>
         <source>Increment the controller value</source>
         <translation>Incrementar el valor del controlador</translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="578"/>
-        <source>+</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="583"/>
@@ -2202,11 +2147,6 @@ Do you want to apply the changes?</source>
         <translation>Decrementar el valor del controlador</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="589"/>
-        <source>-</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="594"/>
         <source>Next Bank</source>
         <translation>Banco siguiente</translation>
@@ -2215,11 +2155,6 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.ui" line="597"/>
         <source>Select the next instrument bank</source>
         <translation>Seleccionar el siguiente banco de instrumentos</translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="600"/>
-        <source>Ctrl+PgUp</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="605"/>
@@ -2232,11 +2167,6 @@ Do you want to apply the changes?</source>
         <translation>Seleccionar el anterior banco de instrumentos</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="611"/>
-        <source>Ctrl+PgDown</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="616"/>
         <source>Next Program</source>
         <translation>Siguiente programa</translation>
@@ -2245,11 +2175,6 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.ui" line="619"/>
         <source>Select the next instrument program</source>
         <translation>Seleccionar el siguiente programa de instrumento</translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="622"/>
-        <source>PgUp</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="627"/>
@@ -2262,11 +2187,6 @@ Do you want to apply the changes?</source>
         <translation>Seleccionar el anterior programa de instrumentos</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="633"/>
-        <source>PgDown</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/vpiano.ui" line="638"/>
         <source>Velocity Up</source>
         <translation>Incrementar velocidad</translation>
@@ -2275,11 +2195,6 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.ui" line="641"/>
         <source>Increment note velocity</source>
         <translation>Incrementar la velocidad de las notas</translation>
-    </message>
-    <message>
-        <location filename="../src/vpiano.ui" line="644"/>
-        <source>End</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="649"/>

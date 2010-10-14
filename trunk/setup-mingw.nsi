@@ -93,6 +93,7 @@ Section -Main SEC0000
     File ${VMPKDIR}\build\translations\vmpk_fr.qm
     File ${VMPKDIR}\build\translations\vmpk_nl.qm
     File ${VMPKDIR}\build\translations\vmpk_ru.qm
+    File ${VMPKDIR}\build\translations\vmpk_sv.qm
 #    File ${VMPKDIR}\build\translations\vmpk_tr.qm
     File ${VMPKDIR}\build\translations\vmpk_zh_CN.qm
     File ${QTLANG}\qt_cs.qm
@@ -171,6 +172,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\vmpk_fr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_nl.qm
     Delete /REBOOTOK $INSTDIR\vmpk_ru.qm
+    Delete /REBOOTOK $INSTDIR\vmpk_sv.qm
 #    Delete /REBOOTOK $INSTDIR\vmpk_tr.qm
     Delete /REBOOTOK $INSTDIR\vmpk_zh_CN.qm
     Delete /REBOOTOK $INSTDIR\vmpk.exe

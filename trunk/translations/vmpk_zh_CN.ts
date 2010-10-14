@@ -1608,55 +1608,55 @@ Do you want to apply the changes?</source>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="252"/>
-        <location filename="../src/vpiano.cpp" line="2079"/>
+        <location filename="../src/vpiano.cpp" line="2080"/>
         <source>Channel:</source>
         <translation>通道: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="261"/>
-        <location filename="../src/vpiano.cpp" line="2077"/>
+        <location filename="../src/vpiano.cpp" line="2078"/>
         <source>Base Octave:</source>
         <translation>基准八度: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="270"/>
-        <location filename="../src/vpiano.cpp" line="2082"/>
+        <location filename="../src/vpiano.cpp" line="2083"/>
         <source>Transpose:</source>
         <translation>移调: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="279"/>
-        <location filename="../src/vpiano.cpp" line="2084"/>
+        <location filename="../src/vpiano.cpp" line="2085"/>
         <source>Velocity:</source>
         <translation>力度: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="318"/>
-        <location filename="../src/vpiano.cpp" line="2080"/>
+        <location filename="../src/vpiano.cpp" line="2081"/>
         <source>Control:</source>
         <translation>控制器: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="325"/>
-        <location filename="../src/vpiano.cpp" line="2083"/>
+        <location filename="../src/vpiano.cpp" line="2084"/>
         <source>Value:</source>
         <translation>值: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="344"/>
-        <location filename="../src/vpiano.cpp" line="2078"/>
+        <location filename="../src/vpiano.cpp" line="2079"/>
         <source>Bender:</source>
         <translation>弯音控制器: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="361"/>
-        <location filename="../src/vpiano.cpp" line="2076"/>
+        <location filename="../src/vpiano.cpp" line="2077"/>
         <source>Bank:</source>
         <translation>音色库号: </translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="368"/>
-        <location filename="../src/vpiano.cpp" line="2081"/>
+        <location filename="../src/vpiano.cpp" line="2082"/>
         <source>Program:</source>
         <translation>音色: </translation>
     </message>
@@ -1674,6 +1674,11 @@ Do you want to apply the changes?</source>
         <location filename="../src/vpiano.cpp" line="2031"/>
         <source>Translation Information</source>
         <translation>翻译信息</translation>
+    </message>
+    <message>
+        <location filename="../src/vpiano.cpp" line="2070"/>
+        <source>Swedish</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2028"/>
@@ -1725,7 +1730,7 @@ Do you want to apply the changes?</source>
         <translation type="obsolete">Turkish</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.cpp" line="2071"/>
+        <location filename="../src/vpiano.cpp" line="2072"/>
         <source>Chinese</source>
         <translation>简体中文</translation>
     </message>
@@ -1960,9 +1965,8 @@ Do you want to apply the changes?</source>
         <translation>停止所有发声音符</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="365"/>
         <source>Esc</source>
-        <translation>Esc</translation>
+        <translation type="obsolete">Esc</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="370"/>
@@ -1985,9 +1989,8 @@ Do you want to apply the changes?</source>
         <translation>重置弯音控制器</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="400"/>
         <source>F1</source>
-        <translation>F1</translation>
+        <translation type="obsolete">F1</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="416"/>
@@ -2052,9 +2055,8 @@ Do you want to apply the changes?</source>
         <translation>高一个八度弹奏</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="490"/>
         <source>Right</source>
-        <translation>Right</translation>
+        <translation type="obsolete">Right</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="495"/>
@@ -2067,9 +2069,8 @@ Do you want to apply the changes?</source>
         <translation>低一个八度弹奏</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="501"/>
         <source>Left</source>
-        <translation>Left</translation>
+        <translation type="obsolete">Left</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="506"/>
@@ -2082,9 +2083,8 @@ Do you want to apply the changes?</source>
         <translation>向上移调一个半音</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="512"/>
         <source>Ctrl+Right</source>
-        <translation>Ctrl+Right</translation>
+        <translation type="obsolete">Ctrl+Right</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="517"/>
@@ -2097,9 +2097,8 @@ Do you want to apply the changes?</source>
         <translation>向下移调一个半音</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="523"/>
         <source>Ctrl+Left</source>
-        <translation>Ctrl+Left</translation>
+        <translation type="obsolete">Ctrl+Left</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="528"/>
@@ -2122,9 +2121,8 @@ Do you want to apply the changes?</source>
         <translation>播放并监听前一个通道</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="655"/>
         <source>Home</source>
-        <translation>Home</translation>
+        <translation type="obsolete">Home</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="660"/>
@@ -2137,14 +2135,12 @@ Do you want to apply the changes?</source>
         <translation>显示软件的翻译信息</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="534"/>
         <source>Up</source>
-        <translation>向上</translation>
+        <translation type="obsolete">向上</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="545"/>
         <source>Down</source>
-        <translation>向下</translation>
+        <translation type="obsolete">向下</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="550"/>
@@ -2157,9 +2153,8 @@ Do you want to apply the changes?</source>
         <translation>选中下一个控制器</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="556"/>
         <source>Ctrl++</source>
-        <translation>Ctrl++</translation>
+        <translation type="obsolete">Ctrl++</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="561"/>
@@ -2172,9 +2167,8 @@ Do you want to apply the changes?</source>
         <translation>选中前一个控制器</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="567"/>
         <source>Ctrl+-</source>
-        <translation>Ctrl+-</translation>
+        <translation type="obsolete">Ctrl+-</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="572"/>
@@ -2187,9 +2181,8 @@ Do you want to apply the changes?</source>
         <translation>增加控制器的值</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="578"/>
         <source>+</source>
-        <translation>+</translation>
+        <translation type="obsolete">+</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="583"/>
@@ -2202,9 +2195,8 @@ Do you want to apply the changes?</source>
         <translation>减少控制器的值</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="589"/>
         <source>-</source>
-        <translation>-</translation>
+        <translation type="obsolete">-</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="594"/>
@@ -2217,9 +2209,8 @@ Do you want to apply the changes?</source>
         <translation>选中下一个乐器库号(Bank)</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="600"/>
         <source>Ctrl+PgUp</source>
-        <translation>Ctrl+PgUp</translation>
+        <translation type="obsolete">Ctrl+PgUp</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="605"/>
@@ -2232,9 +2223,8 @@ Do you want to apply the changes?</source>
         <translation>选中前一个乐器库号</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="611"/>
         <source>Ctrl+PgDown</source>
-        <translation>Ctrl+PgDown</translation>
+        <translation type="obsolete">Ctrl+PgDown</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="616"/>
@@ -2247,9 +2237,8 @@ Do you want to apply the changes?</source>
         <translation>选中下一个乐器音色</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="622"/>
         <source>PgUp</source>
-        <translation>PgUp</translation>
+        <translation type="obsolete">PgUp</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="627"/>
@@ -2262,9 +2251,8 @@ Do you want to apply the changes?</source>
         <translation>选中前一个乐器音色</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="633"/>
         <source>PgDown</source>
-        <translation>PgDown</translation>
+        <translation type="obsolete">PgDown</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="638"/>
@@ -2277,9 +2265,8 @@ Do you want to apply the changes?</source>
         <translation>增加音符力度</translation>
     </message>
     <message>
-        <location filename="../src/vpiano.ui" line="644"/>
         <source>End</source>
-        <translation>End</translation>
+        <translation type="obsolete">End</translation>
     </message>
     <message>
         <location filename="../src/vpiano.ui" line="649"/>

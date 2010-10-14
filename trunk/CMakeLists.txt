@@ -22,8 +22,8 @@ OPTION(ENABLE_DBUS "Enable experimental VMPK DBus interface" ON)
 # Show full commands and messages. 
 # SET(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL)
 
-# Seems that relative paths break the link scripts. Don't set it ON
-SET(CMAKE_USE_RELATIVE_PATHS OFF)
+# If relative paths break the link scripts, set it OFF
+# SET(CMAKE_USE_RELATIVE_PATHS OFF)
 
 # Assorted settings
 SET(CMAKE_COLOR_MAKEFILE ON)
@@ -76,19 +76,15 @@ IF(${CMAKE_SYSTEM} MATCHES "Linux")
     ELSE(PKG_CONFIG_FOUND)
         MESSAGE(FATAL_ERROR "Program pkg-config not found")
     ENDIF(PKG_CONFIG_FOUND)
-# Initialize some variables
-    SET(HAVE_ALSA FALSE)
 # Check for ALSA 1.0
+    SET(HAVE_ALSA FALSE)
     PKG_CHECK_MODULES(ALSA REQUIRED alsa>=1.0)
     IF(ALSA_FOUND)
         SET(HAVE_ALSA TRUE)
         ADD_DEFINITIONS(-DHAVE_ALSA)
         SET(ALSA_LIBS ${ALSA_LIBRARIES})
-        #MESSAGE("ALSA_LIBS: ${ALSA_LIBS}")
         LIST(APPEND ALSA_LIB_DIR ${ALSA_LIBRARY_DIRS} ${ALSA_LIBDIR})
-        #MESSAGE("ALSA_LIB_DIR: ${ALSA_LIB_DIR}")
         LIST(APPEND ALSA_INC_DIR ${ALSA_INCLUDE_DIRS} ${ALSA_INCLUDEDIR})
-        #MESSAGE("ALSA_INC_DIR: ${ALSA_INC_DIR}")
     ELSE(ALSA_FOUND)
         MESSAGE(FATAL_ERROR "Please install the required package. Aborting")
     ENDIF(ALSA_FOUND)
@@ -130,6 +126,26 @@ CONFIGURE_FILE(
 ADD_CUSTOM_TARGET ( uninstall
     "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
+SET (vmpk_DATA_FILES
+    data/azerty.xml
+    data/vkeybd-default.xml
+    data/it-qwerty.xml
+    data/german.xml
+    data/gmgsxg.ins
+    data/spanish.xml
+    data/pc102x11.xml
+    data/pc102mac.xml
+    data/pc102win.xml
+    data/txt2ins.awk
+    data/help.html
+    data/help_de.html
+    data/help_es.html
+    data/help_nl.html
+    data/help_ru.html 
+# unmaintained translations:
+#   data/help_tr.html
+)
+
 IF (UNIX)
     ADD_CUSTOM_TARGET ( distclean
         COMMAND rm -rf build/*
@@ -158,54 +174,34 @@ IF (UNIX AND NOT APPLE)
 
     ADD_SUBDIRECTORY (man)
 
-# unmaintained translations:
-# data/help_tr.html
-    INSTALL ( FILES
-        data/azerty.xml
-        data/vkeybd-default.xml
-        data/it-qwerty.xml
-        data/german.xml
-        data/gmgsxg.ins
-        data/spanish.xml
-        data/pc102x11.xml
-        data/txt2ins.awk
-        data/help.html
-        data/help_de.html
-        data/help_es.html
-        data/help_nl.html
-        data/help_ru.html
-    DESTINATION 
-        share/vmpk 
-    )
+    INSTALL( FILES ${vmpk_DATA_FILES}
+             DESTINATION share/vmpk )
 
-    INSTALL(FILES data/vmpk_16x16.png 
-        DESTINATION share/icons/hicolor/16x16/apps   
-        RENAME vmpk.png)
+    INSTALL( FILES data/vmpk_16x16.png 
+             DESTINATION share/icons/hicolor/16x16/apps   
+             RENAME vmpk.png)
     
-    INSTALL(FILES data/vmpk_32x32.png 
-        DESTINATION share/icons/hicolor/32x32/apps   
-        RENAME vmpk.png)
+    INSTALL( FILES data/vmpk_32x32.png 
+             DESTINATION share/icons/hicolor/32x32/apps   
+             RENAME vmpk.png)
     
-    INSTALL(FILES data/vmpk_48x48.png 
-        DESTINATION share/icons/hicolor/48x48/apps   
-        RENAME vmpk.png)
+    INSTALL( FILES data/vmpk_48x48.png 
+             DESTINATION share/icons/hicolor/48x48/apps   
+             RENAME vmpk.png)
     
-    INSTALL(FILES data/vmpk_64x64.png 
-        DESTINATION share/icons/hicolor/64x64/apps   
-        RENAME vmpk.png)
+    INSTALL( FILES data/vmpk_64x64.png 
+             DESTINATION share/icons/hicolor/64x64/apps   
+             RENAME vmpk.png)
 
-    INSTALL(FILES data/vmpk_128x128.png 
-        DESTINATION share/icons/hicolor/128x128/apps   
-        RENAME vmpk.png)
+    INSTALL( FILES data/vmpk_128x128.png 
+             DESTINATION share/icons/hicolor/128x128/apps   
+             RENAME vmpk.png)
 
-    INSTALL(FILES data/vmpk.svgz
-        DESTINATION share/icons/hicolor/scalable/apps )   
+    INSTALL( FILES data/vmpk.svgz
+             DESTINATION share/icons/hicolor/scalable/apps )   
     
-    INSTALL ( FILES 
-        vmpk.desktop
-    DESTINATION 
-        share/applications
-    )
+    INSTALL( FILES vmpk.desktop
+             DESTINATION share/applications )
 
 ENDIF (UNIX AND NOT APPLE)
 
@@ -217,26 +213,13 @@ IF (WIN32)
         INSTALL ( FILES ${QT_DLL_PATH_tmp}/${qtlib}4.dll
                   DESTINATION . )
     ENDFOREACH(qtlib)
-    INSTALL ( FILES ${QT_DLL_PATH_tmp}/mingwm10.dll 
-                    ${QT_DLL_PATH_tmp}/libgcc_s_dw2-1.dll
+    IF (MINGW)
+        INSTALL ( FILES ${QT_DLL_PATH_tmp}/mingwm10.dll 
+                        ${QT_DLL_PATH_tmp}/libgcc_s_dw2-1.dll
+                  DESTINATION . )
+    ENDIF (MINGW)
+    INSTALL ( FILES ${vmpk_DATA_FILES}
               DESTINATION . )
-
-# unmaintained translations:
-# data/help_tr.html
-    INSTALL ( FILES
-        data/azerty.xml
-        data/vkeybd-default.xml
-        data/it-qwerty.xml
-        data/german.xml
-        data/gmgsxg.ins
-        data/spanish.xml
-        data/pc102win.xml
-        data/help.html
-        data/help_de.html
-        data/help_es.html
-        data/help_nl.html
-        data/help_ru.html
-    DESTINATION . )
 ENDIF (WIN32)
 
 IF (APPLE)
@@ -247,3 +230,49 @@ IF (APPLE)
       "${CMAKE_CURRENT_BINARY_DIR}/build/CreateBundle.sh" @ONLY IMMEDIATE)
     INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/build/CompleteBundle.cmake")
 ENDIF (APPLE)
+
+# CPack support 
+INCLUDE(InstallRequiredSystemLibraries)
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Virtual MIDI Piano Keyboard")
+SET(CPACK_PACKAGE_VENDOR "vmpk.sourceforge.net")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/gpl.rtf")
+SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
+SET(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
+SET(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
+SET(CPACK_PACKAGE_INSTALL_DIRECTORY "vmpk")
+SET(CPACK_PACKAGE_EXECUTABLES "vmpk" "Virtual MIDI Piano Keyboard")
+
+# source packages
+SET(CPACK_SOURCE_GENERATOR TGZ;TBZ2;ZIP)
+SET(CPACK_SOURCE_IGNORE_FILES "/.svn/;/build/;/share/;~$;.cproject;.project;.user;${CPACK_SOURCE_IGNORE_FILES}")
+SET(CPACK_SOURCE_PACKAGE_FILE_NAME "vmpk-${VERSION}") 
+SET(CPACK_SOURCE_STRIP_FILES OFF)
+
+# linux binary packages
+IF(${CMAKE_SYSTEM} MATCHES "Linux")
+    SET(CPACK_GENERATOR TGZ;TBZ2)
+    SET(CPACK_PACKAGE_NAME "vmpk")
+    MATH(EXPR PWORD_SIZE "${CMAKE_SIZEOF_VOID_P}*8")
+    SET(CPACK_SYSTEM_NAME ${CMAKE_SYSTEM_NAME}-x86_${PWORD_SIZE})
+#   SET(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
+#   SET(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+    SET(CPACK_STRIP_FILES ON)
+ENDIF(${CMAKE_SYSTEM} MATCHES "Linux")
+
+# Windows NSIS setup package
+#IF (WIN32)
+#    SET(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/src/vmpk.ico")
+#    SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\MyExecutable.exe")
+#    SET(CPACK_NSIS_DISPLAY_NAME "Virtual MIDI Piano Keyboard")
+#    SET(CPACK_NSIS_HELP_LINK "http://vmpk.sourceforge.net")
+#    SET(CPACK_NSIS_URL_INFO_ABOUT "http://vmpk.sourceforge.net")
+#    SET(CPACK_NSIS_CONTACT "plcl@users.sourceforge.net")
+#    SET(CPACK_NSIS_MODIFY_PATH OFF)
+#ENDIF (WIN32)
+
+# Mac OSX bundle
+#IF (APPLE)
+#ENDIF (APPLE)
+
+INCLUDE(CPack)

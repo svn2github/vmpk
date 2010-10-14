@@ -75,6 +75,7 @@ macx {
         $$DESTDIR/translations/vmpk_fr.qm \
         $$DESTDIR/translations/vmpk_nl.qm \
         $$DESTDIR/translations/vmpk_ru.qm \
+        $$DESTDIR/translations/vmpk_sv.qm \
 #       $$DESTDIR/translations/vmpk_tr.qm \
         $$DESTDIR/translations/vmpk_zh_CN.qm
     BUNDLE_RES.path = Contents/Resources
@@ -166,6 +167,7 @@ TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_fr.ts \
     translations/vmpk_nl.ts \
     translations/vmpk_ru.ts \
+    translations/vmpk_sv.ts \
     translations/vmpk_zh_CN.ts
 
 include(updateqm.pri)
