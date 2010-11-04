@@ -1586,7 +1586,7 @@ Chcete použít tyto změny?</translation>
         <location filename="../src/vpiano.cpp" line="344"/>
         <location filename="../src/vpiano.cpp" line="2079"/>
         <source>Bender:</source>
-        <translation>Menič:</translation>
+        <translation>Měnič:</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="361"/>
@@ -1628,7 +1628,7 @@ Chcete použít tyto změny?</translation>
     <message>
         <location filename="../src/vpiano.cpp" line="2029"/>
         <source>&lt;p&gt;Translation by TRANSLATOR_NAME_AND_EMAIL&lt;/p&gt;%1</source>
-        <translation>&lt;p&gt;Překlad: Pavel Fric, &lt;a href=&apos;http://fripohled.blogspot.com&apos;&gt;fripohled.blogspot.com&lt;/a&gt;&lt;/p&gt;%1</translation>
+        <translation>&lt;p&gt;Překlad: Pavel Fric, fripohled.blogspot.com&lt;/p&gt;%1</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2063"/>
