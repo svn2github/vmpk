@@ -37,6 +37,9 @@ Translators:
     Magnus Johansson - Swedish translation
         translations/vmpk_sv.ts
 
+    Nicolas Froment - French translation
+        data/help_fr.html
+
 Other copyright owners:
 
     Gary P. Scavone     RtMIDI classes
