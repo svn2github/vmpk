@@ -140,6 +140,7 @@ SET (vmpk_DATA_FILES
     data/help.html
     data/help_de.html
     data/help_es.html
+    data/help_fr.html
     data/help_nl.html
     data/help_ru.html 
 # unmaintained translations:

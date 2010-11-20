@@ -52,6 +52,7 @@ macx {
     BUNDLE_RES.files = data/help.html \
         data/help_de.html \
         data/help_es.html \
+        data/help_fr.html \
         data/help_nl.html \
         data/help_ru.html \
 #       data/help_tr.html \
@@ -160,7 +161,7 @@ SOURCES += src/about.cpp \
 RESOURCES += data/vmpk.qrc
 
 # unmaintained translation, not distributed
-# translations/vmpk_fr.ts \
+# translations/vmpk_tr.ts \
 TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_de.ts \
     translations/vmpk_es.ts \
