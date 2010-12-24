@@ -324,11 +324,11 @@ QString PianoScene::noteName(const int note)
     if (m_noteNames.isEmpty()) {
         QString name;
         if (!m_names_f.isEmpty() && !m_names_s.isEmpty())
-            name = m_useFlats ? m_names_f[num] : m_names_s[num];
+            name = m_useFlats ? m_names_f.value(num) : m_names_s.value(num);
         return QString("%1<span style='vertical-align:sub;'>%2</span>").arg(name).arg(oct);
     } else {
         int noteIndex = note + m_transpose + 12*m_baseOctave;
-        return QString("<span style='font-size:5pt;'>%1</span>").arg(m_noteNames[noteIndex]);
+        return QString("<span style='font-size:5pt;'>%1</span>").arg(m_noteNames.value(noteIndex));
     }
 }
 

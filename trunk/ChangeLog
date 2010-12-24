@@ -1,3 +1,6 @@
+2010-12-24
+    * Fixed crash when changing the octave base while channel is 10.
+
 2010-11-20
     * French translation (web site and help page) thanks to Nicolas Froment
  
