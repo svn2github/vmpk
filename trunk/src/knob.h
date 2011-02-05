@@ -1,9 +1,9 @@
 /*
     MIDI Virtual Piano Keyboard
-    Copyright (C) 2008-2010, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    Copyright (C) 2008-2011, Pedro Lopez-Cabanillas <plcl@users.sf.net>
 
     For this file, the following copyright notice is also applicable:
-    Copyright (C) 2005-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+    Copyright (C) 2005-2011, rncbc aka Rui Nuno Capela. All rights reserved.
     See http://qsynth.sourceforge.net
 
     This program is free software; you can redistribute it and/or modify
