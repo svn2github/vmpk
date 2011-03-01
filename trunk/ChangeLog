@@ -1,3 +1,7 @@
+2011-03-01
+    * Merged RtMidi 1.0.12
+    * build system: find library libX11 explicitly
+
 2010-12-24
     * Fixed crash when changing the octave base while channel is 10.
 
