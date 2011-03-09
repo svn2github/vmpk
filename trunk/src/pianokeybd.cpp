@@ -42,13 +42,14 @@ void PianoKeybd::initScene(int base, int num, const QColor& c)
 {
     m_scene = new PianoScene(base, num, c, this);
     m_scene->setKeyboardMap(&m_defaultMap);
-    connect(m_scene, SIGNAL(noteOn(int)), SIGNAL(noteOn(int)));
-    connect(m_scene, SIGNAL(noteOff(int)), SIGNAL(noteOff(int)));
+    connect(m_scene, SIGNAL(noteOn(int,int)), SIGNAL(noteOn(int,int)));
+    connect(m_scene, SIGNAL(noteOff(int,int)), SIGNAL(noteOff(int,int)));
     setScene(m_scene);
 }
 
 void PianoKeybd::initialize()
 {
+    setAttribute(Qt::WA_AcceptTouchEvents);
     setAttribute(Qt::WA_InputMethodEnabled, false);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

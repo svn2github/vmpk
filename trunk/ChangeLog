@@ -1,3 +1,6 @@
+2011-03-08
+    * Touch events implementation
+
 2011-03-01
     * Merged RtMidi 1.0.12
     * build system: find library libX11 explicitly

@@ -875,12 +875,12 @@ void VPiano::sendMessageWrapper(std::vector<unsigned char> *message) const
     }
 }
 
-void VPiano::sendNoteOn(const int midiNote)
+void VPiano::sendNoteOn(const int midiNote, const int vel)
 {
     std::vector<unsigned char> message;
     if ((midiNote & MASK_SAFETY) == midiNote) {
         unsigned char chan = static_cast<unsigned char>(m_channel);
-        unsigned char vel = static_cast<unsigned char>(m_velocity);
+        //unsigned char vel = static_cast<unsigned char>(m_velocity);
         // Note On: 0x90 + channel, note, vel
         message.push_back(STATUS_NOTEON + (chan & MASK_CHANNEL));
         message.push_back(midiNote & MASK_SAFETY);
@@ -889,20 +889,20 @@ void VPiano::sendNoteOn(const int midiNote)
     }
 }
 
-void VPiano::noteOn(const int midiNote)
+void VPiano::noteOn(const int midiNote, const int vel)
 {
-    sendNoteOn(midiNote);
+    sendNoteOn(midiNote, vel);
 #ifdef ENABLE_DBUS
     emit event_noteon(midiNote);
 #endif
 }
 
-void VPiano::sendNoteOff(const int midiNote)
+void VPiano::sendNoteOff(const int midiNote, const int vel)
 {
     std::vector<unsigned char> message;
     if ((midiNote & MASK_SAFETY) == midiNote) {
         unsigned char chan = static_cast<unsigned char>(m_channel);
-        unsigned char vel = static_cast<unsigned char>(m_velocity);
+        //unsigned char vel = static_cast<unsigned char>(m_velocity);
         // Note Off: 0x80 + channel, note, vel
         message.push_back(STATUS_NOTEOFF + (chan & MASK_CHANNEL));
         message.push_back(midiNote & MASK_SAFETY);
@@ -911,9 +911,9 @@ void VPiano::sendNoteOff(const int midiNote)
     }
 }
 
-void VPiano::noteOff(const int midiNote)
+void VPiano::noteOff(const int midiNote, const int vel)
 {
-    sendNoteOff(midiNote);
+    sendNoteOff(midiNote, vel);
 #ifdef ENABLE_DBUS
     emit event_noteoff(midiNote);
 #endif
@@ -1809,14 +1809,14 @@ void VPiano::connect_thru(bool value)
 
 void VPiano::noteoff(int note)
 {
-    sendNoteOff(note);
+    sendNoteOff(note, 0);
     NoteOffEvent *ev = new NoteOffEvent(note, 0);
     QApplication::postEvent(this, ev);
 }
 
 void VPiano::noteon(int note)
 {
-    sendNoteOn(note);
+    sendNoteOn(note, m_velocity);
     NoteOnEvent *ev = new NoteOnEvent(note, m_velocity);
     QApplication::postEvent(this, ev);
 }

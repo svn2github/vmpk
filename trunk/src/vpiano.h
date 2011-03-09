@@ -53,8 +53,8 @@ public:
     void retranslateUi();
 
     // PianoHandler methods
-    void noteOn(const int midiNote);
-    void noteOff(const int midiNote);
+    void noteOn(const int midiNote, const int vel);
+    void noteOff(const int midiNote, const int vel);
 
     // static methods
     static QString dataDirectory();
@@ -163,8 +163,8 @@ private:
     void allNotesOff();
     void sendController(const int controller, const int value);
     void sendBankChange(const int bank);
-    void sendNoteOn(const int midiNote);
-    void sendNoteOff(const int midiNote);
+    void sendNoteOn(const int midiNote, const int vel);
+    void sendNoteOff(const int midiNote, const int vel);
     void sendProgramChange(const int program);
     void sendBender(const int value);
     void sendPolyKeyPress(const int note, const int value);

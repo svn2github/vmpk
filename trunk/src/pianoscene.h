@@ -29,8 +29,8 @@ class PianoHandler
 {
 public:
     virtual ~PianoHandler() {}
-    virtual void noteOn( const int note ) = 0;
-    virtual void noteOff( const int note ) = 0;
+    virtual void noteOn( const int note, const int vel ) = 0;
+    virtual void noteOff( const int note, const int vel ) = 0;
 };
 
 class VPIANO_EXPORT PianoScene : public QGraphicsScene
@@ -78,14 +78,16 @@ public:
     void retranslate();
 
 signals:
-    void noteOn(int n);
-    void noteOff(int n);
+    void noteOn(int n, int v);
+    void noteOff(int n, int v);
 
 protected:
     void showKeyOn( PianoKey* key, int vel );
     void showKeyOff( PianoKey* key, int vel );
     void keyOn( PianoKey* key );
     void keyOff( PianoKey* key );
+    void keyOn( PianoKey* key, qreal pressure );
+    void keyOff( PianoKey* key, qreal pressure );
     PianoKey* getKeyForPos( const QPointF& p ) const;
     PianoKey* getPianoKey( const int key ) const;
     QString noteName(const int note);
@@ -94,12 +96,13 @@ protected:
     void mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void keyPressEvent ( QKeyEvent * keyEvent );
     void keyReleaseEvent ( QKeyEvent * keyEvent );
+    bool event(QEvent *event);
 
 private:
     void hideOrShowKeys();
     void refreshLabels();
-    void triggerNoteOn( const int note );
-    void triggerNoteOff( const int note );
+    void triggerNoteOn( const int note, const int vel );
+    void triggerNoteOff( const int note, const int vel );
     int getNoteFromKey( const int key ) const;
     
     int m_baseOctave;

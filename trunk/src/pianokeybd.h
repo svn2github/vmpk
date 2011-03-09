@@ -92,8 +92,8 @@ public slots:
     void showNoteOff( int midiNote, int vel = -1 );
 
 signals:
-    void noteOn( int midiNote );
-    void noteOff( int midiNote );
+    void noteOn( int midiNote, int vel );
+    void noteOff( int midiNote, int vel );
 
 protected:
     void initialize();
