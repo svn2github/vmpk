@@ -29,6 +29,10 @@ contains(DEFINES, ENABLE_DBUS) {
     CONFIG += qdbus
     DBUS_ADAPTORS += src/net.sourceforge.vmpk.xml
 }
+contains(QT_VERSION, ^4\\.[0-5]\\..*) {
+    message("Cannot build VMPK with Qt $${QT_VERSION}")
+    error("Use at least Qt 4.6")
+}
 VERSIONH = $$sprintf(const QString PGM_VERSION(\"%1\");,$$VERSION)
 system($$QMAKE_MKDIR $$DESTDIR)
 win32 { 

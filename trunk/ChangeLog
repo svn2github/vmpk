@@ -1,3 +1,6 @@
+2011-03-12
+    * Requires Qt >= 4.6.x
+    
 2011-03-08
     * Touch events implementation
 

@@ -44,7 +44,7 @@ http://sourceforge.net/projects/vmpk/files
 
 REQUIREMENTS
 
-You need Qt 4.4 or newer. Install the -devel package for your system, or 
+You need Qt 4.6 or newer. Install the -devel package for your system, or 
 download the open source edition from Nokia:
 
     http://qt.nokia.com/downloads/
