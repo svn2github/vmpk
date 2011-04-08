@@ -206,7 +206,7 @@ bool VPiano::initMidi()
     try {
         m_midiout = new RtMidiOut(QSTR_VMPKOUTPUT.toStdString());
         m_midiin = new RtMidiIn(QSTR_VMPKINPUT.toStdString());
-#if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__)
+#if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__) && !defined(__LINUX_JACK__)
         int nOutPorts = m_midiout->getPortCount();
         if (nOutPorts == 0) {
             delete m_midiout;
@@ -221,7 +221,7 @@ bool VPiano::initMidi()
             m_midiin = 0;
         }
 #endif
-#if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)
+#if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__) || defined(__LINUX_JACK__)
         if (m_midiout != 0)
             m_midiout->openVirtualPort(QSTR_VMPKOUTPUT.toStdString());
         if (m_midiin != 0)

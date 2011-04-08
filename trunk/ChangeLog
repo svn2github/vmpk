@@ -1,3 +1,7 @@
+2011-04-08
+    * Merged RtMidi 1.0.13
+    * build system: find jack
+    
 2011-04-03
     * SVG icon: added a thin blurred background  
 
