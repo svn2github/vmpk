@@ -116,6 +116,15 @@ If you want to install the program at some place other than the default
 (/usr/local) use the following CMake option:
 $ cmake . -DCMAKE_INSTALL_PREFIX=/usr
 
+Other optional configuration options are:
+* ENABLE_DBUS: activates the DBus interface, enabled on Linux by default. 
+* RTMIDI_DRIVER: selects the RtMIDI backend. Default depends on the OS.  
+  Allowed values: ALSA, JACK, COREMIDI, IRIX, WINMM, NET
+* PROGRAM_NAME: selects the executable name.
+
+example:
+$ cmake . -DRTMIDI_DRIVER=JACK -DPROGRAM_NAME=vmpk-jack
+
 NOTES FOR LINUX USERS
 
 A man page is included in the source package, ready to be installed and used. 

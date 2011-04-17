@@ -14,20 +14,15 @@
 # You should have received a copy of the GNU General Public License along 
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 
-INCLUDE_DIRECTORIES ( 
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
+include_directories (${CMAKE_CURRENT_BINARY_DIR})
+link_directories (${CMAKE_CURRENT_BINARY_DIR})
 
-LINK_DIRECTORIES (
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
+if (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h)
+    file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h
+          "const QString PGM_VERSION(\"${VERSION}\");\n")
+endif (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h)
 
-IF (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h)
-    FILE ( WRITE ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h
-           "const QString PGM_VERSION(\"${VERSION}\");\n" )
-ENDIF (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/vmpk_version.h)
-
-SET(vmpk_forms_SRCS
+set (vmpk_forms_SRCS
     about.ui
     extracontrols.ui
     kmapdialog.ui
@@ -35,12 +30,11 @@ SET(vmpk_forms_SRCS
     preferences.ui
     riffimportdlg.ui
     vpiano.ui
-    shortcutdialog.ui
-)
+    shortcutdialog.ui)
 
-QT4_WRAP_UI(vmpk_ui_SRCS ${vmpk_forms_SRCS})
+QT4_WRAP_UI (vmpk_ui_SRCS ${vmpk_forms_SRCS})
 
-SET(vmpk_SRCS
+set (vmpk_SRCS
     about.cpp
     about.h
     classicstyle.cpp
@@ -85,12 +79,11 @@ SET(vmpk_SRCS
     vpiano.cpp
     vpiano.h
     shortcutdialog.cpp
-    shortcutdialog.h
-)
+    shortcutdialog.h)
 
-QT4_ADD_RESOURCES(vmpk_SRCS ../data/vmpk.qrc)
+QT4_ADD_RESOURCES (vmpk_SRCS ../data/vmpk.qrc)
 
-SET(vmpk_qtobject_SRCS
+set (vmpk_qtobject_SRCS
     about.h
     extracontrols.h
     kmapdialog.h
@@ -102,55 +95,53 @@ SET(vmpk_qtobject_SRCS
     riff.h
     riffimportdlg.h
     vpiano.h
-    shortcutdialog.h
-)
+    shortcutdialog.h)
 
-IF(ENABLE_DBUS)
-    QT4_ADD_DBUS_ADAPTOR( vmpk_SRCS 
+if (ENABLE_DBUS)
+    QT4_ADD_DBUS_ADAPTOR (vmpk_SRCS 
                           net.sourceforge.vmpk.xml 
                           vpiano.h 
                           VPiano
-                          vmpk_adaptor
-    )
-ENDIF(ENABLE_DBUS)
+                          vmpk_adaptor)
+endif ()
 
-QT4_WRAP_CPP(vmpk_moc_SRCS ${vmpk_qtobject_SRCS})
+QT4_WRAP_CPP (vmpk_moc_SRCS ${vmpk_qtobject_SRCS})
 
-IF (UNIX AND NOT APPLE)
-    ADD_EXECUTABLE ( vmpk
-        ${vmpk_ui_SRCS}
-        ${vmpk_moc_SRCS}
-        ${vmpk_SRCS} )
-    INSTALL ( TARGETS vmpk
-              RUNTIME DESTINATION bin )
-ENDIF (UNIX AND NOT APPLE)
+if (UNIX AND NOT APPLE)
+    add_executable (vmpk
+					${vmpk_ui_SRCS}
+					${vmpk_moc_SRCS}
+					${vmpk_SRCS})
+    install (TARGETS vmpk
+             RUNTIME DESTINATION bin)
+endif ()
 
-IF (WIN32)
-    SET ( vmpk_RESOURCES )
-    CONFIGURE_FILE ( vmpk.rc.in ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc 
-                     IMMEDIATE @ONLY )
-    IF ( MINGW )
-        ADD_WINDRES_OBJS( vmpk_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc )
-    ENDIF ( MINGW )
-    IF ( MSVC )
-        SET ( vmpk_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc )
-    ENDIF ( MSVC )
-    ADD_EXECUTABLE ( vmpk WIN32
-        ${vmpk_ui_SRCS}
-        ${vmpk_moc_SRCS}
-        ${vmpk_SRCS} 
-        ${vmpk_RESOURCES} )
-    INSTALL ( TARGETS vmpk
-              RUNTIME DESTINATION . )
-ENDIF (WIN32)
+if (WIN32)
+    set (vmpk_RESOURCES)
+    configure_file (vmpk.rc.in ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc 
+                    IMMEDIATE @ONLY)
+    if (MINGW)
+        ADD_WINDRES_OBJS (vmpk_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc)
+    endif ()
+    if ( MSVC )
+        set (vmpk_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/vmpk.rc)
+    endif ()
+    add_executable (vmpk WIN32
+					${vmpk_ui_SRCS}
+					${vmpk_moc_SRCS}
+					${vmpk_SRCS} 
+					${vmpk_RESOURCES})
+    install (TARGETS vmpk
+			 RUNTIME DESTINATION .)
+endif ()
 
-IF (APPLE)
-    SET(MACOSX_BUNDLE_INFO_STRING "Virtual MIDI Piano Keyboard" )
-    SET(MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION} )
-    SET(MACOSX_BUNDLE_ICON_FILE "vmpk.icns" )
-    SET(MACOSX_BUNDLE_GUI_IDENTIFIER "net.sourceforge" )
-    SET(MACOSX_BUNDLE_BUNDLE_NAME "vmpk" )
-    SET(vmpk_RSC ../data/vmpk.icns
+if (APPLE)
+    set (MACOSX_BUNDLE_INFO_STRING "Virtual MIDI Piano Keyboard" )
+    set (MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION} )
+    set (MACOSX_BUNDLE_ICON_FILE "vmpk.icns" )
+    set (MACOSX_BUNDLE_GUI_IDENTIFIER "net.sourceforge" )
+    set (MACOSX_BUNDLE_BUNDLE_NAME "vmpk" )
+    set (vmpk_RSC ../data/vmpk.icns
              ../data/help.html
              ../data/help_de.html
              ../data/help_es.html
@@ -165,11 +156,13 @@ IF (APPLE)
              ../data/it-qwerty.xml
              ../data/vkeybd-default.xml
              ../data/pc102mac.xml )
-    SET_SOURCE_FILES_PROPERTIES(${vmpk_RSC} PROPERTIES
-                                MACOSX_PACKAGE_LOCATION Resources)
-    ADD_EXECUTABLE ( vmpk MACOSX_BUNDLE
-        ${vmpk_ui_SRCS}
-        ${vmpk_moc_SRCS}
-        ${vmpk_SRCS}
-        ${vmpk_RSC} )
-ENDIF (APPLE)
+    set_source_files_properties (${vmpk_RSC} PROPERTIES
+                                 MACOSX_PACKAGE_LOCATION Resources)
+    add_executable (vmpk MACOSX_BUNDLE
+					${vmpk_ui_SRCS}
+					${vmpk_moc_SRCS}
+					${vmpk_SRCS}
+					${vmpk_RSC})
+endif ()
+
+set_target_properties (vmpk PROPERTIES OUTPUT_NAME ${PROGRAM_NAME})

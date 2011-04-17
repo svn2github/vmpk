@@ -14,142 +14,169 @@
 # You should have received a copy of the GNU General Public License along 
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 
-PROJECT(VMPK)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+project (VMPK)
+cmake_minimum_required (VERSION 2.8)
 
-OPTION(ENABLE_DBUS "Enable experimental VMPK DBus interface" ON)
-OPTION(ENABLE_JACK "Enable experimental Jack MIDI" OFF)
+if (${CMAKE_SYSTEM} MATCHES "Linux")
+    set (MIDI_DRIVER_INIT "ALSA")
+    set (DBUS_INIT ON)
+elseif (${CMAKE_SYSTEM} MATCHES "IRIX")
+    set (MIDI_DRIVER_INIT "IRIX")
+    set (DBUS_INIT OFF)
+elseif (APPLE)
+    set (MIDI_DRIVER_INIT "COREMIDI")
+    set (DBUS_INIT OFF)
+elseif (WIN32)
+    set (MIDI_DRIVER_INIT "WINMM")
+    set (DBUS_INIT OFF)
+else ()
+    set (MIDI_DRIVER_INIT "NET")
+    set (DBUS_INIT OFF)
+endif ()
+
+set (PROGRAM_NAME_INIT "vmpk")
+
+set (RTMIDI_DRIVER ${MIDI_DRIVER_INIT} CACHE STRING
+     "RtMIDI driver: ALSA, JACK, COREMIDI, IRIX, WINMM, NET")
+set (PROGRAM_NAME ${PROGRAM_NAME_INIT} CACHE STRING
+     "Executable program name")
+option (ENABLE_DBUS "Enable experimental VMPK DBus interface" ${DBUS_INIT})
 
 # Show full commands and messages. 
-# SET(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL)
+# set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL)
 
 # If relative paths break the link scripts, set it OFF
-# SET(CMAKE_USE_RELATIVE_PATHS OFF)
+# set(CMAKE_USE_RELATIVE_PATHS OFF)
 
 # Assorted settings
-SET(CMAKE_COLOR_MAKEFILE ON)
-SET(CMAKE_INCLUDE_CURRENT_DIR TRUE)
-SET(CMAKE_SKIP_RULE_DEPENDENCY FALSE)
-SET(CMAKE_CXX_FLAGS_DEBUG "-g -DQT_DEBUG -DDEBUG -D__RTMIDI_DEBUG__")
-SET(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG -DNDEBUG")
+set (CMAKE_COLOR_MAKEFILE ON)
+set (CMAKE_INCLUDE_CURRENT_DIR TRUE)
+set (CMAKE_SKIP_RULE_DEPENDENCY FALSE)
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DQT_DEBUG -DDEBUG -D__RTMIDI_DEBUG__")
+set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG -DNDEBUG")
 
 # Additional CMake modules for 3rd party library checks reside here
-SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
+set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
 
 # VMPK version string
-SET (VERSION_MAJOR "0")
-SET (VERSION_MINOR "3")
-SET (VERSION_PATCH "4")
-SET (VERSION_SUFFIX "svn")
-SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX})
+set (VERSION_MAJOR "0")
+set (VERSION_MINOR "3")
+set (VERSION_PATCH "4")
+set (VERSION_SUFFIX "svn")
+set (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX})
 
-MESSAGE(STATUS "vmpk ${VERSION} prefix: ${CMAKE_INSTALL_PREFIX}")
+message (STATUS "${PROGRAM_NAME} ${VERSION} 
+    prefix: ${CMAKE_INSTALL_PREFIX} 
+    driver: ${RTMIDI_DRIVER}")
 
 # User options
-MESSAGE(STATUS "Build configuration: ${CMAKE_BUILD_TYPE}")
+message (STATUS "Build configuration: ${CMAKE_BUILD_TYPE}")
 
 # Check for Qt
-SET(QT_MIN_VERSION "4.6.0")
-FIND_PACKAGE(Qt4 REQUIRED QUIET)
-IF(QT4_FOUND)
-    MESSAGE(STATUS "Found Qt4.${QT_EDITION} version = ${QTVERSION}")
-ELSE(QT4_FOUND)
-    MESSAGE(FATAL_ERROR "Qt4 >= 4.6 not found")
-ENDIF(QT4_FOUND)
+set (QT_MIN_VERSION "4.6.0")
+find_package (Qt4 REQUIRED)
+if (QT4_FOUND)
+    message (STATUS "Found Qt4.${QT_EDITION} version = ${QTVERSION}")
+else ()
+    message (FATAL_ERROR "Qt4 >= 4.6 not found")
+endif ()
 
-SET(QT_USE_QTXML TRUE)
-SET(QT_USE_QTSVG TRUE)
-IF(ENABLE_DBUS)
-    SET(QT_USE_QTDBUS TRUE)
-    ADD_DEFINITIONS(-DENABLE_DBUS)
-ENDIF(ENABLE_DBUS)
-INCLUDE(${QT_USE_FILE})
-INCLUDE_DIRECTORIES(${QT_INCLUDES}) 
-LINK_DIRECTORIES(${QT_LIBRARY_DIR})
-LINK_LIBRARIES(${QT_LIBRARIES})
-ADD_DEFINITIONS(-DQT_STRICT_ITERATORS)
+set (QT_USE_QTXML TRUE)
+set (QT_USE_QTSVG TRUE)
+if (ENABLE_DBUS)
+    set (QT_USE_QTDBUS TRUE)
+    add_definitions (-DENABLE_DBUS)
+endif ()
+include (${QT_USE_FILE})
+include_directories (${QT_INCLUDES}) 
+link_directories (${QT_LIBRARY_DIR})
+link_libraries (${QT_LIBRARIES})
+add_definitions (-DQT_STRICT_ITERATORS)
 
-IF(${CMAKE_SYSTEM} MATCHES "Linux")
+if (${CMAKE_SYSTEM} MATCHES "Linux")
 # Check for PKG-CONFIG
-    FIND_PACKAGE(PkgConfig REQUIRED)
-    IF(PKG_CONFIG_FOUND)
-        MESSAGE(STATUS "Program pkg-config found (${PKG_CONFIG_EXECUTABLE})")
-    ELSE(PKG_CONFIG_FOUND)
-        MESSAGE(FATAL_ERROR "Program pkg-config not found")
-    ENDIF(PKG_CONFIG_FOUND)
-    FIND_PACKAGE(Threads REQUIRED)
-    FIND_PACKAGE(X11 REQUIRED)
+    find_package (PkgConfig REQUIRED)
+    if (PKG_CONFIG_FOUND)
+        message (STATUS "Program pkg-config found (${PKG_CONFIG_EXECUTABLE})")
+    else ()
+        message (FATAL_ERROR "Program pkg-config not found")
+    endif ()
 # Check for libX11    
-    IF(ENABLE_JACK)
-        # Check Jack
-        SET(HAVE_JACK FALSE)
-        PKG_CHECK_MODULES(JACK REQUIRED jack)
-        IF(JACK_FOUND)
-            SET(HAVE_JACK TRUE)
-            ADD_DEFINITIONS(-DHAVE_JACK)
-            SET(JACK_LIBS ${JACK_LIBRARIES})
-            LIST(APPEND JACK_LIB_DIR ${JACK_LIBRARY_DIRS} ${JACK_LIBDIR})
-            LIST(APPEND JACK_INC_DIR ${JACK_INCLUDE_DIRS} ${JACK_INCLUDEDIR})
-            LINK_DIRECTORIES(${JACK_LIB_DIR})
-            INCLUDE_DIRECTORIES(${JACK_INC_DIR} ${X11_X11_INCLUDE_PATH})
-            ADD_DEFINITIONS(-D__LINUX_JACK__)
-            LINK_LIBRARIES(${JACK_LIBS} ${X11_X11_LIB} ${CMAKE_THREAD_LIBS_INIT})
-        ELSE(JACK_FOUND)
-            MESSAGE(FATAL_ERROR "Please install the required package. Aborting")
-        ENDIF(JACK_FOUND)
-    ELSE(ENABLE_JACK)
-        # Check ALSA 1.0
-        SET(HAVE_ALSA FALSE)
-        PKG_CHECK_MODULES(ALSA REQUIRED alsa>=1.0)
-        IF(ALSA_FOUND)
-            SET(HAVE_ALSA TRUE)
-            ADD_DEFINITIONS(-DHAVE_ALSA)
-            SET(ALSA_LIBS ${ALSA_LIBRARIES})
-            LIST(APPEND ALSA_LIB_DIR ${ALSA_LIBRARY_DIRS} ${ALSA_LIBDIR})
-            LIST(APPEND ALSA_INC_DIR ${ALSA_INCLUDE_DIRS} ${ALSA_INCLUDEDIR})
-            LINK_DIRECTORIES(${ALSA_LIB_DIR})
-            INCLUDE_DIRECTORIES(${ALSA_INC_DIR} ${X11_X11_INCLUDE_PATH})
-            ADD_DEFINITIONS(-D__LINUX_ALSASEQ__)
-            ADD_DEFINITIONS(-DAVOID_TIMESTAMPING)
-            LINK_LIBRARIES(${ALSA_LIBS} ${X11_X11_LIB} ${CMAKE_THREAD_LIBS_INIT})
-        ELSE(ALSA_FOUND)
-            MESSAGE(FATAL_ERROR "Please install the required package. Aborting")
-        ENDIF(ALSA_FOUND)
-    ENDIF(ENABLE_JACK)
-ENDIF(${CMAKE_SYSTEM} MATCHES "Linux")
+    find_package (X11 REQUIRED)
+endif ()
 
-IF(${CMAKE_SYSTEM} MATCHES "Darwin")
-    ADD_DEFINITIONS(-D__MACOSX_CORE__)
-    LINK_LIBRARIES("-framework CoreMidi -framework CoreAudio -framework CoreFoundation -framework Carbon")
-ENDIF(${CMAKE_SYSTEM} MATCHES "Darwin")
+if (RTMIDI_DRIVER STREQUAL "JACK")
+    # Check Jack
+    set (HAVE_JACK FALSE)
+    PKG_CHECK_MODULES (JACK REQUIRED jack)
+    if (JACK_FOUND)
+        set (HAVE_JACK TRUE)
+        add_definitions (-DHAVE_JACK)
+        set (JACK_LIBS ${JACK_LIBRARIES})
+        list (APPEND JACK_LIB_DIR ${JACK_LIBRARY_DIRS} ${JACK_LIBDIR})
+        list (APPEND JACK_INC_DIR ${JACK_INCLUDE_DIRS} ${JACK_INCLUDEDIR})
+        link_directories (${JACK_LIB_DIR})
+        include_directories (${JACK_INC_DIR} ${X11_X11_INCLUDE_PATH})
+        add_definitions (-D__LINUX_JACK__)
+        link_libraries (${JACK_LIBS} ${X11_X11_LIB})
+    else ()
+        message (FATAL_ERROR "Please install Jack development libs and headers.")
+    endif ()
+endif ()
 
-IF(${CMAKE_SYSTEM} MATCHES "IRIX")
-    ADD_DEFINITIONS(-D__IRIX_MD__)
-    LINK_LIBRARIES(audio)
-    LINK_LIBRARIES(pthread)
-ENDIF(${CMAKE_SYSTEM} MATCHES "IRIX")
+if (RTMIDI_DRIVER STREQUAL "ALSA")        
+    find_package (Threads REQUIRED)
+    # Check ALSA 1.0
+    set (HAVE_ALSA FALSE)
+    PKG_CHECK_MODULES (ALSA REQUIRED alsa>=1.0)
+    if (ALSA_FOUND)
+        set (HAVE_ALSA TRUE)
+        add_definitions (-DHAVE_ALSA)
+        set (ALSA_LIBS ${ALSA_LIBRARIES})
+        list (APPEND ALSA_LIB_DIR ${ALSA_LIBRARY_DIRS} ${ALSA_LIBDIR})
+        list (APPEND ALSA_INC_DIR ${ALSA_INCLUDE_DIRS} ${ALSA_INCLUDEDIR})
+        link_directories (${ALSA_LIB_DIR})
+        include_directories (${ALSA_INC_DIR} ${X11_X11_INCLUDE_PATH})
+        add_definitions (-D__LINUX_ALSASEQ__)
+        add_definitions (-DAVOID_TIMESTAMPING)
+        link_libraries (${ALSA_LIBS} ${X11_X11_LIB} ${CMAKE_THREAD_LIBS_INIT})
+    else ()
+        message(FATAL_ERROR "Please install ALSA development libs and headers.")
+    endif ()
+endif ()
 
-IF(${CMAKE_SYSTEM} MATCHES "Windows")
-    FIND_PACKAGE(WINDRES REQUIRED)
-    ADD_DEFINITIONS(-D__WINDOWS_MM__)
-    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
-    LINK_LIBRARIES(winmm)
-ENDIF(${CMAKE_SYSTEM} MATCHES "Windows")
+if (RTMIDI_DRIVER STREQUAL "COREMIDI")        
+    add_definitions (-D__MACOSX_CORE__)
+    link_libraries ("-framework CoreMidi -framework CoreAudio -framework CoreFoundation -framework Carbon")
+endif ()
 
-ADD_SUBDIRECTORY (src)
-ADD_SUBDIRECTORY (translations)
-CONFIGURE_FILE (vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
+if (RTMIDI_DRIVER STREQUAL "IRIX")        
+    add_definitions (-D__IRIX_MD__)
+    link_libraries (audio)
+    link_libraries (pthread)
+endif ()
+
+if (RTMIDI_DRIVER STREQUAL "WINMM")        
+    find_package (WINDRES REQUIRED)
+    add_definitions (-D__WINDOWS_MM__)
+    set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
+    link_libraries (winmm)
+endif ()
+
+add_subdirectory (src)
+add_subdirectory (translations)
+configure_file (vmpk.spec.in vmpk.spec IMMEDIATE @ONLY)
 
 # uninstall custom target
-CONFIGURE_FILE(
+configure_file (
     "${CMAKE_SOURCE_DIR}/cmake_admin/cmake_uninstall.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
     IMMEDIATE @ONLY)
 
-ADD_CUSTOM_TARGET ( uninstall
+add_custom_target ( uninstall
     "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
-SET (vmpk_DATA_FILES
+set (vmpk_DATA_FILES
     data/azerty.xml
     data/vkeybd-default.xml
     data/it-qwerty.xml
@@ -166,18 +193,15 @@ SET (vmpk_DATA_FILES
     data/help_fr.html
     data/help_nl.html
     data/help_ru.html 
-# unmaintained translations:
-#   data/help_tr.html
 )
 
-IF (UNIX)
-    ADD_CUSTOM_TARGET ( distclean
+if (UNIX)
+    add_custom_target ( distclean
         COMMAND rm -rf build/*
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    )
-    ADD_DEPENDENCIES (distclean clean)
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+    add_dependencies (distclean clean)
     
-    ADD_CUSTOM_TARGET ( tarball
+    add_custom_target (tarball
         COMMAND mkdir -p vmpk-${VERSION}/translations/
         COMMAND cp -r cmake_admin vmpk-${VERSION}
         COMMAND cp -r data vmpk-${VERSION}
@@ -192,111 +216,111 @@ IF (UNIX)
         COMMAND rm -rf vmpk-${VERSION}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     )
-ENDIF (UNIX)
+endif ()
 
-IF (UNIX AND NOT APPLE)
+if (UNIX AND NOT APPLE)
 
-    ADD_SUBDIRECTORY (man)
+    add_subdirectory (man)
 
-    INSTALL( FILES ${vmpk_DATA_FILES}
+    install (FILES ${vmpk_DATA_FILES}
              DESTINATION share/vmpk )
 
-    INSTALL( FILES data/vmpk_16x16.png 
+    install (FILES data/vmpk_16x16.png 
              DESTINATION share/icons/hicolor/16x16/apps   
              RENAME vmpk.png)
     
-    INSTALL( FILES data/vmpk_32x32.png 
+    install (FILES data/vmpk_32x32.png 
              DESTINATION share/icons/hicolor/32x32/apps   
              RENAME vmpk.png)
     
-    INSTALL( FILES data/vmpk_48x48.png 
+    install (FILES data/vmpk_48x48.png 
              DESTINATION share/icons/hicolor/48x48/apps   
              RENAME vmpk.png)
     
-    INSTALL( FILES data/vmpk_64x64.png 
+    install (FILES data/vmpk_64x64.png 
              DESTINATION share/icons/hicolor/64x64/apps   
              RENAME vmpk.png)
 
-    INSTALL( FILES data/vmpk_128x128.png 
+    install (FILES data/vmpk_128x128.png 
              DESTINATION share/icons/hicolor/128x128/apps   
              RENAME vmpk.png)
 
-    INSTALL( FILES data/vmpk.svgz
+    install (FILES data/vmpk.svgz
              DESTINATION share/icons/hicolor/scalable/apps )   
     
-    INSTALL( FILES vmpk.desktop
+    install (FILES vmpk.desktop
              DESTINATION share/applications )
 
-ENDIF (UNIX AND NOT APPLE)
+endif ()
 
-IF (WIN32)
-    INCLUDE (InstallRequiredSystemLibraries)
-    SET ( QTLIBLIST QtCore QtGui QtXml QtSvg )
-    GET_FILENAME_COMPONENT(QT_DLL_PATH_tmp ${QT_QMAKE_EXECUTABLE} PATH)
-    FOREACH(qtlib ${QTLIBLIST})
-        INSTALL ( FILES ${QT_DLL_PATH_tmp}/${qtlib}4.dll
-                  DESTINATION . )
-    ENDFOREACH(qtlib)
-    IF (MINGW)
-        INSTALL ( FILES ${QT_DLL_PATH_tmp}/mingwm10.dll 
-                        ${QT_DLL_PATH_tmp}/libgcc_s_dw2-1.dll
-                  DESTINATION . )
-    ENDIF (MINGW)
-    INSTALL ( FILES ${vmpk_DATA_FILES}
-              DESTINATION . )
-ENDIF (WIN32)
+if (WIN32)
+    include (InstallRequiredSystemLibraries)
+    set (QTLIBLIST QtCore QtGui QtXml QtSvg )
+    get_filename_component (QT_DLL_PATH_tmp ${QT_QMAKE_EXECUTABLE} PATH)
+    foreach (qtlib ${QTLIBLIST})
+        install (FILES ${QT_DLL_PATH_tmp}/${qtlib}4.dll
+                 DESTINATION .)
+    endforeach (qtlib)
+    if (MINGW)
+        install (FILES ${QT_DLL_PATH_tmp}/mingwm10.dll 
+                       ${QT_DLL_PATH_tmp}/libgcc_s_dw2-1.dll
+                 DESTINATION .)
+    endif ()
+    install (FILES ${vmpk_DATA_FILES}
+             DESTINATION .)
+endif ()
 
-IF (APPLE)
-    SET(target "vmpk")
-    CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/cmake_admin/CompleteBundle.cmake.in"
+if (APPLE)
+    set (target "vmpk")
+    configure_file ("${CMAKE_SOURCE_DIR}/cmake_admin/CompleteBundle.cmake.in"
       "${CMAKE_CURRENT_BINARY_DIR}/build/CompleteBundle.cmake" @ONLY IMMEDIATE)
-    CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/cmake_admin/CreateBundle.sh.in"
+    configure_file ("${CMAKE_SOURCE_DIR}/cmake_admin/CreateBundle.sh.in"
       "${CMAKE_CURRENT_BINARY_DIR}/build/CreateBundle.sh" @ONLY IMMEDIATE)
-    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/build/CompleteBundle.cmake")
-ENDIF (APPLE)
+    install (SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/build/CompleteBundle.cmake")
+endif ()
 
 # CPack support 
-INCLUDE(InstallRequiredSystemLibraries)
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Virtual MIDI Piano Keyboard")
-SET(CPACK_PACKAGE_VENDOR "vmpk.sourceforge.net")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README")
-SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/gpl.rtf")
-SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
-SET(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
-SET(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
-SET(CPACK_PACKAGE_INSTALL_DIRECTORY "vmpk")
-SET(CPACK_PACKAGE_EXECUTABLES "vmpk" "Virtual MIDI Piano Keyboard")
+include (InstallRequiredSystemLibraries)
+set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Virtual MIDI Piano Keyboard")
+set (CPACK_PACKAGE_VENDOR "vmpk.sourceforge.net")
+set (CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README")
+set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/gpl.rtf")
+set (CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
+set (CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
+set (CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
+set (CPACK_PACKAGE_INSTALL_DIRECTORY "vmpk")
+set (CPACK_PACKAGE_EXECUTABLES "vmpk" "Virtual MIDI Piano Keyboard")
 
 # source packages
-SET(CPACK_SOURCE_GENERATOR TGZ;TBZ2;ZIP)
-SET(CPACK_SOURCE_IGNORE_FILES "/.svn/;/build/;/share/;~$;.cproject;.project;.user;${CPACK_SOURCE_IGNORE_FILES}")
-SET(CPACK_SOURCE_PACKAGE_FILE_NAME "vmpk-${VERSION}") 
-SET(CPACK_SOURCE_STRIP_FILES OFF)
+set (CPACK_SOURCE_GENERATOR TGZ;TBZ2;ZIP)
+set (CPACK_SOURCE_IGNORE_FILES "/.svn/;/build/;/share/;~$;.cproject;.project;.user;${CPACK_SOURCE_IGNORE_FILES}")
+set (CPACK_SOURCE_PACKAGE_FILE_NAME "vmpk-${VERSION}") 
+set (CPACK_SOURCE_STRIP_FILES OFF)
 
 # linux binary packages
-IF(${CMAKE_SYSTEM} MATCHES "Linux")
-    SET(CPACK_GENERATOR TGZ;TBZ2)
-    SET(CPACK_PACKAGE_NAME "vmpk")
-    MATH(EXPR PWORD_SIZE "${CMAKE_SIZEOF_VOID_P}*8")
-    SET(CPACK_SYSTEM_NAME ${CMAKE_SYSTEM_NAME}-x86_${PWORD_SIZE})
-#   SET(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
-#   SET(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-    SET(CPACK_STRIP_FILES ON)
-ENDIF(${CMAKE_SYSTEM} MATCHES "Linux")
+if (${CMAKE_SYSTEM} MATCHES "Linux")
+    set (CPACK_GENERATOR TGZ;TBZ2)
+    set (CPACK_PACKAGE_NAME "vmpk")
+    math (EXPR PWORD_SIZE "${CMAKE_SIZEOF_VOID_P}*8")
+    set (CPACK_SYSTEM_NAME ${CMAKE_SYSTEM_NAME}-x86_${PWORD_SIZE})
+#   set (CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
+#   set (CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+    set (CPACK_STRIP_FILES ON)
+endif ()
 
 # Windows NSIS setup package
-#IF (WIN32)
-#    SET(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/src/vmpk.ico")
-#    SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\MyExecutable.exe")
-#    SET(CPACK_NSIS_DISPLAY_NAME "Virtual MIDI Piano Keyboard")
-#    SET(CPACK_NSIS_HELP_LINK "http://vmpk.sourceforge.net")
-#    SET(CPACK_NSIS_URL_INFO_ABOUT "http://vmpk.sourceforge.net")
-#    SET(CPACK_NSIS_CONTACT "plcl@users.sourceforge.net")
-#    SET(CPACK_NSIS_MODIFY_PATH OFF)
-#ENDIF (WIN32)
+#if (WIN32)
+#    set (CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/src/vmpk.ico")
+#    set (CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\MyExecutable.exe")
+#    set (CPACK_NSIS_DISPLAY_NAME "Virtual MIDI Piano Keyboard")
+#    set (CPACK_NSIS_HELP_LINK "http://vmpk.sourceforge.net")
+#    set (CPACK_NSIS_URL_INFO_ABOUT "http://vmpk.sourceforge.net")
+#    set (CPACK_NSIS_CONTACT "plcl@users.sourceforge.net")
+#    set (CPACK_NSIS_MODIFY_PATH OFF)
+#endif ()
 
 # Mac OSX bundle
-#IF (APPLE)
-#ENDIF (APPLE)
+#if (APPLE)
+#endif ()
 
-INCLUDE(CPack)
+include (CPack)
