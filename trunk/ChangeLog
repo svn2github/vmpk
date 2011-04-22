@@ -1,3 +1,6 @@
+2011-04-22
+    * Merged RtMidi 1.0.14
+
 2011-04-17
     * Jack: fixed RtMidiOut destructor and closePort(). Patch by Alexander Svetalkin 
     * Build system updated to cmake-2.8, new options RTMIDI_DRIVER, PROGRAM_NAME

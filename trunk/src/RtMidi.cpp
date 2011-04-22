@@ -35,11 +35,7 @@
 */
 /**********************************************************************/
 
-// RtMidi: Version 1.0.13
-
-// Modifications for VMPK
-// ALSA RtMidiOut ports: added missing SND_SEQ_PORT_TYPE_APPLICATION flag
-// Jack RtMidiOut ports: fixed destructor and closePort()
+// RtMidi: Version 1.0.14
 
 #include "RtMidi.h"
 #include <sstream>
