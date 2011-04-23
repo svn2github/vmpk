@@ -76,10 +76,11 @@ set (vmpk_SRCS
     RtError.h
     RtMidi.cpp
     RtMidi.h
+    udpmidi.cpp
     vpiano.cpp
     vpiano.h
     shortcutdialog.cpp
-    shortcutdialog.h)
+    shortcutdialog.h )
 
 QT4_ADD_RESOURCES (vmpk_SRCS ../data/vmpk.qrc)
 

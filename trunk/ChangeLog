@@ -1,3 +1,6 @@
+2011-04-23
+    * new Network MIDI driver, based on Qmidinet (http://qmidinet.sf.net) 
+    
 2011-04-22
     * Merged RtMidi 1.0.14
 
