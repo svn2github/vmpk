@@ -89,7 +89,7 @@ extern "C" void *networkMidiHandler( void *ptr )
             if (r > 0) {
                 message.timeStamp = 0;
                 message.bytes.clear();
-                for ( unsigned int i = 0; i < r; ++i ) {
+                for ( int i = 0; i < r; ++i ) {
                       message.bytes.push_back( buf[i] );
                 }
                 if ( data->usingCallback ) {
@@ -107,6 +107,7 @@ extern "C" void *networkMidiHandler( void *ptr )
             }
         }
     }
+    return 0;
 }
 
 void RtMidiIn :: initialize( const std::string& clientName )
@@ -121,14 +122,9 @@ void RtMidiIn :: initialize( const std::string& clientName )
 
 RtMidiIn :: ~RtMidiIn()
 {
+    NetworkMidiData *data = (NetworkMidiData *) inputData_.apiData ;
     // Close a connection if it exists.
     closePort();
-    // Shutdown the input thread.
-    NetworkMidiData *data = (NetworkMidiData *) inputData_.apiData ;
-    if ( inputData_.doInput ) {
-        inputData_.doInput = false;
-        pthread_join( data->thread, NULL );
-    }
     // Cleanup.
 #if defined(WIN32)
     WSACleanup();
@@ -139,7 +135,6 @@ RtMidiIn :: ~RtMidiIn()
 void RtMidiIn :: openPort( unsigned int portNumber, const std::string portName )
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
-    closePort();
     // Setup network protocol...
     int protonum = 0;
     data->socket = ::socket(PF_INET, SOCK_DGRAM, protonum);
@@ -205,6 +200,11 @@ std::string RtMidiIn :: getPortName( unsigned int portNumber )
 void RtMidiIn :: closePort()
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
+    // Shutdown the input thread.
+    if ( inputData_.doInput ) {
+        inputData_.doInput = false;
+        pthread_join( data->thread, NULL );
+    }
     if (data->socket >= 0) {
 #if defined(WIN32)
         ::closesocket(data->socket);
@@ -219,13 +219,7 @@ void RtMidiIn :: closePort()
 
 void RtMidiOut :: initialize( const std::string& clientName )
 {
-    int result;
     NetworkMidiData *data = new NetworkMidiData;
-    if ( result < 0 ) {
-      delete data;
-      errorString_ = "RtMidiOut::initialize: error initializing MIDI event parser!\n\n";
-      error( RtError::DRIVER_ERROR );
-    }
     apiData_ = (void *) data;
 }
 
@@ -244,8 +238,8 @@ void RtMidiOut :: openPort( unsigned int portNumber, const std::string portName 
     int protonum = 0;
     data->socket = ::socket(AF_INET, SOCK_DGRAM, protonum);
     if (data->socket < 0) {
-        std::cerr << "socket(out)";
-        return;
+        errorString_ = "RtMidiOut::openPort: error creating a socket";
+        error( RtError::SYSTEM_ERROR );
     }
 
     ::memset(&data->sockaddr, 0, sizeof(data->sockaddr));
