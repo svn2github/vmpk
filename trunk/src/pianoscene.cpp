@@ -17,7 +17,9 @@
 */
 
 #include "pianoscene.h"
+#if defined(RAWKBD_SUPPORT)
 #include "rawkeybdapp.h"
+#endif
 #include <QtGui/QApplication>
 #include <QtGui/QPalette>
 #include <QtGui/QGraphicsSceneMouseEvent>
@@ -436,8 +438,10 @@ void PianoScene::setRawKeyboardMode(bool b)
 {
     if (m_rawkbd != b) {
         m_rawkbd = b;
+#if defined(RAWKBD_SUPPORT)
         RawKeybdApp* rapp = dynamic_cast<RawKeybdApp*>(qApp);
         if (rapp != NULL) rapp->setRawKbdEnable(m_rawkbd);
+#endif
     }
 }
 

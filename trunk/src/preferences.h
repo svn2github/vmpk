@@ -32,6 +32,7 @@ public:
     Preferences(QWidget *parent = 0);
     int getNumOctaves() const { return m_numOctaves; }
     int getDrumsChannel() const { return m_drumsChannel; }
+    int getNetworkPort() const { return m_networkPort; }
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
     bool getGrabKeyboard() const { return m_grabKb; }
     bool getStyledWidgets() const { return m_styledKnobs; }
@@ -54,6 +55,7 @@ public:
 public slots:
     void setNumOctaves(int value) { m_numOctaves = value; }
     void setDrumsChannel(int value) { m_drumsChannel = value; }
+    void setNetworkPort(int value) { m_networkPort = value; }
     void setGrabKeyboard(bool value) { m_grabKb = value; }
     void setStyledWidgets(bool value) { m_styledKnobs = value; }
     void setAlwaysOnTop(bool value) { m_alwaysOnTop = value; }
@@ -77,6 +79,7 @@ private:
     InstrumentList m_ins;
     int m_numOctaves;
     int m_drumsChannel;
+    int m_networkPort;
     bool m_grabKb;
     bool m_styledKnobs;
     bool m_alwaysOnTop;

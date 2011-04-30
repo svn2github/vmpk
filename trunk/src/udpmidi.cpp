@@ -22,7 +22,6 @@
 
 #if defined(NETWORK_MIDI)
 
-#include <RtMidi.h>
 #include <pthread.h>
 #include <cstring>
 #include <sstream>
@@ -35,7 +34,7 @@
 #include <unistd.h>
 #else
 #if defined(WIN32)
-#include <winsock.h>
+#include <winsock2.h>
 static WSADATA g_wsaData;
 typedef int socklen_t;
 #else
@@ -45,7 +44,10 @@ typedef int socklen_t;
 #endif
 #endif
 
-static int g_iUdpPort = 21928;
+#include "RtMidi.h"
+#include "preferences.h"
+
+int g_iUdpPort = NETWORKPORTNUMBER;
 
 struct NetworkMidiData {
     int socket;

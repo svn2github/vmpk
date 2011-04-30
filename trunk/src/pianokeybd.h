@@ -20,7 +20,9 @@
 #define PIANOKEYBD_H
 
 #include "pianoscene.h"
+#if defined(RAWKBD_SUPPORT)
 #include "rawkeybdapp.h"
+#endif
 #include <QtGui/QGraphicsView>
 
 #if defined(VPIANO_PLUGIN)
@@ -29,7 +31,10 @@
 #define QDESIGNER_WIDGET_EXPORT
 #endif
 
-class QDESIGNER_WIDGET_EXPORT PianoKeybd : public QGraphicsView, public RawKbdHandler
+class QDESIGNER_WIDGET_EXPORT PianoKeybd : public QGraphicsView
+#if defined(RAWKBD_SUPPORT)
+        , public RawKbdHandler
+#endif
 {
     Q_OBJECT
     Q_PROPERTY( int baseOctave READ baseOctave WRITE setBaseOctave )
@@ -83,10 +88,11 @@ public:
     int getVelocity() { return m_scene->getVelocity(); }
     void setVelocity(const int velocity) { m_scene->setVelocity(velocity); }
     void retranslate();
+#if defined(RAWKBD_SUPPORT)
 // RawKbdHandler methods
     bool handleKeyPressed(int keycode);
     bool handleKeyReleased(int keycode);
-
+#endif
 public slots:
     void showNoteOn( int midiNote, int vel = -1 );
     void showNoteOff( int midiNote, int vel = -1 );

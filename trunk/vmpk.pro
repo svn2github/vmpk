@@ -12,15 +12,7 @@
 # with this program; If not, see <http://www.gnu.org/licenses/>.
 TEMPLATE = app
 TARGET = vmpk
-VERSION = 0.3.4svn
-DESTDIR = build
-OBJECTS_DIR = $$DESTDIR
-UI_DIR = $$DESTDIR
-MOC_DIR = $$DESTDIR
-RCC_DIR = $$DESTDIR
-CONFIG -= debug_and_release
-CONFIG -= debug
-CONFIG += release
+VERSION = 0.4.0
 QT += core \
     gui \
     xml \
@@ -34,32 +26,46 @@ contains(QT_VERSION, ^4\\.[0-5]\\..*) {
     error("Use at least Qt 4.6")
 }
 VERSIONH = $$sprintf(const QString PGM_VERSION(\"%1\");,$$VERSION)
-system($$QMAKE_MKDIR $$DESTDIR)
-win32 { 
+win32 {
+    system(echo $$VERSIONH > $$OUT_PWD/vmpk_version.h)
+}
+else {
+    system(echo \'$$VERSIONH\' > $$OUT_PWD/vmpk_version.h)
+}
+simulator|symbian {
+    DEFINES += NETWORK_MIDI
+    DEFINES += SMALL_SCREEN
+}
+symbian {
+    LIBS += -lcone -leikcore -lavkon
+    ICON = data/vmpk.svg
+}
+win32:!simulator {
     DEFINES += __WINDOWS_MM__
+    DEFINES += RAWKBD_SUPPORT
     LIBS += -lwinmm
     RC_FILE = src/vpianoico.rc
-    system(echo $$VERSIONH > $$DESTDIR/vmpk_version.h)
 }
-linux* { 
+linux*:!simulator {
     DEFINES += __LINUX_ALSASEQ__
     DEFINES += AVOID_TIMESTAMPING
+    DEFINES += RAWKBD_SUPPORT
     CONFIG += link_pkgconfig x11
     PKGCONFIG += alsa
-    system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
+    LIBS += -lpthread
 }
 macx { 
     CONFIG += x86 \
         ppc
     ICON = data/vmpk.icns
     DEFINES += __MACOSX_CORE__
+    DEFINES += RAWKBD_SUPPORT
     BUNDLE_RES.files = data/help.html \
         data/help_de.html \
         data/help_es.html \
         data/help_fr.html \
         data/help_nl.html \
         data/help_ru.html \
-#       data/help_tr.html \
         data/gmgsxg.ins \
         data/spanish.xml \
         data/german.xml \
@@ -74,15 +80,14 @@ macx {
         $$[QT_INSTALL_TRANSLATIONS]/qt_fr.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_ru.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_zh_CN.qm \
-        $$DESTDIR/translations/vmpk_cs.qm \
-        $$DESTDIR/translations/vmpk_de.qm \
-        $$DESTDIR/translations/vmpk_es.qm \
-        $$DESTDIR/translations/vmpk_fr.qm \
-        $$DESTDIR/translations/vmpk_nl.qm \
-        $$DESTDIR/translations/vmpk_ru.qm \
-        $$DESTDIR/translations/vmpk_sv.qm \
-#       $$DESTDIR/translations/vmpk_tr.qm \
-        $$DESTDIR/translations/vmpk_zh_CN.qm
+        $$OUT_PWD/vmpk_cs.qm \
+        $$OUT_PWD/vmpk_de.qm \
+        $$OUT_PWD/vmpk_es.qm \
+        $$OUT_PWD/vmpk_fr.qm \
+        $$OUT_PWD/vmpk_nl.qm \
+        $$OUT_PWD/vmpk_ru.qm \
+        $$OUT_PWD/vmpk_sv.qm \
+        $$OUT_PWD/vmpk_zh_CN.qm
     BUNDLE_RES.path = Contents/Resources
     QMAKE_BUNDLE_DATA += BUNDLE_RES
     LIBS += -framework \
@@ -93,18 +98,18 @@ macx {
         CoreFoundation \
         -framework \
         Carbon
-    system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 irix* { 
+    CONFIG += x11
     DEFINES += __IRIX_MD__
+    DEFINES += RAWKBD_SUPPORT
     LIBS += -laudio \
         -lpthread
-    system(echo \'$$VERSIONH\' > $$DESTDIR/vmpk_version.h)
 }
 debug:DEFINES += __RTMIDI_DEBUG__
 INCLUDEPATH += src
-# Input
 
+# Input
 FORMS += src/about.ui \
     src/extracontrols.ui \
     src/kmapdialog.ui \
@@ -159,13 +164,12 @@ SOURCES += src/about.cpp \
     src/riff.cpp \
     src/riffimportdlg.cpp \
     src/RtMidi.cpp \
+    src/udpmidi.cpp \
     src/shortcutdialog.cpp \
     src/vpiano.cpp
 
 RESOURCES += data/vmpk.qrc
 
-# unmaintained translation, not distributed
-# translations/vmpk_tr.ts \
 TRANSLATIONS +=  translations/vmpk_cs.ts \
     translations/vmpk_de.ts \
     translations/vmpk_es.ts \

@@ -89,7 +89,6 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     QCoreApplication::installTranslator(m_trp);
     ui.setupUi(this);
     initLanguages();
-
     connect(ui.actionAbout, SIGNAL(triggered()), SLOT(slotAbout()));
     connect(ui.actionAboutQt, SIGNAL(triggered()), SLOT(slotAboutQt()));
     connect(ui.actionAboutTranslation, SIGNAL(triggered()), SLOT(slotAboutTranslation()));
@@ -102,6 +101,24 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.actionEditExtraControls, SIGNAL(triggered()), SLOT(slotEditExtraControls()));
     connect(ui.actionNoteNames, SIGNAL(triggered()), SLOT(slotShowNoteNames()));
     connect(ui.actionShortcuts, SIGNAL(triggered()), SLOT(slotShortcuts()));
+    // Toolbars actions: toggle view
+    connect(ui.toolBarNotes->toggleViewAction(), SIGNAL(toggled(bool)),
+            ui.actionNotes, SLOT(setChecked(bool)));
+    connect(ui.toolBarControllers->toggleViewAction(), SIGNAL(toggled(bool)),
+            ui.actionControllers, SLOT(setChecked(bool)));
+    connect(ui.toolBarBender->toggleViewAction(), SIGNAL(toggled(bool)),
+            ui.actionBender, SLOT(setChecked(bool)));
+    connect(ui.toolBarPrograms->toggleViewAction(), SIGNAL(toggled(bool)),
+            ui.actionPrograms, SLOT(setChecked(bool)));
+    connect(ui.toolBarExtra->toggleViewAction(), SIGNAL(toggled(bool)),
+            ui.actionExtraControls, SLOT(setChecked(bool)));
+#if defined(SMALL_SCREEN)
+    //ui.toolBarNotes->hide();
+    ui.toolBarControllers->hide();
+    ui.toolBarBender->hide();
+    //ui.toolBarPrograms->hide();
+    ui.toolBarExtra->hide();
+#endif
     ui.pianokeybd->setPianoHandler(this);
     initialization();
 }
@@ -249,7 +266,13 @@ void VPiano::initToolBars()
     m_dialStyle = new ClassicStyle();
     m_dialStyle->setParent(this);
     // Notes tool bar
-    m_lblChannel = new QLabel(tr("Channel:"), this);
+    m_lblChannel = new QLabel(
+#if defined(SMALL_SCREEN)
+        tr("Chan:")
+#else
+        tr("Channel:")
+#endif
+    , this);
     ui.toolBarNotes->addWidget(m_lblChannel);
     m_lblChannel->setMargin(TOOLBARLABELMARGIN);
     m_sboxChannel = new QSpinBox(this);
@@ -258,7 +281,13 @@ void VPiano::initToolBars()
     m_sboxChannel->setValue(m_channel + 1);
     m_sboxChannel->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxChannel);
-    m_lblBaseOctave = new QLabel(tr("Base Octave:"), this);
+    m_lblBaseOctave = new QLabel(
+#if defined(SMALL_SCREEN)
+        tr("Oct:")
+#else
+        tr("Base Octave:")
+#endif
+    , this);
     ui.toolBarNotes->addWidget(m_lblBaseOctave);
     m_lblBaseOctave->setMargin(TOOLBARLABELMARGIN);
     m_sboxOctave = new QSpinBox(this);
@@ -267,7 +296,13 @@ void VPiano::initToolBars()
     m_sboxOctave->setValue(m_baseOctave);
     m_sboxOctave->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxOctave);
-    m_lblTranspose = new QLabel(tr("Transpose:"), this);
+    m_lblTranspose = new QLabel(
+#if defined(SMALL_SCREEN)
+        tr("Tran:")
+#else
+        tr("Transpose:")
+#endif
+    , this);
     ui.toolBarNotes->addWidget(m_lblTranspose);
     m_lblTranspose->setMargin(TOOLBARLABELMARGIN);
     m_sboxTranspose = new QSpinBox(this);
@@ -276,7 +311,13 @@ void VPiano::initToolBars()
     m_sboxTranspose->setValue(m_transpose);
     m_sboxTranspose->setFocusPolicy(Qt::NoFocus);
     ui.toolBarNotes->addWidget(m_sboxTranspose);
-    m_lblVelocity = new QLabel(tr("Velocity:"), this);
+    m_lblVelocity = new QLabel(
+#if defined(SMALL_SCREEN)
+        tr("Vel:")
+#else
+        tr("Velocity:")
+#endif
+    , this);
     ui.toolBarNotes->addWidget(m_lblVelocity);
     m_lblVelocity->setMargin(TOOLBARLABELMARGIN);
     m_Velocity = new Knob(this);
@@ -376,17 +417,6 @@ void VPiano::initToolBars()
              SLOT(slotComboBankActivated(int)) );
     connect( m_comboProg, SIGNAL(activated(int)),
              SLOT(slotComboProgActivated(int)) );
-    // Toolbars actions: toggle view
-    connect(ui.toolBarNotes->toggleViewAction(), SIGNAL(toggled(bool)),
-            ui.actionNotes, SLOT(setChecked(bool)));
-    connect(ui.toolBarControllers->toggleViewAction(), SIGNAL(toggled(bool)),
-            ui.actionControllers, SLOT(setChecked(bool)));
-    connect(ui.toolBarBender->toggleViewAction(), SIGNAL(toggled(bool)),
-            ui.actionBender, SLOT(setChecked(bool)));
-    connect(ui.toolBarPrograms->toggleViewAction(), SIGNAL(toggled(bool)),
-            ui.actionPrograms, SLOT(setChecked(bool)));
-    connect(ui.toolBarExtra->toggleViewAction(), SIGNAL(toggled(bool)),
-            ui.actionExtraControls, SLOT(setChecked(bool)));
     // Toolbars actions: buttons
     connect( ui.actionPanic, SIGNAL(triggered()),
              SLOT(slotPanic()));
@@ -560,7 +590,7 @@ void VPiano::readSettings()
     m_velocity = settings.value(QSTR_VELOCITY, MIDIVELOCITY).toInt();
     m_baseOctave = settings.value(QSTR_BASEOCTAVE, 3).toInt();
     m_transpose = settings.value(QSTR_TRANSPOSE, 0).toInt();
-    int num_octaves = settings.value(QSTR_NUMOCTAVES, 5).toInt();
+    int num_octaves = settings.value(QSTR_NUMOCTAVES, DEFAULTNUMBEROFOCTAVES).toInt();
     QString insFileName = settings.value(QSTR_INSTRUMENTSDEFINITION).toString();
     QString insName = settings.value(QSTR_INSTRUMENTNAME).toString();
     QColor keyColor = settings.value(QSTR_KEYPRESSEDCOLOR, QColor()).value<QColor>();
@@ -571,8 +601,14 @@ void VPiano::readSettings()
     bool showStatusBar = settings.value(QSTR_SHOWSTATUSBAR, false).toBool();
     bool velocityColor = settings.value(QSTR_VELOCITYCOLOR, true).toBool();
     int drumsChannel = settings.value(QSTR_DRUMSCHANNEL, MIDIGMDRUMSCHANNEL).toInt();
+#if defined(NETWORK_MIDI)
+    g_iUdpPort = settings.value(QSTR_NETWORKPORT, NETWORKPORTNUMBER).toInt();
+#endif
     settings.endGroup();
 
+#if defined(NETWORK_MIDI)
+    dlgPreferences()->setNetworkPort(g_iUdpPort);
+#endif
     dlgPreferences()->setNumOctaves(num_octaves);
     dlgPreferences()->setDrumsChannel(drumsChannel);
     dlgPreferences()->setKeyPressedColor(keyColor);
@@ -594,8 +630,10 @@ void VPiano::readSettings()
     settings.beginGroup(QSTR_CONNECTIONS);
     bool inEnabled = settings.value(QSTR_INENABLED, true).toBool();
     bool thruEnabled = settings.value(QSTR_THRUENABLED, false).toBool();
+#if !defined(NETWORK_MIDI)
     QString in_port = settings.value(QSTR_INPORT).toString();
     QString out_port = settings.value(QSTR_OUTPORT).toString();
+#endif
     settings.endGroup();
 #if defined(__LINUX_ALSASEQ__) || defined(__MACOSX_CORE__)
     inEnabled = true;
@@ -606,10 +644,13 @@ void VPiano::readSettings()
     } else {
         dlgMidiSetup()->setInputEnabled(inEnabled);
         dlgMidiSetup()->setThruEnabled(thruEnabled);
+#if !defined(NETWORK_MIDI)
         dlgMidiSetup()->setCurrentInput(in_port);
+#endif
     }
+#if !defined(NETWORK_MIDI)
     dlgMidiSetup()->setCurrentOutput(out_port);
-
+#endif
     settings.beginGroup(QSTR_KEYBOARD);
     bool rawKeyboard = settings.value(QSTR_RAWKEYBOARDMODE, false).toBool();
     QString mapFile = settings.value(QSTR_MAPFILE, QSTR_DEFAULT).toString();
@@ -698,13 +739,18 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_SHOWSTATUSBAR, ui.actionStatusBar->isChecked());
     settings.setValue(QSTR_DRUMSCHANNEL, dlgPreferences()->getDrumsChannel());
     settings.setValue(QSTR_VELOCITYCOLOR, dlgPreferences()->getVelocityColor());
+#if defined(NETWORK_MIDI)
+    settings.setValue(QSTR_NETWORKPORT, dlgPreferences()->getNetworkPort());
+#endif
     settings.endGroup();
 
     settings.beginGroup(QSTR_CONNECTIONS);
     settings.setValue(QSTR_INENABLED, dlgMidiSetup()->inputIsEnabled());
     settings.setValue(QSTR_THRUENABLED, dlgMidiSetup()->thruIsEnabled());
+#if !defined(NETWORK_MIDI)
     settings.setValue(QSTR_INPORT,  dlgMidiSetup()->selectedInputName());
     settings.setValue(QSTR_OUTPORT, dlgMidiSetup()->selectedOutputName());
+#endif
     settings.endGroup();
 
     settings.beginGroup(QSTR_KEYBOARD);
@@ -1281,6 +1327,10 @@ void VPiano::applyPreferences()
     ui.pianokeybd->setRawKeyboardMode(dlgPreferences()->getRawKeyboard());
     ui.pianokeybd->setVelocity(dlgPreferences()->getVelocityColor() ? m_velocity : MIDIVELOCITY );
 
+#if defined(NETWORK_MIDI)
+    g_iUdpPort = dlgPreferences()->getNetworkPort();
+#endif
+
     KeyboardMap* map = dlgPreferences()->getKeyboardMap();
     if (!map->getFileName().isEmpty() && map->getFileName() != QSTR_DEFAULT )
         ui.pianokeybd->setKeyboardMap(map);
@@ -1373,21 +1423,21 @@ void VPiano::slotPreferences()
 
 QString VPiano::dataDirectory()
 {
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     return QApplication::applicationDirPath() + "/";
-#endif
-#ifdef Q_OS_LINUX
+#elif defined(Q_OS_LINUX)
     return QApplication::applicationDirPath() + "/../share/vmpk/";
-#endif
-#ifdef Q_OS_DARWIN
+#elif defined(Q_OS_DARWIN)
     return QApplication::applicationDirPath() + "/../Resources/";
+#elif defined(Q_OS_SYMBIAN)
+    return QApplication::applicationDirPath();
 #endif
     return QString();
 }
 
 QString VPiano::localeDirectory()
 {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX)
     return VPiano::dataDirectory() + "locale/";
 #else
     return VPiano::dataDirectory();
@@ -2068,7 +2118,6 @@ void VPiano::initLanguages()
     m_supportedLangs.insert(QLatin1String("nl"), tr("Dutch"));
     m_supportedLangs.insert(QLatin1String("ru"), tr("Russian"));
     m_supportedLangs.insert(QLatin1String("sv"), tr("Swedish"));
-//  m_supportedLangs.insert(QLatin1String("tr"), tr("Turkish"));
     m_supportedLangs.insert(QLatin1String("zh_CN"), tr("Chinese"));
 }
 

@@ -16,6 +16,8 @@
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
+#if defined(RAWKBD_SUPPORT)
+
 #include "rawkeybdapp.h"
 
 #if defined(Q_WS_X11)
@@ -147,3 +149,5 @@ bool RawKeybdApp::macEventFilter( EventHandlerCallRef /*caller*/, EventRef event
     return false;
 }
 #endif  // Q_WS_MAC
+
+#endif // RAWKBD_SUPPORT

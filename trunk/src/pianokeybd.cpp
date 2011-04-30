@@ -61,10 +61,12 @@ void PianoKeybd::initialize()
     setOptimizationFlag(DontAdjustForAntialiasing, true);
     setBackgroundBrush(QApplication::palette().background());
     initDefaultMap();
+#if defined(RAWKBD_SUPPORT)
     RawKeybdApp* rapp = dynamic_cast<RawKeybdApp*>(qApp);
     if (rapp != NULL) {
         rapp->setRawKbdHandler(this);
     }
+#endif
 }
 
 void PianoKeybd::resizeEvent(QResizeEvent *event)
@@ -275,6 +277,7 @@ QSize PianoKeybd::sizeHint() const
     return mapFromScene(sceneRect()).boundingRect().size();
 }
 
+#if defined(RAWKBD_SUPPORT)
 bool PianoKeybd::handleKeyPressed(int keycode)
 {
     if (m_rawMap != NULL && m_rawMap->contains(keycode)) {
@@ -292,6 +295,7 @@ bool PianoKeybd::handleKeyReleased(int keycode)
     }
     return false;
 }
+#endif
 
 void PianoKeybd::retranslate()
 {

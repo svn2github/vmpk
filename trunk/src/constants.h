@@ -83,6 +83,7 @@ const QString QSTR_DRUMSCHANNEL("DrumsChannel");
 const QString QSTR_SHORTCUTS("Shortcuts");
 const QString QSTR_LANGUAGE("Language");
 const QString QSTR_VELOCITYCOLOR("VelocityColor");
+const QString QSTR_NETWORKPORT("NetworkPort");
 
 const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
 
@@ -92,13 +93,25 @@ const char MIDICTLOFFVALUE[] = "MIDICTLOFFVAL\0";
 const char SYSEXFILENAME[] = "SYSEXFILENAME\0";
 const char SYSEXFILEDATA[] = "SYSEXFILEDATA\0";
 
-const int TOOLBARLABELMARGIN = 5;
 const int MIDIGMDRUMSCHANNEL = 9;
 const int MIDICHANNELS = 16;
 const int MIDIVELOCITY = 100;
 const int MIDIPAN = 64;
 const int MIDIVOLUME = 100;
 const int MIDIEXPRESSION = 127;
+
+#if defined(SMALL_SCREEN)
+const int DEFAULTNUMBEROFOCTAVES = 2;
+const int TOOLBARLABELMARGIN = 2;
+#else
+const int DEFAULTNUMBEROFOCTAVES = 5;
+const int TOOLBARLABELMARGIN = 5;
+#endif
+const int NETWORKPORTNUMBER = 21928;
+
+#if defined(NETWORK_MIDI)
+extern int g_iUdpPort;
+#endif
 
 #if defined(Q_WS_MAC) && defined(QT_MAC_USE_COCOA)
 #error "This program requires Qt built with the Carbon framework. Sorry."

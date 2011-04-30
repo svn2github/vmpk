@@ -27,8 +27,9 @@
 
 Preferences::Preferences(QWidget *parent)
     : QDialog(parent),
-    m_numOctaves(5),
+    m_numOctaves(DEFAULTNUMBEROFOCTAVES),
     m_drumsChannel(MIDIGMDRUMSCHANNEL),
+    m_networkPort(NETWORKPORTNUMBER),
     m_grabKb(false),
     m_styledKnobs(true),
     m_alwaysOnTop(false),
@@ -48,6 +49,16 @@ Preferences::Preferences(QWidget *parent)
     connect(ui.btnRawKmap, SIGNAL(clicked()), SLOT(slotOpenRawKeymapFile()));
     QPushButton *btnDefaults = ui.buttonBox->button(QDialogButtonBox::RestoreDefaults);
     connect(btnDefaults, SIGNAL(clicked()), SLOT(slotRestoreDefaults()));
+#if !defined(RAWKBD_SUPPORT)
+    ui.chkRawKeyboard->setVisible(false);
+    ui.lblRawKmap->setVisible(false);
+    ui.txtFileRawKmap->setVisible(false);
+    ui.btnRawKmap->setVisible(false);
+#endif
+#if !defined(NETWORK_MIDI)
+    ui.lblNetworkPort->setVisible(false);
+    ui.txtNetworkPort->setVisible(false);
+#endif
 }
 
 void Preferences::showEvent ( QShowEvent *event )
@@ -60,6 +71,7 @@ void Preferences::showEvent ( QShowEvent *event )
         ui.chkAlwaysOnTop->setChecked( m_alwaysOnTop );
         ui.chkRawKeyboard->setChecked( m_rawKeyboard );
         ui.chkVelocityColor->setChecked( m_velocityColor );
+        ui.txtNetworkPort->setText( QString::number( m_networkPort ));
         if (!m_keyPressedColor.isValid()) {
             setKeyPressedColor(QApplication::palette().highlight().color());
         }
@@ -85,6 +97,7 @@ void Preferences::apply()
          ui.txtFileInstrument->text() == QSTR_DEFAULT )
         m_insFileName = QSTR_DEFAULT;
     m_drumsChannel = ui.cboDrumsChannel->currentIndex() - 1;
+    m_networkPort = ui.txtNetworkPort->text().toInt();
 }
 
 void Preferences::accept()
@@ -231,12 +244,13 @@ void Preferences::restoreDefaults()
     ui.chkGrabKb->setChecked(false);
     ui.chkRawKeyboard->setChecked(false);
     ui.chkStyledKnobs->setChecked(true);
-    ui.spinNumOctaves->setValue(5);
+    ui.spinNumOctaves->setValue(DEFAULTNUMBEROFOCTAVES);
     ui.txtFileKmap->setText(QSTR_DEFAULT);
     ui.txtFileRawKmap->setText(QSTR_DEFAULT);
     ui.chkVelocityColor->setChecked(true);
     setInstrumentsFileName(VPiano::dataDirectory() + QSTR_DEFAULTINS);
     ui.cboInstrument->setCurrentIndex(0);
+    ui.txtNetworkPort->setText(QString::number(NETWORKPORTNUMBER));
 }
 
 void Preferences::slotRestoreDefaults()
