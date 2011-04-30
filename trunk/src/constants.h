@@ -30,10 +30,12 @@
 
 const QString BLD_DATE(__DATE__);
 const QString BLD_TIME(__TIME__);
-#if defined(Q_CC_GNU)
+#if defined(Q_CC_GNU) || defined(Q_CC_GCCE)
 const QString CMP_VERSION(__VERSION__);
 #elif defined(Q_CC_MSVC)
 const QString CMP_VERSION(QString::number(_MSC_VER/100.0,'g',2));
+#else
+const QString CMP_VERSION(QString());
 #endif
 
 const QString QSTR_APPNAME("Virtual MIDI Piano Keyboard");

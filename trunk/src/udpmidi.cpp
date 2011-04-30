@@ -35,8 +35,7 @@
 #else
 #if defined(WIN32)
 #include <winsock2.h>
-static WSADATA g_wsaData;
-typedef int socklen_t;
+#include <ws2tcpip.h>
 #else
 #include <unistd.h>
 #include <arpa/inet.h>
@@ -54,6 +53,24 @@ struct NetworkMidiData {
     struct sockaddr_in sockaddr;
     pthread_t thread;
 };
+
+#if defined(WIN32)
+
+static WSADATA g_wsaData;
+typedef int socklen_t;
+
+static void __attribute__((constructor)) startup()
+{
+    std::cerr << "setup";
+    WSAStartup(MAKEWORD(1, 1), &g_wsaData);
+}
+
+static void __attribute__((destructor)) cleanup()
+{
+    std::cerr << "cleanup";
+    WSACleanup();
+}
+#endif
 
 /* RtMidiIn */
 
@@ -116,7 +133,7 @@ void RtMidiIn :: initialize( const std::string& clientName )
 {
     NetworkMidiData *data = new NetworkMidiData;
 #if defined(WIN32)
-    WSAStartup(MAKEWORD(1, 1), &g_wsaData);
+//    WSAStartup(MAKEWORD(1, 1), &g_wsaData);
 #endif
     apiData_ = (void *) data;
     inputData_.apiData = (void *) data;
@@ -129,7 +146,7 @@ RtMidiIn :: ~RtMidiIn()
     closePort();
     // Cleanup.
 #if defined(WIN32)
-    WSACleanup();
+//    WSACleanup();
 #endif
     delete data;
 }
@@ -170,7 +187,9 @@ void RtMidiIn :: openPort( unsigned int portNumber, const std::string portName )
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+#if defined(SCHED_OTHER)
     pthread_attr_setschedpolicy(&attr, SCHED_OTHER);
+#endif
     inputData_.doInput = true;
     int err = pthread_create(&data->thread, &attr, networkMidiHandler, &inputData_);
     pthread_attr_destroy(&attr);
@@ -291,12 +310,13 @@ void RtMidiOut :: closePort()
 
 void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
 {
+    char *rawdata = (char *) &message->front();
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     if (data->socket < 0) {
         std::cerr << "socket";
         return;
     }
-    if (::sendto(data->socket, (char *) message->data(), message->size(), 0,
+    if (::sendto(data->socket, rawdata, message->size(), 0,
             (struct sockaddr*) &data->sockaddr, sizeof(data->sockaddr)) < 0) {
         std::cerr << "sendto";
         return;

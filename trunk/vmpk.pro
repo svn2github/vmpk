@@ -26,7 +26,7 @@ contains(QT_VERSION, ^4\\.[0-5]\\..*) {
     error("Use at least Qt 4.6")
 }
 VERSIONH = $$sprintf(const QString PGM_VERSION(\"%1\");,$$VERSION)
-win32 {
+win32|symbian {
     system(echo $$VERSIONH > $$OUT_PWD/vmpk_version.h)
 }
 else {
@@ -37,7 +37,7 @@ simulator|symbian {
     DEFINES += SMALL_SCREEN
 }
 symbian {
-    LIBS += -lcone -leikcore -lavkon
+    LIBS += -lcone -leikcore -lavkon -llibpthread
     ICON = data/vmpk.svg
 }
 win32:!simulator {
@@ -46,6 +46,7 @@ win32:!simulator {
     LIBS += -lwinmm
     RC_FILE = src/vpianoico.rc
 }
+win32:simulator: LIBS += -lws2_32
 linux*:!simulator {
     DEFINES += __LINUX_ALSASEQ__
     DEFINES += AVOID_TIMESTAMPING
