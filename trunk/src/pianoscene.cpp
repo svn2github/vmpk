@@ -50,7 +50,7 @@ PianoScene::PianoScene ( const int baseOctave,
     QBrush hilightBrush(m_keyPressedColor.isValid() ? m_keyPressedColor : QApplication::palette().highlight());
     QFont lblFont(QApplication::font());
     int i, numkeys = m_numOctaves * 12;
-    lblFont.setPointSize(7);
+    lblFont.setPointSize(KEYLABELFONTSIZE);
     for(i = 0; i < numkeys; ++i)
     {
         float x = 0;
@@ -392,7 +392,11 @@ QString PianoScene::noteName(const int note)
         return QString("%1<span style='vertical-align:sub;'>%2</span>").arg(name).arg(oct);
     } else {
         int noteIndex = note + m_transpose + 12*m_baseOctave;
+#if defined(SMALL_SCREEN)
+        return m_noteNames.value(noteIndex);
+#else
         return QString("<span style='font-size:5pt;'>%1</span>").arg(m_noteNames.value(noteIndex));
+#endif
     }
 }
 
@@ -462,28 +466,28 @@ void PianoScene::retranslate()
     m_names_s.clear();
     m_names_f.clear();
     m_names_s << trUtf8("C")
-              << trUtf8("C♯")
+              << trUtf8("C#")
               << trUtf8("D")
-              << trUtf8("D♯")
+              << trUtf8("D#")
               << trUtf8("E")
               << trUtf8("F")
-              << trUtf8("F♯")
+              << trUtf8("F#")
               << trUtf8("G")
-              << trUtf8("G♯")
+              << trUtf8("G#")
               << trUtf8("A")
-              << trUtf8("A♯")
+              << trUtf8("A#")
               << trUtf8("B");
     m_names_f << trUtf8("C")
-              << trUtf8("D♭")
+              << trUtf8("Db")
               << trUtf8("D")
-              << trUtf8("E♭")
+              << trUtf8("Eb")
               << trUtf8("E")
               << trUtf8("F")
-              << trUtf8("G♭")
+              << trUtf8("Gb")
               << trUtf8("G")
-              << trUtf8("A♭")
+              << trUtf8("Ab")
               << trUtf8("A")
-              << trUtf8("B♭")
+              << trUtf8("Bb")
               << trUtf8("B");
     refreshLabels();
 }

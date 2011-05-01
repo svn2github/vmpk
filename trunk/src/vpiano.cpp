@@ -2131,13 +2131,46 @@ void VPiano::initLanguages()
 
 void VPiano::retranslateToolbars()
 {
+    m_lblChannel->setText(
+#if defined(SMALL_SCREEN)
+        tr("Chan:")
+#else
+        tr("Channel:")
+#endif
+    );
+    m_lblBaseOctave->setText(
+#if defined(SMALL_SCREEN)
+        tr("Oct:")
+#else
+        tr("Base Octave:")
+#endif
+    );
+    m_lblTranspose->setText(
+#if defined(SMALL_SCREEN)
+        tr("Trans:")
+#else
+        tr("Transpose:")
+#endif
+    );
+    m_lblVelocity->setText(
+#if defined(SMALL_SCREEN)
+        tr("Vel:")
+#else
+        tr("Velocity:")
+#endif
+    );
     m_lblBank->setText(tr("Bank:"));
-    m_lblBaseOctave->setText(tr("Base Octave:"));
     m_lblBender->setText(tr("Bender:"));
-    m_lblChannel->setText(tr("Channel:"));
     m_lblControl->setText(tr("Control:"));
     m_lblProgram->setText(tr("Program:"));
-    m_lblTranspose->setText(tr("Transpose:"));
     m_lblValue->setText(tr("Value:"));
-    m_lblVelocity->setText(tr("Velocity:"));
+}
+
+QMenu * VPiano::createPopupMenu ()
+{
+#if defined(SMALL_SCREEN)
+    return 0;
+#else
+    return QMainWindow::createPopupMenu();
+#endif
 }

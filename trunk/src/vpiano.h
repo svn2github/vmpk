@@ -51,6 +51,7 @@ public:
     void midiThru(std::vector<unsigned char> *message) const;
     bool isInitialized() const { return m_initialized; }
     void retranslateUi();
+    QMenu *createPopupMenu ();
 
     // PianoHandler methods
     void noteOn(const int midiNote, const int vel);
