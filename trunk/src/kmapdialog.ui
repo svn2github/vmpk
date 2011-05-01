@@ -30,6 +30,10 @@
   <property name="windowTitle">
    <string>Key Map Editor</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../data/vmpk.qrc">
+    <normaloff>:/vpiano/vmpk_32x32.png</normaloff>:/vpiano/vmpk_32x32.png</iconset>
+  </property>
   <layout class="QGridLayout">
    <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="labelMapName">
@@ -725,7 +729,9 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../data/vmpk.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

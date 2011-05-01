@@ -30,6 +30,10 @@
   <property name="windowTitle">
    <string>Extra Controls Editor</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../data/vmpk.qrc">
+    <normaloff>:/vpiano/vmpk_32x32.png</normaloff>:/vpiano/vmpk_32x32.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_6">
    <item row="0" column="0" rowspan="3">
     <widget class="QListWidget" name="extraList">

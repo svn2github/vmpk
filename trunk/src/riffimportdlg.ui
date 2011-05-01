@@ -30,6 +30,10 @@
   <property name="windowTitle">
    <string>Import SoundFont instruments</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../data/vmpk.qrc">
+    <normaloff>:/vpiano/vmpk_32x32.png</normaloff>:/vpiano/vmpk_32x32.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QFrame" name="frame">
@@ -178,7 +182,9 @@
   <tabstop>m_output</tabstop>
   <tabstop>m_outputBtn</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../data/vmpk.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

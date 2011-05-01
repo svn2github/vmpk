@@ -27,14 +27,12 @@
     <height>391</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>500</width>
-    <height>0</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Preferences</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../data/vmpk.qrc">
+    <normaloff>:/vpiano/vmpk_32x32.png</normaloff>:/vpiano/vmpk_32x32.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="2">
@@ -428,7 +426,9 @@ p, li { white-space: pre-wrap; }
   <tabstop>chkVelocityColor</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../data/vmpk.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

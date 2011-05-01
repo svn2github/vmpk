@@ -30,6 +30,10 @@
   <property name="windowTitle">
    <string notr="true">Virtual MIDI Piano Keyboard</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../data/vmpk.qrc">
+    <normaloff>:/vpiano/vmpk_32x32.png</normaloff>:/vpiano/vmpk_32x32.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout">
     <property name="margin">
@@ -46,7 +50,7 @@
      <x>0</x>
      <y>0</y>
      <width>573</width>
-     <height>24</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -671,7 +675,9 @@
    <header>pianokeybd.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../data/vmpk.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionExit</sender>

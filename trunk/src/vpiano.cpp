@@ -1438,7 +1438,7 @@ QString VPiano::dataDirectory()
 #elif defined(Q_OS_DARWIN)
     return QApplication::applicationDirPath() + "/../Resources/";
 #elif defined(Q_OS_SYMBIAN)
-    return QApplication::applicationDirPath();
+    return QApplication::applicationDirPath() + "/";
 #endif
     return QString();
 }

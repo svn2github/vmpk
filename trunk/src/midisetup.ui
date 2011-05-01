@@ -36,6 +36,10 @@
   <property name="windowTitle">
    <string>MIDI Setup</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../data/vmpk.qrc">
+    <normaloff>:/vpiano/vmpk_32x32.png</normaloff>:/vpiano/vmpk_32x32.png</iconset>
+  </property>
   <layout class="QGridLayout">
    <item row="0" column="0" colspan="2">
     <widget class="QCheckBox" name="chkEnableInput">
@@ -142,7 +146,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../data/vmpk.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

@@ -24,6 +24,7 @@
 #include <QtGui/QShowEvent>
 #include <QtGui/QFileDialog>
 #include <QtGui/QColorDialog>
+#include <QtCore/QDebug>
 
 Preferences::Preferences(QWidget *parent)
     : QDialog(parent),
@@ -163,6 +164,8 @@ void Preferences::setInstrumentsFileName( const QString fileName )
             m_insFileName.clear();
             ui.txtFileInstrument->setText(m_insFileName);
         }
+    } else {
+        qDebug() << "file" << fileName << "not readable.";
     }
 }
 

@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Keyboard Shortcuts</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../data/vmpk.qrc">
+    <normaloff>:/vpiano/vmpk_32x32.png</normaloff>:/vpiano/vmpk_32x32.png</iconset>
+  </property>
   <layout class="QVBoxLayout">
    <item>
     <widget class="QTableWidget" name="ShortcutTable">
