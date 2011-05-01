@@ -38,7 +38,7 @@ simulator|symbian {
 }
 symbian {
     LIBS += -lcone -leikcore -lavkon
-    ICON = data/vmpk.svg
+    ICON = data/vmpk_symbian.svg
     TARGET.CAPABILITY += NetworkServices
     addFiles.path = .
     addFiles.sources = data/help.html \
