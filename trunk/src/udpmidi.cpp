@@ -162,7 +162,7 @@ void RtMidiIn :: openPort( unsigned int /*portNumber*/, const std::string /*port
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     // Setup network protocol...
-    data->socket = ::socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
+    data->socket = ::socket(PF_INET, SOCK_DGRAM, 0);
     if (data->socket < 0) {
         qDebug() << "socket(in)";
         return;
@@ -261,7 +261,7 @@ RtMidiOut :: ~RtMidiOut()
 void RtMidiOut :: openPort( unsigned int /*portNumber*/, const std::string /*portName*/ )
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
-    data->socket = ::socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+    data->socket = ::socket(AF_INET, SOCK_DGRAM, 0);
     if (data->socket < 0) {
         errorString_ = "RtMidiOut::openPort: error creating a socket";
         error( RtError::SYSTEM_ERROR );

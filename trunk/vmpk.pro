@@ -39,6 +39,25 @@ simulator|symbian {
 symbian {
     LIBS += -lcone -leikcore -lavkon
     ICON = data/vmpk.svg
+    TARGET.CAPABILITY += NetworkServices
+    addFiles.path = .
+    addFiles.sources = data/help.html \
+        data/help_de.html \
+        data/help_es.html \
+        data/help_fr.html \
+        data/help_nl.html \
+        data/help_ru.html \
+        data/gmgsxg.ins \
+        qt.conf \
+        translations/vmpk_cs.qm \
+        translations/vmpk_de.qm \
+        translations/vmpk_es.qm \
+        translations/vmpk_fr.qm \
+        translations/vmpk_nl.qm \
+        translations/vmpk_ru.qm \
+        translations/vmpk_sv.qm \
+        translations/vmpk_zh_CN.qm
+    DEPLOYMENT += addFiles
 }
 win32:!simulator {
     DEFINES += __WINDOWS_MM__
