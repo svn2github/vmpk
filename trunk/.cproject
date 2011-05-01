@@ -299,14 +299,13 @@
 <target name="cmake" path="build" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>cmake</buildCommand>
 <buildArguments/>
-<buildTarget>.. -DCMAKE_BUILD_TYPE=Debug</buildTarget>
+<buildTarget>.. -DCMAKE_BUILD_TYPE=Debug -DRTMIDI_DRIVER=NET</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
 <target name="distclean" path="build" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
-<buildArguments/>
 <buildTarget>distclean</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>true</useDefaultCommand>
@@ -314,6 +313,7 @@
 </target>
 <target name="qmake" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>qmake</buildCommand>
+<buildArguments/>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>false</runAllBuilders>

@@ -167,9 +167,7 @@ if (RTMIDI_DRIVER STREQUAL "WINMM")
 endif ()
 
 if (RTMIDI_DRIVER STREQUAL "NET")
-    find_package (Threads REQUIRED)
     add_definitions (-DNETWORK_MIDI)
-    link_libraries (${CMAKE_THREAD_LIBS_INIT})
 endif()
 
 add_subdirectory (src)

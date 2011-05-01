@@ -22,7 +22,6 @@
 
 #if defined(NETWORK_MIDI)
 
-#include <pthread.h>
 #include <cstring>
 #include <sstream>
 
@@ -43,6 +42,8 @@
 #endif
 #endif
 
+#include <QThread>
+#include <QDebug>
 #include "RtMidi.h"
 #include "preferences.h"
 
@@ -51,7 +52,7 @@ int g_iUdpPort = NETWORKPORTNUMBER;
 struct NetworkMidiData {
     int socket;
     struct sockaddr_in sockaddr;
-    pthread_t thread;
+    class UdpDeviceThread *thread;
 };
 
 #if defined(WIN32)
@@ -61,49 +62,61 @@ typedef int socklen_t;
 
 static void __attribute__((constructor)) startup()
 {
-    std::cerr << "setup";
+    qDebug() << "setup";
     WSAStartup(MAKEWORD(1, 1), &g_wsaData);
 }
 
 static void __attribute__((destructor)) cleanup()
 {
-    std::cerr << "cleanup";
+    qDebug() << "cleanup";
     WSACleanup();
 }
 #endif
 
 /* RtMidiIn */
 
-extern "C" void *networkMidiHandler( void *ptr )
+class UdpDeviceThread : public QThread
 {
-    RtMidiIn::RtMidiInData *data = static_cast<RtMidiIn::RtMidiInData *> (ptr);
-    NetworkMidiData *apiData = static_cast<NetworkMidiData *> (data->apiData);
+public:
+        UdpDeviceThread(RtMidiIn::RtMidiInData *data)
+            : QThread(), m_data(data)
+        { }
+
+protected:
+        void run();
+
+private:
+        RtMidiIn::RtMidiInData *m_data;
+};
+
+void UdpDeviceThread::run (void)
+{
+    NetworkMidiData *apiData = static_cast<NetworkMidiData *> (m_data->apiData);
     RtMidiIn::MidiMessage message;
-    while (data->doInput) {
-        int sockin = apiData->socket;
+    while (m_data->doInput) {
         fd_set fds;
         FD_ZERO(&fds);
-        FD_SET(sockin, &fds);
-        int fdmax = sockin;
+        FD_SET(apiData->socket, &fds);
+        int fdmax = apiData->socket;
         struct timeval tv;
         tv.tv_sec  = 1; // timeout period (1 second)...
         tv.tv_usec = 0;
         int s = ::select(fdmax + 1, &fds, NULL, NULL, &tv);
         if (s < 0) {
-            std::cerr << "\nRtMidiIn: select=" << s;
+            qDebug() << "RtMidiIn: select=" << s;
             break;
         }
         if (s == 0) {
-            //std::cerr << "\nRtMidiIn: timeout";
+            //qDebug() << "\nRtMidiIn: timeout";
             continue;
         }
         // A Network event
-        if (FD_ISSET(sockin, &fds)) {
+        if (FD_ISSET(apiData->socket, &fds)) {
             // Read from network...
             unsigned char buf[1024];
             struct sockaddr_in sender;
             socklen_t slen = sizeof(sender);
-            int r = ::recvfrom(sockin, (char *) buf, sizeof(buf),
+            int r = ::recvfrom(apiData->socket, (char *) buf, sizeof(buf),
                         0, (struct sockaddr *) &sender, &slen);
             if (r > 0) {
                 message.timeStamp = 0;
@@ -111,54 +124,47 @@ extern "C" void *networkMidiHandler( void *ptr )
                 for ( int i = 0; i < r; ++i ) {
                       message.bytes.push_back( buf[i] );
                 }
-                if ( data->usingCallback ) {
-                    RtMidiIn::RtMidiCallback callback = (RtMidiIn::RtMidiCallback) data->userCallback;
-                    callback( message.timeStamp, &message.bytes, data->userData );
+                if ( m_data->usingCallback ) {
+                    RtMidiIn::RtMidiCallback callback =
+                            (RtMidiIn::RtMidiCallback) m_data->userCallback;
+                    callback(message.timeStamp, &message.bytes, m_data->userData);
                 } else {
-                    if ( data->queueLimit > data->queue.size() ) {
-                      data->queue.push( message );
+                    if ( m_data->queueLimit > m_data->queue.size() ) {
+                      m_data->queue.push( message );
                     } else {
-                      std::cerr << "\nRtMidiIn: message queue limit reached!!\n\n";
+                      qDebug() << "RtMidiIn: message queue limit reached!!\n\n";
                     }
                 }
             } else if (r < 0) {
-                std::cerr << "\nRtMidiIn: recvfrom=" << r;
+                qDebug() << "RtMidiIn: recvfrom=" << r;
             }
         }
     }
-    return 0;
 }
 
-void RtMidiIn :: initialize( const std::string& clientName )
+void RtMidiIn :: initialize( const std::string& /*clientName*/ )
 {
     NetworkMidiData *data = new NetworkMidiData;
-#if defined(WIN32)
-//    WSAStartup(MAKEWORD(1, 1), &g_wsaData);
-#endif
     apiData_ = (void *) data;
     inputData_.apiData = (void *) data;
 }
 
 RtMidiIn :: ~RtMidiIn()
 {
-    NetworkMidiData *data = (NetworkMidiData *) inputData_.apiData ;
     // Close a connection if it exists.
     closePort();
     // Cleanup.
-#if defined(WIN32)
-//    WSACleanup();
-#endif
+    NetworkMidiData *data = (NetworkMidiData *) inputData_.apiData ;
     delete data;
 }
 
-void RtMidiIn :: openPort( unsigned int portNumber, const std::string portName )
+void RtMidiIn :: openPort( unsigned int /*portNumber*/, const std::string /*portName*/ )
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     // Setup network protocol...
-    int protonum = 0;
-    data->socket = ::socket(PF_INET, SOCK_DGRAM, protonum);
+    data->socket = ::socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
     if (data->socket < 0) {
-        std::cerr << "socket(in)";
+        qDebug() << "socket(in)";
         return;
     }
     struct sockaddr_in addrin;
@@ -167,7 +173,7 @@ void RtMidiIn :: openPort( unsigned int portNumber, const std::string portName )
     addrin.sin_addr.s_addr = htonl(INADDR_ANY);
     addrin.sin_port = htons(g_iUdpPort);
     if (::bind(data->socket, (struct sockaddr *) (&addrin), sizeof(addrin)) < 0) {
-        std::cerr << "bind";
+        qDebug() << "bind";
         return;
     }
     // Will Hall, 2007
@@ -179,28 +185,22 @@ void RtMidiIn :: openPort( unsigned int portNumber, const std::string portName )
     mreq.imr_interface.s_addr = if_addr_in.s_addr;
     if (::setsockopt (data->socket, IPPROTO_IP, IP_ADD_MEMBERSHIP,
                      (char *) &mreq, sizeof(mreq)) < 0) {
-        std::cerr << "setsockopt(IP_ADD_MEMBERSHIP)";
+        qDebug() << "setsockopt(IP_ADD_MEMBERSHIP)";
         errorString_ = "RtMidiIn::openPort: OS is probably missing multicast support.";
         error( RtError::SYSTEM_ERROR );
     }
     // start the input thread
-    pthread_attr_t attr;
-    pthread_attr_init(&attr);
-    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-#if defined(SCHED_OTHER)
-    pthread_attr_setschedpolicy(&attr, SCHED_OTHER);
-#endif
+    data->thread = new UdpDeviceThread(&inputData_);
     inputData_.doInput = true;
-    int err = pthread_create(&data->thread, &attr, networkMidiHandler, &inputData_);
-    pthread_attr_destroy(&attr);
-    if (err) {
+    data->thread->start();
+    if (data->thread == 0 || !data->thread->isRunning()) {
         inputData_.doInput = false;
         errorString_ = "RtMidiIn::openPort: error starting MIDI input thread!";
         error( RtError::THREAD_ERROR );
     }
 }
 
-void RtMidiIn :: openVirtualPort( const std::string portName )
+void RtMidiIn :: openVirtualPort( const std::string /*portName*/ )
 {
     errorString_ = "RtMidiIn::openVirtualPort: cannot be implemented in UDP!";
     error( RtError::WARNING );
@@ -211,7 +211,7 @@ unsigned int RtMidiIn :: getPortCount()
     return 1;
 }
 
-std::string RtMidiIn :: getPortName( unsigned int portNumber )
+std::string RtMidiIn :: getPortName( unsigned int /*portNumber*/ )
 {
     std::ostringstream ost;
     ost << "UDP/" << g_iUdpPort;
@@ -222,10 +222,15 @@ void RtMidiIn :: closePort()
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     // Shutdown the input thread.
-    if ( inputData_.doInput ) {
-        inputData_.doInput = false;
-        pthread_join( data->thread, NULL );
+    if (data->thread) {
+        if (data->thread->isRunning()) {
+            inputData_.doInput = false;
+            data->thread->wait(1200); // Timeout>1sec.
+        }
+        delete data->thread;
+        data->thread = 0;
     }
+    // close socket
     if (data->socket >= 0) {
 #if defined(WIN32)
         ::closesocket(data->socket);
@@ -238,7 +243,7 @@ void RtMidiIn :: closePort()
 
 /* RtMidiOut */
 
-void RtMidiOut :: initialize( const std::string& clientName )
+void RtMidiOut :: initialize( const std::string& /*clientName*/ )
 {
     NetworkMidiData *data = new NetworkMidiData;
     apiData_ = (void *) data;
@@ -248,36 +253,33 @@ RtMidiOut :: ~RtMidiOut()
 {
     // Close a connection if it exists.
     closePort();
-    NetworkMidiData *data = (NetworkMidiData *) apiData_;
     // Cleanup.
+    NetworkMidiData *data = (NetworkMidiData *) apiData_;
     delete data;
 }
 
-void RtMidiOut :: openPort( unsigned int portNumber, const std::string portName )
+void RtMidiOut :: openPort( unsigned int /*portNumber*/, const std::string /*portName*/ )
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
-    int protonum = 0;
-    data->socket = ::socket(AF_INET, SOCK_DGRAM, protonum);
+    data->socket = ::socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
     if (data->socket < 0) {
         errorString_ = "RtMidiOut::openPort: error creating a socket";
         error( RtError::SYSTEM_ERROR );
     }
-
     ::memset(&data->sockaddr, 0, sizeof(data->sockaddr));
     data->sockaddr.sin_family = AF_INET;
     data->sockaddr.sin_addr.s_addr = ::inet_addr("225.0.0.37");
     data->sockaddr.sin_port = htons(g_iUdpPort);
-
     // Turn off loopback...
     int loop = 0;
     if (::setsockopt(data->socket, IPPROTO_IP, IP_MULTICAST_LOOP,
                     (char *) &loop, sizeof (loop)) < 0) {
-        std::cerr << "setsockopt(IP_MULTICAST_LOOP)";
+        qDebug() << "setsockopt(IP_MULTICAST_LOOP)";
         return;
     }
 }
 
-void RtMidiOut :: openVirtualPort( const std::string portName )
+void RtMidiOut :: openVirtualPort( const std::string /*portName*/ )
 {
     errorString_ = "RtMidiOut::openVirtualPort: cannot be implemented in UDP!";
     error( RtError::WARNING );
@@ -288,7 +290,7 @@ unsigned int RtMidiOut :: getPortCount()
     return 1;
 }
 
-std::string RtMidiOut :: getPortName( unsigned int portNumber )
+std::string RtMidiOut :: getPortName( unsigned int /*portNumber*/ )
 {
     std::ostringstream ost;
     ost << "UDP/" << g_iUdpPort;
@@ -310,15 +312,14 @@ void RtMidiOut :: closePort()
 
 void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
 {
-    char *rawdata = (char *) &message->front();
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     if (data->socket < 0) {
-        std::cerr << "socket";
+        qDebug() << "socket";
         return;
     }
-    if (::sendto(data->socket, rawdata, message->size(), 0,
+    if (::sendto(data->socket, (char *) &((*message)[0]), message->size(), 0,
             (struct sockaddr*) &data->sockaddr, sizeof(data->sockaddr)) < 0) {
-        std::cerr << "sendto";
+        qDebug() << "sendto";
         return;
     }
 }

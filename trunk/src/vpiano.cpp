@@ -298,7 +298,7 @@ void VPiano::initToolBars()
     ui.toolBarNotes->addWidget(m_sboxOctave);
     m_lblTranspose = new QLabel(
 #if defined(SMALL_SCREEN)
-        tr("Tran:")
+        tr("Trans:")
 #else
         tr("Transpose:")
 #endif
@@ -1414,9 +1414,17 @@ void VPiano::applyInitialSettings()
 
 void VPiano::slotPreferences()
 {
+#if defined(NETWORK_MIDI)
+    int old_udpPort = g_iUdpPort;
+#endif
     releaseKb();
     if (dlgPreferences()->exec() == QDialog::Accepted) {
         applyPreferences();
+#if defined(NETWORK_MIDI)
+        if (old_udpPort != g_iUdpPort) {
+            applyConnections();
+        }
+#endif
     }
     grabKb();
 }

@@ -37,7 +37,7 @@ simulator|symbian {
     DEFINES += SMALL_SCREEN
 }
 symbian {
-    LIBS += -lcone -leikcore -lavkon -llibpthread
+    LIBS += -lcone -leikcore -lavkon
     ICON = data/vmpk.svg
 }
 win32:!simulator {
