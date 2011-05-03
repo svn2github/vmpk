@@ -28,9 +28,12 @@
 #include "about.h"
 #include "preferences.h"
 #include "midisetup.h"
-#include "kmapdialog.h"
 #include "events.h"
+
+#if !defined(SMALL_SCREEN)
+#include "kmapdialog.h"
 #include "shortcutdialog.h"
+#endif
 
 #if ENABLE_DBUS
 #include "vmpk_adaptor.h"
@@ -113,11 +116,14 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     connect(ui.toolBarExtra->toggleViewAction(), SIGNAL(toggled(bool)),
             ui.actionExtraControls, SLOT(setChecked(bool)));
 #if defined(SMALL_SCREEN)
-    //ui.toolBarNotes->hide();
     ui.toolBarControllers->hide();
     ui.toolBarBender->hide();
-    //ui.toolBarPrograms->hide();
     ui.toolBarExtra->hide();
+    //ui.toolBarNotes->hide();
+    //ui.toolBarPrograms->hide();
+    ui.actionEditKM->setVisible(false);
+    ui.actionShortcuts->setVisible(false);
+    ui.actionStatusBar->setVisible(false);
 #endif
     ui.pianokeybd->setPianoHandler(this);
     initialization();
@@ -1454,6 +1460,7 @@ QString VPiano::localeDirectory()
 
 void VPiano::slotEditKeyboardMap()
 {
+#if !defined(SMALL_SCREEN)
     KeyboardMap* map;
     releaseKb();
     if (dlgPreferences()->getRawKeyboard())
@@ -1469,6 +1476,7 @@ void VPiano::slotEditKeyboardMap()
             ui.pianokeybd->setKeyboardMap(map);
     }
     grabKb();
+#endif
 }
 
 void VPiano::populatePrograms(int bank)
@@ -1765,9 +1773,11 @@ MidiSetup* VPiano::dlgMidiSetup()
 
 KMapDialog* VPiano::dlgKeyMap()
 {
+#if !defined(SMALL_SCREEN)
     if (m_dlgKeyMap == 0) {
         m_dlgKeyMap = new KMapDialog(this);
     }
+#endif
     return m_dlgKeyMap;
 }
 
@@ -1927,10 +1937,12 @@ void VPiano::pitchwheel(int value)
 
 void VPiano::slotShortcuts()
 {
+#if !defined(SMALL_SCREEN)
     ShortcutDialog shcutDlg(findChildren<QAction*>());
     releaseKb();
     shcutDlg.exec();
     grabKb();
+#endif
 }
 
 void VPiano::slotBankNext()
@@ -2107,8 +2119,10 @@ void VPiano::retranslateUi()
         m_dlgPreferences->retranslateUi();
     if (m_dlgMidiSetup != 0)
         m_dlgMidiSetup->retranslateUi();
+#if !defined(SMALL_SCREEN)
     if (m_dlgKeyMap != 0)
         m_dlgKeyMap->retranslateUi();
+#endif
     if (m_dlgExtra != 0)
         m_dlgExtra->retranslateUi();
     if (m_dlgRiffImport != 0)

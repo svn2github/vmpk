@@ -60,6 +60,19 @@ Preferences::Preferences(QWidget *parent)
     ui.lblNetworkPort->setVisible(false);
     ui.txtNetworkPort->setVisible(false);
 #endif
+#if defined(SMALL_SCREEN)
+    ui.chkRawKeyboard->setVisible(false);
+    ui.lblRawKmap->setVisible(false);
+    ui.txtFileRawKmap->setVisible(false);
+    ui.btnRawKmap->setVisible(false);
+    ui.lblKmap->setVisible(false);
+    ui.txtFileKmap->setVisible(false);
+    ui.btnKmap->setVisible(false);
+    ui.chkAlwaysOnTop->setVisible(false);
+    ui.chkGrabKb->setVisible(false);
+#else
+    setMinimumSize(460,430);
+#endif
 }
 
 void Preferences::showEvent ( QShowEvent *event )

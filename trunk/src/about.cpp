@@ -24,6 +24,9 @@ About::About(QWidget *parent)
 {
     ui.setupUi(this);
     retranslateUi();
+#if !defined(SMALL_SCREEN)
+    setMinimumSize(550,580);
+#endif
 }
 
 void About::retranslateUi()
@@ -34,7 +37,7 @@ void About::retranslateUi()
               "<meta name=\"qrichtext\" content=\"1\" />"
               "<style type=\"text/css\">\np, li { white-space: pre-wrap; }</style>"
             "</head>"
-            "<body style=\"font-family:'Sans Serif'; font-size:12pt; font-weight:400; font-style:normal;\">"
+            "<body style=\"font-family:'Sans Serif'; font-size:12pt; font-style:normal;\">"
               "<p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
                 "Version: %1<br/>"
                 "Build date: %2<br/>"

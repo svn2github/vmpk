@@ -132,11 +132,9 @@ INCLUDEPATH += src
 # Input
 FORMS += src/about.ui \
     src/extracontrols.ui \
-    src/kmapdialog.ui \
     src/midisetup.ui \
     src/preferences.ui \
     src/riffimportdlg.ui \
-    src/shortcutdialog.ui \
     src/vpiano.ui
 
 HEADERS += src/about.h \
@@ -147,7 +145,6 @@ HEADERS += src/about.h \
     src/instrument.h \
     src/keyboardmap.h \
     src/keylabel.h \
-    src/kmapdialog.h \
     src/knob.h \
     src/mididefs.h \
     src/midisetup.h \
@@ -162,16 +159,14 @@ HEADERS += src/about.h \
     src/riffimportdlg.h \
     src/RtError.h \
     src/RtMidi.h \
-    src/shortcutdialog.h \
     src/vpiano.h
-    
+
 SOURCES += src/about.cpp \
     src/classicstyle.cpp \
     src/extracontrols.cpp \
     src/instrument.cpp \
     src/keyboardmap.cpp \
     src/keylabel.cpp \
-    src/kmapdialog.cpp \
     src/knob.cpp \
     src/main.cpp \
     src/midisetup.cpp \
@@ -180,13 +175,21 @@ SOURCES += src/about.cpp \
     src/pianoscene.cpp \
     src/preferences.cpp \
     src/qticonloader.cpp \
-    src/rawkeybdapp.cpp \
     src/riff.cpp \
     src/riffimportdlg.cpp \
     src/RtMidi.cpp \
     src/udpmidi.cpp \
-    src/shortcutdialog.cpp \
     src/vpiano.cpp
+
+!symbian:!simulator {
+FORMS += src/kmapdialog.ui \
+    src/shortcutdialog.ui
+HEADERS += src/kmapdialog.h \
+    src/shortcutdialog.h
+SOURCES += src/kmapdialog.cpp \
+    src/shortcutdialog.cpp \
+    src/rawkeybdapp.cpp
+}
 
 RESOURCES += data/vmpk.qrc
 
