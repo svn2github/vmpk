@@ -37,7 +37,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;/span&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;The following copyright notice is also applicable:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program contains &lt;/span&gt;&lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2010 Gary P. Scavone&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -1028,12 +1028,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/pianoscene.cpp" line="469"/>
         <source>C#</source>
-        <translation type="unfinished"></translation>
+        <translation>Do#</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="471"/>
         <source>D#</source>
-        <translation type="unfinished"></translation>
+        <translation>Re#</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="472"/>
@@ -1050,42 +1050,42 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/pianoscene.cpp" line="474"/>
         <source>F#</source>
-        <translation type="unfinished"></translation>
+        <translation>Fa#</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="476"/>
         <source>G#</source>
-        <translation type="unfinished"></translation>
+        <translation>Sol#</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="478"/>
         <source>A#</source>
-        <translation type="unfinished"></translation>
+        <translation>La#</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="481"/>
         <source>Db</source>
-        <translation type="unfinished"></translation>
+        <translation>Reb</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="483"/>
         <source>Eb</source>
-        <translation type="unfinished"></translation>
+        <translation>Mib</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="486"/>
         <source>Gb</source>
-        <translation type="unfinished"></translation>
+        <translation>Solb</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="488"/>
         <source>Ab</source>
-        <translation type="unfinished"></translation>
+        <translation>Solb</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="490"/>
         <source>Bb</source>
-        <translation type="unfinished"></translation>
+        <translation>Bb</translation>
     </message>
     <message utf8="true">
         <source>F♯</source>
@@ -1374,7 +1374,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="397"/>
         <source>Network Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port Réseau</translation>
     </message>
     <message>
         <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
@@ -1586,7 +1586,7 @@ Voulez-vous appliquer ces modifications?</translation>
         <location filename="../src/vpiano.cpp" line="271"/>
         <location filename="../src/vpiano.cpp" line="2136"/>
         <source>Chan:</source>
-        <translation type="unfinished"></translation>
+        <translation>Can:</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="273"/>
@@ -1598,7 +1598,7 @@ Voulez-vous appliquer ces modifications?</translation>
         <location filename="../src/vpiano.cpp" line="286"/>
         <location filename="../src/vpiano.cpp" line="2143"/>
         <source>Oct:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="288"/>
@@ -1610,7 +1610,7 @@ Voulez-vous appliquer ces modifications?</translation>
         <location filename="../src/vpiano.cpp" line="301"/>
         <location filename="../src/vpiano.cpp" line="2150"/>
         <source>Trans:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="303"/>
@@ -1622,7 +1622,7 @@ Voulez-vous appliquer ces modifications?</translation>
         <location filename="../src/vpiano.cpp" line="316"/>
         <location filename="../src/vpiano.cpp" line="2157"/>
         <source>Vel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vél:</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="318"/>
@@ -1678,7 +1678,7 @@ Voulez-vous appliquer ces modifications?</translation>
     <message>
         <location filename="../src/vpiano.cpp" line="2128"/>
         <source>Swedish</source>
-        <translation type="unfinished"></translation>
+        <translation>Suédois</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2086"/>
@@ -1718,7 +1718,7 @@ Voulez-vous appliquer ces modifications?</translation>
     <message>
         <location filename="../src/vpiano.cpp" line="2126"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Hollandais</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2127"/>
