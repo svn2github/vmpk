@@ -50,19 +50,19 @@
 int g_iUdpPort = NETWORKPORTNUMBER;
 
 struct NetworkMidiData {
+    NetworkMidiData(): socket(0), thread(0) { }
     int socket;
     struct sockaddr_in sockaddr;
     class UdpDeviceThread *thread;
 };
 
 #if defined(WIN32)
-
 static WSADATA g_wsaData;
 typedef int socklen_t;
 
 static void __attribute__((constructor)) startup()
 {
-    qDebug() << "setup";
+    qDebug() << "startup";
     WSAStartup(MAKEWORD(1, 1), &g_wsaData);
 }
 
@@ -93,6 +93,7 @@ void UdpDeviceThread::run (void)
 {
     NetworkMidiData *apiData = static_cast<NetworkMidiData *> (m_data->apiData);
     RtMidiIn::MidiMessage message;
+    qDebug() << "running!";
     while (m_data->doInput) {
         fd_set fds;
         FD_ZERO(&fds);
@@ -103,7 +104,7 @@ void UdpDeviceThread::run (void)
         tv.tv_usec = 0;
         int s = ::select(fdmax + 1, &fds, NULL, NULL, &tv);
         if (s < 0) {
-            qDebug() << "RtMidiIn: select=" << s;
+            qDebug() << "RtMidiIn: select = " << s << ": " << ::strerror(s);
             break;
         }
         if (s == 0) {
@@ -222,7 +223,7 @@ void RtMidiIn :: closePort()
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     // Shutdown the input thread.
-    if (data->thread) {
+    if (data->thread != 0) {
         if (data->thread->isRunning()) {
             inputData_.doInput = false;
             data->thread->wait(1200); // Timeout>1sec.
@@ -313,8 +314,8 @@ void RtMidiOut :: closePort()
 void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
-    if (data->socket < 0) {
-        qDebug() << "socket";
+    if (data->socket <= 0) {
+        qDebug() << "socket = " << data->socket;
         return;
     }
     if (::sendto(data->socket, (char *) &((*message)[0]), message->size(), 0,

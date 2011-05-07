@@ -40,6 +40,7 @@ symbian {
     LIBS += -lcone -leikcore -lavkon
     ICON = data/vmpk_symbian.svg
     TARGET.CAPABILITY += NetworkServices
+    TARGET.EPOCHEAPSIZE = 2000000 20000000
     addFiles.path = .
     addFiles.sources = data/help.html \
         data/help_de.html \

@@ -71,7 +71,7 @@ Preferences::Preferences(QWidget *parent)
     ui.chkAlwaysOnTop->setVisible(false);
     ui.chkGrabKb->setVisible(false);
 #else
-    setMinimumSize(460,430);
+    setMinimumSize(380,300);
 #endif
 }
 

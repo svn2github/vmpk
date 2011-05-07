@@ -124,6 +124,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     ui.actionEditKM->setVisible(false);
     ui.actionShortcuts->setVisible(false);
     ui.actionStatusBar->setVisible(false);
+    setWindowTitle("VMPK");
 #endif
     ui.pianokeybd->setPianoHandler(this);
     initialization();
@@ -272,6 +273,8 @@ void VPiano::initToolBars()
     m_dialStyle = new ClassicStyle();
     m_dialStyle->setParent(this);
     // Notes tool bar
+    QWidget *w = ui.toolBarNotes->widgetForAction(ui.actionPanic);
+    w->setMaximumWidth(120);
     m_lblChannel = new QLabel(
 #if defined(SMALL_SCREEN)
         tr("Chan:")
@@ -1670,18 +1673,22 @@ void VPiano::slotComboControlCurrentIndexChanged(const int index)
 
 void VPiano::grabKb()
 {
+#if !defined(SMALL_SCREEN)
     if (dlgPreferences()->getGrabKeyboard()) {
         ui.pianokeybd->grabKeyboard();
     }
     ui.pianokeybd->setRawKeyboardMode(dlgPreferences()->getRawKeyboard());
+#endif
 }
 
 void VPiano::releaseKb()
 {
+#if !defined(SMALL_SCREEN)
     if (dlgPreferences()->getGrabKeyboard()) {
         ui.pianokeybd->releaseKeyboard();
     }
     ui.pianokeybd->setRawKeyboardMode(false);
+#endif
 }
 
 void VPiano::slotHelpContents()
