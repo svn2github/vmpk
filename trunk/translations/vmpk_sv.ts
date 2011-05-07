@@ -42,11 +42,11 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;/span&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;The following copyright notice is also applicable:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This program contains &lt;/span&gt;&lt;a href=&quot;http://www.music.mcgill.ca/~gary/rtmidi/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;RtMIDI&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;: realtime MIDI i/o C++ classes&lt;br /&gt;Copyright © 2003-2010 Gary P. Scavone&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Kopieringsrätt © 2008-2010, &lt;/span&gt;&lt;a href=&quot;mailto:plcl@users.sf.net?subject=VMPK&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; text-decoration: underline; color:#0057ae;&quot;&gt;Pedro Lopez-Cabanillas &amp;lt;plcl@users.sf.net&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Kopieringsrätt © 2008-2011, &lt;/span&gt;&lt;a href=&quot;mailto:plcl@users.sf.net?subject=VMPK&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; text-decoration: underline; color:#0057ae;&quot;&gt;Pedro Lopez-Cabanillas &amp;lt;plcl@users.sf.net&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Detta program har öppen och fri källkod. Det kan återutges eller ändras i enlighet med GNU GPL (GNU:s General Public License), publicerad av Free Software Foundation, antingen enligt version 3 eller senare version.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Detta program ges ut med förhoppningen att det ska vara användbart, dock UTAN GARANTIER, såsom FÖRSÄLJNINGSGARANTIER eller GARANTIER FÖR ÄNDAMÅLSENLIGHET. Ytterligare detaljer finns i GNU GPL som levereras med detta program. Om inte licensen  finns medskickad, se &lt;/span&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Följande kopieringsrättsnotis är under alla omständigheter gällande:&lt;/span&gt;&lt;/p&gt;
@@ -351,592 +351,592 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/kmapdialog.ui" line="129"/>
         <source>11</source>
-        <translation></translation>
+        <translation>11</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="134"/>
         <source>12</source>
-        <translation></translation>
+        <translation>12</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="139"/>
         <source>13</source>
-        <translation></translation>
+        <translation>13</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="144"/>
         <source>14</source>
-        <translation></translation>
+        <translation>14</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="149"/>
         <source>15</source>
-        <translation></translation>
+        <translation>15</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="154"/>
         <source>16</source>
-        <translation></translation>
+        <translation>16</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="159"/>
         <source>17</source>
-        <translation></translation>
+        <translation>17</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="164"/>
         <source>18</source>
-        <translation></translation>
+        <translation>18</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="169"/>
         <source>19</source>
-        <translation></translation>
+        <translation>19</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="174"/>
         <source>20</source>
-        <translation></translation>
+        <translation>20</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="179"/>
         <source>21</source>
-        <translation></translation>
+        <translation>21</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="184"/>
         <source>22</source>
-        <translation></translation>
+        <translation>22</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="189"/>
         <source>23</source>
-        <translation></translation>
+        <translation>23</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="194"/>
         <source>24</source>
-        <translation></translation>
+        <translation>24</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="199"/>
         <source>25</source>
-        <translation></translation>
+        <translation>25</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="204"/>
         <source>26</source>
-        <translation></translation>
+        <translation>26</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="209"/>
         <source>27</source>
-        <translation></translation>
+        <translation>27</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="214"/>
         <source>28</source>
-        <translation></translation>
+        <translation>28</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="219"/>
         <source>29</source>
-        <translation></translation>
+        <translation>29</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="224"/>
         <source>30</source>
-        <translation></translation>
+        <translation>30</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="229"/>
         <source>31</source>
-        <translation></translation>
+        <translation>31</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="234"/>
         <source>32</source>
-        <translation></translation>
+        <translation>32</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="239"/>
         <source>33</source>
-        <translation></translation>
+        <translation>33</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="244"/>
         <source>34</source>
-        <translation></translation>
+        <translation>34</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="249"/>
         <source>35</source>
-        <translation></translation>
+        <translation>35</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="254"/>
         <source>36</source>
-        <translation></translation>
+        <translation>36</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="259"/>
         <source>37</source>
-        <translation></translation>
+        <translation>37</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="264"/>
         <source>38</source>
-        <translation></translation>
+        <translation>38</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="269"/>
         <source>39</source>
-        <translation></translation>
+        <translation>39</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="274"/>
         <source>40</source>
-        <translation></translation>
+        <translation>40</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="279"/>
         <source>41</source>
-        <translation></translation>
+        <translation>41</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="284"/>
         <source>42</source>
-        <translation></translation>
+        <translation>42</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="289"/>
         <source>43</source>
-        <translation></translation>
+        <translation>43</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="294"/>
         <source>44</source>
-        <translation></translation>
+        <translation>44</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="299"/>
         <source>45</source>
-        <translation></translation>
+        <translation>45</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="304"/>
         <source>46</source>
-        <translation></translation>
+        <translation>46</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="309"/>
         <source>47</source>
-        <translation></translation>
+        <translation>47</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="314"/>
         <source>48</source>
-        <translation></translation>
+        <translation>48</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="319"/>
         <source>49</source>
-        <translation></translation>
+        <translation>49</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="324"/>
         <source>50</source>
-        <translation></translation>
+        <translation>50</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="329"/>
         <source>51</source>
-        <translation></translation>
+        <translation>51</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="334"/>
         <source>52</source>
-        <translation></translation>
+        <translation>52</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="339"/>
         <source>53</source>
-        <translation></translation>
+        <translation>53</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="344"/>
         <source>54</source>
-        <translation></translation>
+        <translation>54</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="349"/>
         <source>55</source>
-        <translation></translation>
+        <translation>55</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="354"/>
         <source>56</source>
-        <translation></translation>
+        <translation>56</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="359"/>
         <source>57</source>
-        <translation></translation>
+        <translation>57</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="364"/>
         <source>58</source>
-        <translation></translation>
+        <translation>58</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="369"/>
         <source>59</source>
-        <translation></translation>
+        <translation>59</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="374"/>
         <source>60</source>
-        <translation></translation>
+        <translation>60</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="379"/>
         <source>61</source>
-        <translation></translation>
+        <translation>61</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="384"/>
         <source>62</source>
-        <translation></translation>
+        <translation>62</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="389"/>
         <source>63</source>
-        <translation></translation>
+        <translation>63</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="394"/>
         <source>64</source>
-        <translation></translation>
+        <translation>64</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="399"/>
         <source>65</source>
-        <translation></translation>
+        <translation>65</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="404"/>
         <source>66</source>
-        <translation></translation>
+        <translation>66</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="409"/>
         <source>67</source>
-        <translation></translation>
+        <translation>67</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="414"/>
         <source>68</source>
-        <translation></translation>
+        <translation>68</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="419"/>
         <source>69</source>
-        <translation></translation>
+        <translation>69</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="424"/>
         <source>70</source>
-        <translation></translation>
+        <translation>70</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="429"/>
         <source>71</source>
-        <translation></translation>
+        <translation>71</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="434"/>
         <source>72</source>
-        <translation></translation>
+        <translation>72</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="439"/>
         <source>73</source>
-        <translation></translation>
+        <translation>73</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="444"/>
         <source>74</source>
-        <translation></translation>
+        <translation>74</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="449"/>
         <source>75</source>
-        <translation></translation>
+        <translation>75</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="454"/>
         <source>76</source>
-        <translation></translation>
+        <translation>76</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="459"/>
         <source>77</source>
-        <translation></translation>
+        <translation>77</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="464"/>
         <source>78</source>
-        <translation></translation>
+        <translation>78</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="469"/>
         <source>79</source>
-        <translation></translation>
+        <translation>79</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="474"/>
         <source>80</source>
-        <translation></translation>
+        <translation>80</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="479"/>
         <source>81</source>
-        <translation></translation>
+        <translation>81</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="484"/>
         <source>82</source>
-        <translation></translation>
+        <translation>82</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="489"/>
         <source>83</source>
-        <translation></translation>
+        <translation>83</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="494"/>
         <source>84</source>
-        <translation></translation>
+        <translation>84</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="499"/>
         <source>85</source>
-        <translation></translation>
+        <translation>85</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="504"/>
         <source>86</source>
-        <translation></translation>
+        <translation>86</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="509"/>
         <source>87</source>
-        <translation></translation>
+        <translation>87</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="514"/>
         <source>88</source>
-        <translation></translation>
+        <translation>88</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="519"/>
         <source>89</source>
-        <translation></translation>
+        <translation>89</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="524"/>
         <source>90</source>
-        <translation></translation>
+        <translation>90</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="529"/>
         <source>91</source>
-        <translation></translation>
+        <translation>91</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="534"/>
         <source>92</source>
-        <translation></translation>
+        <translation>92</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="539"/>
         <source>93</source>
-        <translation></translation>
+        <translation>93</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="544"/>
         <source>94</source>
-        <translation></translation>
+        <translation>94</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="549"/>
         <source>95</source>
-        <translation></translation>
+        <translation>95</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="554"/>
         <source>96</source>
-        <translation></translation>
+        <translation>96</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="559"/>
         <source>97</source>
-        <translation></translation>
+        <translation>97</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="564"/>
         <source>98</source>
-        <translation></translation>
+        <translation>98</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="569"/>
         <source>99</source>
-        <translation></translation>
+        <translation>99</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="574"/>
         <source>100</source>
-        <translation></translation>
+        <translation>100</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="579"/>
         <source>101</source>
-        <translation></translation>
+        <translation>101</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="584"/>
         <source>102</source>
-        <translation></translation>
+        <translation>102</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="589"/>
         <source>103</source>
-        <translation></translation>
+        <translation>103</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="594"/>
         <source>104</source>
-        <translation></translation>
+        <translation>104</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="599"/>
         <source>105</source>
-        <translation></translation>
+        <translation>105</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="604"/>
         <source>106</source>
-        <translation></translation>
+        <translation>106</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="609"/>
         <source>107</source>
-        <translation></translation>
+        <translation>107</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="614"/>
         <source>108</source>
-        <translation></translation>
+        <translation>108</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="619"/>
         <source>109</source>
-        <translation></translation>
+        <translation>109</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="624"/>
         <source>110</source>
-        <translation></translation>
+        <translation>110</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="629"/>
         <source>111</source>
-        <translation></translation>
+        <translation>111</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="634"/>
         <source>112</source>
-        <translation></translation>
+        <translation>112</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="639"/>
         <source>113</source>
-        <translation></translation>
+        <translation>113</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="644"/>
         <source>114</source>
-        <translation></translation>
+        <translation>114</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="649"/>
         <source>115</source>
-        <translation></translation>
+        <translation>115</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="654"/>
         <source>116</source>
-        <translation></translation>
+        <translation>116</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="659"/>
         <source>117</source>
-        <translation></translation>
+        <translation>117</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="664"/>
         <source>118</source>
-        <translation></translation>
+        <translation>118</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="669"/>
         <source>119</source>
-        <translation></translation>
+        <translation>119</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="674"/>
         <source>120</source>
-        <translation></translation>
+        <translation>120</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="679"/>
         <source>121</source>
-        <translation></translation>
+        <translation>121</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="684"/>
         <source>122</source>
-        <translation></translation>
+        <translation>122</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="689"/>
         <source>123</source>
-        <translation></translation>
+        <translation>123</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="694"/>
         <source>124</source>
-        <translation></translation>
+        <translation>124</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="699"/>
         <source>125</source>
-        <translation></translation>
+        <translation>125</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="704"/>
         <source>126</source>
-        <translation></translation>
+        <translation>126</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="709"/>
         <source>127</source>
-        <translation></translation>
+        <translation>127</translation>
     </message>
     <message>
         <location filename="../src/kmapdialog.ui" line="714"/>
         <source>Key</source>
-        <translation>Taste</translation>
+        <translation>Tangent</translation>
     </message>
 </context>
 <context>
@@ -989,7 +989,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/midisetup.ui" line="63"/>
         <source>Enable MIDI Thru on MIDI Output</source>
-        <translation>Aktivera MIDI-genommatning för MIDI-utmatningen</translation>
+        <translation>Aktivera MIDI-genommatning för MIDI-utmatningen.</translation>
     </message>
     <message>
         <location filename="../src/midisetup.ui" line="76"/>
@@ -1037,12 +1037,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/pianoscene.cpp" line="469"/>
         <source>C#</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciss</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="471"/>
         <source>D#</source>
-        <translation type="unfinished"></translation>
+        <translation>Diss</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="472"/>
@@ -1059,42 +1059,42 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/pianoscene.cpp" line="474"/>
         <source>F#</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiss</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="476"/>
         <source>G#</source>
-        <translation type="unfinished"></translation>
+        <translation>Giss</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="478"/>
         <source>A#</source>
-        <translation type="unfinished"></translation>
+        <translation>Aiss</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="481"/>
         <source>Db</source>
-        <translation type="unfinished"></translation>
+        <translation>Dess</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="483"/>
         <source>Eb</source>
-        <translation type="unfinished"></translation>
+        <translation>Ess</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="486"/>
         <source>Gb</source>
-        <translation type="unfinished"></translation>
+        <translation>Gess</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="488"/>
         <source>Ab</source>
-        <translation type="unfinished"></translation>
+        <translation>Ass</translation>
     </message>
     <message>
         <location filename="../src/pianoscene.cpp" line="490"/>
         <source>Bb</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message utf8="true">
         <source>F♯</source>
@@ -1383,7 +1383,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/preferences.ui" line="397"/>
         <source>Network Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Nätverksport</translation>
     </message>
     <message>
         <source>Change the knob buttons style, either using the custom look or revert to the style selected in qtconfig.</source>
@@ -1591,7 +1591,7 @@ Wollen Sie die Änderungen anwenden?</translation>
         <location filename="../src/vpiano.cpp" line="271"/>
         <location filename="../src/vpiano.cpp" line="2136"/>
         <source>Chan:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanal:</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="273"/>
@@ -1603,7 +1603,7 @@ Wollen Sie die Änderungen anwenden?</translation>
         <location filename="../src/vpiano.cpp" line="286"/>
         <location filename="../src/vpiano.cpp" line="2143"/>
         <source>Oct:</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktav:</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="288"/>
@@ -1615,7 +1615,7 @@ Wollen Sie die Änderungen anwenden?</translation>
         <location filename="../src/vpiano.cpp" line="301"/>
         <location filename="../src/vpiano.cpp" line="2150"/>
         <source>Trans:</source>
-        <translation type="unfinished"></translation>
+        <translation>Transposition:</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="303"/>
@@ -1627,7 +1627,7 @@ Wollen Sie die Änderungen anwenden?</translation>
         <location filename="../src/vpiano.cpp" line="316"/>
         <location filename="../src/vpiano.cpp" line="2157"/>
         <source>Vel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hastighet:</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="318"/>
@@ -1683,7 +1683,7 @@ Wollen Sie die Änderungen anwenden?</translation>
     <message>
         <location filename="../src/vpiano.cpp" line="2128"/>
         <source>Swedish</source>
-        <translation type="unfinished"></translation>
+        <translation>Svenska</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2086"/>
@@ -1723,7 +1723,7 @@ Wollen Sie die Änderungen anwenden?</translation>
     <message>
         <location filename="../src/vpiano.cpp" line="2126"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Holländska</translation>
     </message>
     <message>
         <location filename="../src/vpiano.cpp" line="2127"/>
