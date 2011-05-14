@@ -87,7 +87,15 @@ const QString QSTR_LANGUAGE("Language");
 const QString QSTR_VELOCITYCOLOR("VelocityColor");
 const QString QSTR_NETWORKPORT("NetworkPort");
 
+#if defined(SMALL_SCREEN)
+const QString QSTR_VMPKURL("http://vmpk.sourceforge.net/m/");
+const QString QSTR_HELP("hm.html");
+const QString QSTR_HELPL("hm_%1.html");
+#else
 const QString QSTR_VMPKURL("http://vmpk.sourceforge.net");
+const QString QSTR_HELP("help.html");
+const QString QSTR_HELPL("help_%1.html");
+#endif
 
 const char MIDICTLNUMBER[] = "MIDICTLNUMBER\0";
 const char MIDICTLONVALUE[] = "MIDICTLONVAL\0";

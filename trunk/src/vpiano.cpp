@@ -124,7 +124,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     ui.actionEditKM->setVisible(false);
     ui.actionShortcuts->setVisible(false);
     ui.actionStatusBar->setVisible(false);
-    setWindowTitle("VMPK");
+    setWindowTitle("VMPK " + PGM_VERSION);
 #endif
     ui.pianokeybd->setPianoHandler(this);
     initialization();
@@ -162,6 +162,7 @@ void VPiano::initialization()
         applyConnections();
         applyInitialSettings();
         initExtraControllers();
+        activateWindow();
     }
 }
 
@@ -816,6 +817,7 @@ void VPiano::writeSettings()
 
 void VPiano::closeEvent( QCloseEvent *event )
 {
+    //qDebug() << "closeEvent:" << event->type();
     if (m_initialized)
         writeSettings();
     event->accept();
@@ -823,6 +825,7 @@ void VPiano::closeEvent( QCloseEvent *event )
 
 void VPiano::customEvent ( QEvent *event )
 {
+    //qDebug() << "customEvent:" << event->type();
     if ( event->type() == NoteOnEventType ) {
         NoteOnEvent *ev = static_cast<NoteOnEvent*>(event);
         int n = ev->getNote();
@@ -897,16 +900,22 @@ void VPiano::customEvent ( QEvent *event )
 
 void VPiano::showEvent ( QShowEvent *event )
 {
+    //qDebug() << "showEvent:" << event->type();
+    QMainWindow::showEvent(event);
+#if !defined(SMALL_SCREEN)
     if (m_initialized) {
-        QMainWindow::showEvent(event);
         ui.pianokeybd->setFocus();
         grabKb();
     }
+#endif
 }
 
 void VPiano::hideEvent( QHideEvent *event )
 {
+    //qDebug() << "hideEvent:" << event->type();
+#if !defined(SMALL_SCREEN)
     releaseKb();
+#endif
     QMainWindow::hideEvent(event);
 }
 
@@ -1696,14 +1705,15 @@ void VPiano::slotHelpContents()
     QStringList hlps;
     QLocale loc(configuredLanguage());
     QStringList lc = loc.name().split("_");
-    hlps += QString("help_%1.html").arg(loc.name());
+    hlps += QSTR_HELPL.arg(loc.name());
     if (lc.count() > 1)
-        hlps += QString("help_%1.html").arg(lc[0]);
-    hlps += "help.html";
+        hlps += QSTR_HELPL.arg(lc[0]);
+    hlps += QSTR_HELP;
     foreach(const QString& hlp_name, hlps) {
         QString fullName = VPiano::dataDirectory() + hlp_name;
         if (QFile::exists(fullName)) {
             QUrl url = QUrl::fromLocalFile(fullName);
+            qDebug() << "showHelpContents:" << url;
             QDesktopServices::openUrl(url);
             return;
         }

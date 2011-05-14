@@ -56,6 +56,9 @@ DialogExtraControls::DialogExtraControls(QWidget *parent) :
     connect( m_ui->spinSliderSize, SIGNAL(valueChanged(int)), SLOT(sizeChanged(int)) );
     connect( m_ui->spinValue, SIGNAL(valueChanged(int)), SLOT(minimumChanged(int)) );
     connect( m_ui->btnFileSyx, SIGNAL(clicked()), SLOT(openFile()) );
+#if defined(SMALL_SCREEN)
+    setWindowState(Qt::WindowActive | Qt::WindowMaximized);
+#endif
 }
 
 DialogExtraControls::~DialogExtraControls()

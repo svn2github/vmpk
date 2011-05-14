@@ -19,6 +19,14 @@
  </comment>
  <class>PreferencesClass</class>
  <widget class="QDialog" name="PreferencesClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Preferences</string>
   </property>
@@ -28,7 +36,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="margin">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="spacing">
     <number>0</number>
@@ -46,7 +54,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>382</width>
+        <width>394</width>
         <height>271</height>
        </rect>
       </property>

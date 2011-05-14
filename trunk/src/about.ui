@@ -23,7 +23,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>512</width>
+    <width>518</width>
     <height>560</height>
    </rect>
   </property>
@@ -35,8 +35,20 @@
     <normaloff>:/vpiano/vmpk_32x32.png</normaloff>:/vpiano/vmpk_32x32.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
+   </property>
+   <property name="margin">
+    <number>3</number>
+   </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetMinimumSize</enum>
      </property>
@@ -88,7 +100,7 @@
        <property name="minimumSize">
         <size>
          <width>280</width>
-         <height>160</height>
+         <height>170</height>
         </size>
        </property>
        <property name="textFormat">
@@ -123,11 +135,17 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>496</width>
-        <height>343</height>
+        <width>510</width>
+        <height>357</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
+       <property name="margin">
+        <number>3</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item row="0" column="0">
         <widget class="QLabel" name="labelName">
          <property name="text">

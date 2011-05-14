@@ -70,8 +70,9 @@ Preferences::Preferences(QWidget *parent)
     ui.btnKmap->setVisible(false);
     ui.chkAlwaysOnTop->setVisible(false);
     ui.chkGrabKb->setVisible(false);
+    setWindowState(Qt::WindowActive | Qt::WindowMaximized);
 #else
-    setMinimumSize(380,300);
+    setMinimumSize(400,300);
 #endif
 }
 

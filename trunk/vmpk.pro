@@ -39,15 +39,14 @@ simulator|symbian {
 symbian {
     LIBS += -lcone -leikcore -lavkon
     ICON = data/vmpk_symbian.svg
-    TARGET.CAPABILITY += NetworkServices
-    TARGET.EPOCHEAPSIZE = 2000000 20000000
+    TARGET.CAPABILITY += NetworkServices \
+        UserEnvironment \
+        LocalServices \
+        ReadUserData \
+        WriteUserData
+    TARGET.UID3 = 0x20041DD7
     addFiles.path = .
-    addFiles.sources = data/help.html \
-        data/help_de.html \
-        data/help_es.html \
-        data/help_fr.html \
-        data/help_nl.html \
-        data/help_ru.html \
+    addFiles.sources = data/hm.html \
         data/gmgsxg.ins \
         qt.conf \
         translations/vmpk_cs.qm \

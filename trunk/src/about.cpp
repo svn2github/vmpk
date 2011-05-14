@@ -24,7 +24,9 @@ About::About(QWidget *parent)
 {
     ui.setupUi(this);
     retranslateUi();
-#if !defined(SMALL_SCREEN)
+#if defined(SMALL_SCREEN)
+    setWindowState(Qt::WindowActive | Qt::WindowMaximized);
+#else
     setMinimumSize(550,580);
 #endif
 }
