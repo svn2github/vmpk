@@ -53,10 +53,8 @@ symbian {
         translations/vmpk_de.qm \
         translations/vmpk_es.qm \
         translations/vmpk_fr.qm \
-        translations/vmpk_nl.qm \
         translations/vmpk_ru.qm \
-        translations/vmpk_sv.qm \
-        translations/vmpk_zh_CN.qm
+        translations/vmpk_sv.qm
     DEPLOYMENT += addFiles
 }
 win32:!simulator {

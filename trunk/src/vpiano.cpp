@@ -1709,7 +1709,7 @@ class HelpDialog : public QDialog
 public:
     HelpDialog(const QUrl &document, QWidget *parent = 0) : QDialog(parent)
     {
-        setWindowState(Qt::WindowMaximized);
+        setWindowState(Qt::WindowMaximized | Qt::WindowActive);
         QVBoxLayout *layout = new QVBoxLayout(this);
         QTextBrowser *browser = new QTextBrowser(this);
         layout->addWidget(browser);
