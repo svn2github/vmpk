@@ -72,7 +72,8 @@ Preferences::Preferences(QWidget *parent)
     ui.chkGrabKb->setVisible(false);
     setWindowState(Qt::WindowActive | Qt::WindowMaximized);
 #else
-    setMinimumSize(400,300);
+    setMinimumSize(480,320);
+    adjustSize();
 #endif
 }
 

@@ -52,6 +52,10 @@
 #include <QtGui/QDial>
 #include <QtGui/QToolButton>
 #include <QtGui/QToolTip>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QTextBrowser>
+#include <QtGui/QDialogButtonBox>
+#include <QtGui/QDialog>
 #include <QtCore/QUrl>
 #include <QtCore/QString>
 #include <QtCore/QSettings>
@@ -1700,6 +1704,24 @@ void VPiano::releaseKb()
 #endif
 }
 
+class HelpDialog : public QDialog
+{
+public:
+    HelpDialog(const QUrl &document, QWidget *parent = 0) : QDialog(parent)
+    {
+        setWindowState(Qt::WindowMaximized);
+        QVBoxLayout *layout = new QVBoxLayout(this);
+        QTextBrowser *browser = new QTextBrowser(this);
+        layout->addWidget(browser);
+        QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+        buttonBox->setOrientation(Qt::Horizontal);
+        buttonBox->setStandardButtons(QDialogButtonBox::Ok);
+        layout->addWidget(buttonBox);
+        browser->setSource(document);
+        connect(buttonBox, SIGNAL(accepted()), SLOT(close()));
+    }
+};
+
 void VPiano::slotHelpContents()
 {
     QStringList hlps;
@@ -1709,12 +1731,16 @@ void VPiano::slotHelpContents()
     if (lc.count() > 1)
         hlps += QSTR_HELPL.arg(lc[0]);
     hlps += QSTR_HELP;
+    QDir hlpDir(VPiano::dataDirectory());
     foreach(const QString& hlp_name, hlps) {
-        QString fullName = VPiano::dataDirectory() + hlp_name;
-        if (QFile::exists(fullName)) {
-            QUrl url = QUrl::fromLocalFile(fullName);
-            qDebug() << "showHelpContents:" << url;
+        if (hlpDir.exists(hlp_name)) {
+            QUrl url = QUrl::fromLocalFile(hlpDir.absoluteFilePath(hlp_name));
+#if defined(SMALL_SCREEN)
+            HelpDialog hlpDlg(url, this);
+            hlpDlg.exec();
+#else
             QDesktopServices::openUrl(url);
+#endif
             return;
         }
     }
