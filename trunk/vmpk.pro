@@ -45,6 +45,10 @@ symbian {
         ReadUserData \
         WriteUserData
     TARGET.UID3 = 0x20041DD7
+    vendorinfo = \
+      "%{\"Pedro Lopez-Cabanillas\"}" \
+      ":\"Pedro Lopez-Cabanillas\""
+    addFiles.pkg_prerules = vendorinfo
     addFiles.path = .
     addFiles.sources = data/hm.html \
         data/hm_es.html \
