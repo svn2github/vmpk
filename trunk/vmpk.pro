@@ -47,6 +47,7 @@ symbian {
     TARGET.UID3 = 0x20041DD7
     addFiles.path = .
     addFiles.sources = data/hm.html \
+        data/hm_es.html \
         data/gmgsxg.ins \
         qt.conf \
         translations/vmpk_cs.qm \
