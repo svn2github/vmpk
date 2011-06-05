@@ -196,6 +196,7 @@ set (vmpk_DATA_FILES
     data/txt2ins.awk
     data/hm.html
     data/hm_es.html
+    data/hm_ru.html
     data/help.html
     data/help_de.html
     data/help_es.html

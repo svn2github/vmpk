@@ -50,6 +50,7 @@ symbian {
     addFiles.path = .
     addFiles.sources = data/hm.html \
         data/hm_es.html \
+        data/hm_ru.html \
         data/gmgsxg.ins \
         qt.conf \
         translations/vmpk_cs.qm \
