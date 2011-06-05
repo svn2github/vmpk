@@ -63,7 +63,7 @@ set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_admin")
 set (VERSION_MAJOR "0")
 set (VERSION_MINOR "4")
 set (VERSION_PATCH "0")
-set (VERSION_SUFFIX "svn")
+set (VERSION_SUFFIX "")
 set (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX})
 
 message (STATUS "${PROGRAM_NAME} ${VERSION} 
@@ -194,6 +194,8 @@ set (vmpk_DATA_FILES
     data/pc102mac.xml
     data/pc102win.xml
     data/txt2ins.awk
+    data/hm.html
+    data/hm_es.html
     data/help.html
     data/help_de.html
     data/help_es.html
@@ -207,7 +209,7 @@ if (UNIX)
         COMMAND rm -rf build/*
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
     add_dependencies (distclean clean)
-    
+
     add_custom_target (tarball
         COMMAND mkdir -p vmpk-${VERSION}/translations/
         COMMAND cp -r cmake_admin vmpk-${VERSION}
@@ -215,9 +217,9 @@ if (UNIX)
         COMMAND cp -r src vmpk-${VERSION}
         COMMAND cp -r man vmpk-${VERSION}
         COMMAND cp -r dbus vmpk-${VERSION}
-        COMMAND cp translations/vmpk_{cs,de,es,fr,ru,zh_CN}.ts vmpk-${VERSION}/translations/
+        COMMAND cp translations/vmpk_{cs,de,es,fr,nl,ru,sv,zh_CN}.ts vmpk-${VERSION}/translations/
         COMMAND cp translations/CMakeLists.txt vmpk-${VERSION}/translations/
-        COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README setup.nsi TODO vmpk.desktop vmpk.pro updateqm.pri vmpk.spec.in qt.conf vmpk-${VERSION}
+        COMMAND cp AUTHORS ChangeLog CMakeLists.txt COPYING gpl.rtf NEWS README *.nsi TODO vmpk.desktop vmpk.pro updateqm.pri vmpk.spec.in qt.conf vmpk-${VERSION}
         COMMAND tar -cj --exclude=.* -f vmpk-${VERSION}.tar.bz2 vmpk-${VERSION}
         COMMAND tar -cz --exclude=.* -f vmpk-${VERSION}.tar.gz vmpk-${VERSION}
         COMMAND rm -rf vmpk-${VERSION}
@@ -235,15 +237,15 @@ if (UNIX AND NOT APPLE)
     install (FILES data/vmpk_16x16.png 
              DESTINATION share/icons/hicolor/16x16/apps   
              RENAME vmpk.png)
-    
+
     install (FILES data/vmpk_32x32.png 
              DESTINATION share/icons/hicolor/32x32/apps   
              RENAME vmpk.png)
-    
+
     install (FILES data/vmpk_48x48.png 
              DESTINATION share/icons/hicolor/48x48/apps   
              RENAME vmpk.png)
-    
+
     install (FILES data/vmpk_64x64.png 
              DESTINATION share/icons/hicolor/64x64/apps   
              RENAME vmpk.png)
@@ -254,7 +256,7 @@ if (UNIX AND NOT APPLE)
 
     install (FILES data/vmpk.svgz
              DESTINATION share/icons/hicolor/scalable/apps )   
-    
+
     install (FILES vmpk.desktop
              DESTINATION share/applications )
 

@@ -100,6 +100,7 @@ macx {
         $$[QT_INSTALL_TRANSLATIONS]/qt_es.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_fr.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_ru.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_sv.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_zh_CN.qm \
         $$OUT_PWD/vmpk_cs.qm \
         $$OUT_PWD/vmpk_de.qm \
