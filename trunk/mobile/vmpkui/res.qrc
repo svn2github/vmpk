@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/MainPage.qml</file>
+        <file>qml/About.qml</file>
+        <file>qml/BasePage.qml</file>
+        <file>qml/Preferences.qml</file>
+        <file>qml/Splash.qml</file>
+        <file>qml/fluidsynth.png</file>
+        <file>qml/vmpk.png</file>
+        <file>qml/PreferencesItem.qml</file>
+        <file>qml/ColorSelectionDialog.qml</file>
+        <file>qml/Help.qml</file>
+        <file>i18n/vmpkn9_es.qm</file>
+    </qresource>
+</RCC>
