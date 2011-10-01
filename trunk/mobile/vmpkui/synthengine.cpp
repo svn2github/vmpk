@@ -282,7 +282,7 @@ void SynthEngine::setSoundFont(const QString &value)
 
 void SynthEngine::scanSoundFonts(const QDir &initialDir)
 {
-    qDebug() << Q_FUNC_INFO << initialDir.absolutePath();
+    //qDebug() << Q_FUNC_INFO << initialDir.absolutePath();
     QDir dir(initialDir);
     dir.setFilter(QDir::Files);
     dir.setSorting(QDir::Name);

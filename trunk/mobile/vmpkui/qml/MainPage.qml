@@ -173,12 +173,25 @@ Page {
             Slider {
                 id: velocitySlider
                 anchors.verticalCenter: parent.verticalCenter
-                width: 700
+                width: 500
                 minimumValue: 0
                 maximumValue: 127
                 stepSize: 1
                 valueIndicatorVisible: true
                 value: 100
+            }
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("Turn:")
+                font.pixelSize: 24
+            }
+            Switch {
+                id: velocityTurn
+                anchors.verticalCenter: parent.verticalCenter
+                checked: false
+                onCheckedChanged: {
+                    velocitySlider.value = 64
+                }
             }
         }
 
@@ -320,8 +333,10 @@ Page {
     }
 
     RotationSensor {
-        Component.onCompleted: start()
+        id: rotationSensor
         onReadingChanged: {
+            if(velocityTurn.checked)
+                velocitySlider.value = 64 - (reading.x * 0.71)
             if (ctlTurn.checked)
                 controlSlider.value = -reading.x * 1.41
             if (benderTurn.checked)
@@ -346,6 +361,7 @@ Page {
         octaveButton.text = baseOctaveSelection.model.get(5).name;
         synthEngine.initialize();
         theme.inverted = synthEngine.invertedTheme;
+        rotationSensor.start()
     }
 
     Connections {

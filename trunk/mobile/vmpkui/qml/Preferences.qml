@@ -113,10 +113,12 @@ BasePage {
     SelectionDialog {
         id: soundfontSelection
         titleText: qsTr("SoundFont File")
-        model: ListModel { }
+        model: ListModel {
+            id: soundfontModel
+        }
         onAccepted: {
             if (selectedIndex >= 0) {
-                synthEngine.soundFont = model.get(selectedIndex).name
+                synthEngine.soundFont = model.get(selectedIndex).value
             }
         }
     }
@@ -137,7 +139,7 @@ BasePage {
 
     QueryDialog {
         id: langMessage
-        icon: "image://theme/icon-l-help"
+        //icon: "image://theme/icon-l-help"
         titleText: qsTr("Language changed")
         message: qsTr("The new language will take effect after restarting the program")
         acceptButtonText: qsTr("Accept")
@@ -159,10 +161,11 @@ BasePage {
     Connections {
         target: synthEngine
         onSoundFontsChanged: {
-            soundfontSelection.model.clear()
+            soundfontModel.clear()
         }
         onSoundFontAdded: {
-            soundfontSelection.model.append({name: name})
+            var shortName = name.substr(name.lastIndexOf("/")+1)
+            soundfontModel.append( { name: shortName, value: name } )
         }
     }
 

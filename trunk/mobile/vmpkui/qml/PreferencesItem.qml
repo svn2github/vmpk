@@ -44,10 +44,13 @@ Item {
             bottom: parent.bottom
         }
         Column {
+            width: parent.width
             anchors.verticalCenter: parent.verticalCenter
             Label {
                 id: mainText
                 text: itemTitle
+                width: parent.width
+                elide: Text.ElideRight
                 font.pixelSize: 26
                 font.bold: true;
                 color: (theme.inverted ? "#d6d6d6" : "#282828")
@@ -55,6 +58,8 @@ Item {
             Label {
                 id: subText
                 text: itemValue
+                width: parent.width
+                elide: Text.ElideRight
                 font.pixelSize: 22
                 color: (theme.inverted ? "#b0b0b0" : "#505050")
             }
