@@ -379,7 +379,7 @@ Page {
             controllerSelection.model.append({name: name})
         }
         onVolumeChanged: {
-            volumeInfo.text = qsTr("Volume: %1%").arg(vol)
+            volumeInfo.text = qsTr("Volume: %1%").arg(Math.round(vol))
             volumeInfo.show()
         }
     }
@@ -388,12 +388,11 @@ Page {
         id: commonTools
         visible: true
 
-        Text {
-            text: qsTr("VMPK & FluidSynth 0.0.2 (beta)")
+        Label {
+            text: qsTr("VMPK & FluidSynth v%1").arg(synthEngine.version())
             anchors.centerIn: parent
             font.pixelSize: 24
         }
-
         ToolIcon {
             platformIconId: "toolbar-view-menu";
             anchors.right: parent===undefined ? undefined : parent.right
@@ -424,7 +423,7 @@ Page {
                 onClicked: mainPage.openFile("Help.qml")
             }
             MenuItem {
-                text: qsTr("Preferences")
+                text: qsTr("Settings")
                 MoreIndicator {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right

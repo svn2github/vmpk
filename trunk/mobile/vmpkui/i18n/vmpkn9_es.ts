@@ -15,6 +15,10 @@
         <source>About</source>
         <translation>Acerca de</translation>
     </message>
+    <message>
+        <source>v%1</source>
+        <translation>v%1</translation>
+    </message>
 </context>
 <context>
     <name>ColorSelectionDialog</name>
@@ -73,20 +77,12 @@
         <translation>¡Pánico!</translation>
     </message>
     <message>
-        <source>VMPK &amp; FluidSynth 0.0.2 (beta)</source>
-        <translation>VMPK &amp; FluidSynth 0.0.2 (beta)</translation>
-    </message>
-    <message>
         <source>Show Note Names</source>
         <translation>Mostrar nombres de notas</translation>
     </message>
     <message>
         <source>Help</source>
         <translation>Ayuda</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation>Preferencias</translation>
     </message>
     <message>
         <source>About</source>
@@ -119,6 +115,14 @@
     <message>
         <source>Volume: %1%</source>
         <translation>Volumen: %1%</translation>
+    </message>
+    <message>
+        <source>VMPK &amp; FluidSynth v%1</source>
+        <translation>VMPK &amp; FluidSynth v%1</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Ajustes</translation>
     </message>
 </context>
 <context>
@@ -195,10 +199,6 @@
 <context>
     <name>Preferences</name>
     <message>
-        <source>Preferences</source>
-        <translation>Preferencias</translation>
-    </message>
-    <message>
         <source>Number of Octaves</source>
         <translation>Número de octavas</translation>
     </message>
@@ -233,6 +233,10 @@
     <message>
         <source>Accept</source>
         <translation>Aceptar</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Ajustes</translation>
     </message>
 </context>
 <context>

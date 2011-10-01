@@ -22,7 +22,7 @@ import com.nokia.extras 1.0
 
 BasePage {
     id: preferences
-    title: qsTr("Preferences")
+    title: qsTr("Settings")
 
     Flickable {
         anchors.fill: client

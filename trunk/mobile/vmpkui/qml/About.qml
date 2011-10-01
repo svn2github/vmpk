@@ -57,10 +57,16 @@ BasePage {
                 width: 1; height: 32
             }
             Text {
-                id: text1
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("VMPK & FluidSynth")
                 font.pixelSize: 48
+                font.bold: true
+                color: (theme.inverted ? "#d6d6d6" : "#282828")
+            }
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("v%1").arg(synthEngine.version())
+                font.pixelSize: 24
                 font.bold: true
                 color: (theme.inverted ? "#d6d6d6" : "#282828")
             }
@@ -85,7 +91,6 @@ BasePage {
                 width: 1; height: 32
             }
             Text {
-                id: text2
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 18

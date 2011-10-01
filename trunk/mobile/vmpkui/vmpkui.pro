@@ -1,6 +1,9 @@
 TEMPLATE = app
 TARGET = vmpkn9
+VERSION = 0.0.3
 LIBS += -L../fluidsynth -lfluidsynth
+
+DEFINES += VERSION=$$VERSION
 
 # Additional import path used to resolve QML modules in Creator's code model
 # QML_IMPORT_PATH =

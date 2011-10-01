@@ -30,8 +30,22 @@ License:
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL'.
 
+SoundFont file:
+
+    sf2/VintageDreamWaves-v2.sf2 Copyright (c) Ian Wilson, 1996-1998
+
+SoundFont License:
+
+    This soundfont is freeware. You may freely use and/or redistribute it subject
+    to the following terms:
+    1. It is not altered, edited, modified, ripped, or converted to other formats,
+    except for private use only.
+    2. It is distributed with this copyright notice.
+
+    This soundfont is distributed WITHOUT WARRANTY, and without the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. No liability
+    or damages can be inferred upon the said copyright owner, Ian Wilson.
+
+
 The Debian packaging is (C) 2011, Pedro Lopez-Cabanillas <plcl@users.sf.net> and
 is licensed under the GPL, see above.
-
-# Please also look if there are files or directories which have a
-# different copyright/license attached and list them here.

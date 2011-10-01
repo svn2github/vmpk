@@ -31,6 +31,9 @@
 #include "preset.h"
 #include "ctl.h"
 
+#define str(s) #s
+#define stringify(s) str(s)
+
 class SynthEngine : public QObject
 {
     Q_OBJECT
@@ -85,6 +88,7 @@ public:
     Q_INVOKABLE void noteOff(const int midiNote, const int velocity);
     Q_INVOKABLE void controlChange(const int value);
     Q_INVOKABLE void bender(const int value);
+    Q_INVOKABLE QString version() const { return stringify(VERSION); }
 
 public slots:
     void keyEvent(MeeGo::QmKeys::Key key, MeeGo::QmKeys::State state);

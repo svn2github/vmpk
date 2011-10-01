@@ -9,12 +9,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/About.qml" line="62"/>
+        <location filename="../qml/About.qml" line="61"/>
         <source>VMPK &amp; FluidSynth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/About.qml" line="98"/>
+        <location filename="../qml/About.qml" line="68"/>
+        <source>v%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/About.qml" line="103"/>
         <source>&lt;p&gt;&lt;a href=&apos;http://vmpk.sf.net&apos;&gt;VMPK (Virtual MIDI Piano Keyboard)&lt;/a&gt;.&lt;br&gt;Copyright © 2008-2011, &lt;a href=&apos;mailto:plcl@users.sf.net?subject=VMPK&apos;&gt; Pedro Lopez-Cabanillas &amp;lt;plcl@users.sf.net&amp;gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.&lt;/p&gt;&lt;p&gt;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License  along with this program. If not, see &lt;a href=&apos;http://www.gnu.org/licenses/&apos;&gt;http://www.gnu.org/licenses/&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;The following copyright notice is also applicable:&lt;/p&gt;&lt;p&gt;&lt;a href=&apos;http://www.fluidsynth.org&apos;&gt;FluidSynth&lt;/a&gt;, A Software Synthesizer. Copyright © 2003-2011 Peter Hanappe and others.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -93,58 +98,59 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="240"/>
-        <location filename="../qml/MainPage.qml" line="286"/>
+        <location filename="../qml/MainPage.qml" line="185"/>
+        <location filename="../qml/MainPage.qml" line="253"/>
+        <location filename="../qml/MainPage.qml" line="299"/>
         <source>Turn:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="259"/>
+        <location filename="../qml/MainPage.qml" line="272"/>
         <source>Bender:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="198"/>
+        <location filename="../qml/MainPage.qml" line="392"/>
+        <source>VMPK &amp; FluidSynth v%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/MainPage.qml" line="426"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/MainPage.qml" line="211"/>
         <source>Panic!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="342"/>
+        <location filename="../qml/MainPage.qml" line="357"/>
         <source>Channel %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="345"/>
+        <location filename="../qml/MainPage.qml" line="360"/>
         <source>Octave %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="366"/>
+        <location filename="../qml/MainPage.qml" line="382"/>
         <source>Volume: %1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="376"/>
-        <source>VMPK &amp; FluidSynth 0.0.2 (beta)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/MainPage.qml" line="392"/>
+        <location filename="../qml/MainPage.qml" line="407"/>
         <source>Show Note Names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="403"/>
+        <location filename="../qml/MainPage.qml" line="418"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="411"/>
-        <source>Preferences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/MainPage.qml" line="419"/>
+        <location filename="../qml/MainPage.qml" line="434"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -248,7 +254,7 @@
     <name>Preferences</name>
     <message>
         <location filename="../qml/Preferences.qml" line="25"/>
-        <source>Preferences</source>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -270,7 +276,7 @@
     </message>
     <message>
         <location filename="../qml/Preferences.qml" line="62"/>
-        <location filename="../qml/Preferences.qml" line="126"/>
+        <location filename="../qml/Preferences.qml" line="128"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
@@ -280,22 +286,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Preferences.qml" line="141"/>
+        <location filename="../qml/Preferences.qml" line="143"/>
         <source>Language changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Preferences.qml" line="142"/>
+        <location filename="../qml/Preferences.qml" line="144"/>
         <source>The new language will take effect after restarting the program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Preferences.qml" line="143"/>
+        <location filename="../qml/Preferences.qml" line="145"/>
         <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Preferences.qml" line="148"/>
+        <location filename="../qml/Preferences.qml" line="150"/>
         <source>%1 Octaves</source>
         <translation type="unfinished"></translation>
     </message>
