@@ -7,14 +7,12 @@
 QT -= core gui
 QMAKE_LINK = $$QMAKE_LINK_C
 QMAKE_LFLAGS_RPATH =
-#QMAKE_CFLAGS_DEBUG += -mfpu=vfpv3
-#QMAKE_CFLAGS_RELEASE += -mfpu=vfpv3
-#QMAKE_CFLAGS_DEBUG += -mfpu=neon -ffast-math
-#QMAKE_CFLAGS_RELEASE += -mfpu=neon -ffast-math -funsafe-math-optimizations
+QMAKE_CFLAGS_DEBUG += -Wno-unused-parameter
+QMAKE_CFLAGS_RELEASE += -Wno-unused-parameter -mfpu=neon -ffast-math -funsafe-math-optimizations
 
 TARGET = fluidsynth
 TEMPLATE = lib
-VERSION = 1.5.0
+VERSION = 1.5.1
 CONFIG += link_pkgconfig \
     staticlib \
     stdlib
