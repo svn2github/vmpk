@@ -129,6 +129,7 @@ BasePage {
         model: ListModel {
             ListElement { name: "English"; value: "en" }
             ListElement { name: "Español"; value: "es" }
+            ListElement { name: "Русский"; value: "ru" }
         }
         onAccepted: {
             synthEngine.language = model.get(selectedIndex).value
