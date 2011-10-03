@@ -286,22 +286,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Preferences.qml" line="143"/>
+        <location filename="../qml/Preferences.qml" line="144"/>
         <source>Language changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Preferences.qml" line="144"/>
+        <location filename="../qml/Preferences.qml" line="145"/>
         <source>The new language will take effect after restarting the program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Preferences.qml" line="145"/>
+        <location filename="../qml/Preferences.qml" line="146"/>
         <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Preferences.qml" line="150"/>
+        <location filename="../qml/Preferences.qml" line="151"/>
         <source>%1 Octaves</source>
         <translation type="unfinished"></translation>
     </message>
@@ -311,6 +311,29 @@
     <message>
         <location filename="../qml/Splash.qml" line="70"/>
         <source>VMPK &amp; FluidSynth</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SynthEngine</name>
+    <message>
+        <location filename="../synthengine.cpp" line="175"/>
+        <source>1:Modulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../synthengine.cpp" line="176"/>
+        <source>7:Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../synthengine.cpp" line="177"/>
+        <source>10:Pan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../synthengine.cpp" line="178"/>
+        <source>64:Sustain</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

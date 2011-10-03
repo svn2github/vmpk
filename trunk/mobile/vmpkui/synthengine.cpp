@@ -172,12 +172,12 @@ void SynthEngine::loadControllers()
 {
     m_controllers.clear();
     emit controllersChanged();
-    m_controllers << new Controller( 1,   0, "1:Modulation", this);
-    m_controllers << new Controller( 7, 100, "7:Volume", this);
-    m_controllers << new Controller(10,  64, "10:Pan", this);
-    m_controllers << new Controller(64,   0, "64:Sustain", this);
-//  m_controllers << new Controller(91,   0, "91:Reverb", this);
-//  m_controllers << new Controller(93,   0, "93:Chorus", this);
+    m_controllers << new Controller( 1,   0, tr("1:Modulation"), this);
+    m_controllers << new Controller( 7, 100, tr("7:Volume"), this);
+    m_controllers << new Controller(10,  64, tr("10:Pan"), this);
+    m_controllers << new Controller(64,   0, tr("64:Sustain"), this);
+//  m_controllers << new Controller(91,   0, tr("91:Reverb"), this);
+//  m_controllers << new Controller(93,   0, tr("93:Chorus"), this);
     foreach(Controller *ctl, m_controllers) {
         emit controllerAdded(ctl->name());
     }

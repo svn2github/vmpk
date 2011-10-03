@@ -246,4 +246,23 @@
         <translation>VMPK &amp; FluidSynth</translation>
     </message>
 </context>
+<context>
+    <name>SynthEngine</name>
+    <message>
+        <source>1:Modulation</source>
+        <translation>1:Modulación</translation>
+    </message>
+    <message>
+        <source>7:Volume</source>
+        <translation>7:Volumen</translation>
+    </message>
+    <message>
+        <source>10:Pan</source>
+        <translation>10:Panorama</translation>
+    </message>
+    <message>
+        <source>64:Sustain</source>
+        <translation>64:Sustento</translation>
+    </message>
+</context>
 </TS>
