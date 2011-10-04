@@ -319,22 +319,22 @@
     <message>
         <location filename="../synthengine.cpp" line="175"/>
         <source>1:Modulation</source>
-        <translation type="unfinished"></translation>
+        <translation>1:Модуляция</translation>
     </message>
     <message>
         <location filename="../synthengine.cpp" line="176"/>
         <source>7:Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>7:Громкость</translation>
     </message>
     <message>
         <location filename="../synthengine.cpp" line="177"/>
         <source>10:Pan</source>
-        <translation type="unfinished"></translation>
+        <translation>10:Баланс</translation>
     </message>
     <message>
         <location filename="../synthengine.cpp" line="178"/>
         <source>64:Sustain</source>
-        <translation type="unfinished"></translation>
+        <translation>64:Продолжительность</translation>
     </message>
 </context>
 </TS>
