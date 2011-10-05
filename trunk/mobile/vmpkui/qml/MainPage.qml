@@ -184,6 +184,8 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Turn:")
                 font.pixelSize: 24
+                width: 80
+                elide: Text.ElideRight
             }
             Switch {
                 id: velocityTurn
@@ -220,7 +222,7 @@ Page {
         Row {
             id: panelCtl
             visible: btCtl.checked
-            spacing: 5
+            spacing: 2
             TumblerButton {
                 width: 250;
                 anchors.verticalCenter: parent.verticalCenter
@@ -237,7 +239,7 @@ Page {
             }
             Slider {
                 id: controlSlider
-                width: 400;
+                width: 380;
                 anchors.verticalCenter: parent.verticalCenter
                 minimumValue: 0
                 maximumValue: 127
@@ -252,6 +254,8 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Turn:")
                 font.pixelSize: 24
+                width: 80
+                elide: Text.ElideRight
             }
             Switch {
                 id: ctlTurn
@@ -298,6 +302,8 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Turn:")
                 font.pixelSize: 24
+                width: 80
+                elide: Text.ElideRight
             }
             Switch {
                 id: benderTurn
@@ -334,6 +340,8 @@ Page {
 
     RotationSensor {
         id: rotationSensor
+        active: Qt.application.active
+        dataRate: 0
         onReadingChanged: {
             if(velocityTurn.checked)
                 velocitySlider.value = 64 - (reading.x * 0.71)
@@ -361,7 +369,6 @@ Page {
         octaveButton.text = baseOctaveSelection.model.get(5).name;
         synthEngine.initialize();
         theme.inverted = synthEngine.invertedTheme;
-        rotationSensor.start()
     }
 
     Connections {

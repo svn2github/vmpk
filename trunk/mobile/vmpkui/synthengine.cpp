@@ -64,7 +64,7 @@ void SynthEngine::keyEvent(MeeGo::QmKeys::Key key, MeeGo::QmKeys::State state)
         (MeeGo::QmKeys::VolumeDown == key ||
          MeeGo::QmKeys::VolumeUp == key)) {
         float g = ::fluid_synth_get_gain(m_synth) * 100.0f;
-        g += (key == MeeGo::QmKeys::VolumeUp ? 2.0f : -2.0f);
+        g += (key == MeeGo::QmKeys::VolumeUp ? 1.0f : -1.0f);
         if (g < 0) g = 0;
         if (g > 100.0f) g = 100.0f;
         ::fluid_synth_set_gain(m_synth, g / 100.0f);
