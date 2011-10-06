@@ -13,5 +13,6 @@
         <file>qml/Help.qml</file>
         <file>i18n/vmpkn9_es.qm</file>
         <file>i18n/vmpkn9_ru.qm</file>
+        <file>i18n/vmpkn9_cs.qm</file>
     </qresource>
 </RCC>

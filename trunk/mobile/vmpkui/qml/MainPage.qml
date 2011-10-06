@@ -275,6 +275,8 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Bender:")
                 font.pixelSize: 24
+                width: 100
+                elide: Text.ElideRight
             }
             CountBubble {
                 width: 80

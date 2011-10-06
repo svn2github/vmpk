@@ -127,6 +127,7 @@ BasePage {
         id: languageSelection
         titleText: qsTr("Language")
         model: ListModel {
+            ListElement { name: "Čeština"; value: "cs" }
             ListElement { name: "English"; value: "en" }
             ListElement { name: "Español"; value: "es" }
             ListElement { name: "Русский"; value: "ru" }
