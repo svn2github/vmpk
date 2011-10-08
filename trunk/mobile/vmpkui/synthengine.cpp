@@ -34,6 +34,7 @@ const QString QSTR_SOUNDFONT("VintageDreamsWaves-v2.sf2");
 const QString QSTR_INVERTHEME("InvertedTheme");
 const QString QSTR_LANGUAGE("Language");
 const QString QSTR_DOWNLOADS("/MyDocs/Downloads");
+const QStringList VALID_LANGUAGES( QStringList() << "cs" << "en" << "es" << "ru" );
 
 SynthEngine::SynthEngine(QObject *parent)
     : QObject(parent), m_channel(0), m_invertedTheme(false)
@@ -326,7 +327,7 @@ void SynthEngine::setLanguage(const QString value)
 void SynthEngine::initLanguage(const QString value)
 {
     //qDebug() << Q_FUNC_INFO << value;
-    if (!value.isEmpty() && m_language.isEmpty()) {
+    if (m_language.isEmpty() &&  !value.isEmpty() && VALID_LANGUAGES.contains(value)) {
         m_language = value;
         emit languageChanged();
     }

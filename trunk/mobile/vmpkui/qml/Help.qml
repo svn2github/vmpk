@@ -23,22 +23,34 @@ import com.nokia.meego 1.0
 BasePage {
     id: helpPage
     title: qsTr("Help")
+    property string document:""
 
     Flickable {
         id: flickable
         anchors.fill: client
         contentWidth: Math.max(client.width,browser.width)
         contentHeight: Math.max(client.height,browser.height)
-        flickableDirection : Flickable.HorizontalAndVerticalFlick
+        flickableDirection : Flickable.VerticalFlick
 
         WebView {
             id: browser
+            url : "http://vmpk.sourceforge.net/n9/" + document
             transformOrigin: Item.TopLeft
-            url: "http://vmpk.sourceforge.net/n9/"
             preferredWidth: flickable.width
             preferredHeight: flickable.height
+            settings.standardFontFamily: "Nokia Pure"
             settings.defaultFontSize: 32
+            settings.javascriptEnabled: true
             onAlert: console.log(message)
+            onLoadFailed: {
+                console.log("document " + document + " load failed");
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        if (synthEngine.language != "en" && synthEngine.language != "" ) {
+            document = "index." + synthEngine.language + ".html"
         }
     }
 
