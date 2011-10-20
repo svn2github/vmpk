@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = vmpkn9
-VERSION = 0.1.0
+VERSION = 0.1.1
 LIBS += -L../fluidsynth -lfluidsynth
 
 DEFINES += VERSION=$$VERSION

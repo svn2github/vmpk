@@ -357,7 +357,9 @@ Page {
     InfoBanner {
         id: volumeInfo
         iconSource: "image://theme/icon-m-toolbar-volume-white"
-        anchors.centerIn: parent
+        //anchors.centerIn: parent
+        topMargin: 160
+        leftMargin: 300
         timerEnabled: true
         timerShowTime: 2000
     }
