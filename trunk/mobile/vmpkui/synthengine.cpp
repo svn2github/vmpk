@@ -33,7 +33,7 @@ const QString QSTR_DATADIR("/opt/vmpkn9/sf2/");
 const QString QSTR_SOUNDFONT("VintageDreamsWaves-v2.sf2");
 const QString QSTR_INVERTHEME("InvertedTheme");
 const QString QSTR_LANGUAGE("Language");
-const QString QSTR_DOWNLOADS("/MyDocs/Downloads");
+const QString QSTR_USERDOCS("/MyDocs");
 const QStringList VALID_LANGUAGES( QStringList() << "cs" << "en" << "es" << "ru" );
 
 SynthEngine::SynthEngine(QObject *parent)
@@ -103,7 +103,7 @@ void SynthEngine::initializeSynth()
     m_driver = ::new_fluid_audio_driver(m_settings, m_synth);
     ::fluid_synth_set_chorus_on(m_synth, 0);
     ::fluid_synth_set_reverb_on(m_synth, 0);
-    ::fluid_synth_set_interp_method(m_synth, -1, FLUID_INTERP_LINEAR); // FLUID_INTERP_NONE);
+    ::fluid_synth_set_interp_method(m_synth, -1, FLUID_INTERP_LINEAR);
     for (int i=0; i<16; ++i) {
         m_controller[i]=0;
     }
@@ -188,6 +188,10 @@ void SynthEngine::loadControllers()
 void SynthEngine::initialize()
 {
     loadSoundFont();
+    if (m_sfid < 0) {
+        m_soundFont = m_defSoundFont;
+        loadSoundFont();
+    }
     loadControllers();
 }
 
@@ -285,15 +289,19 @@ void SynthEngine::scanSoundFonts(const QDir &initialDir)
 {
     //qDebug() << Q_FUNC_INFO << initialDir.absolutePath();
     QDir dir(initialDir);
-    dir.setFilter(QDir::Files);
+    dir.setFilter(QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot);
     dir.setSorting(QDir::Name);
     QStringList filters;
     filters << "*.sf2" << "*.SF2";
     QFileInfoList entries= dir.entryInfoList(filters);
     foreach(const QFileInfo &info, entries) {
         QString name = info.absoluteFilePath();
-        m_soundFontsList << name;
-        emit soundFontAdded(name);
+        if (info.isFile()) {
+            m_soundFontsList << name;
+            emit soundFontAdded(name);
+        } else if (info.isDir()){
+            scanSoundFonts(name);
+        }
     }
 }
 
@@ -303,7 +311,7 @@ void SynthEngine::scanSoundFonts()
     emit soundFontsChanged();
     QDir globaldir(QSTR_DATADIR);
     scanSoundFonts(globaldir);
-    QDir homedir(QDesktopServices::storageLocation(QDesktopServices::HomeLocation) + QSTR_DOWNLOADS);
+    QDir homedir(QDesktopServices::storageLocation(QDesktopServices::HomeLocation) + QSTR_USERDOCS);
     scanSoundFonts(homedir);
 }
 
@@ -338,9 +346,8 @@ void SynthEngine::readSettings()
     //qDebug() << Q_FUNC_INFO;
     QDir dir(QSTR_DATADIR);
     QFileInfo sf2(dir, QSTR_SOUNDFONT);
-    QString defSoundFont;
     if (sf2.exists()) {
-        defSoundFont = sf2.absoluteFilePath();
+        m_defSoundFont = sf2.absoluteFilePath();
     }
     QColor defColor("purple");
     m_sfid = -1;
@@ -348,9 +355,9 @@ void SynthEngine::readSettings()
     QSettings settings;
     settings.beginGroup(QSTR_PREFERENCES);
     m_numOctaves = settings.value(QSTR_NUMOCTAVES, 2).toInt();
-    m_soundFont = settings.value(QSTR_INSTRUMENTSDEFINITION, defSoundFont).toString();
+    m_soundFont = settings.value(QSTR_INSTRUMENTSDEFINITION, m_defSoundFont).toString();
     m_highlightColor = settings.value(QSTR_KEYPRESSEDCOLOR, defColor).value<QColor>();
-    m_invertedTheme = settings.value(QSTR_INVERTHEME, false).toBool();
+    m_invertedTheme = settings.value(QSTR_INVERTHEME, true).toBool();
     m_language = settings.value(QSTR_LANGUAGE, QString()).toString();
     settings.endGroup();
 }

@@ -128,6 +128,7 @@ private:
     bool m_invertedTheme;
     QColor m_highlightColor;
     QString m_soundFont;
+    QString m_defSoundFont;
     fluid_settings_t* m_settings;
     fluid_synth_t* m_synth;
     fluid_audio_driver_t* m_driver;
