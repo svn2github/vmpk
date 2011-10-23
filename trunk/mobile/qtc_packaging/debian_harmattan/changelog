@@ -1,15 +1,17 @@
+vmpkn9 (0.1.1) unstable; urgency=low
+  * fix for volume InfoBanner after N950 device software update PR1.1 (39-5)
+  * inverted theme is now the default setting.
+  * look for soundfont files all over /home/user/MyDocs and subdirs
+  * fix initialization when the configured soundfont was not found
+
+ -- Pedro Lopez-Cabanillas <plcl@users.sf.net>  Sun, 23 Oct 2011 11:48:31 +0200
+
 vmpkn9 (0.1.0) unstable; urgency=low
-  * <Add change description here>
+  * First public release
 
  -- Pedro Lopez-Cabanillas <plcl@users.sf.net>  Sun, 09 Oct 2011 18:33:10 +0200
 
-vmpkn9 (0.1.3) unstable; urgency=low
-  * <Add change description here>
-
- -- Pedro Lopez-Cabanillas <plcl@users.sf.net>  Sun, 09 Oct 2011 18:33:08 +0200
-
 vmpkn9 (0.0.3) unstable; urgency=low
-
   * Initial Release.
 
  -- Pedro Lopez-Cabanillas <plcl@users.sf.net>  Fri, 19 Aug 2011 18:39:57 +0200
