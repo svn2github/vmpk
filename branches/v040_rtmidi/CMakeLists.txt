@@ -36,7 +36,7 @@ endif ()
 
 set (PROGRAM_NAME_INIT "vmpk")
 
-set (RTMIDI_DRIVER ${MIDI_DRIVER_INIT} CACHE STRING
+set (RTMIDI_DRIVERS ${MIDI_DRIVER_INIT} CACHE STRING
      "RtMIDI driver: ALSA, JACK, COREMIDI, IRIX, WINMM, NET")
 set (PROGRAM_NAME ${PROGRAM_NAME_INIT} CACHE STRING
      "Executable program name")
@@ -108,6 +108,7 @@ if (UNIX AND NOT APPLE)
     link_libraries (${X11_X11_LIB})
 endif ()
 
+foreach (RTMIDI_DRIVER ${RTMIDI_DRIVERS})
 if (RTMIDI_DRIVER STREQUAL "JACK")
     # Check Jack
     set (HAVE_JACK FALSE)
@@ -149,17 +150,20 @@ if (RTMIDI_DRIVER STREQUAL "ALSA")
 endif ()
 
 if (RTMIDI_DRIVER STREQUAL "COREMIDI")        
+    set (HAVE_COREMIDI TRUE)
     add_definitions (-D__MACOSX_CORE__)
     link_libraries ("-framework CoreMidi -framework CoreAudio -framework CoreFoundation -framework Carbon")
 endif ()
 
 if (RTMIDI_DRIVER STREQUAL "IRIX")        
+    set (HAVE_IRIX_MD TRUE)
     find_package (Threads REQUIRED)
     add_definitions (-D__IRIX_MD__)
     link_libraries (audio ${CMAKE_THREAD_LIBS_INIT})
 endif ()
 
 if (RTMIDI_DRIVER STREQUAL "WINMM")        
+    set (HAVE_WINMM TRUE)
     find_package (WINDRES REQUIRED)
     add_definitions (-D__WINDOWS_MM__)
     set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
@@ -167,8 +171,10 @@ if (RTMIDI_DRIVER STREQUAL "WINMM")
 endif ()
 
 if (RTMIDI_DRIVER STREQUAL "NET")
+    set (HAVE_NETWORK_MIDI TRUE)
     add_definitions (-DNETWORK_MIDI)
 endif()
+endforeach ()
 
 add_subdirectory (src)
 add_subdirectory (translations)

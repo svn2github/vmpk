@@ -45,7 +45,7 @@ class VPiano : public QMainWindow, public PianoHandler
     Q_OBJECT
 
 public:
-    VPiano( QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+    VPiano( const char * rtmidi_backend, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
     virtual ~VPiano();
     int getInputChannel();
     void midiThru(std::vector<unsigned char> *message) const;
@@ -144,8 +144,8 @@ protected:
     void hideEvent( QHideEvent *event );
 
 private:
-    void initialization();
-    bool initMidi();
+    void initialization(const char * rtmidi_backend);
+    bool initMidi(const char * rtmidi_backend);
     void readSettings();
     void writeSettings();
     void applyPreferences();

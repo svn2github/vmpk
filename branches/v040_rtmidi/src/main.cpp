@@ -22,6 +22,9 @@
 #include "rawkeybdapp.h"
 #endif
 #include <QtGui/QApplication>
+#include <getopt.h>
+#include <iostream>
+#include <cstring>
 #if defined(Q_OS_SYMBIAN)
 // to lock orientation in Symbian
 #include <eikenv.h>
@@ -29,6 +32,12 @@
 #include <aknenv.h>
 #include <aknappui.h>
 #endif
+
+const char* const short_options = "m:";
+const struct option long_options[] = {
+    { "rtmidi-backend",     1, NULL, 'm' },
+    { NULL,       0, NULL, 0   }   /* Required at end of array.  */
+};
 
 int main(int argc, char *argv[])
 {
@@ -40,6 +49,42 @@ int main(int argc, char *argv[])
 #else
     QApplication a(argc, argv);
 #endif
+    // vmpk options
+    const char *rtmidi_backend = NULL;
+    int next_option;
+    do {
+        next_option = getopt_long (argc, argv, short_options, long_options, NULL);
+        switch (next_option) {
+        case 'm':
+            rtmidi_backend=optarg;
+            if (
+#if defined(__LINUX_ALSASEQ__)
+                (strcmp(rtmidi_backend, "alsa")) &&
+#endif
+#if defined(__LINUX_JACK__)
+                (strcmp(rtmidi_backend, "jack")) &&
+#endif
+#if defined(__IRIX_MD__)
+                (strcmp(rtmidi_backend, "irix")) &&
+#endif
+#if defined(__MACOSX_CORE__)
+                (strcmp(rtmidi_backend, "coremidi")) &&
+#endif
+#if defined(__WINDOWS_MM__)
+                (strcmp(rtmidi_backend, "winmm")) &&
+#endif
+#if defined(NETWORK_MIDI)
+                (strcmp(rtmidi_backend, "net")) &&
+#endif
+                true) {
+                std::cerr << "Unknown or unavailable RtMidi backend '" << rtmidi_backend << "'!\n";
+                return EXIT_FAILURE;
+            }
+            break;
+        default:
+            break;
+        }
+    } while (next_option != -1);
 #if defined(Q_OS_LINUX)
     a.setWindowIcon(QIcon(":/vpiano/vmpk_32x32.png"));
 #endif //Q_OS_LINUX
@@ -52,7 +97,7 @@ int main(int argc, char *argv[])
         }
     );
 #endif //Q_OS_SYMBIAN
-    VPiano w;
+    VPiano w(rtmidi_backend);
     if (w.isInitialized()) {
 #if defined(SMALL_SCREEN)
         w.showMaximized();

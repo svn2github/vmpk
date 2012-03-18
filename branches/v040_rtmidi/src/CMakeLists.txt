@@ -76,11 +76,47 @@ set (vmpk_SRCS
     RtError.h
     RtMidi.cpp
     RtMidi.h
-    udpmidi.cpp
     vpiano.cpp
     vpiano.h
     shortcutdialog.cpp
     shortcutdialog.h )
+
+if (HAVE_ALSA)
+set (vmpk_SRCS
+    ${vmpk_SRCS}
+    RtMidiAlsa.cpp
+    RtMidiAlsa.h )
+endif ()
+if (HAVE_JACK)
+set (vmpk_SRCS
+    ${vmpk_SRCS}
+    RtMidiJack.cpp
+    RtMidiJack.h )
+endif ()
+if (HAVE_COREMIDI)
+set (vmpk_SRCS
+    ${vmpk_SRCS}
+    RtMidiCoreMidi.cpp
+    RtMidiCoreMidi.h )
+endif ()
+if (HAVE_IRIX_MD)
+set (vmpk_SRCS
+    ${vmpk_SRCS}
+    RtMidiIrix.cpp
+    RtMidiIrix.h )
+endif ()
+if (HAVE_WINMM)
+set (vmpk_SRCS
+    ${vmpk_SRCS}
+    RtMidiWinMM.cpp
+    RtMidiWinMM.h )
+endif ()
+if (HAVE_NETWORK_MIDI)
+set (vmpk_SRCS
+    ${vmpk_SRCS}
+    RtMidiNet.cpp
+    RtMidiNet.h )
+endif ()
 
 QT4_ADD_RESOURCES (vmpk_SRCS ../data/vmpk.qrc)
 

@@ -22,6 +22,25 @@
 #include "knob.h"
 #include "classicstyle.h"
 #include "RtMidi.h"
+// FIXME PINI
+#if defined(__LINUX_ALSASEQ__)
+#include "RtMidiAlsa.h"
+#endif
+#if defined(__LINUX_JACK__)
+#include "RtMidiJack.h"
+#endif
+#if defined(__IRIX_MD__)
+#include "RtMidiIrix.h"
+#endif
+#if defined(__MACOSX_CORE__)
+#include "RtMidiCoreMidi.h"
+#endif
+#if defined(__WINDOWS_MM__)
+#include "RtMidiWinMM.h"
+#endif
+#if defined(NETWORK_MIDI)
+#include "RtMidiNet.h"
+#endif
 #include "constants.h"
 #include "riffimportdlg.h"
 #include "extracontrols.h"
@@ -64,7 +83,7 @@
 #include <QtCore/QMapIterator>
 #include <QtCore/QDebug>
 
-VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
+VPiano::VPiano( const char * rtmidi_backend, QWidget * parent, Qt::WindowFlags flags )
     : QMainWindow(parent, flags),
     m_midiout(0),
     m_midiin(0),
@@ -131,7 +150,7 @@ VPiano::VPiano( QWidget * parent, Qt::WindowFlags flags )
     setWindowTitle("VMPK " + PGM_VERSION);
 #endif
     ui.pianokeybd->setPianoHandler(this);
-    initialization();
+    initialization(rtmidi_backend);
 }
 
 VPiano::~VPiano()
@@ -155,9 +174,9 @@ VPiano::~VPiano()
     }
 }
 
-void VPiano::initialization()
+void VPiano::initialization(const char * rtmidi_backend)
 {
-    if ((m_initialized = initMidi())) {
+    if ((m_initialized = initMidi(rtmidi_backend))) {
         refreshConnections();
         readSettings();
         createLanguageMenu();
@@ -230,11 +249,55 @@ void midiCallback( double /*deltatime*/,
         QApplication::postEvent(instance, ev);
 }
 
-bool VPiano::initMidi()
+bool VPiano::initMidi(const char * rtmidi_backend)
 {
     try {
-        m_midiout = new RtMidiOut(QSTR_VMPKOUTPUT.toStdString());
-        m_midiin = new RtMidiIn(QSTR_VMPKINPUT.toStdString());
+#if defined(__LINUX_ALSASEQ__)
+        if (!strcmp(rtmidi_backend, "alsa")) {
+            m_midiout = new RtMidiOutAlsa(QSTR_VMPKOUTPUT.toStdString());
+            m_midiin = new RtMidiInAlsa(QSTR_VMPKINPUT.toStdString());
+        }
+        else
+#endif
+#if defined(__LINUX_JACK__)
+        if (!strcmp(rtmidi_backend, "jack")) {
+            m_midiout = new RtMidiOutJack(QSTR_VMPKOUTPUT.toStdString());
+            m_midiin = new RtMidiInJack(QSTR_VMPKINPUT.toStdString());
+        }
+        else
+#endif
+#if defined(__IRIX_MD__)
+        if (!strcmp(rtmidi_backend, "irix")) {
+            m_midiout = new RtMidiOutIrix(QSTR_VMPKOUTPUT.toStdString());
+            m_midiin = new RtMidiInIrix(QSTR_VMPKINPUT.toStdString());
+        }
+        else
+#endif
+#if defined(__MACOSX_CORE__)
+        if (!strcmp(rtmidi_backend, "coremidi")) {
+            m_midiout = new RtMidiOutCoreMidi(QSTR_VMPKOUTPUT.toStdString());
+            m_midiin = new RtMidiInCoreMidi(QSTR_VMPKINPUT.toStdString());
+        }
+        else
+#endif
+#if defined(__WINDOWS_MM__)
+        if (!strcmp(rtmidi_backend, "winmm")) {
+            m_midiout = new RtMidiOutWinMM(QSTR_VMPKOUTPUT.toStdString());
+            m_midiin = new RtMidiInWinMM(QSTR_VMPKINPUT.toStdString());
+        }
+        else
+#endif
+#if defined(NETWORK_MIDI)
+        if (!strcmp(rtmidi_backend, "net")) {
+            m_midiout = new RtMidiOutNet(QSTR_VMPKOUTPUT.toStdString());
+            m_midiin = new RtMidiInNet(QSTR_VMPKINPUT.toStdString());
+        }
+        else
+#endif
+        {
+            std::cerr << "No RtMidi backend available. Exiting.\n";
+            exit(-1);
+        }
 #if !defined(__LINUX_ALSASEQ__) && !defined(__MACOSX_CORE__) && !defined(__LINUX_JACK__)
         int nOutPorts = m_midiout->getPortCount();
         if (nOutPorts == 0) {

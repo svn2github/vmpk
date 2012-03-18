@@ -20,8 +20,6 @@
  *  This code is based on Qmidinet, by Rui Nuno Capela: http://qmidinet.sf.net
  */
 
-#if defined(NETWORK_MIDI)
-
 #include <cstring>
 #include <sstream>
 
@@ -44,7 +42,7 @@
 
 #include <QThread>
 #include <QDebug>
-#include "RtMidi.h"
+#include "RtMidiNet.h"
 #include "preferences.h"
 
 int g_iUdpPort = NETWORKPORTNUMBER;
@@ -143,14 +141,19 @@ void UdpDeviceThread::run (void)
     }
 }
 
-void RtMidiIn :: initialize( const std::string& /*clientName*/ )
+RtMidiInNet :: RtMidiInNet( const std::string clientName ) : RtMidiIn()
+{
+  this->initialize( clientName );
+}
+
+void RtMidiInNet :: initialize( const std::string& /*clientName*/ )
 {
     NetworkMidiData *data = new NetworkMidiData;
     apiData_ = (void *) data;
     inputData_.apiData = (void *) data;
 }
 
-RtMidiIn :: ~RtMidiIn()
+RtMidiInNet :: ~RtMidiInNet()
 {
     // Close a connection if it exists.
     closePort();
@@ -159,7 +162,7 @@ RtMidiIn :: ~RtMidiIn()
     delete data;
 }
 
-void RtMidiIn :: openPort( unsigned int /*portNumber*/, const std::string /*portName*/ )
+void RtMidiInNet :: openPort( unsigned int /*portNumber*/, const std::string /*portName*/ )
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     // Setup network protocol...
@@ -201,25 +204,25 @@ void RtMidiIn :: openPort( unsigned int /*portNumber*/, const std::string /*port
     }
 }
 
-void RtMidiIn :: openVirtualPort( const std::string /*portName*/ )
+void RtMidiInNet :: openVirtualPort( const std::string /*portName*/ )
 {
     errorString_ = "RtMidiIn::openVirtualPort: cannot be implemented in UDP!";
     error( RtError::WARNING );
 }
 
-unsigned int RtMidiIn :: getPortCount()
+unsigned int RtMidiInNet :: getPortCount()
 {
     return 1;
 }
 
-std::string RtMidiIn :: getPortName( unsigned int /*portNumber*/ )
+std::string RtMidiInNet :: getPortName( unsigned int /*portNumber*/ )
 {
     std::ostringstream ost;
     ost << "UDP/" << g_iUdpPort;
     return ost.str();
 }
 
-void RtMidiIn :: closePort()
+void RtMidiInNet :: closePort()
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     // Shutdown the input thread.
@@ -244,13 +247,18 @@ void RtMidiIn :: closePort()
 
 /* RtMidiOut */
 
-void RtMidiOut :: initialize( const std::string& /*clientName*/ )
+RtMidiOutNet :: RtMidiOutNet( const std::string clientName ) : RtMidiOut()
+{
+  this->initialize( clientName );
+}
+
+void RtMidiOutNet :: initialize( const std::string& /*clientName*/ )
 {
     NetworkMidiData *data = new NetworkMidiData;
     apiData_ = (void *) data;
 }
 
-RtMidiOut :: ~RtMidiOut()
+RtMidiOutNet :: ~RtMidiOutNet()
 {
     // Close a connection if it exists.
     closePort();
@@ -259,7 +267,7 @@ RtMidiOut :: ~RtMidiOut()
     delete data;
 }
 
-void RtMidiOut :: openPort( unsigned int /*portNumber*/, const std::string /*portName*/ )
+void RtMidiOutNet :: openPort( unsigned int /*portNumber*/, const std::string /*portName*/ )
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     data->socket = ::socket(AF_INET, SOCK_DGRAM, 0);
@@ -280,25 +288,25 @@ void RtMidiOut :: openPort( unsigned int /*portNumber*/, const std::string /*por
     }
 }
 
-void RtMidiOut :: openVirtualPort( const std::string /*portName*/ )
+void RtMidiOutNet :: openVirtualPort( const std::string /*portName*/ )
 {
     errorString_ = "RtMidiOut::openVirtualPort: cannot be implemented in UDP!";
     error( RtError::WARNING );
 }
 
-unsigned int RtMidiOut :: getPortCount()
+unsigned int RtMidiOutNet :: getPortCount()
 {
     return 1;
 }
 
-std::string RtMidiOut :: getPortName( unsigned int /*portNumber*/ )
+std::string RtMidiOutNet :: getPortName( unsigned int /*portNumber*/ )
 {
     std::ostringstream ost;
     ost << "UDP/" << g_iUdpPort;
     return ost.str();
 }
 
-void RtMidiOut :: closePort()
+void RtMidiOutNet :: closePort()
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     if (data->socket >= 0) {
@@ -311,7 +319,7 @@ void RtMidiOut :: closePort()
     }
 }
 
-void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
+void RtMidiOutNet :: sendMessage( std::vector<unsigned char> *message )
 {
     NetworkMidiData *data = static_cast<NetworkMidiData *> (apiData_);
     if (data->socket <= 0) {
@@ -324,5 +332,3 @@ void RtMidiOut :: sendMessage( std::vector<unsigned char> *message )
         return;
     }
 }
-
-#endif
