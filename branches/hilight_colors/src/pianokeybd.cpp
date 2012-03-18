@@ -38,9 +38,9 @@ PianoKeybd::~PianoKeybd()
     setRawKeyboardMap(NULL);
 }
 
-void PianoKeybd::initScene(int base, int num, const QColor& c)
+void PianoKeybd::initScene(int base, int num, const QColor& c, const QColor& sharpc)
 {
-    m_scene = new PianoScene(base, num, c, this);
+    m_scene = new PianoScene(base, num, c, sharpc, this);
     m_scene->setKeyboardMap(&m_defaultMap);
     connect(m_scene, SIGNAL(noteOn(int,int)), SIGNAL(noteOn(int,int)));
     connect(m_scene, SIGNAL(noteOff(int,int)), SIGNAL(noteOff(int,int)));
@@ -252,10 +252,11 @@ void PianoKeybd::setNumOctaves(const int numOctaves)
     if (numOctaves != m_scene->numOctaves()) {
         int baseOctave = m_scene->baseOctave();
         QColor color = m_scene->getKeyPressedColor();
+        QColor sharpColor = m_scene->getKeyPressedSharpColor();
         PianoHandler* handler = m_scene->getPianoHandler();
         KeyboardMap* keyMap = m_scene->getKeyboardMap();
         delete m_scene;
-        initScene(baseOctave, numOctaves, color);
+        initScene(baseOctave, numOctaves, color, sharpColor);
         m_scene->setPianoHandler(handler);
         m_scene->setKeyboardMap(keyMap);
         fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);

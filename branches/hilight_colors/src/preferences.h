@@ -34,6 +34,7 @@ public:
     int getDrumsChannel() const { return m_drumsChannel; }
     int getNetworkPort() const { return m_networkPort; }
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
+    QColor getKeyPressedSharpColor() const { return m_keyPressedSharpColor; }
     bool getGrabKeyboard() const { return m_grabKb; }
     bool getStyledWidgets() const { return m_styledKnobs; }
     bool getAlwaysOnTop() const { return m_alwaysOnTop; }
@@ -64,8 +65,10 @@ public slots:
     void setRawKeyboard(bool value) { m_rawKeyboard = value; }
     void setVelocityColor(bool value) { m_velocityColor = value; }
     void setKeyPressedColor(QColor value);
+    void setKeyPressedSharpColor(QColor value);
     void slotOpenInstrumentFile();
     void slotSelectColor();
+    void slotSelectSharpColor();
     void slotOpenKeymapFile();
     void slotOpenRawKeymapFile();
     void slotRestoreDefaults();
@@ -88,6 +91,7 @@ private:
     bool m_rawKeyboard;
     bool m_velocityColor;
     QColor m_keyPressedColor;
+    QColor m_keyPressedSharpColor;
     KeyboardMap m_keymap;
     KeyboardMap m_rawmap;
 };

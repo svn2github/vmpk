@@ -28,17 +28,19 @@ class VPIANO_EXPORT PianoKey : public QGraphicsRectItem
 public:
     PianoKey(QGraphicsItem * parent = 0 ) 
         : QGraphicsRectItem(parent), m_pressed(false) { }
-    PianoKey(const QRectF &rect, const QBrush &brush, const int note); 
+    PianoKey(const QRectF &rect, const QColor &color, const int note);
     PianoKey(const QRectF &rect, const bool black, const int note);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
     int getNote() const { return m_note; }
-    void setPressedBrush(const QBrush& b) { m_selectedBrush = b; }
+    void setPressedColor(const QColor& c);
     bool isPressed() const { return m_pressed; }
     void setPressed(bool p);
+    bool isSharpKey() const { return m_black; }
+    void setSharpKey(bool sk) { m_black = sk ; }
 private:
     bool m_pressed;
-    QBrush m_selectedBrush;
-    QBrush m_brush;
+    QColor m_color;
+    QColor m_pressedColor;
     int m_note;
     bool m_black;
 };

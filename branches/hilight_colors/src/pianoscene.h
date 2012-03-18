@@ -40,7 +40,8 @@ class VPIANO_EXPORT PianoScene : public QGraphicsScene
 public:
     PianoScene ( const int baseOctave, 
                  const int numOctaves,
-                 const QColor& keyPressedColor = QColor(),
+                 const QColor& keyPressedColor = QColor(Qt::blue),
+                 const QColor& keyPressedSharpColor = QColor(Qt::green),
                  QObject * parent = 0 );
     
     QSize sizeHint() const;
@@ -50,6 +51,8 @@ public:
     void setPianoHandler(PianoHandler* handler) { m_handler = handler; }
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
     void setKeyPressedColor(const QColor& color);
+    QColor getKeyPressedSharpColor() const { return m_keyPressedSharpColor; }
+    void setKeyPressedSharpColor(const QColor& color);
     int getMinNote() const { return m_minNote; } 
     void setMinNote(const int note);
     int getMaxNote() const { return m_maxNote; }
@@ -114,6 +117,7 @@ private:
     bool m_useFlats;
     bool m_rawkbd;
     QColor m_keyPressedColor;
+    QColor m_keyPressedSharpColor;
     bool m_mousePressed;
     int m_velocity;
     PianoHandler* m_handler;

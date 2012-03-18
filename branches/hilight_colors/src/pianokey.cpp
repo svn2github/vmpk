@@ -22,26 +22,24 @@
 #include <QtGui/QPalette>
 #include <QtSvg/QSvgRenderer>
 
-static const QBrush blackBrush = QBrush(Qt::black);
-static const QBrush whiteBrush = QBrush(Qt::white);
-
-PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note)
+PianoKey::PianoKey(const QRectF &rect, const QColor &color, const int note)
     : QGraphicsRectItem(rect),
     m_pressed(false),
-    m_brush(brush), 
     m_note(note),
-    m_black(brush == blackBrush)
+    m_black(false)
 {
+    if (color.isValid())
+        m_color = color;
     setAcceptedMouseButtons(Qt::NoButton);
 }
 
 PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
     : QGraphicsRectItem(rect),
     m_pressed(false),
-    m_brush( black ? blackBrush : whiteBrush ),
     m_note(note),
     m_black(black)
 {
+    m_color = (black) ? QColor(Qt::black) : QColor(Qt::white);
     setAcceptedMouseButtons(Qt::NoButton);
 }
 
@@ -50,15 +48,16 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
     static QSvgRenderer keyRenderer(QString(":/vpiano/blkey.svg"));
     static const QPen blackPen(Qt::black, 1);
     static const QPen grayPen(QBrush(Qt::gray), 1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
+    QBrush tmpBrush;
+    QColor tmpColor;
     if (m_pressed) {
-        if (m_selectedBrush.style() != Qt::NoBrush) {
-            painter->setBrush(m_selectedBrush);
-        } else {
-            painter->setBrush(QApplication::palette().highlight());
-        }
+        tmpColor = m_pressedColor;
     } else {
-        painter->setBrush(m_brush);
+        tmpColor = m_color;
     }
+
+    tmpBrush = QBrush(tmpColor);
+    painter->setBrush(tmpBrush);
     painter->setPen(blackPen);
     painter->drawRoundRect(rect(), 15, 15);
     if (m_black)
@@ -79,5 +78,12 @@ void PianoKey::setPressed(bool p)
     if (p != m_pressed) {
         m_pressed = p;
         update();
+    }
+}
+
+void PianoKey::setPressedColor(const QColor& c)
+{
+    if (c.isValid()) {
+        m_pressedColor = c;
     }
 }

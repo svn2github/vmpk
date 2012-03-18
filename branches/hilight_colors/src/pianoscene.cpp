@@ -32,6 +32,7 @@
 PianoScene::PianoScene ( const int baseOctave, 
                          const int numOctaves, 
                          const QColor& keyPressedColor,
+                         const QColor& keyPressedSharpColor,
                          QObject * parent )
     : QGraphicsScene( QRectF(0, 0, KEYWIDTH * numOctaves * 7, KEYHEIGHT), parent ),
     m_baseOctave( baseOctave ),
@@ -42,12 +43,15 @@ PianoScene::PianoScene ( const int baseOctave,
     m_showLabels( false ),
     m_useFlats( false ),
     m_rawkbd( false ),
-    m_keyPressedColor( keyPressedColor ),
     m_mousePressed( false ),
     m_velocity( 100 ),
     m_handler( 0 )
 {
-    QBrush hilightBrush(m_keyPressedColor.isValid() ? m_keyPressedColor : QApplication::palette().highlight());
+    if (keyPressedColor.isValid())
+        m_keyPressedColor = keyPressedColor;
+    if (keyPressedSharpColor.isValid())
+        m_keyPressedSharpColor = keyPressedSharpColor;
+
     QFont lblFont(QApplication::font());
     int i, numkeys = m_numOctaves * 12;
     lblFont.setPointSize(KEYLABELFONTSIZE);
@@ -65,6 +69,10 @@ PianoScene::PianoScene ( const int baseOctave,
             lbl = new KeyLabel(key);
             lbl->setDefaultTextColor(Qt::black);
             lbl->setPos(x, KEYHEIGHT);
+            if (! m_keyPressedColor.isValid()) {
+                m_keyPressedColor = QColor(QApplication::palette().highlight().color());
+            }
+            key->setPressedColor(m_keyPressedColor);
         } else {
             x = (octave + j / 2) * KEYWIDTH + KEYWIDTH * 6/10 + 1;
             key = new PianoKey( QRectF( x, 0, KEYWIDTH * 8/10 - 1, KEYHEIGHT * 6/10 ), true, i );
@@ -72,9 +80,11 @@ PianoScene::PianoScene ( const int baseOctave,
             lbl = new KeyLabel(key);
             lbl->setDefaultTextColor(Qt::white);
             lbl->setPos(x - 3, KEYHEIGHT * 6/10 - 3);
+            if (! m_keyPressedSharpColor.isValid()) {
+                m_keyPressedSharpColor = QColor(Qt::green);
+            }
+            key->setPressedColor(m_keyPressedSharpColor);
         }
-        if (m_keyPressedColor.isValid())
-            key->setPressedBrush(hilightBrush);
         m_keys.insert(i, key);
         addItem( key );
         lbl->setFont(lblFont);
@@ -91,10 +101,8 @@ QSize PianoScene::sizeHint() const
 
 void PianoScene::showKeyOn( PianoKey* key, int vel )
 {
-    if (vel >= 0 && m_keyPressedColor.isValid() ) {
-        QBrush hilightBrush(m_keyPressedColor.lighter(200 - vel));
-        key->setPressedBrush(hilightBrush);
-    }
+    QColor tmpColor = key->isSharpKey() ? m_keyPressedSharpColor : m_keyPressedColor;
+    key->setPressedColor(tmpColor.lighter(200 - vel));
     key->setPressed(true);
 }
 
@@ -349,9 +357,22 @@ void PianoScene::setKeyPressedColor(const QColor& color)
 {
     if (color.isValid() && (color != m_keyPressedColor)) {
         m_keyPressedColor = color;
-        QBrush hilightBrush(m_keyPressedColor);
         foreach(PianoKey* key, m_keys) {
-            key->setPressedBrush(hilightBrush);
+            if (! key->isSharpKey()) {
+                key->setPressedColor(m_keyPressedColor);
+            }
+        }
+    }
+}
+
+void PianoScene::setKeyPressedSharpColor(const QColor& color)
+{
+    if (color.isValid() && (color != m_keyPressedSharpColor)) {
+        m_keyPressedSharpColor = color;
+        foreach(PianoKey* key, m_keys) {
+            if (key->isSharpKey()) {
+                key->setPressedColor(m_keyPressedSharpColor);
+            }
         }
     }
 }

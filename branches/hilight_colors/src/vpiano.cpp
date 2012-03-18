@@ -613,6 +613,7 @@ void VPiano::readSettings()
     QString insFileName = settings.value(QSTR_INSTRUMENTSDEFINITION).toString();
     QString insName = settings.value(QSTR_INSTRUMENTNAME).toString();
     QColor keyColor = settings.value(QSTR_KEYPRESSEDCOLOR, QColor()).value<QColor>();
+    QColor keySharpColor = settings.value(QSTR_KEYPRESSEDSHARPCOLOR, QColor()).value<QColor>();
     bool grabKb = settings.value(QSTR_GRABKB, false).toBool();
     bool styledKnobs = settings.value(QSTR_STYLEDKNOBS, true).toBool();
     bool alwaysOnTop = settings.value(QSTR_ALWAYSONTOP, false).toBool();
@@ -635,6 +636,7 @@ void VPiano::readSettings()
     dlgPreferences()->setNumOctaves(num_octaves);
     dlgPreferences()->setDrumsChannel(drumsChannel);
     dlgPreferences()->setKeyPressedColor(keyColor);
+    dlgPreferences()->setKeyPressedSharpColor(keySharpColor);
     dlgPreferences()->setGrabKeyboard(grabKb);
     dlgPreferences()->setStyledWidgets(styledKnobs);
     dlgPreferences()->setAlwaysOnTop(alwaysOnTop);
@@ -755,6 +757,7 @@ void VPiano::writeSettings()
     settings.setValue(QSTR_INSTRUMENTSDEFINITION, dlgPreferences()->getInstrumentsFileName());
     settings.setValue(QSTR_INSTRUMENTNAME, dlgPreferences()->getInstrumentName());
     settings.setValue(QSTR_KEYPRESSEDCOLOR, dlgPreferences()->getKeyPressedColor());
+    settings.setValue(QSTR_KEYPRESSEDSHARPCOLOR, dlgPreferences()->getKeyPressedSharpColor());
     settings.setValue(QSTR_GRABKB, dlgPreferences()->getGrabKeyboard());
     settings.setValue(QSTR_STYLEDKNOBS, dlgPreferences()->getStyledWidgets());
     settings.setValue(QSTR_ALWAYSONTOP, dlgPreferences()->getAlwaysOnTop());
@@ -1356,6 +1359,7 @@ void VPiano::applyPreferences()
         ui.pianokeybd->setNumOctaves(dlgPreferences()->getNumOctaves());
     }
     ui.pianokeybd->setKeyPressedColor(dlgPreferences()->getKeyPressedColor());
+    ui.pianokeybd->setKeyPressedSharpColor(dlgPreferences()->getKeyPressedSharpColor());
     ui.pianokeybd->setRawKeyboardMode(dlgPreferences()->getRawKeyboard());
     ui.pianokeybd->setVelocity(dlgPreferences()->getVelocityColor() ? m_velocity : MIDIVELOCITY );
 

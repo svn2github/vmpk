@@ -55,6 +55,7 @@ const QString QSTR_NUMOCTAVES("NumOctaves");
 const QString QSTR_INSTRUMENTSDEFINITION("InstrumentsDefinition");
 const QString QSTR_INSTRUMENTNAME("InstrumentName");
 const QString QSTR_KEYPRESSEDCOLOR("KeyPressedColor");
+const QString QSTR_KEYPRESSEDSHARPCOLOR("KeyPressedSharpColor");
 const QString QSTR_CONNECTIONS("Connections");
 const QString QSTR_INENABLED("InEnabled");
 const QString QSTR_THRUENABLED("ThruEnabled");

@@ -50,6 +50,7 @@ Preferences::Preferences(QWidget *parent)
     restoreDefaults();
     connect(ui.btnInstrument, SIGNAL(clicked()), SLOT(slotOpenInstrumentFile()));
     connect(ui.btnColor, SIGNAL(clicked()), SLOT(slotSelectColor()));
+    connect(ui.btnSharpColor, SIGNAL(clicked()), SLOT(slotSelectSharpColor()));
     connect(ui.btnKmap, SIGNAL(clicked()), SLOT(slotOpenKeymapFile()));
     connect(ui.btnRawKmap, SIGNAL(clicked()), SLOT(slotOpenRawKeymapFile()));
     QPushButton *btnDefaults = ui.buttonBox->button(QDialogButtonBox::RestoreDefaults);
@@ -105,6 +106,9 @@ void Preferences::showEvent ( QShowEvent *event )
         if (!m_keyPressedColor.isValid()) {
             setKeyPressedColor(QApplication::palette().highlight().color());
         }
+        if (!m_keyPressedSharpColor.isValid()) {
+            setKeyPressedSharpColor(Qt::green);
+        }
     }
 }
 
@@ -112,6 +116,7 @@ void Preferences::apply()
 {
     m_numOctaves = ui.spinNumOctaves->value();
     m_keyPressedColor = QColor(ui.lblColorName->text());
+    m_keyPressedSharpColor = QColor(ui.lblSharpColorName->text());
     m_grabKb = ui.chkGrabKb->isChecked();
     m_styledKnobs = ui.chkStyledKnobs->isChecked();
     m_alwaysOnTop = ui.chkAlwaysOnTop->isChecked();
@@ -151,6 +156,12 @@ void Preferences::slotSelectColor()
 {
     QColor color = QColorDialog::getColor(m_keyPressedColor, this);
     setKeyPressedColor(color);
+}
+
+void Preferences::slotSelectSharpColor()
+{
+    QColor color = QColorDialog::getColor(m_keyPressedSharpColor, this);
+    setKeyPressedSharpColor(color);
 }
 
 Instrument* Preferences::getInstrument()
@@ -235,6 +246,16 @@ void Preferences::setKeyPressedColor(QColor value)
     }
 }
 
+void Preferences::setKeyPressedSharpColor(QColor value)
+{
+    if (m_keyPressedSharpColor != value && value.isValid()) {
+        m_keyPressedSharpColor = value;
+        ui.lblSharpColorName->setText(value.name());
+        ui.lblSharpColorName->setPalette(QPalette(value));
+        ui.lblSharpColorName->setAutoFillBackground(true);
+    }
+}
+
 void Preferences::slotOpenKeymapFile()
 {
     QString fileName = QFileDialog::getOpenFileName(0,
@@ -300,6 +321,7 @@ void Preferences::slotRestoreDefaults()
 {
     restoreDefaults();
     setKeyPressedColor(QApplication::palette().highlight().color());
+    setKeyPressedSharpColor(Qt::green);
 }
 
 void Preferences::retranslateUi()
