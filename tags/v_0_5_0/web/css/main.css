@@ -1,0 +1,507 @@
+@charset "utf-8";
+
+/*  This is just a way to stop the dreamweaver bug  */
+
+html { /*  These properties force a vertical scroll bar to prevent a shift to the left when browsing between pages  */
+	height:100%;
+	margin:0 0 1px 0;
+}
+
+body {
+	background:#EEEEEE; /*  Light grey background to the body; for depth mainly  */
+	font-family:Verdana, Arial, sans-serif; /*  Verdana is a readable font. So is Trebuchet MS and Lucida Sans. I've chosen Verdana  */
+	font-size:12px;
+	padding-bottom:10px;/*  Mainly for Firefox's benefit - leaves a gap between container and body end  */
+	color:#333333; /*  Dark grey instead of black for legibility  */
+	line-height:20px; /*  For the sake of readability  */
+}
+
+::-moz-selection { /*  Makes the background yellow when you select text  - useful, but won't work in IE =[ (IE defaults, though) */
+	background:#FFFF00;
+	color: #000000;
+} 
+
+::selection {
+	background:#FFFF00;
+	color: #000000;
+} 
+
+blockquote { /*  Anything placed inside a <blockquote> tag in the markup will look all fancy-pants  */
+	font-style:italic;
+	margin:0;
+	padding:10px 10px 10px 20px;
+	border:1px solid #CCCCCC;
+	background:#EEEEEE;
+	color:#666666;
+}
+
+blockquote:hover { /*  A simple hover effect, just for clarity - makes the border wider  */
+	padding:9px 9px 9px 19px;
+	border:2px solid #CCCCCC;
+}
+
+pre { 
+    margin:0;
+    padding:10px 10px 10px 20px;
+    border:1px solid #CCCCCC;
+    background:#EEEEEE;
+    color:#666666;
+}
+
+a { /*  Removes the dotted line around just-clicked links. Remove this if you prefer  */
+	outline:none;
+}
+
+a.external, a.external:visited { /*  Any link with a class="external" will display a tiny icon (user-friendly)  */
+	padding-right:14px !important;
+	background:url(external-link.gif) no-repeat right center;
+}
+
+a.external:hover {
+	background:#336699 url(external-link.gif) no-repeat right center;
+}
+
+p a, p a:visited { /*  Style for all in-text links (highlights on hover)  */
+	color:#336699;
+	padding:1px;
+}
+
+p a:hover {
+	background:#336699;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+h3 {
+	font-size:16px;
+	color:#555555;
+	margin:0;
+	padding:10px 0 0 0;
+}
+
+h4 {
+	font-size:15px;
+	color:#777777;
+	margin:0;
+	padding:10px 0 0 0;
+}
+
+h5 {
+	font-size:13px;
+	color:#777777;
+	margin:0;
+	padding:10px 0 0 0;
+}
+
+h6 {
+	font-size:12px;
+	color:#333333;
+	margin:0;
+	padding:10px 0 0 0;
+}
+
+#container { /*  Wraps everything up into the centre of the page  */
+	width:900px;
+	padding:10px;
+	border:2px solid #DDDDDD;
+	background:#FFFFFF;
+	margin:0 auto;
+	overflow:auto;
+}
+
+#masthead { /*  That's the site title area which contains the H1 title and H2 subtitle  */
+	width:100%;
+	overflow:hidden;
+	background:#006699;
+	margin:0 0 10px 0;
+	line-height:normal;
+}
+
+#masthead h1, #masthead h1 a, #masthead h1 a:visited { /*  Convention dictates that the site logo be a link to the Home page  */
+	padding:30px 0 0 10px;
+	margin:0;
+	font-size:30px;
+	text-transform:uppercase;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-family:Arial, sans-serif;
+	letter-spacing:-1px;
+	text-decoration:none;
+}
+
+#masthead h1 a span { /*  Hides the "Return to the Home page" until ...  */
+	display:none;
+	font-size:11px;
+	font-weight:normal;
+	font-style:italic;
+	color:#999999;
+	text-transform:none;
+	letter-spacing:normal;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+#masthead h1 a:hover span { /*  ... NOW!  */
+	display:inline;
+}
+
+#masthead h2 { /*  Usually used for a slogan or such like  */
+	padding:0 0 30px 20px;
+	font-size:12px;
+	color:#FFFFFF;
+	font-weight:normal;
+	margin:0;
+}
+
+/* -- GLOBAL NAVIGATION STYLES BEGIN -- */
+
+#navs { /*  The div surrounding the list of links  */
+	width:898px; /*  Take away 2px to compensate for the border at both sides */
+	margin:0 0 10px 0;
+	border:1px solid #DDDDDD; /*  If you remove/adjust this, remember to compensate the width above  */
+	background:#EEEEEE;
+	float:left;
+	line-height:normal;
+}
+
+#navs ul, #navs ul ul { /*  Some style for the list - resetting browser defaults, really  */
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+#navs ul li { /*  More browser resets  */
+	float: left;
+	position: relative;
+}
+
+#navs ul li.nav {
+	background: #EEEEEE;
+}
+
+#navs ul li.nav a, #navs ul li.nav a:visited { /*  Superficial stuffs here - highly customisable  */
+	padding:6px 20px;
+	float:left;
+	text-decoration: none;
+	border-right:1px solid #DDDDDD;
+	font-weight:bold;
+	color:#666666;
+}
+
+#navs ul li.nav a:hover {
+	background:#DDDDDD;
+}
+
+#navs ul li.rss {
+	float:right;
+}
+
+#navs ul li.rss a, #navs ul li.rss a:visited  {
+	background:url(bullet-feed.png) no-repeat left center;
+	border-right:none;
+	border-left:1px solid #DDDDDD;
+	padding:6px 20px 6px 25px;
+}
+
+#navs ul li.rss a:hover  {
+	background:#DDDDDD url(bullet-feed.png) no-repeat left center;
+}
+
+#navs ul li.nav a.current, #navs ul li.nav a.current:visited {
+	background:#FFFFFF;
+}
+
+.sub-nav { /*  This is for the drop-down part of the navigation. Delete it if you don't need it. It'll only confuse you otherwise.  */
+	display: none;
+	width:250px !important;
+	background:#EEEEEE;
+	position: absolute;
+	border:1px solid #DDDDDD;
+	border-bottom:0;
+	top: 26px;
+	left: -1px;
+}
+
+#navs ul li.nav .sub-nav li {
+	width: 100%;
+}
+
+#navs ul li.nav .sub-nav li a {
+	text-decoration: none;
+	display:block;
+	padding:6px 0 6px 20px;
+	width:230px; /* DON'T FORGET THIS IF YOU CHANGE THE .sub-nav WIDTH, SILLY! */
+	border-bottom:1px solid #DDDDDD;
+	border-right:0;
+}
+
+#navs ul li:hover ul { 
+	display: block;
+	width:900px;
+}
+
+/* -- GLOBAL NAVIGATION STYLES ENDS -- */
+
+#toggle { /*  This is the little toggler that holds the feeds or whatever you replace them with  */
+	display:none;
+	background:#EEEEEE;
+	width:898px;
+	border:1px solid #DDDDDD;
+	overflow:hidden;
+	float:right;
+}
+
+#toggle ul {
+	margin:0;
+	padding:0;
+	float:right;
+}
+
+#toggle ul li {
+	list-style:none;
+	float:right;
+}
+
+#toggle ul li a, #toggle ul li a:visited {
+	padding:4px 20px 4px 0;
+	color:#666666;
+	display:block;
+	font-weight:bold;
+	float:left;
+	font-size:10px;
+	text-decoration:none;
+}
+
+#toggle ul li a:hover {
+	text-decoration:underline;
+}
+
+#content { /*  This is the main content on the left of the page. Where you want people to be looking, basically  */
+	width:625px;
+	float:left;
+	text-align:justify;
+}
+
+#left-column { /*  This is for the left column. Put <div id="left-column"> BEFORE <div id="content"> if you use it  */
+	width:230px;
+	min-height:300px;
+	float:left;
+	background:#EEEEEE;
+	border:1px solid #DDDDDD;
+	padding:10px;
+	margin:10px 20px 0 0;
+}
+
+#right-column { /*  This is for the right column. Put <div id="right-column"> AFTER <div id="content"> if you use it  */
+	width:230px;
+	min-height:300px;
+	float:right;
+	background:#EEEEEE;
+	border:1px solid #DDDDDD;
+	padding:10px;
+	margin:10px 0 0 0;
+}
+
+#right-column h4, #left-column h4 {
+	font-weight:bold;
+	font-size:13px;
+	color:#333333;
+	margin:0;
+	padding:15px 0 5px 0;
+}
+
+#right-column h4.top, #left-column h4.top { /*  Oh, the mathematical quirks of CSS!  */
+	padding:0 0 5px 0;
+}
+
+#right-column p, #left-column p {
+	font-size:11px;
+	margin:0	
+}
+
+#right-column img, #left-column img {
+	margin:15px 0 0 0;
+}
+
+ul.vertical-navs {
+	list-style:none;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	border-top:1px solid #DDDDDD;
+}
+
+ul.vertical-navs li a, ul.vertical-navs li a:visited {
+	padding:5px 0;
+	text-decoration:none;
+	display:block;
+	color:#006688;
+	border-bottom:1px solid #DDDDDD;
+}
+
+ul.vertical-navs li a span, ul.vertical-navs li a:visited span {
+	display:none;
+}
+
+ul.vertical-navs li a:hover span {
+	display:block;
+	float:left;
+	padding:0 5px 0 0 ;
+}
+
+ul.vertical-navs li a.current {
+	font-weight:bold;
+	color:#666666;
+}
+
+ul.vertical-navs li a.current span {
+	display:none;
+}
+
+ul.vertical-navs li a:hover {
+	color:#666666;
+}
+
+/*  These are the styles for in-paragraph images. Decides whether to float left or right and/or to add a caption  */
+
+.in-text-image {
+	border:1px solid #DDDDDD;
+	padding:5px;
+	background:#EEEEEE;
+	overflow:hidden;
+	font-size:11px;
+	color:#666666;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	line-height:14px;
+    /*width:300px;*/
+    text-align: center;
+}
+
+/*.in-text-image img {
+	width:300px;
+}*/
+
+.in-text-image p {
+	margin:0;
+	padding:3px 0 0 0;
+}
+
+.in-text-image.left {
+	float:left;
+	margin:0 20px 0 0;
+}
+
+.in-text-image.right {
+	float:right;
+	margin:0 0 0 20px;
+}
+
+#footer {
+	float:left;
+	margin:50px 0 0 0;
+	width:100%;
+	overflow:hidden;
+	background:#97B6FD;
+	line-height:normal;
+}
+
+#footer:hover {
+	background:#006699;
+}
+
+#footer p {
+	color:#FFFFFF;
+}
+
+#footer p.left {
+	float:left;
+	padding:15px 0 15px 20px;
+}
+
+#footer p.right {
+	float:right;
+	padding:15px 20px 15px 0;
+}
+
+#footer a, #footer a:visited {
+	color:#FFFFFF;
+	text-decoration:underline;
+}
+
+#footer a:hover {
+	text-decoration:none;
+	background:none;
+}
+
+/*  The styles that follow are just superficial add-ons that aren't necessarily necessary!  */
+
+p.notice {
+	padding:10px;
+	border:1px solid #336699;
+	color:#336699;
+	background:#BDD7FD;
+}
+
+p.notice:hover {
+	padding:9px;
+	border:2px solid #336699;
+}
+
+p.alert { /*  Makes a paragraph and its links red  */
+	padding:10px;
+	border:1px solid #CC0000;
+	color:#CC0000;
+	background:#FFBFBF;
+}
+
+p.alert a, p.alert a:visited {
+	color:#CC0000;
+}
+
+p.alert a:hover {
+	background:#CC0000;
+	color:#FFFFFF;
+}
+
+p.alert:hover {
+	padding:9px;
+	border:2px solid #CC0000;
+}
+
+p.green { /*  Makes a paragraph and its links green  */
+	padding:10px;
+	border:1px solid #006633;
+	color:#006633;
+	background:#AAFFAA;
+}
+
+p.green a, p.green a:visited {
+	color:#006633;
+}
+
+p.green a:hover {
+	background:#006633;
+	color:#FFFFFF;
+}
+
+p.green:hover {
+	padding:9px;
+	border:2px solid #006633;
+}
+
+acronym {
+	border-bottom:1px dotted #999999;
+	cursor:help;
+}
+
+acronym:hover {
+	border-bottom:1px solid #999999;
+}
+
+#content ul {
+	list-style:square;
+}
+
+#right-column p.alert, #right-column p.notice, #right-column p.green, #left-column p.alert, #left-column p.notice, #left-column p.green {
+	margin:10px 0 0 0;
+}
