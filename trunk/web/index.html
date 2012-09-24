@@ -182,11 +182,17 @@ VMPK the next time.</p>
 
 <h3><a name="MIDI_Connections"></a>MIDI connections and virtual MIDI cables</h3>
 
+<p>In Windows, VMPK connects automatically to the default MIDI output, which is usually the 
+"Microsoft GS Wavetable Synth", included in all Windows versions. This MIDI synthesizer produces 
+very poor quality sound, and suffers of high latency. A better (and free) alternative is 
+<a href="http://coolsoft.altervista.org/virtualmidisynth">CoolSoft Virtual MIDI Synth</a>.</p>
+
 <p>To connect hardware MIDI devices you need physical MIDI cables. To connect MIDI software 
 you need virtual cables. In Windows you can use some virtual MIDI cable software, like 
 <a href="http://www.midiox.com/myoke.htm">MIDI Yoke</a>, Maple, 
-<a href="http://www.nerds.de/en/loopbe1.html">LoopBe1</a> or 
-<a href="http://www.sonycreativesoftware.com/dl/dl.aspx?dwnid=77">Sony Virtual MIDI Router</a>. 
+<a href="http://www.nerds.de/en/loopbe1.html">LoopBe1</a>, 
+<a href="http://www.sonycreativesoftware.com/dl/dl.aspx?dwnid=77">Sony Virtual MIDI Router</a> or
+<a href="http://www.tobias-erichsen.de/software/loopmidi.html">loopMIDI"</a>.
 </p>
 
 <p>MIDI Yoke setup process will install the driver and a control panel applet to change the number 
@@ -222,7 +228,10 @@ virtual cables, but for digital audio data.</p>
 <h2><a name="FAQ"></a>Frequently Asked Questions</h2>
 
 <h3>How to display 88 keys?</h3>
-<p>88 is an arbitrary number of keys used by (most) modern piano manufacturers, but organ and synthesizer manufacturers don't always follow this convention. VMPK can be customized to display from 1 to 10 octaves. Using 7 octaves it shows 84 keys, and for 8 octaves it shows 98 keys. There is no way to display exactly 7 and half octaves.</p>
+<p>88 is an arbitrary number of keys used by (most) modern piano manufacturers, but organ and 
+synthesizer manufacturers don't always follow this convention. VMPK can be customized to display 
+from 1 to 9 octaves. Using 7 octaves it shows 84 keys, and for 8 octaves it shows 98 keys. 
+There is no way to display exactly 7 and half octaves.</p>
 
 <h3>There is no sound</h3>
 <p>VMPK doesn't produce any sound by itself. You need a MIDI synthesizer, and please read the documentation again.</p>
@@ -322,6 +331,8 @@ archive and uncompress it using any utility that supports the format, like
 the PATH including the directories for Qt4 binaries, MinGW binaries, and also
 CMake binaries. The program CMakeSetup.exe is the graphic version of CMake for
 Windows.</p>
+
+<p>For some hints on using the program in Windows, please see <a href="#MIDI_Connections">MIDI connections</a>.</p>
 
 <h3><a name="mac_notes"></a>Notes for Mac OSX users</h3>
 <p>You can find a precompiled universal app bundle, including Qt4 runtime libraries,  
@@ -510,6 +521,7 @@ apps.org</a></li>
 
         <h4>Related Software for Windows</h4>
         <ul class="vertical-navs">
+        <li><a href="http://coolsoft.altervista.org/virtualmidisynth">CoolSoft Virtual MIDI Synth</a></li>
         <li><a href="http://www.midiox.com/myoke.htm">MIDI Yoke</a></li>
         <li><a href="http://www.midiox.com">MIDIOX</a></li>
         </ul>
