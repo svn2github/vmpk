@@ -140,8 +140,8 @@ Sous Linux, vous pouvez utiliser <a href="http://kmidimon.sourceforge.net">KMidi
  
 <p>VMPK ne produit aucun son. Vous devez utiliser un synthétiseur pour entendre les notes jouées.
 Je recommende d'utiliser <a href="http://qsynth.sourceforge.net">QSynth</a>,
- une interface graphique pour <a href="http://www.fluidsynth.org">Fluidsynth</a>. Il est aussi possible  
- d'utiliser "Microsoft GS Wavetable SW Synth" fournit sous Windows. Bien sûr, un synthétiseur MIDI externe est une 
+ une interface graphique pour <a href="http://www.fluidsynth.org">Fluidsynth</a>. Sur Windows, Il est aussi possible  
+ d'utiliser "Microsoft GS Wavetable SW Synth" fournit avec toutes les versions de Windows ou une meilleure alternative comme <a href="http://coolsoft.altervista.org/virtualmidisynth">CoolSoft Virtual MIDI Synth</a>. Bien sûr, un synthétiseur MIDI externe est une 
  approche encore meilleure.</p> 
  
 <h3><a name="maps_instruments"></a>Correspondance des touches du clavier et définition des instruments</h3> 
@@ -170,11 +170,15 @@ En fait, toutes vos préférences, la banque MIDI sélectionnée, le programme, 
  
 <h3><a name="MIDI_Connections"></a>Connection MIDI et câbles MIDI virtuels</h3> 
  
+<p>Sous Windows, VMPK se connecte automatiquement à la sortie MIDI par défaut, qui est d'ordinaire "Microsoft GS Wavetable Synth", que l'on trouve sous toutes les versions de Windows. Ce synthétiseur MIDI produit des sons de qualité médiocre et souffre d'une grande latence.
+Une alternative de meilleure qualité (et gratuite) est <a href="http://coolsoft.altervista.org/virtualmidisynth">CoolSoft Virtual MIDI Synth</a>.</p> 
+ 
 <p>Pour connecter du matériel MIDI, vous utilisez des câbles MIDI physiques. Pour connecter des logiciels MIDI  
 vous avez besoin de câbles virtuels. Sous Windows, vous pouvez utiliser des câbles virtuels tels que 
 <a href="http://www.midiox.com/myoke.htm">MIDI Yoke</a>, Maple, 
-<a href="http://www.nerds.de/en/loopbe1.html">LoopBe1</a> ou 
-<a href="http://www.sonycreativesoftware.com/dl/dl.aspx?dwnid=77">Sony Virtual MIDI Router</a>. 
+<a href="http://www.nerds.de/en/loopbe1.html">LoopBe1</a> 
+<a href="http://www.sonycreativesoftware.com/dl/dl.aspx?dwnid=77">Sony Virtual MIDI Router</a> ou
+<a href="http://www.tobias-erichsen.de/software/loopmidi.html">loopMIDI</a>. 
 </p> 
  
 <p>MIDI Yoke installera le pilote et une interface pour changer le nombre de ports disponibles 
@@ -209,7 +213,7 @@ de la même façon que des câbles virtuels MIDI mais pour l'audio.</p>
 <h2><a name="FAQ"></a>Foire aux questions</h2> 
  
 <h3>Comment afficher 88 touches sur le piano?</h3> 
-<p>88 est un nombre de touches arbitraire utilisé par la plupart des constructeurs de piano modernes, mais les constructeurs d'orgues et de synthétiseurs ne respectent pas toujours cette convention. VMPK peut être personnalisé pour afficher de 1 à 10 octaves. En utilisant 7 octaves, il affiche 84 touches, et pour 8 octaves, il affiche 98 touches. On ne peut pas afficher 7 octaves et demi et exactement 88 touches.</p> 
+<p>88 est un nombre de touches arbitraire utilisé par la plupart des constructeurs de piano modernes, mais les constructeurs d'orgues et de synthétiseurs ne respectent pas toujours cette convention. VMPK peut être personnalisé pour afficher de 1 à 9 octaves. En utilisant 7 octaves, il affiche 84 touches, et pour 8 octaves, il affiche 98 touches. On ne peut pas afficher 7 octaves et demi et exactement 88 touches.</p> 
  
 <h3>Il n'y a pas de son</h3> 
 <p>VMPK ne produit pas de son par lui même. Vous devez utiliser un synthétiseur MIDI, et s'il vous plaît, lisez la documentation encore une fois.</p> 
@@ -305,6 +309,8 @@ et le décompresser avec un utilitaire tel que <a href="http://www.7-zip.org">7-
  
 <p>Pour configurer les sources, utilisez qmake (de Qt4) ou CMake. La variable d'environnement PATH doit contenir les répertoires des binaires de Qt4, des binaires de MinGW et aussi 
 des binaires de CMake. Le programme CMakeSetup.exe est la version graphique de CMake pour Windows.</p> 
+
+<p>Pour des renseignements sur l'utilisation du programme sous Windows, voir <a href="#MIDI_Connections">MIDI connections</a>.</p>
  
 <h3><a name="mac_notes"></a>Notes aux utilisateurs de Mac OSX</h3> 
 <p>Vous pouvez télécharger un bundle précompilé, incluant Qt4, sur    
@@ -484,6 +490,7 @@ apps.org</a></li>
  
         <h4>Logiciels associés pour Windows</h4> 
         <ul class="vertical-navs"> 
+        <li><a href="http://coolsoft.altervista.org/virtualmidisynth">CoolSoft Virtual MIDI Synth</a></li>
         <li><a href="http://www.midiox.com/myoke.htm">MIDI Yoke</a></li> 
         <li><a href="http://www.midiox.com">MIDIOX</a></li> 
         </ul> 
