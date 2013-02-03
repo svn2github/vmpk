@@ -260,7 +260,9 @@ $ awk -f txt2ins.awk SF2NAME.txt > SF2NAME.ins
 <p>You can find the AWK script "txt2ins.awk" installed in the VMPK's data directory.</p>
 
 <h2><a name="Download"></a>Download</h2>
-<p>You can find the latest sources, Windows, and Mac OSX packages at <a href="http://sourceforge.net/projects/vmpk/files/">SourceForge project site</a>.</p>
+<p>You can find the latest sources, Windows, and Mac OSX packages at <a href="http://sourceforge.net/projects/vmpk/files/">SourceForge project site</a>.
+<!--#include virtual="/downloads.shtml" -->
+</p>
 <p>There are also ready to install Linux packages for:</p>
 <ul>
   <!--li><a class="external" href="http://software.opensuse.org/search?baseproject=ALL&amp;p=1&amp;q=vmpk">openSUSE</a>, from the openSUSE Build Service</li -->
@@ -435,10 +437,10 @@ Knob widget</li>
 
         <h4>Available Languages</h4>
         <ul class="vertical-navs">
-        <li><a href="index.html" title="English"  class="current"><span>&raquo;</span>English</a></li>
-        <li><a href="index.es.html" title="español"><span>&raquo;</span>español</a></li>
-        <li><a href="index.fr.html" title="français"><span>&raquo;</span>Français</a></li>
-        <li><a href="index.ru.html" title="русский"><span>&raquo;</span>Русский</a></li>
+        <li><a href="index.shtml" title="English"  class="current"><span>&raquo;</span>English</a></li>
+        <li><a href="index.es.shtml" title="español"><span>&raquo;</span>español</a></li>
+        <li><a href="index.fr.shtml" title="français"><span>&raquo;</span>Français</a></li>
+        <li><a href="index.ru.shtml" title="русский"><span>&raquo;</span>Русский</a></li>
         </ul>
 
         <br/>
